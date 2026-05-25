@@ -11,10 +11,8 @@ export default function CustomCursor() {
     const ring = ringRef.current;
     if (!dot || !ring) return;
 
-    let mouseX = 0;
-    let mouseY = 0;
-    let ringX = 0;
-    let ringY = 0;
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
     let rafId: number;
 
     const onMouseMove = (e: MouseEvent) => {
@@ -33,17 +31,19 @@ export default function CustomCursor() {
         target.closest("button");
 
       if (isInteractive) {
-        ring.style.width = "52px";
-        ring.style.height = "52px";
-        ring.style.borderColor = "rgba(61, 190, 111, 0.5)";
-        dot.style.width = "5px";
-        dot.style.height = "5px";
+        ring.style.width = "56px";
+        ring.style.height = "56px";
+        ring.style.background = "rgba(74, 122, 92, 0.18)";
+        ring.style.borderColor = "rgba(74, 122, 92, 0.5)";
+        dot.style.width = "4px";
+        dot.style.height = "4px";
       } else {
-        ring.style.width = "34px";
-        ring.style.height = "34px";
-        ring.style.borderColor = "rgba(61, 190, 111, 0.35)";
-        dot.style.width = "8px";
-        dot.style.height = "8px";
+        ring.style.width = "38px";
+        ring.style.height = "38px";
+        ring.style.background = "rgba(255, 255, 255, 0.28)";
+        ring.style.borderColor = "rgba(255, 255, 255, 0.85)";
+        dot.style.width = "7px";
+        dot.style.height = "7px";
       }
     };
 

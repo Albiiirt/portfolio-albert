@@ -17,12 +17,8 @@ export default function WorkSection() {
   return (
     <section
       id="work"
-      style={{
-        padding: "clamp(5rem, 10vw, 10rem) clamp(1.5rem, 5vw, 5rem)",
-        position: "relative",
-      }}
+      style={{ padding: "clamp(5rem, 10vw, 10rem) clamp(1.5rem, 5vw, 5rem)", position: "relative" }}
     >
-      {/* Header */}
       <div
         style={{
           display: "flex",
@@ -32,40 +28,34 @@ export default function WorkSection() {
         }}
       >
         <p className="section-label">{tx.label}</p>
-        <span
-          style={{
-            fontSize: "0.68rem",
-            color: "rgba(74,106,84,0.6)",
-            letterSpacing: "0.1em",
-            fontWeight: 600,
-          }}
-        >
+        <span style={{ fontSize: "0.68rem", color: "rgba(141,184,154,0.7)", letterSpacing: "0.1em", fontWeight: 600 }}>
           {tx.count}
         </span>
       </div>
 
-      <div className="divider" style={{ marginBottom: 0 }} />
+      <div className="divider" />
 
-      {/* List */}
       {projects.map((project, i) => (
         <div key={project.id}>
-          {/* Row */}
           <div
             className="project-row"
             onMouseEnter={() => setHoveredIndex(i)}
             onMouseLeave={() => setHoveredIndex(null)}
             onClick={() => setExpandedIndex(expandedIndex === i ? null : i)}
           >
-            {/* Hover glass background */}
+            {/* Glass hover highlight */}
             <motion.div
               animate={{ opacity: hoveredIndex === i ? 1 : 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.25 }}
               style={{
                 position: "absolute",
                 inset: 0,
-                background:
-                  "linear-gradient(90deg, rgba(61,190,111,0.04) 0%, transparent 100%)",
-                borderRadius: "4px",
+                background: "rgba(255,255,255,0.35)",
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
+                borderRadius: "8px",
+                border: "1px solid rgba(255,255,255,0.6)",
+                boxShadow: "0 1px 0 rgba(255,255,255,0.9) inset",
                 pointerEvents: "none",
               }}
             />
@@ -76,7 +66,7 @@ export default function WorkSection() {
                 gridTemplateColumns: "3rem 1fr auto auto",
                 alignItems: "center",
                 gap: "clamp(1rem, 2.5vw, 2.5rem)",
-                padding: "clamp(1.5rem, 3vw, 2.5rem) 0",
+                padding: "clamp(1.5rem, 3vw, 2.5rem) 0.5rem",
                 position: "relative",
               }}
             >
@@ -86,8 +76,8 @@ export default function WorkSection() {
                   fontSize: "0.72rem",
                   fontWeight: 700,
                   letterSpacing: "0.1em",
-                  color: hoveredIndex === i ? "#3dbe6f" : "rgba(74,106,84,0.5)",
-                  transition: "color 0.3s ease",
+                  color: hoveredIndex === i ? "#4a7a5c" : "rgba(141,184,154,0.6)",
+                  transition: "color 0.3s",
                 }}
               >
                 {project.num}
@@ -102,86 +92,53 @@ export default function WorkSection() {
                   fontWeight: 700,
                   letterSpacing: "-0.02em",
                   lineHeight: 1.1,
-                  color:
-                    hoveredIndex === i
-                      ? "#ddeae0"
-                      : "rgba(221,234,224,0.55)",
-                  transition: "color 0.3s ease",
+                  color: hoveredIndex === i ? "#1c2b20" : "rgba(28,43,32,0.45)",
+                  transition: "color 0.3s",
                 }}
               >
                 {project.title[lang]}
               </motion.h3>
 
               {/* Category + year */}
-              <div
-                className="hidden md:flex"
-                style={{
-                  flexDirection: "column",
-                  alignItems: "flex-end",
-                  gap: "0.2rem",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "0.72rem",
-                    color: "rgba(106,155,120,0.7)",
-                    fontWeight: 500,
-                    letterSpacing: "0.04em",
-                  }}
-                >
+              <div className="hidden md:flex" style={{ flexDirection: "column", alignItems: "flex-end", gap: "0.2rem" }}>
+                <span style={{ fontSize: "0.72rem", color: "rgba(74,122,92,0.7)", fontWeight: 500, letterSpacing: "0.04em" }}>
                   {project.category[lang]}
                 </span>
-                <span
-                  style={{
-                    fontSize: "0.65rem",
-                    color: "rgba(74,106,84,0.5)",
-                    fontWeight: 600,
-                    letterSpacing: "0.08em",
-                  }}
-                >
+                <span style={{ fontSize: "0.65rem", color: "rgba(141,184,154,0.6)", fontWeight: 600, letterSpacing: "0.08em" }}>
                   {project.year}
                 </span>
               </div>
 
-              {/* Toggle indicator */}
+              {/* Toggle — glass circle */}
               <motion.div
-                animate={{
-                  rotate: expandedIndex === i ? 45 : 0,
-                }}
+                animate={{ rotate: expandedIndex === i ? 45 : 0 }}
                 transition={{ duration: 0.25, ease: EASE }}
                 style={{
-                  width: "clamp(26px, 2.5vw, 36px)",
-                  height: "clamp(26px, 2.5vw, 36px)",
+                  width: "clamp(28px,2.5vw,38px)",
+                  height: "clamp(28px,2.5vw,38px)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  borderRadius: "50%",
-                  border: `1px solid ${
-                    hoveredIndex === i
-                      ? "rgba(61,190,111,0.3)"
-                      : "rgba(120,180,140,0.12)"
-                  }`,
-                  color:
-                    hoveredIndex === i
-                      ? "rgba(61,190,111,0.9)"
-                      : "rgba(74,106,84,0.5)",
-                  transition: "border-color 0.3s, color 0.3s",
                   flexShrink: 0,
+                  borderRadius: "50%",
+                  /* Liquid Glass circle button */
+                  background: hoveredIndex === i ? "rgba(74,122,92,0.14)" : "rgba(255,255,255,0.45)",
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                  border: `1px solid ${hoveredIndex === i ? "rgba(74,122,92,0.35)" : "rgba(255,255,255,0.8)"}`,
+                  boxShadow: "0 1px 0 rgba(255,255,255,0.9) inset, 0 2px 8px rgba(40,60,40,0.08)",
+                  color: hoveredIndex === i ? "#4a7a5c" : "rgba(28,43,32,0.35)",
+                  transition: "background 0.3s, border-color 0.3s, color 0.3s",
                 }}
               >
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path
-                    d="M6 2v8M2 6h8"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
+                <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                  <path d="M6 2v8M2 6h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                 </svg>
               </motion.div>
             </div>
           </div>
 
-          {/* Expanded case study — Liquid Glass */}
+          {/* Expanded case — Liquid Glass card */}
           <AnimatePresence>
             {expandedIndex === i && (
               <motion.div
@@ -193,28 +150,14 @@ export default function WorkSection() {
               >
                 <div
                   className="liquid-glass"
-                  style={{
-                    margin: "0 0 1.5rem 0",
-                    padding: "clamp(1.5rem, 3vw, 3rem)",
-                  }}
+                  style={{ margin: "0 0 1.5rem", padding: "clamp(1.5rem, 3vw, 3rem)" }}
                 >
-                  {/* Tags */}
-                  <div
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      gap: "0.4rem",
-                      marginBottom: "2rem",
-                    }}
-                  >
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "2rem" }}>
                     {project.tags.map((tag) => (
-                      <span key={tag} className="tag">
-                        {tag}
-                      </span>
+                      <span key={tag} className="tag">{tag}</span>
                     ))}
                   </div>
 
-                  {/* 3 cols */}
                   <div
                     style={{
                       display: "grid",
@@ -223,39 +166,15 @@ export default function WorkSection() {
                     }}
                   >
                     {[
-                      {
-                        label: lang === "en" ? "The Problem" : "El Problema",
-                        text: project.problem[lang],
-                      },
-                      {
-                        label: lang === "en" ? "The Process" : "El Proceso",
-                        text: project.process[lang],
-                      },
-                      {
-                        label: lang === "en" ? "The Result" : "El Resultado",
-                        text: project.result[lang],
-                      },
+                      { label: lang === "en" ? "The Problem" : lang === "es" ? "El Problema" : "El Problema", text: project.problem[lang] },
+                      { label: lang === "en" ? "The Process" : lang === "es" ? "El Proceso" : "El Procés", text: project.process[lang] },
+                      { label: lang === "en" ? "The Result"  : lang === "es" ? "El Resultado" : "El Resultat", text: project.result[lang] },
                     ].map((col) => (
                       <div key={col.label}>
-                        <p
-                          style={{
-                            fontSize: "0.63rem",
-                            fontWeight: 700,
-                            letterSpacing: "0.18em",
-                            textTransform: "uppercase",
-                            color: "rgba(61,190,111,0.7)",
-                            marginBottom: "0.75rem",
-                          }}
-                        >
+                        <p style={{ fontSize: "0.63rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#4a7a5c", marginBottom: "0.75rem" }}>
                           {col.label}
                         </p>
-                        <p
-                          style={{
-                            fontSize: "0.875rem",
-                            lineHeight: 1.75,
-                            color: "rgba(221,234,224,0.6)",
-                          }}
-                        >
+                        <p style={{ fontSize: "0.875rem", lineHeight: 1.75, color: "rgba(28,43,32,0.6)" }}>
                           {col.text}
                         </p>
                       </div>

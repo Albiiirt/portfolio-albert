@@ -17,23 +17,30 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      style={{
-        padding: "clamp(5rem, 10vw, 10rem) clamp(1.5rem, 5vw, 5rem)",
-        position: "relative",
-        overflow: "hidden",
-      }}
+      style={{ padding: "clamp(5rem, 10vw, 10rem) clamp(1.5rem, 5vw, 5rem)", position: "relative", overflow: "hidden" }}
     >
-      {/* Background glow — like morning light through canopy */}
+      {/* Warm amber glow — visible through cards */}
       <div
         style={{
           position: "absolute",
-          top: "20%",
-          right: "-15%",
-          width: "500px",
-          height: "500px",
-          background:
-            "radial-gradient(circle, rgba(196,163,90,0.07) 0%, transparent 65%)",
-          filter: "blur(60px)",
+          top: "10%",
+          right: "-10%",
+          width: "400px",
+          height: "400px",
+          background: "radial-gradient(circle, rgba(195,160,100,0.45) 0%, transparent 65%)",
+          filter: "blur(70px)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "0%",
+          left: "20%",
+          width: "350px",
+          height: "350px",
+          background: "radial-gradient(circle, rgba(120,185,140,0.4) 0%, transparent 65%)",
+          filter: "blur(80px)",
           pointerEvents: "none",
         }}
       />
@@ -67,7 +74,7 @@ export default function About() {
         style={{
           fontSize: "clamp(1rem, 1.4vw, 1.1rem)",
           lineHeight: 1.75,
-          color: "rgba(221,234,224,0.5)",
+          color: "rgba(28,43,32,0.55)",
           maxWidth: "540px",
           marginBottom: "clamp(3rem, 6vw, 6rem)",
         }}
@@ -75,14 +82,8 @@ export default function About() {
         {tx.intro}
       </motion.p>
 
-      {/* Steps — Liquid Glass cards */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-          gap: "1rem",
-        }}
-      >
+      {/* Liquid Glass step cards */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "1rem" }}>
         {tx.steps.map((step, i) => (
           <motion.div
             key={step.num}
@@ -90,11 +91,7 @@ export default function About() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.3 + i * 0.1, ease: EASE }}
             className="liquid-glass"
-            style={{
-              padding: "clamp(1.5rem, 2.5vw, 2.25rem)",
-              position: "relative",
-              overflow: "hidden",
-            }}
+            style={{ padding: "clamp(1.5rem, 2.5vw, 2.25rem)", position: "relative", overflow: "hidden" }}
           >
             {/* Ghost number */}
             <span
@@ -104,7 +101,7 @@ export default function About() {
                 right: "0.75rem",
                 fontSize: "5.5rem",
                 fontWeight: 700,
-                color: "rgba(61,190,111,0.04)",
+                color: "rgba(74,122,92,0.06)",
                 letterSpacing: "-0.05em",
                 lineHeight: 1,
                 pointerEvents: "none",
@@ -114,50 +111,17 @@ export default function About() {
               {step.num}
             </span>
 
-            {/* Step num label */}
-            <p
-              style={{
-                fontSize: "0.63rem",
-                fontWeight: 700,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "rgba(61,190,111,0.65)",
-                marginBottom: "1rem",
-              }}
-            >
+            <p style={{ fontSize: "0.63rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#8db89a", marginBottom: "1rem" }}>
               {step.num}
             </p>
 
-            {/* Accent line */}
-            <div
-              style={{
-                width: "28px",
-                height: "1.5px",
-                background: "linear-gradient(90deg, #3dbe6f, #c4a35a)",
-                borderRadius: "1px",
-                marginBottom: "1.25rem",
-              }}
-            />
+            <div style={{ width: "28px", height: "1.5px", background: "linear-gradient(90deg, #4a7a5c, #9a7040)", borderRadius: "1px", marginBottom: "1.25rem" }} />
 
-            <h3
-              style={{
-                fontSize: "clamp(1.1rem, 1.8vw, 1.4rem)",
-                fontWeight: 700,
-                letterSpacing: "-0.02em",
-                color: "#ddeae0",
-                marginBottom: "0.75rem",
-              }}
-            >
+            <h3 style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.4rem)", fontWeight: 700, letterSpacing: "-0.02em", color: "#1c2b20", marginBottom: "0.75rem" }}>
               {step.title}
             </h3>
 
-            <p
-              style={{
-                fontSize: "0.875rem",
-                lineHeight: 1.7,
-                color: "rgba(221,234,224,0.45)",
-              }}
-            >
+            <p style={{ fontSize: "0.875rem", lineHeight: 1.7, color: "rgba(28,43,32,0.5)" }}>
               {step.desc}
             </p>
           </motion.div>

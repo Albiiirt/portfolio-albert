@@ -17,32 +17,19 @@ export default function Contact() {
     <section
       id="contact"
       ref={ref}
-      style={{
-        padding: "clamp(5rem, 10vw, 12rem) clamp(1.5rem, 5vw, 5rem)",
-        position: "relative",
-        overflow: "hidden",
-      }}
+      style={{ padding: "clamp(5rem, 10vw, 12rem) clamp(1.5rem, 5vw, 5rem)", position: "relative", overflow: "hidden" }}
     >
-      {/* Forest light glow */}
+      {/* Green glow bleed */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background:
-            "radial-gradient(ellipse 70% 50% at 50% 60%, rgba(30,90,50,0.18) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse 70% 50% at 50% 60%, rgba(120,185,140,0.3) 0%, transparent 70%)",
           pointerEvents: "none",
         }}
       />
 
-      <div
-        style={{
-          position: "relative",
-          zIndex: 1,
-          maxWidth: "860px",
-          margin: "0 auto",
-          textAlign: "center",
-        }}
-      >
+      <div style={{ position: "relative", zIndex: 1, maxWidth: "860px", margin: "0 auto", textAlign: "center" }}>
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -69,46 +56,24 @@ export default function Contact() {
           initial={{ opacity: 0, y: 14 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
-          style={{
-            fontSize: "1rem",
-            color: "rgba(221,234,224,0.4)",
-            marginBottom: "clamp(2.5rem, 5vw, 4rem)",
-          }}
+          style={{ fontSize: "1rem", color: "rgba(28,43,32,0.45)", marginBottom: "clamp(2.5rem, 5vw, 4rem)" }}
         >
           {tx.sub}
         </motion.p>
 
-        {/* Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.3 }}
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "0.875rem",
-            justifyContent: "center",
-            marginBottom: "clamp(3rem, 6vw, 6rem)",
-          }}
+          style={{ display: "flex", flexWrap: "wrap", gap: "0.875rem", justifyContent: "center", marginBottom: "clamp(3rem, 6vw, 6rem)" }}
         >
           <a href={`mailto:${tx.email}`} className="btn-primary">
             <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
-              <path
-                d="M2 4l6 4.5L14 4M2 4h12v9H2V4z"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+              <path d="M2 4l6 4.5L14 4M2 4h12v9H2V4z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             {tx.cta}
           </a>
-          <a
-            href="https://www.linkedin.com/in/albertcanadas/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-ghost"
-          >
+          <a href="https://www.linkedin.com/in/albertcanadas/" target="_blank" rel="noopener noreferrer" className="btn-ghost">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
               <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
             </svg>
@@ -116,7 +81,6 @@ export default function Contact() {
           </a>
         </motion.div>
 
-        {/* Email text */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
@@ -125,20 +89,9 @@ export default function Contact() {
           <div className="divider" style={{ marginBottom: "1.75rem" }} />
           <a
             href={`mailto:${tx.email}`}
-            style={{
-              fontSize: "clamp(0.85rem, 1.5vw, 1rem)",
-              color: "rgba(74,106,84,0.6)",
-              letterSpacing: "0.06em",
-              textDecoration: "none",
-              fontWeight: 500,
-              transition: "color 0.3s",
-            }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.color = "rgba(221,234,224,0.8)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.color = "rgba(74,106,84,0.6)")
-            }
+            style={{ fontSize: "clamp(0.85rem, 1.5vw, 1rem)", color: "rgba(74,122,92,0.5)", letterSpacing: "0.06em", textDecoration: "none", fontWeight: 500, transition: "color 0.3s" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#1c2b20")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(74,122,92,0.5)")}
           >
             {tx.email}
           </a>
