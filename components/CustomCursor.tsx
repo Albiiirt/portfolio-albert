@@ -30,21 +30,20 @@ export default function CustomCursor() {
         target.tagName === "A" ||
         target.tagName === "BUTTON" ||
         target.closest("a") ||
-        target.closest("button") ||
-        target.getAttribute("data-cursor") === "hover";
+        target.closest("button");
 
       if (isInteractive) {
-        ring.style.width = "60px";
-        ring.style.height = "60px";
-        ring.style.borderColor = "rgba(123, 47, 190, 0.6)";
-        dot.style.width = "6px";
-        dot.style.height = "6px";
+        ring.style.width = "52px";
+        ring.style.height = "52px";
+        ring.style.borderColor = "rgba(61, 190, 111, 0.5)";
+        dot.style.width = "5px";
+        dot.style.height = "5px";
       } else {
-        ring.style.width = "36px";
-        ring.style.height = "36px";
-        ring.style.borderColor = "rgba(240, 240, 245, 0.4)";
-        dot.style.width = "10px";
-        dot.style.height = "10px";
+        ring.style.width = "34px";
+        ring.style.height = "34px";
+        ring.style.borderColor = "rgba(61, 190, 111, 0.35)";
+        dot.style.width = "8px";
+        dot.style.height = "8px";
       }
     };
 

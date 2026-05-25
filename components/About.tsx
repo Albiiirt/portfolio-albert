@@ -5,11 +5,13 @@ import { motion, useInView } from "framer-motion";
 import { useLang } from "@/lib/LanguageContext";
 import { t } from "@/data/translations";
 
+const EASE = [0.25, 0.46, 0.45, 0.94] as [number, number, number, number];
+
 export default function About() {
   const { lang } = useLang();
   const tx = t[lang].about;
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <section
@@ -21,103 +23,88 @@ export default function About() {
         overflow: "hidden",
       }}
     >
-      {/* Background accent */}
+      {/* Background glow — like morning light through canopy */}
       <div
         style={{
           position: "absolute",
-          top: "50%",
-          right: "-20%",
+          top: "20%",
+          right: "-15%",
           width: "500px",
           height: "500px",
-          background: "radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 70%)",
-          transform: "translateY(-50%)",
+          background:
+            "radial-gradient(circle, rgba(196,163,90,0.07) 0%, transparent 65%)",
+          filter: "blur(60px)",
           pointerEvents: "none",
         }}
       />
 
-      {/* Label */}
       <motion.p
-        initial={{ opacity: 0, y: 12 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
         className="section-label"
-        style={{ marginBottom: "2rem" }}
+        style={{ marginBottom: "1.75rem" }}
       >
         {tx.label}
       </motion.p>
 
-      {/* Heading */}
       <motion.h2
         initial={{ opacity: 0, y: 24 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] }}
+        transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
         className="display-heading"
-        style={{
-          maxWidth: "800px",
-          marginBottom: "clamp(1.5rem, 3vw, 3rem)",
-          whiteSpace: "pre-line",
-        }}
+        style={{ maxWidth: "780px", marginBottom: "1.5rem" }}
       >
-        {tx.heading.split("\n").map((line, i) =>
-          i === 0 ? (
-            <span key={i}>
-              {line}
-              <br />
-            </span>
-          ) : (
-            <span key={i} className="text-gradient">
-              {line}
-            </span>
-          )
-        )}
+        {tx.heading.split("\n")[0]}
+        <br />
+        <span className="text-gradient">{tx.heading.split("\n")[1]}</span>
       </motion.h2>
 
-      {/* Intro text */}
       <motion.p
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: 14 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7, delay: 0.2 }}
         style={{
-          fontSize: "clamp(1rem, 1.5vw, 1.15rem)",
+          fontSize: "clamp(1rem, 1.4vw, 1.1rem)",
           lineHeight: 1.75,
-          color: "#888899",
-          maxWidth: "580px",
+          color: "rgba(221,234,224,0.5)",
+          maxWidth: "540px",
           marginBottom: "clamp(3rem, 6vw, 6rem)",
         }}
       >
         {tx.intro}
       </motion.p>
 
-      {/* Steps */}
+      {/* Steps — Liquid Glass cards */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-          gap: "1.5rem",
+          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+          gap: "1rem",
         }}
       >
         {tx.steps.map((step, i) => (
           <motion.div
             key={step.num}
-            initial={{ opacity: 0, y: 32 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.3 + i * 0.12, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] }}
-            className="glass"
+            transition={{ duration: 0.7, delay: 0.3 + i * 0.1, ease: EASE }}
+            className="liquid-glass"
             style={{
-              padding: "clamp(1.5rem, 3vw, 2.5rem)",
+              padding: "clamp(1.5rem, 2.5vw, 2.25rem)",
               position: "relative",
               overflow: "hidden",
             }}
           >
-            {/* Big background number */}
+            {/* Ghost number */}
             <span
               style={{
                 position: "absolute",
-                top: "-0.5rem",
-                right: "1rem",
-                fontSize: "5rem",
+                top: "-0.75rem",
+                right: "0.75rem",
+                fontSize: "5.5rem",
                 fontWeight: 700,
-                color: "rgba(255,255,255,0.03)",
+                color: "rgba(61,190,111,0.04)",
                 letterSpacing: "-0.05em",
                 lineHeight: 1,
                 pointerEvents: "none",
@@ -127,50 +114,48 @@ export default function About() {
               {step.num}
             </span>
 
-            {/* Step number */}
+            {/* Step num label */}
             <p
               style={{
-                fontSize: "0.65rem",
+                fontSize: "0.63rem",
                 fontWeight: 700,
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "#7b2fbe",
+                color: "rgba(61,190,111,0.65)",
                 marginBottom: "1rem",
               }}
             >
               {step.num}
             </p>
 
-            {/* Divider */}
+            {/* Accent line */}
             <div
               style={{
-                width: "32px",
-                height: "2px",
-                background: "linear-gradient(90deg, #7b2fbe, #00d4ff)",
+                width: "28px",
+                height: "1.5px",
+                background: "linear-gradient(90deg, #3dbe6f, #c4a35a)",
                 borderRadius: "1px",
                 marginBottom: "1.25rem",
               }}
             />
 
-            {/* Title */}
             <h3
               style={{
-                fontSize: "clamp(1.2rem, 2vw, 1.5rem)",
+                fontSize: "clamp(1.1rem, 1.8vw, 1.4rem)",
                 fontWeight: 700,
                 letterSpacing: "-0.02em",
-                color: "#f0f0f5",
+                color: "#ddeae0",
                 marginBottom: "0.75rem",
               }}
             >
               {step.title}
             </h3>
 
-            {/* Description */}
             <p
               style={{
-                fontSize: "0.9rem",
+                fontSize: "0.875rem",
                 lineHeight: 1.7,
-                color: "#666680",
+                color: "rgba(221,234,224,0.45)",
               }}
             >
               {step.desc}

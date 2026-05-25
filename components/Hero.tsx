@@ -4,30 +4,21 @@ import { motion } from "framer-motion";
 import { useLang } from "@/lib/LanguageContext";
 import { t } from "@/data/translations";
 
+const EASE = [0.25, 0.46, 0.45, 0.94] as [number, number, number, number];
+
 const container = {
   hidden: {},
   show: {
-    transition: { staggerChildren: 0.1, delayChildren: 0.3 },
+    transition: { staggerChildren: 0.1, delayChildren: 0.4 },
   },
 };
-
-const EASE = [0.25, 0.46, 0.45, 0.94] as [number, number, number, number];
 
 const lineReveal = {
   hidden: { y: "105%", opacity: 0 },
   show: {
     y: 0,
     opacity: 1,
-    transition: { duration: 1, ease: EASE },
-  },
-};
-
-const fadeIn = {
-  hidden: { opacity: 0, y: 12 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: EASE },
+    transition: { duration: 1.1, ease: EASE },
   },
 };
 
@@ -50,32 +41,40 @@ export default function Hero() {
         overflow: "hidden",
       }}
     >
-      {/* Gradient blobs */}
+      {/* Forest background blobs */}
       <div className="blob blob-1" />
       <div className="blob blob-2" />
       <div className="blob blob-3" />
+      <div className="blob blob-4" />
 
-      {/* Subtle grid overlay */}
+      {/* Subtle radial vignette */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "radial-gradient(ellipse 120% 80% at 60% 40%, transparent 40%, rgba(9,17,11,0.7) 100%)",
+          pointerEvents: "none",
+          zIndex: 1,
+        }}
+      />
+
+      {/* Subtle organic grid */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)",
+            "linear-gradient(rgba(120,180,140,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(120,180,140,0.025) 1px, transparent 1px)",
           backgroundSize: "80px 80px",
           pointerEvents: "none",
           zIndex: 1,
         }}
       />
 
-      {/* Main content */}
+      {/* Content */}
       <div style={{ position: "relative", zIndex: 2 }}>
-        {/* Hero heading */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-        >
+        <motion.div variants={container} initial="hidden" animate="show">
           {[tx.line1, tx.line2, tx.line3, tx.line4].map((line, i) => (
             <div key={i} style={{ overflow: "hidden" }}>
               <motion.h1
@@ -88,11 +87,11 @@ export default function Hero() {
           ))}
         </motion.div>
 
-        {/* Bottom row */}
+        {/* Bottom meta row */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.9, duration: 0.8 }}
+          transition={{ delay: 1.0, duration: 0.9 }}
           style={{
             display: "flex",
             alignItems: "flex-end",
@@ -106,20 +105,20 @@ export default function Hero() {
           <div>
             <p
               style={{
-                fontSize: "0.78rem",
-                fontWeight: 600,
+                fontSize: "0.72rem",
+                fontWeight: 700,
                 letterSpacing: "0.14em",
                 textTransform: "uppercase",
-                color: "#666680",
-                marginBottom: "0.25rem",
+                color: "#4a6a54",
+                marginBottom: "0.3rem",
               }}
             >
               Albert Canadas
             </p>
             <p
               style={{
-                fontSize: "0.9rem",
-                color: "#888899",
+                fontSize: "0.875rem",
+                color: "rgba(221,234,224,0.45)",
                 letterSpacing: "0.04em",
               }}
             >
@@ -127,14 +126,14 @@ export default function Hero() {
             </p>
           </div>
 
-          {/* Availability badge */}
+          {/* Availability — Liquid Glass pill */}
           <div
-            className="glass"
+            className="liquid-pill"
             style={{
               display: "flex",
               alignItems: "center",
               gap: "0.6rem",
-              padding: "0.75rem 1.25rem",
+              padding: "0.65rem 1.25rem",
             }}
           >
             <span className="status-dot" />
@@ -142,8 +141,7 @@ export default function Hero() {
               style={{
                 fontSize: "0.78rem",
                 fontWeight: 500,
-                color: "#f0f0f5",
-                letterSpacing: "0.02em",
+                color: "rgba(221,234,224,0.85)",
               }}
             >
               {tx.availability}
@@ -152,14 +150,14 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Scroll hint */}
+      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 0.8 }}
+        transition={{ delay: 1.6, duration: 0.8 }}
         style={{
           position: "absolute",
-          bottom: "clamp(2rem, 4vw, 4rem)",
+          bottom: "clamp(1.5rem, 3vw, 3rem)",
           left: "50%",
           transform: "translateX(-50%)",
           display: "flex",
@@ -171,21 +169,21 @@ export default function Hero() {
       >
         <span
           style={{
-            fontSize: "0.65rem",
-            letterSpacing: "0.2em",
+            fontSize: "0.6rem",
+            letterSpacing: "0.22em",
             textTransform: "uppercase",
-            color: "#666680",
+            color: "#4a6a54",
           }}
         >
           {tx.scroll}
         </span>
         <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           style={{
             width: "1px",
-            height: "40px",
-            background: "linear-gradient(180deg, #7b2fbe, transparent)",
+            height: "36px",
+            background: "linear-gradient(180deg, rgba(61,190,111,0.6), transparent)",
           }}
         />
       </motion.div>

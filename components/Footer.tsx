@@ -10,8 +10,8 @@ export default function Footer() {
   return (
     <footer
       style={{
-        padding: "2rem clamp(1.5rem, 5vw, 5rem)",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
+        padding: "1.75rem clamp(1.5rem, 5vw, 5rem)",
+        borderTop: "1px solid rgba(120,180,140,0.08)",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
@@ -21,11 +21,11 @@ export default function Footer() {
     >
       <span
         style={{
-          fontSize: "0.72rem",
-          fontWeight: 600,
+          fontSize: "0.68rem",
+          fontWeight: 700,
           letterSpacing: "0.12em",
           textTransform: "uppercase",
-          color: "#2a2a40",
+          color: "rgba(74,106,84,0.5)",
         }}
       >
         {tx.copy}
@@ -33,9 +33,9 @@ export default function Footer() {
 
       <span
         style={{
-          fontSize: "0.68rem",
-          letterSpacing: "0.1em",
-          color: "#2a2a40",
+          fontSize: "0.65rem",
+          letterSpacing: "0.08em",
+          color: "rgba(74,106,84,0.35)",
         }}
       >
         © {new Date().getFullYear()} — {tx.rights}
@@ -43,10 +43,11 @@ export default function Footer() {
 
       <div
         style={{
-          width: "32px",
+          width: "28px",
           height: "1px",
-          background: "linear-gradient(90deg, #7b2fbe, #00d4ff)",
+          background: "linear-gradient(90deg, #3dbe6f, #c4a35a)",
           borderRadius: "1px",
+          opacity: 0.5,
         }}
       />
     </footer>
