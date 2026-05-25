@@ -2,11 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useLang } from "@/lib/LanguageContext";
+import { useLang, type Lang } from "@/lib/LanguageContext";
 import { t } from "@/data/translations";
 
 export default function Navigation() {
   const { lang, toggle } = useLang();
+  const langs: { code: Lang; label: string }[] = [
+    { code: "en", label: "EN" },
+    { code: "es", label: "ES" },
+    { code: "ca", label: "CA" },
+  ];
   const tx = t[lang].nav;
   const [visible, setVisible] = useState(true);
   const [lastY, setLastY] = useState(0);
@@ -105,31 +110,33 @@ export default function Navigation() {
           }}
         />
 
-        {/* Language toggle */}
-        <button
-          onClick={toggle}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "0.2rem",
-            fontSize: "0.68rem",
-            fontWeight: 700,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            background: "none",
-            border: "none",
-            cursor: "none",
-            padding: "0.35rem 0.75rem",
-          }}
-        >
-          <span style={{ color: lang === "en" ? "#ddeae0" : "rgba(221,234,224,0.35)", transition: "color 0.2s" }}>
-            EN
-          </span>
-          <span style={{ color: "rgba(120,180,140,0.3)" }}>/</span>
-          <span style={{ color: lang === "es" ? "#ddeae0" : "rgba(221,234,224,0.35)", transition: "color 0.2s" }}>
-            ES
-          </span>
-        </button>
+        {/* Language selector */}
+        <div style={{ display: "flex", alignItems: "center", gap: "0.1rem", padding: "0 0.25rem" }}>
+          {langs.map(({ code, label }, i) => (
+            <span key={code} style={{ display: "flex", alignItems: "center", gap: "0.1rem" }}>
+              <button
+                onClick={toggle}
+                style={{
+                  fontSize: "0.68rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  background: "none",
+                  border: "none",
+                  cursor: "none",
+                  padding: "0.35rem 0.5rem",
+                  color: lang === code ? "#ddeae0" : "rgba(221,234,224,0.3)",
+                  transition: "color 0.2s",
+                }}
+              >
+                {label}
+              </button>
+              {i < langs.length - 1 && (
+                <span style={{ color: "rgba(120,180,140,0.25)", fontSize: "0.6rem" }}>/</span>
+              )}
+            </span>
+          ))}
+        </div>
       </div>
     </motion.div>
   );

@@ -2,7 +2,9 @@
 
 import { createContext, useContext, useState, ReactNode } from "react";
 
-export type Lang = "en" | "es";
+export type Lang = "en" | "es" | "ca";
+
+const LANGS: Lang[] = ["en", "es", "ca"];
 
 type LangContextType = {
   lang: Lang;
@@ -17,7 +19,8 @@ const LangContext = createContext<LangContextType>({
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>("en");
 
-  const toggle = () => setLang((l) => (l === "en" ? "es" : "en"));
+  const toggle = () =>
+    setLang((l) => LANGS[(LANGS.indexOf(l) + 1) % LANGS.length]);
 
   return (
     <LangContext.Provider value={{ lang, toggle }}>

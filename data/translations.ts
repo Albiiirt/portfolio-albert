@@ -111,4 +111,60 @@ export const t = {
       rights: "Todos los derechos reservados",
     },
   },
+  ca: {
+    nav: {
+      work: "Treballs",
+      about: "Procés",
+      contact: "Contacte",
+    },
+    hero: {
+      line1: "Tradueixo",
+      line2: "problemes en",
+      line3: "disseny",
+      line4: "que funciona.",
+      role: "Dissenyador × IA",
+      availability: "Disponible per a projectes",
+      scroll: "Scroll per explorar",
+    },
+    work: {
+      label: "Treballs Seleccionats",
+      count: "(04)",
+      viewCase: "Veure cas d'estudi",
+      close: "Tancar",
+    },
+    about: {
+      label: "Procés",
+      heading: "Disseny amb propòsit,\naccelerat per la IA.",
+      intro: "Cada píxel té una raó. Combino pensament estratègic amb exploració potenciada per IA per crear disseny que resol problemes de negoci reals.",
+      steps: [
+        {
+          num: "01",
+          title: "Entendre",
+          desc: "Definició del problema i recerca. Abans dels píxels, l'estratègia. Mapeig l'espai del problema abans d'obrir Figma.",
+        },
+        {
+          num: "02",
+          title: "Dissenyar",
+          desc: "Estratègia visual accelerada per IA. Exploro 10x més direccions en el mateix temps — i trio la que és correcta.",
+        },
+        {
+          num: "03",
+          title: "Lliurar",
+          desc: "Precís, documentat, llest per construir. Disseny que es traspassa sense friccions i escala sense problemes.",
+        },
+      ],
+    },
+    contact: {
+      label: "Contacte",
+      heading: "Treballem\njunts.",
+      sub: "Tens un projecte en ment? Fem-lo gran.",
+      cta: "Parlem",
+      email: "acanades@gmail.com",
+      linkedin: "LinkedIn",
+    },
+    footer: {
+      copy: "Albert Canadas",
+      rights: "Tots els drets reservats",
+    },
+  },
 };
