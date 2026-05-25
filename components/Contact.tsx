@@ -17,47 +17,21 @@ export default function Contact() {
     <section
       id="contact"
       ref={ref}
-      style={{ padding: "clamp(5rem, 10vw, 12rem) clamp(1.5rem, 5vw, 5rem)", position: "relative", overflow: "hidden" }}
+      style={{ padding: "clamp(5rem, 10vw, 12rem) clamp(1.5rem, 5vw, 5rem)", position: "relative", overflow: "hidden", background: "#f7f3ea" }}
     >
-      {/* Green glow bleed */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "radial-gradient(ellipse 70% 50% at 50% 60%, rgba(120,185,140,0.3) 0%, transparent 70%)",
-          pointerEvents: "none",
-        }}
-      />
+      <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 55% at 50% 65%, rgba(140,195,155,0.38) 0%, transparent 70%)", pointerEvents: "none" }} />
 
-      <div style={{ position: "relative", zIndex: 1, maxWidth: "860px", margin: "0 auto", textAlign: "center" }}>
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="section-label"
-          style={{ marginBottom: "1.75rem" }}
-        >
+      <div style={{ position: "relative", zIndex: 1, maxWidth: "820px", margin: "0 auto", textAlign: "center" }}>
+        <motion.p initial={{ opacity: 0, y: 10 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="section-label" style={{ marginBottom: "1.75rem" }}>
           {tx.label}
         </motion.p>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 32 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
-          className="display-heading"
-          style={{ marginBottom: "1.25rem" }}
-        >
-          {tx.heading.split("\n")[0]}
-          <br />
+        <motion.h2 initial={{ opacity: 0, y: 32 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.9, delay: 0.1, ease: EASE }} className="display-heading" style={{ marginBottom: "1.25rem" }}>
+          {tx.heading.split("\n")[0]}<br />
           <span className="text-gradient">{tx.heading.split("\n")[1]}</span>
         </motion.h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 14 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          style={{ fontSize: "1rem", color: "rgba(28,43,32,0.45)", marginBottom: "clamp(2.5rem, 5vw, 4rem)" }}
-        >
+        <motion.p initial={{ opacity: 0, y: 14 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.2 }} style={{ fontSize: "1rem", color: "rgba(30,26,20,0.42)", marginBottom: "clamp(2.5rem, 5vw, 4rem)" }}>
           {tx.sub}
         </motion.p>
 
@@ -81,17 +55,13 @@ export default function Contact() {
           </a>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.5 }}
-        >
+        <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.8, delay: 0.5 }}>
           <div className="divider" style={{ marginBottom: "1.75rem" }} />
           <a
             href={`mailto:${tx.email}`}
-            style={{ fontSize: "clamp(0.85rem, 1.5vw, 1rem)", color: "rgba(74,122,92,0.5)", letterSpacing: "0.06em", textDecoration: "none", fontWeight: 500, transition: "color 0.3s" }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#1c2b20")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(74,122,92,0.5)")}
+            style={{ fontSize: "clamp(0.82rem, 1.4vw, 0.95rem)", color: "rgba(90,140,106,0.5)", letterSpacing: "0.06em", textDecoration: "none", fontWeight: 500, transition: "color 0.28s" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#1e1a14")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(90,140,106,0.5)")}
           >
             {tx.email}
           </a>

@@ -27,8 +27,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={spaceGrotesk.variable}>
-      <body>
+    <html lang="en" className={spaceGrotesk.variable} style={{ background: "#f7f3ea" }}>
+      <body style={{ background: "#f7f3ea" }}>
         <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>

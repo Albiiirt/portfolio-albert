@@ -8,11 +8,11 @@ const EASE = [0.25, 0.46, 0.45, 0.94] as [number, number, number, number];
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1, delayChildren: 0.4 } },
+  show: { transition: { staggerChildren: 0.09, delayChildren: 0.35 } },
 };
 
 const lineReveal = {
-  hidden: { y: "105%", opacity: 0 },
+  hidden: { y: "108%", opacity: 0 },
   show: { y: 0, opacity: 1, transition: { duration: 1.1, ease: EASE } },
 };
 
@@ -33,23 +33,21 @@ export default function Hero() {
         paddingLeft: "clamp(1.5rem, 5vw, 5rem)",
         paddingRight: "clamp(1.5rem, 5vw, 5rem)",
         overflow: "hidden",
+        background: "#f7f3ea",
       }}
     >
-      {/* Blobs — these bleed through the glass components */}
+      {/* Organic dappled light blobs */}
       <div className="blob blob-1" />
       <div className="blob blob-2" />
       <div className="blob blob-3" />
       <div className="blob blob-4" />
 
-      {/* Soft vignette */}
+      {/* Very light vignette to keep edges warm */}
       <div
         style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(ellipse 130% 90% at 55% 45%, transparent 35%, rgba(240,235,224,0.5) 100%)",
-          pointerEvents: "none",
-          zIndex: 1,
+          position: "absolute", inset: 0,
+          background: "radial-gradient(ellipse 150% 100% at 60% 40%, transparent 30%, rgba(247,243,234,0.45) 100%)",
+          pointerEvents: "none", zIndex: 1,
         }}
       />
 
@@ -68,7 +66,6 @@ export default function Hero() {
           ))}
         </motion.div>
 
-        {/* Meta row */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -83,30 +80,18 @@ export default function Hero() {
           }}
         >
           <div>
-            <p
-              style={{
-                fontSize: "0.72rem",
-                fontWeight: 700,
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
-                color: "#8db89a",
-                marginBottom: "0.3rem",
-              }}
-            >
+            <p style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#a8b8a0", marginBottom: "0.3rem" }}>
               Albert Canadas
             </p>
-            <p style={{ fontSize: "0.875rem", color: "rgba(28,43,32,0.45)", letterSpacing: "0.04em" }}>
+            <p style={{ fontSize: "0.875rem", color: "rgba(30,26,20,0.4)", letterSpacing: "0.03em" }}>
               {tx.role}
             </p>
           </div>
 
-          {/* Liquid Glass availability badge */}
-          <div
-            className="liquid-pill"
-            style={{ display: "flex", alignItems: "center", gap: "0.6rem", padding: "0.65rem 1.25rem" }}
-          >
+          {/* Availability — Liquid Glass pill */}
+          <div className="liquid-pill" style={{ display: "flex", alignItems: "center", gap: "0.6rem", padding: "0.65rem 1.3rem" }}>
             <span className="status-dot" />
-            <span style={{ fontSize: "0.78rem", fontWeight: 500, color: "#2d5a3c" }}>
+            <span style={{ fontSize: "0.78rem", fontWeight: 500, color: "#2a5038" }}>
               {tx.availability}
             </span>
           </div>
@@ -130,13 +115,13 @@ export default function Hero() {
           zIndex: 2,
         }}
       >
-        <span style={{ fontSize: "0.6rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "#8db89a" }}>
+        <span style={{ fontSize: "0.58rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "#a8b8a0" }}>
           {tx.scroll}
         </span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          style={{ width: "1px", height: "36px", background: "linear-gradient(180deg, #4a7a5c, transparent)" }}
+          transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+          style={{ width: "1px", height: "32px", background: "linear-gradient(180deg, #5a8c6a, transparent)" }}
         />
       </motion.div>
     </section>
