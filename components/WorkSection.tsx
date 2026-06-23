@@ -191,7 +191,7 @@ export default function WorkSection() {
             </div>
 
             {/* Right: card column — desktop only */}
-            <div className="work-card-wrap" style={{ position: "relative", height: "100%", minHeight: 0, maxHeight: "min(68vh, 680px)" }}>
+            <div className="work-card-wrap" style={{ position: "relative", height: "100%", minHeight: 0, maxHeight: "min(74vh, 740px)" }}>
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
                   key={active}
@@ -224,7 +224,7 @@ export default function WorkSection() {
                         sizes="(max-width: 768px) 100vw, 66vw"
                         style={{ objectFit: "cover", objectPosition: "center" }} />
                     )}
-                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.65) 35%, rgba(0,0,0,0.2) 65%, transparent 100%)" }} />
+                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.72) 40%, rgba(0,0,0,0.18) 70%, transparent 100%)" }} />
                     <div style={{ position: "absolute", top: "1.5rem", left: "1.75rem", display: "flex", gap: "0.5rem", alignItems: "center" }}>
                       <span style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.9)", background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", padding: "0.3rem 0.75rem", borderRadius: "100px", border: "1px solid rgba(255,255,255,0.2)" }}>
                         {project.category[lang]}
@@ -237,7 +237,7 @@ export default function WorkSection() {
                       <h3 style={{ fontSize: "clamp(1.3rem, 2.2vw, 1.8rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "#fff", lineHeight: 1.15, margin: 0 }}>
                         {project.title[lang]}
                       </h3>
-                      <p style={{ fontSize: "1rem", lineHeight: 1.6, color: "rgba(255,255,255,0.8)", margin: 0, maxWidth: "520px" }}>
+                      <p className="work-card-desc" style={{ fontSize: "0.95rem", lineHeight: 1.6, color: "rgba(255,255,255,0.8)", margin: 0, maxWidth: "520px" }}>
                         {project.description[lang]}
                       </p>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "0.75rem" }}>
