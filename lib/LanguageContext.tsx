@@ -1,29 +1,29 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 export type Lang = "en" | "es" | "ca";
 
-const LANGS: Lang[] = ["en", "es", "ca"];
 
 type LangContextType = {
   lang: Lang;
-  toggle: () => void;
+  setLang: (l: Lang) => void;
 };
 
 const LangContext = createContext<LangContextType>({
-  lang: "en",
-  toggle: () => {},
+  lang: "es",
+  setLang: () => {},
 });
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>("en");
+  const [lang, setLang] = useState<Lang>("es");
 
-  const toggle = () =>
-    setLang((l) => LANGS[(LANGS.indexOf(l) + 1) % LANGS.length]);
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   return (
-    <LangContext.Provider value={{ lang, toggle }}>
+    <LangContext.Provider value={{ lang, setLang }}>
       {children}
     </LangContext.Provider>
   );

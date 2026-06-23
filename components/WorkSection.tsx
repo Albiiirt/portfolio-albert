@@ -1,193 +1,266 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { useLang } from "@/lib/LanguageContext";
 import { t } from "@/data/translations";
 import { projects } from "@/data/projects";
+import { EASE } from "@/lib/animations";
+import Image from "next/image";
 
-const EASE = [0.25, 0.46, 0.45, 0.94] as [number, number, number, number];
+const FEATURED_IDS = ["elbulli", "madrid", "castellera", "turisme-jaen", "mirazur"];
+const featured = FEATURED_IDS.map((id) => projects.find((p) => p.id === id)!).filter(Boolean);
+
+const cardVariants = {
+  enter: (dir: number) => ({ y: dir * 50, opacity: 0 }),
+  center: { y: 0, opacity: 1 },
+  exit: (dir: number) => ({ y: dir * -50, opacity: 0 }),
+};
+
+function AccordionCard({ p, lang, viewCase }: { p: typeof featured[0]; lang: string; viewCase: string }) {
+  return (
+    <Link href={`/proyectos/${p.id}`} style={{ display: "block", textDecoration: "none", cursor: "none" }}>
+      <div style={{
+        position: "relative",
+        height: "clamp(180px, 36vw, 260px)",
+        borderRadius: "1.25rem",
+        overflow: "hidden",
+        background: p.gradient,
+        marginTop: "0.25rem",
+        marginBottom: "0.5rem",
+      }}>
+        {p.video && (
+          <video autoPlay muted loop playsInline
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}>
+            <source src={p.video} type="video/mp4" />
+          </video>
+        )}
+        {!p.video && p.cover && (
+          <Image src={p.cover} alt="" fill sizes="100vw"
+            style={{ objectFit: "cover", objectPosition: "center" }} />
+        )}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.3) 50%, transparent 100%)" }} />
+        <div style={{ position: "absolute", top: "1rem", left: "1.25rem", display: "flex", gap: "0.4rem", alignItems: "center" }}>
+          <span style={{ fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.9)", background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", padding: "0.25rem 0.65rem", borderRadius: "100px", border: "1px solid rgba(255,255,255,0.2)" }}>
+            {(p.category as Record<string, string>)[lang]}
+          </span>
+          <span style={{ fontSize: "0.58rem", fontWeight: 600, color: "rgba(255,255,255,0.45)", letterSpacing: "0.08em" }}>
+            {p.year}
+          </span>
+        </div>
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "1.25rem 1.5rem", display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: "1rem" }}>
+          <h3 style={{ fontSize: "clamp(1rem, 2.5vw, 1.4rem)", fontWeight: 700, letterSpacing: "-0.02em", color: "#fff", lineHeight: 1.15, margin: 0 }}>
+            {(p.title as Record<string, string>)[lang]}
+          </h3>
+          <span style={{ fontSize: "0.78rem", fontWeight: 600, color: "#fff", borderBottom: "1px solid rgba(255,255,255,0.5)", paddingBottom: "2px", whiteSpace: "nowrap", flexShrink: 0 }}>
+            {viewCase} →
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
 
 export default function WorkSection() {
   const { lang } = useLang();
   const tx = t[lang].work;
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [active, setActive] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const prevIdx = useRef(0);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const project = featured[active];
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const idx = Math.min(Math.floor(latest * featured.length), featured.length - 1);
+    if (idx !== prevIdx.current) {
+      setDirection(idx > prevIdx.current ? 1 : -1);
+      setActive(idx);
+      prevIdx.current = idx;
+    }
+  });
+
+  const goTo = (i: number) => {
+    setDirection(i > active ? 1 : -1);
+    setActive(i);
+    prevIdx.current = i;
+  };
 
   return (
     <section
       id="work"
-      style={{ padding: "clamp(5rem, 10vw, 10rem) clamp(1.5rem, 5vw, 5rem)", position: "relative" }}
+      ref={sectionRef}
+      className="work-section"
+      style={{ height: `${featured.length * 100}svh`, background: "var(--bg)" }}
     >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: "clamp(2.5rem, 5vw, 5rem)",
-        }}
-      >
-        <p className="section-label">{tx.label}</p>
-        <span style={{ fontSize: "0.68rem", color: "rgba(141,184,154,0.7)", letterSpacing: "0.1em", fontWeight: 600 }}>
-          {tx.count}
-        </span>
-      </div>
+      {/* Sticky viewport */}
+      <div className="work-sticky" style={{
+        position: "sticky",
+        top: 0,
+        height: "100svh",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        padding: "clamp(5rem, 9vh, 7rem) clamp(1.5rem, 5vw, 5rem) clamp(2.5rem, 5vh, 4.5rem)",
+      }}>
+        <div className="site-content" style={{ display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}>
 
-      <div className="divider" />
-
-      {projects.map((project, i) => (
-        <div key={project.id}>
-          <div
-            className="project-row"
-            onMouseEnter={() => setHoveredIndex(i)}
-            onMouseLeave={() => setHoveredIndex(null)}
-            onClick={() => setExpandedIndex(expandedIndex === i ? null : i)}
-          >
-            {/* Glass hover highlight */}
-            <motion.div
-              animate={{ opacity: hoveredIndex === i ? 1 : 0 }}
-              transition={{ duration: 0.25 }}
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: "rgba(255,255,255,0.35)",
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
-                borderRadius: "8px",
-                border: "1px solid rgba(255,255,255,0.6)",
-                boxShadow: "0 1px 0 rgba(255,255,255,0.9) inset",
-                pointerEvents: "none",
-              }}
-            />
-
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "3rem 1fr auto auto",
-                alignItems: "center",
-                gap: "clamp(1rem, 2.5vw, 2.5rem)",
-                padding: "clamp(1.5rem, 3vw, 2.5rem) 0.5rem",
-                position: "relative",
-              }}
-            >
-              {/* Number */}
-              <span
-                style={{
-                  fontSize: "0.72rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.1em",
-                  color: hoveredIndex === i ? "#4a7a5c" : "rgba(141,184,154,0.6)",
-                  transition: "color 0.3s",
-                }}
-              >
-                {project.num}
+          {/* Heading */}
+          <div style={{ marginBottom: "clamp(2rem, 4vh, 3.5rem)", flexShrink: 0 }}>
+            <p className="section-label" style={{ marginBottom: "0.65rem" }}>{tx.label}</p>
+            <h2 style={{ margin: 0, lineHeight: 1.05 }}>
+              <span style={{ display: "block", fontSize: "var(--text-display)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--text)" }}>
+                {tx.heading}
               </span>
-
-              {/* Title */}
-              <motion.h3
-                animate={{ x: hoveredIndex === i ? 6 : 0 }}
-                transition={{ duration: 0.3, ease: EASE }}
-                style={{
-                  fontSize: "clamp(1.3rem, 3.5vw, 2.8rem)",
-                  fontWeight: 700,
-                  letterSpacing: "-0.02em",
-                  lineHeight: 1.1,
-                  color: hoveredIndex === i ? "#1c2b20" : "rgba(28,43,32,0.45)",
-                  transition: "color 0.3s",
-                }}
-              >
-                {project.title[lang]}
-              </motion.h3>
-
-              {/* Category + year */}
-              <div className="hidden md:flex" style={{ flexDirection: "column", alignItems: "flex-end", gap: "0.2rem" }}>
-                <span style={{ fontSize: "0.72rem", color: "rgba(74,122,92,0.7)", fontWeight: 500, letterSpacing: "0.04em" }}>
-                  {project.category[lang]}
-                </span>
-                <span style={{ fontSize: "0.65rem", color: "rgba(141,184,154,0.6)", fontWeight: 600, letterSpacing: "0.08em" }}>
-                  {project.year}
-                </span>
-              </div>
-
-              {/* Toggle — glass circle */}
-              <motion.div
-                animate={{ rotate: expandedIndex === i ? 45 : 0 }}
-                transition={{ duration: 0.25, ease: EASE }}
-                style={{
-                  width: "clamp(28px,2.5vw,38px)",
-                  height: "clamp(28px,2.5vw,38px)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexShrink: 0,
-                  borderRadius: "50%",
-                  /* Liquid Glass circle button */
-                  background: hoveredIndex === i ? "rgba(74,122,92,0.14)" : "rgba(255,255,255,0.45)",
-                  backdropFilter: "blur(12px)",
-                  WebkitBackdropFilter: "blur(12px)",
-                  border: `1px solid ${hoveredIndex === i ? "rgba(74,122,92,0.35)" : "rgba(255,255,255,0.8)"}`,
-                  boxShadow: "0 1px 0 rgba(255,255,255,0.9) inset, 0 2px 8px rgba(40,60,40,0.08)",
-                  color: hoveredIndex === i ? "#4a7a5c" : "rgba(28,43,32,0.35)",
-                  transition: "background 0.3s, border-color 0.3s, color 0.3s",
-                }}
-              >
-                <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-                  <path d="M6 2v8M2 6h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                </svg>
-              </motion.div>
-            </div>
+              <span style={{ display: "block", fontSize: "var(--text-display)", fontFamily: "var(--font-serif), 'Playfair Display', serif", fontStyle: "italic", fontWeight: 400, color: "var(--text-muted)" }}>
+                {tx.headingItalic}
+              </span>
+            </h2>
           </div>
 
-          {/* Expanded case — Liquid Glass card */}
-          <AnimatePresence>
-            {expandedIndex === i && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.45, ease: EASE }}
-                style={{ overflow: "hidden" }}
-              >
-                <div
-                  className="liquid-glass"
-                  style={{ margin: "0 0 1.5rem", padding: "clamp(1.5rem, 3vw, 3rem)" }}
+          {/* Grid: list + card */}
+          <div className="work-grid" style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "clamp(2rem, 4vw, 5rem)", alignItems: "start", flex: 1, minHeight: 0 }}>
+
+            {/* Left: list */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "clamp(1rem, 2vh, 1.5rem)" }}>
+              <nav style={{ display: "flex", flexDirection: "column" }}>
+                {featured.map((p, i) => (
+                  <div key={p.id}>
+                    <button
+                      onClick={() => goTo(i)}
+                      style={{
+                        all: "unset", cursor: "none",
+                        display: "flex", alignItems: "center", gap: "1rem",
+                        padding: "0.85rem 0",
+                        borderBottom: "1px solid var(--border)",
+                        width: "100%",
+                      }}
+                    >
+                      <span style={{
+                        fontSize: "0.6rem", fontWeight: 600, letterSpacing: "0.1em",
+                        color: i === active ? "var(--text)" : "var(--text-subtle)",
+                        transition: "color 0.35s", flexShrink: 0,
+                      }}>
+                        {p.num}
+                      </span>
+                      <span style={{
+                        fontSize: "clamp(0.88rem, 1.1vw, 1rem)",
+                        fontWeight: i === active ? 700 : 400,
+                        color: i === active ? "var(--text)" : "var(--text-muted)",
+                        transition: "color 0.35s, font-weight 0.1s",
+                      }}>
+                        {p.title[lang]}
+                      </span>
+                      {i === active && (
+                        <span style={{ marginLeft: "auto", width: "5px", height: "5px", borderRadius: "50%", background: "var(--text)", flexShrink: 0 }} />
+                      )}
+                    </button>
+
+                    {/* Accordion panel — visible on tablet/mobile only via CSS */}
+                    <AnimatePresence initial={false}>
+                      {i === active && (
+                        <motion.div
+                          key={`accordion-${p.id}`}
+                          className="work-accordion"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.38, ease: [0.25, 0.46, 0.45, 0.94] }}
+                          style={{ overflow: "hidden" }}
+                        >
+                          <AccordionCard p={p} lang={lang} viewCase={tx.viewCase} />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ))}
+              </nav>
+
+              {/* Ver todos */}
+              <div style={{ paddingTop: "0.75rem" }}>
+                <a href="/proyectos" className="btn-ghost">
+                  {tx.viewAll} →
+                </a>
+              </div>
+            </div>
+
+            {/* Right: card column — desktop only */}
+            <div className="work-card-wrap" style={{ position: "relative", height: "100%", minHeight: 0, maxHeight: "min(68vh, 680px)" }}>
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={active}
+                  custom={direction}
+                  variants={cardVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.42, ease: EASE }}
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    borderRadius: "1.5rem",
+                    overflow: "hidden",
+                    background: project.gradient,
+                  }}
                 >
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "2rem" }}>
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="tag">{tag}</span>
-                    ))}
-                  </div>
-
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-                      gap: "2rem",
-                    }}
+                  <Link
+                    href={`/proyectos/${project.id}`}
+                    style={{ display: "block", position: "absolute", inset: 0, textDecoration: "none", cursor: "none" }}
                   >
-                    {[
-                      { label: lang === "en" ? "The Problem" : lang === "es" ? "El Problema" : "El Problema", text: project.problem[lang] },
-                      { label: lang === "en" ? "The Process" : lang === "es" ? "El Proceso" : "El Procés", text: project.process[lang] },
-                      { label: lang === "en" ? "The Result"  : lang === "es" ? "El Resultado" : "El Resultat", text: project.result[lang] },
-                    ].map((col) => (
-                      <div key={col.label}>
-                        <p style={{ fontSize: "0.63rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#4a7a5c", marginBottom: "0.75rem" }}>
-                          {col.label}
-                        </p>
-                        <p style={{ fontSize: "0.875rem", lineHeight: 1.75, color: "rgba(28,43,32,0.6)" }}>
-                          {col.text}
-                        </p>
+                    {project.video && (
+                      <video autoPlay muted loop playsInline
+                        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}>
+                        <source src={project.video} type="video/mp4" />
+                      </video>
+                    )}
+                    {!project.video && project.cover && (
+                      <Image src={project.cover} alt="" fill
+                        sizes="(max-width: 768px) 100vw, 66vw"
+                        style={{ objectFit: "cover", objectPosition: "center" }} />
+                    )}
+                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.65) 35%, rgba(0,0,0,0.2) 65%, transparent 100%)" }} />
+                    <div style={{ position: "absolute", top: "1.5rem", left: "1.75rem", display: "flex", gap: "0.5rem", alignItems: "center" }}>
+                      <span style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.9)", background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", padding: "0.3rem 0.75rem", borderRadius: "100px", border: "1px solid rgba(255,255,255,0.2)" }}>
+                        {project.category[lang]}
+                      </span>
+                      <span style={{ fontSize: "0.6rem", fontWeight: 600, color: "rgba(255,255,255,0.45)", letterSpacing: "0.08em" }}>
+                        {project.year}
+                      </span>
+                    </div>
+                    <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "1.75rem", display: "flex", flexDirection: "column", gap: "0.65rem" }}>
+                      <h3 style={{ fontSize: "clamp(1.3rem, 2.2vw, 1.8rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "#fff", lineHeight: 1.15, margin: 0 }}>
+                        {project.title[lang]}
+                      </h3>
+                      <p style={{ fontSize: "1rem", lineHeight: 1.6, color: "rgba(255,255,255,0.8)", margin: 0, maxWidth: "520px" }}>
+                        {project.description[lang]}
+                      </p>
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "0.75rem" }}>
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem" }}>
+                          {project.tags.slice(0, 3).map((tag) => (
+                            <span key={tag} style={{ fontSize: "0.65rem", fontWeight: 600, letterSpacing: "0.05em", color: "rgba(255,255,255,0.7)", background: "rgba(255,255,255,0.1)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.18)", padding: "0.22rem 0.65rem", borderRadius: "100px" }}>
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <span style={{ fontSize: "0.8rem", fontWeight: 600, color: "#fff", borderBottom: "1px solid rgba(255,255,255,0.5)", paddingBottom: "2px", letterSpacing: "0.01em" }}>
+                          {tx.viewCase} →
+                        </span>
                       </div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      ))}
+                    </div>
+                  </Link>
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
-      <div className="divider" />
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

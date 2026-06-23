@@ -3,18 +3,8 @@
 import { motion } from "framer-motion";
 import { useLang } from "@/lib/LanguageContext";
 import { t } from "@/data/translations";
-
-const EASE = [0.25, 0.46, 0.45, 0.94] as [number, number, number, number];
-
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.09, delayChildren: 0.35 } },
-};
-
-const lineReveal = {
-  hidden: { y: "108%", opacity: 0 },
-  show: { y: 0, opacity: 1, transition: { duration: 1.1, ease: EASE } },
-};
+import { EASE } from "@/lib/animations";
+import PlanetOrbit from "@/components/PlanetOrbit";
 
 export default function Hero() {
   const { lang } = useLang();
@@ -25,105 +15,100 @@ export default function Hero() {
       id="hero"
       style={{
         position: "relative",
-        minHeight: "100svh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-end",
-        paddingBottom: "clamp(3rem, 6vw, 6rem)",
-        paddingLeft: "clamp(1.5rem, 5vw, 5rem)",
-        paddingRight: "clamp(1.5rem, 5vw, 5rem)",
+        minHeight: "80svh",
+        background: "var(--bg)",
         overflow: "hidden",
-        background: "#f7f3ea",
+        display: "flex",
+        alignItems: "center",
       }}
     >
-      {/* Organic dappled light blobs */}
-      <div className="blob blob-1" />
-      <div className="blob blob-2" />
-      <div className="blob blob-3" />
-      <div className="blob blob-4" />
+      <div className="hero-inner" style={{
+        position: "relative",
+        zIndex: 1,
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        gap: "clamp(3rem, 6vw, 8rem)",
+        paddingTop: "clamp(4rem, 7vh, 6rem)",
+        paddingBottom: "clamp(3rem, 6vh, 5rem)",
+        paddingLeft: "clamp(1.5rem, 5vw, 5rem)",
+        paddingRight: "clamp(1.5rem, 5vw, 5rem)",
+      }}>
 
-      {/* Very light vignette to keep edges warm */}
-      <div
-        style={{
-          position: "absolute", inset: 0,
-          background: "radial-gradient(ellipse 150% 100% at 60% 40%, transparent 30%, rgba(247,243,234,0.45) 100%)",
-          pointerEvents: "none", zIndex: 1,
-        }}
-      />
+        {/* Left: text */}
+        <div style={{ flex: "1 1 0", minWidth: 0, display: "flex", flexDirection: "column", gap: "clamp(1rem, 1.8vh, 1.75rem)" }}>
 
-      {/* Content */}
-      <div style={{ position: "relative", zIndex: 2 }}>
-        <motion.div variants={container} initial="hidden" animate="show">
-          {[tx.line1, tx.line2, tx.line3, tx.line4].map((line, i) => (
-            <div key={i} style={{ overflow: "hidden" }}>
-              <motion.h1
-                variants={lineReveal}
-                className={`hero-heading${i === 2 ? " text-gradient" : ""}`}
-              >
-                {line}
-              </motion.h1>
-            </div>
-          ))}
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.0, duration: 0.9 }}
-          style={{
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: "1.5rem",
-            marginTop: "clamp(2rem, 4vw, 4rem)",
-          }}
-        >
-          <div>
-            <p style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#a8b8a0", marginBottom: "0.3rem" }}>
-              Albert Canadas
-            </p>
-            <p style={{ fontSize: "0.875rem", color: "rgba(30,26,20,0.4)", letterSpacing: "0.03em" }}>
-              {tx.role}
-            </p>
-          </div>
-
-          {/* Availability — Liquid Glass pill */}
-          <div className="liquid-pill" style={{ display: "flex", alignItems: "center", gap: "0.6rem", padding: "0.65rem 1.3rem" }}>
-            <span className="status-dot" />
-            <span style={{ fontSize: "0.78rem", fontWeight: 500, color: "#2a5038" }}>
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: EASE, delay: 0 }}
+            style={{ display: "flex", alignItems: "center", gap: "0.55rem", flexWrap: "wrap" }}
+          >
+            <svg width="9" height="11" viewBox="0 0 12 15" fill="none" aria-hidden="true">
+              <path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5A1.5 1.5 0 1 1 6 3.5 1.5 1.5 0 0 1 6 6.5z" fill="var(--text-muted)" />
+            </svg>
+            <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--text-muted)", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+              Barcelona
+            </span>
+            <span style={{ width: "1px", height: "10px", background: "var(--border-mid)", flexShrink: 0 }} aria-hidden="true" />
+            <span className="status-dot" style={{ width: "6px", height: "6px" }} aria-hidden="true" />
+            <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--text-muted)", letterSpacing: "0.04em" }}>
               {tx.availability}
             </span>
-          </div>
-        </motion.div>
-      </div>
+          </motion.div>
 
-      {/* Scroll hint */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.6, duration: 0.8 }}
-        style={{
-          position: "absolute",
-          bottom: "clamp(1.5rem, 3vw, 3rem)",
-          left: "50%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "0.5rem",
-          zIndex: 2,
-        }}
-      >
-        <span style={{ fontSize: "0.58rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "#a8b8a0" }}>
-          {tx.scroll}
-        </span>
+          {/* Heading */}
+          <motion.h1
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, ease: EASE, delay: 0.12 }}
+            style={{ margin: 0, lineHeight: 1, display: "flex", flexDirection: "column" }}
+          >
+            <span style={{ color: "var(--text)", fontSize: "clamp(1.8rem, 4vw, 5rem)", fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.03em" }}>
+              {`${tx.line1} ${tx.line2}`}
+            </span>
+            <span className="text-gradient" style={{ fontSize: "clamp(3.5rem, 8vw, 9.5rem)", fontFamily: "var(--font-serif), 'Playfair Display', serif", fontStyle: "italic", fontWeight: 400, letterSpacing: "0em", lineHeight: 0.92 }}>
+              {tx.line3}
+            </span>
+            <span style={{ color: "var(--text)", fontSize: "clamp(3.5rem, 8vw, 9.5rem)", fontFamily: "var(--font-serif), 'Playfair Display', serif", fontStyle: "italic", fontWeight: 400, letterSpacing: "0em", lineHeight: 0.92 }}>
+              {tx.line4}
+            </span>
+          </motion.h1>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: EASE, delay: 0.34 }}
+            style={{ marginTop: "clamp(0.75rem, 2vh, 1.5rem)" }}
+          >
+            <a
+              href="#contact"
+              className="btn-primary"
+              onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
+            >
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M2 4l6 4.5L14 4M2 4h12v9H2V4z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              {tx.cta}
+            </a>
+          </motion.div>
+
+        </div>
+
+        {/* Right: planet */}
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-          style={{ width: "1px", height: "32px", background: "linear-gradient(180deg, #5a8c6a, transparent)" }}
-        />
-      </motion.div>
+          initial={{ opacity: 0, x: 24 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, ease: EASE, delay: 0.22 }}
+          className="hero-orbit"
+          style={{ flexShrink: 0, width: "clamp(260px, 36vw, 480px)" }}
+        >
+          <PlanetOrbit />
+        </motion.div>
+
+      </div>
     </section>
   );
 }

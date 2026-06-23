@@ -33,15 +33,15 @@ export default function CustomCursor() {
       if (isInteractive) {
         ring.style.width = "56px";
         ring.style.height = "56px";
-        ring.style.background = "rgba(74, 122, 92, 0.18)";
-        ring.style.borderColor = "rgba(74, 122, 92, 0.5)";
+        ring.style.background = "var(--cursor-ring-bg-hover)";
+        ring.style.borderColor = "var(--cursor-ring-border-hover)";
         dot.style.width = "4px";
         dot.style.height = "4px";
       } else {
         ring.style.width = "38px";
         ring.style.height = "38px";
-        ring.style.background = "rgba(255, 255, 255, 0.28)";
-        ring.style.borderColor = "rgba(255, 255, 255, 0.85)";
+        ring.style.background = "var(--cursor-ring-bg)";
+        ring.style.borderColor = "var(--cursor-ring-border)";
         dot.style.width = "7px";
         dot.style.height = "7px";
       }
