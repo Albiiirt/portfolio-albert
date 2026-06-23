@@ -23,7 +23,7 @@ function AccordionCard({ p, lang, viewCase }: { p: typeof featured[0]; lang: str
     <Link href={`/proyectos/${p.id}`} style={{ display: "block", textDecoration: "none", cursor: "none" }}>
       <div style={{
         position: "relative",
-        height: "clamp(180px, 36vw, 260px)",
+        height: "clamp(200px, 38vw, 300px)",
         borderRadius: "1.25rem",
         overflow: "hidden",
         background: p.gradient,
@@ -40,7 +40,7 @@ function AccordionCard({ p, lang, viewCase }: { p: typeof featured[0]; lang: str
           <Image src={p.cover} alt="" fill sizes="100vw"
             style={{ objectFit: "cover", objectPosition: "center" }} />
         )}
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.3) 50%, transparent 100%)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.78) 50%, rgba(0,0,0,0.15) 75%, transparent 100%)" }} />
         <div style={{ position: "absolute", top: "1rem", left: "1.25rem", display: "flex", gap: "0.4rem", alignItems: "center" }}>
           <span style={{ fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.9)", background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", padding: "0.25rem 0.65rem", borderRadius: "100px", border: "1px solid rgba(255,255,255,0.2)" }}>
             {(p.category as Record<string, string>)[lang]}
@@ -49,11 +49,14 @@ function AccordionCard({ p, lang, viewCase }: { p: typeof featured[0]; lang: str
             {p.year}
           </span>
         </div>
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "1.25rem 1.5rem", display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: "1rem" }}>
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "1.25rem 1.5rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
           <h3 style={{ fontSize: "clamp(1rem, 2.5vw, 1.4rem)", fontWeight: 700, letterSpacing: "-0.02em", color: "#fff", lineHeight: 1.15, margin: 0 }}>
             {(p.title as Record<string, string>)[lang]}
           </h3>
-          <span style={{ fontSize: "0.78rem", fontWeight: 600, color: "#fff", borderBottom: "1px solid rgba(255,255,255,0.5)", paddingBottom: "2px", whiteSpace: "nowrap", flexShrink: 0 }}>
+          <p style={{ fontSize: "0.82rem", lineHeight: 1.55, color: "rgba(255,255,255,0.75)", margin: 0, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" } as React.CSSProperties}>
+            {(p.description as Record<string, string>)[lang]}
+          </p>
+          <span style={{ fontSize: "0.72rem", fontWeight: 600, color: "#fff", borderBottom: "1px solid rgba(255,255,255,0.5)", paddingBottom: "2px", alignSelf: "flex-end" }}>
             {viewCase} →
           </span>
         </div>
@@ -125,10 +128,10 @@ export default function WorkSection() {
           </div>
 
           {/* Grid: list + card */}
-          <div className="work-grid" style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "clamp(2rem, 4vw, 5rem)", alignItems: "start", flex: 1, minHeight: 0 }}>
+          <div className="work-grid" style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "clamp(2rem, 4vw, 5rem)", flex: 1, minHeight: 0 }}>
 
             {/* Left: list */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "clamp(1rem, 2vh, 1.5rem)" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "clamp(1rem, 2vh, 1.5rem)", alignSelf: "start" }}>
               <nav style={{ display: "flex", flexDirection: "column" }}>
                 {featured.map((p, i) => (
                   <div key={p.id}>
