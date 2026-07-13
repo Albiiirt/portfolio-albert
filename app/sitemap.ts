@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { projects } from "@/data/projects";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://albertcanadas.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://portfolio-albert-six.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const projectUrls = projects.map((p) => ({

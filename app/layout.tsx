@@ -18,7 +18,7 @@ const playfair = Playfair_Display({
 });
 
 // Update SITE_URL when deploying to production
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://albertcanadas.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://portfolio-albert-six.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
