@@ -9,8 +9,12 @@ import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import NextProjectCard from "@/components/proyectos/NextProjectCard";
 import { EASE } from "@/lib/animations";
+import { useLang } from "@/lib/LanguageContext";
+import { projects } from "@/data/projects";
 
 const ACCENT = "#b84040";
+const project = projects.find((p) => p.id === "castellera")!;
+const resultLabel = { en: "The result", es: "El resultado", ca: "El resultat" };
 
 const meta = [
   { label: "Proyecto",  value: "Personal · Autónomo" },
@@ -88,6 +92,7 @@ function SvgSystem() {
 
 // ── Page ────────────────────────────────────────────────────────────────────
 export default function CastelleraPage() {
+  const { lang } = useLang();
   return (
     <SmoothScroll>
       <CustomCursor />
@@ -200,7 +205,7 @@ export default function CastelleraPage() {
               <FadeInView>
                 <p className="section-label" style={{ marginBottom: "1.5rem" }}>El proyecto</p>
                 <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
-                  Un proyecto que hice de forma altruista para la Colla Castellera del Baix Montseny. Me encargué de todo: diseño, desarrollo, CMS con Notion, formularios conectados al correo del hosting, despliegue con pipeline de GitHub al servidor, y configuración de la ficha de Google para que la asociación apareciera bien referenciada en Maps con la web enlazada.
+                  {project.problem[lang]}
                 </p>
               </FadeInView>
               <FadeInView delay={0.1}>
@@ -243,6 +248,9 @@ export default function CastelleraPage() {
                 <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
                   De cero a web en producción
                 </h2>
+                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.5rem" }}>
+                  {project.process[lang]}
+                </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                   {[
                     { label: "Diseño y desarrollo", desc: "Diseñé y desarrollé la web completa con Claude Code, con ajustes de composición y diseño a lo largo del proceso." },
@@ -270,8 +278,20 @@ export default function CastelleraPage() {
           </div>
         </section>
 
-        {/* ── Aprendizajes ── */}
+        {/* ── El resultado ── */}
         <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+          <div className="site-content" style={{ maxWidth: 720 }}>
+            <FadeInView>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{resultLabel[lang]}</p>
+              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                {project.result[lang]}
+              </p>
+            </FadeInView>
+          </div>
+        </section>
+
+        {/* ── Aprendizajes ── */}
+        <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content" style={{ maxWidth: 720 }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>Aprendizajes</p>

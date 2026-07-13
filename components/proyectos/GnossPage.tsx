@@ -9,8 +9,12 @@ import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import { EASE } from "@/lib/animations";
+import { useLang } from "@/lib/LanguageContext";
+import { projects } from "@/data/projects";
 
 const ACCENT = "#c4a35a";
+const project = projects.find((p) => p.id === "gnoss-ai")!;
+const resultLabel = { en: "The result", es: "El resultado", ca: "El resultat" };
 
 const meta = [
   { label: "Cliente",  value: "GNOSS" },
@@ -84,6 +88,7 @@ function SvgSystem() {
 
 // ── Page ────────────────────────────────────────────────────────────────────
 export default function GnossPage() {
+  const { lang } = useLang();
   return (
     <SmoothScroll>
       <CustomCursor />
@@ -188,7 +193,7 @@ export default function GnossPage() {
               <FadeInView>
                 <p className="section-label" style={{ marginBottom: "1.5rem" }}>El proyecto</p>
                 <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)" }}>
-                  GNOSS quería renovar toda su web. Cuando me incorporé, el design system, las páginas principales y los patrones visuales ya estaban definidos. Mi tarea fue mantener y ampliar ese sistema — creando bastantes páginas nuevas que encajaran de forma coherente con todo lo construido. El flujo era claro: yo diseñaba en Figma, alguien del equipo validaba, y sus programadores lo implementaban.
+                  {project.problem[lang]}
                 </p>
               </FadeInView>
               <FadeInView delay={0.1}>
@@ -245,7 +250,10 @@ export default function GnossPage() {
         <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content">
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>El trabajo</p>
+              <p className="section-label" style={{ marginBottom: "1rem" }}>El trabajo</p>
+              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.75rem", maxWidth: 720 }}>
+                {project.process[lang]}
+              </p>
             </FadeInView>
             <div className="proj-grid-3" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "clamp(1rem, 2vw, 2rem)" }}>
               {[
@@ -287,8 +295,20 @@ export default function GnossPage() {
           </div>
         </section>
 
-        {/* ── Aprendizajes ── */}
+        {/* ── El resultado ── */}
         <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+          <div className="site-content" style={{ maxWidth: 720 }}>
+            <FadeInView>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{resultLabel[lang]}</p>
+              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                {project.result[lang]}
+              </p>
+            </FadeInView>
+          </div>
+        </section>
+
+        {/* ── Aprendizajes ── */}
+        <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content" style={{ maxWidth: 720 }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>Aprendizajes</p>

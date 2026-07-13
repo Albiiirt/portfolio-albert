@@ -9,8 +9,11 @@ import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import { EASE } from "@/lib/animations";
+import { useLang } from "@/lib/LanguageContext";
+import { projects } from "@/data/projects";
 
 const ACCENT = "#b5386e";
+const project = projects.find((p) => p.id === "la-rioja-turismo")!;
 
 const meta = [
   { label: "Cliente",  value: "La Rioja Turismo" },
@@ -24,6 +27,7 @@ const meta = [
 const chips = ["Figma", "Framer", "Web Design", "Tourism"];
 
 export default function LaRiojaPage() {
+  const { lang } = useLang();
   return (
     <SmoothScroll>
       <CustomCursor />
@@ -128,7 +132,7 @@ export default function LaRiojaPage() {
               <FadeInView>
                 <p className="section-label" style={{ marginBottom: "1.5rem" }}>El proyecto</p>
                 <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
-                  El portal turístico de La Rioja necesitaba un rediseño a la altura de un destino con identidad propia. El proyecto ya estaba en marcha en el estudio — yo me incorporé para diseñar páginas concretas en Figma dentro del sistema visual establecido. La implementación se hizo en Framer.
+                  {project.problem[lang]}
                 </p>
               </FadeInView>
               <FadeInView delay={0.1}>
@@ -165,11 +169,8 @@ export default function LaRiojaPage() {
                 <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
                   Entrar en un proyecto en marcha
                 </h2>
-                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                  La base del proyecto — dirección visual, sistema de componentes, páginas principales — ya estaba definida cuando me incorporé. Mi contribución fue diseñar páginas concretas respetando ese sistema: mismo lenguaje visual, misma lógica de componentes, misma coherencia.
-                </p>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                  Trabajar dentro de un sistema que no has construido tú obliga a leerlo bien antes de tocar nada. Cualquier página nueva tiene que parecer que siempre estuvo ahí.
+                  {project.process[lang]}
                 </p>
               </FadeInView>
               <FadeInView delay={0.1}>
@@ -208,7 +209,7 @@ export default function LaRiojaPage() {
                 El proyecto que abrió la puerta a Jaén
               </h2>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                El portal de La Rioja fue el trabajo que llevó a Turismo de Jaén a contactar con el estudio. Un encargo genera otro — y eso pasa cuando el resultado habla por sí solo.
+                {project.result[lang]}
               </p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                 El proyecto de Jaén —&nbsp;<Link href="/proyectos/turisme-jaen" style={{ color: ACCENT, textDecoration: "none", borderBottom: `1px solid ${ACCENT}55`, paddingBottom: "1px" }}>que puedes ver aquí</Link>&nbsp;— es directamente heredero de este.

@@ -10,9 +10,13 @@ import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import { EASE } from "@/lib/animations";
+import { useLang } from "@/lib/LanguageContext";
+import { projects } from "@/data/projects";
 import Image from "next/image";
 
 const ACCENT = "#c4813a";
+const project = projects.find((p) => p.id === "turisme-jaen")!;
+const resultLabel = { en: "The result", es: "El resultado", ca: "El resultat" };
 
 const meta = [
   { label: "Cliente",   value: "Turismo de Jaén" },
@@ -253,6 +257,7 @@ function SvgModular() {
 
 // ── Page ────────────────────────────────────────────────────────────────────
 export default function JaenPage() {
+  const { lang } = useLang();
   return (
     <SmoothScroll>
       <CustomCursor />
@@ -370,7 +375,7 @@ export default function JaenPage() {
               <FadeInView>
                 <p className="section-label" style={{ marginBottom: "1.5rem" }}>El proyecto</p>
                 <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
-                  El portal de Turismo de Jaén es el punto de referencia turístico de la provincia: rutas de montaña, fichas de municipios, puntos de interés, alojamientos, restaurantes, eventos. Un site con cientos de páginas que necesitaba un rediseño de arriba a abajo. Lo diseñamos a cuatro manos en Figma — yo y una compañera de estudio — y está actualmente en fase de implementación con el equipo de desarrollo interno.
+                  {project.problem[lang]}
                 </p>
               </FadeInView>
 
@@ -494,22 +499,28 @@ export default function JaenPage() {
                 <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
                   Primero el estilo, luego el sistema
                 </h2>
-                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                  Lo diseñamos a cuatro manos — yo y una compañera — lanzando propuestas de página completa en Figma para encontrar la dirección visual que mejor encajaba con el proyecto. El diseño evolucionó bastante: hubo que iterar con propuestas distintas por factores externos al estudio.
-                </p>
-                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                  Con la dirección definida, construimos el sistema de componentes en Figma. Una card de ruta y una card de municipio comparten la misma anatomía — lo que cambia es el acento visual y la jerarquía de información.
-                </p>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                  La implementación la lleva un compañero del mismo estudio. Trabajar con el desarrollador en el mismo equipo cambia la dinámica: los ajustes son más rápidos, la comunicación más directa, y el resultado final se parece mucho más a lo que se diseñó. El proyecto está actualmente en esta fase.
+                  {project.process[lang]}
                 </p>
               </FadeInView>
             </div>
           </div>
         </section>
 
-        {/* ── Aprendizajes ── */}
+        {/* ── El resultado ── */}
         <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+          <div className="site-content" style={{ maxWidth: 720 }}>
+            <FadeInView>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{resultLabel[lang]}</p>
+              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                {project.result[lang]}
+              </p>
+            </FadeInView>
+          </div>
+        </section>
+
+        {/* ── Aprendizajes ── */}
+        <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content" style={{ maxWidth: 720 }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>Aprendizajes</p>

@@ -9,9 +9,13 @@ import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import { EASE } from "@/lib/animations";
+import { useLang } from "@/lib/LanguageContext";
+import { projects } from "@/data/projects";
 import Image from "next/image";
 
 const ACCENT = "#8c3a5a";
+const project = projects.find((p) => p.id === "madrid")!;
+const resultLabel = { en: "The result", es: "El resultado", ca: "El resultat" };
 
 const meta = [
   { label: "Cliente",  value: "Enoturismo Madrid" },
@@ -141,6 +145,7 @@ function SvgResponsive() {
 
 // ── Page ────────────────────────────────────────────────────────────────────
 export default function MadridPage() {
+  const { lang } = useLang();
   return (
     <SmoothScroll>
       <CustomCursor />
@@ -281,7 +286,7 @@ export default function MadridPage() {
               <FadeInView>
                 <p className="section-label" style={{ marginBottom: "1.5rem" }}>El proyecto</p>
                 <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
-                  El cliente entregó una primera versión generada por IA — en HTML, no solo como imagen. Tenía dirección visual pero no tenía estructura: sin componentes, sin sistema, sin forma de escalar. Como responsable del diseño del proyecto, lo migré a Next.js, construí el sistema de componentes y diseñé e implementé el site de la primera a la última página.
+                  {project.problem[lang]}
                 </p>
               </FadeInView>
               <FadeInView delay={0.1}>
@@ -318,11 +323,8 @@ export default function MadridPage() {
                 <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
                   Una base generada por IA
                 </h2>
-                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                  Tenía una base de partida, pero el diseño necesitaba más carácter y personalización. Además, el HTML que entregó el cliente no tenía estructura: sin componentes, sin sistema, sin forma de escalar.
-                </p>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                  Antes de diseñar nada nuevo, migré la base a Next.js — un entorno de código real, con componentes reutilizables, sobre el que construir todo lo demás sin perder la coherencia visual de lo que ya existía.
+                  {project.process[lang]}
                 </p>
               </FadeInView>
               <FadeInView delay={0.12}>
@@ -377,6 +379,18 @@ export default function MadridPage() {
                 </FadeInView>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ── El resultado ── */}
+        <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+          <div className="site-content" style={{ maxWidth: 720 }}>
+            <FadeInView>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{resultLabel[lang]}</p>
+              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                {project.result[lang]}
+              </p>
+            </FadeInView>
           </div>
         </section>
 

@@ -9,9 +9,13 @@ import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import { EASE } from "@/lib/animations";
+import { useLang } from "@/lib/LanguageContext";
+import { projects } from "@/data/projects";
 import Image from "next/image";
 
 const ACCENT = "#4a8fcc";
+const project = projects.find((p) => p.id === "elbulli")!;
+const resultLabel = { en: "The result", es: "El resultado", ca: "El resultat" };
 
 const meta = [
   { label: "Cliente",       value: "Fundació elBulli" },
@@ -269,6 +273,7 @@ function SvgBlocks() {
 
 // ── Page ────────────────────────────────────────────────────────────────────
 export default function ElBulliPage() {
+  const { lang } = useLang();
   return (
     <SmoothScroll>
       <CustomCursor />
@@ -388,7 +393,7 @@ export default function ElBulliPage() {
               <FadeInView>
                 <p className="section-label" style={{ marginBottom: "1.5rem" }}>El proyecto</p>
                 <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
-                  La Fundació elBulli custodia décadas de historia gastronómica en un archivo digital en constante crecimiento. Mi rol es doble: implementar en código las páginas ya diseñadas — responsive incluido — y diseñar las nuevas que el archivo necesita a medida que el proyecto avanza.
+                  {project.problem[lang]}
                 </p>
               </FadeInView>
 
@@ -458,11 +463,8 @@ export default function ElBulliPage() {
                 <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
                   El diseño se decide una sola vez
                 </h2>
-                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                  El sistema se estructura en tres capas: en la base, el design system con colores, tipografías y espaciados blindados. Encima, los bloques de contenido con estructura fija. En la cima, el contenido que pone el equipo.
-                </p>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                  El equipo editorial toma decisiones de contenido. <span style={{ color: "var(--text)", fontWeight: 600 }}>El sistema toma las decisiones de diseño.</span>
+                  {project.process[lang]}
                 </p>
               </FadeInView>
             </div>
@@ -496,8 +498,20 @@ export default function ElBulliPage() {
           </div>
         </section>
 
-        {/* ── Aprendizajes ── */}
+        {/* ── El resultado ── */}
         <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+          <div className="site-content" style={{ maxWidth: 720 }}>
+            <FadeInView>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{resultLabel[lang]}</p>
+              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                {project.result[lang]}
+              </p>
+            </FadeInView>
+          </div>
+        </section>
+
+        {/* ── Aprendizajes ── */}
+        <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content" style={{ maxWidth: 720 }}>
             <FadeInView>
               <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.75rem" }}>

@@ -9,8 +9,13 @@ import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import { EASE } from "@/lib/animations";
+import { useLang } from "@/lib/LanguageContext";
+import { projects } from "@/data/projects";
 
 const ACCENT = "#7aad3a";
+const project = projects.find((p) => p.id === "mirazur")!;
+const processLabel = { en: "The approach", es: "El enfoque", ca: "L'enfocament" };
+const resultLabel = { en: "The result", es: "El resultado", ca: "El resultat" };
 
 const meta = [
   { label: "Cliente",      value: "Mirazur" },
@@ -92,6 +97,7 @@ function SvgRecipeFlow() {
 
 // ── Page ────────────────────────────────────────────────────────────────────
 export default function MirazurPage() {
+  const { lang } = useLang();
   return (
     <SmoothScroll>
       <CustomCursor />
@@ -196,7 +202,7 @@ export default function MirazurPage() {
               <FadeInView>
                 <p className="section-label" style={{ marginBottom: "1.5rem" }}>El proyecto</p>
                 <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)" }}>
-                  Dos proyectos reales con Mirazur, restaurante de tres estrellas Michelin en Menton. En los dos casos el trabajo estaba a medias — yo los retomé y los terminé. Cada uno con una herramienta distinta, por razones distintas.
+                  {project.problem[lang]}
                 </p>
               </FadeInView>
               <FadeInView delay={0.1}>
@@ -296,8 +302,26 @@ export default function MirazurPage() {
           </div>
         </section>
 
-        {/* ── Aprendizajes ── */}
+        {/* ── El enfoque / El resultado ── */}
         <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+          <div className="site-content" style={{ maxWidth: 720, display: "flex", flexDirection: "column", gap: "clamp(2.5rem, 5vh, 3.5rem)" }}>
+            <FadeInView>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{processLabel[lang]}</p>
+              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                {project.process[lang]}
+              </p>
+            </FadeInView>
+            <FadeInView delay={0.05}>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{resultLabel[lang]}</p>
+              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                {project.result[lang]}
+              </p>
+            </FadeInView>
+          </div>
+        </section>
+
+        {/* ── Aprendizajes ── */}
+        <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content" style={{ maxWidth: 720 }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>Aprendizajes</p>
