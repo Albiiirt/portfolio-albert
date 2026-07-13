@@ -56,6 +56,89 @@ export const t = {
       copy: "Albert Canadas",
       rights: "All rights reserved",
     },
+    cv: {
+      label: "Resume",
+      roleTitle: "Web Designer · UI/UX · Frontend",
+      downloadPdf: "Download PDF",
+      bio: "Web designer with real production experience. I work in tourism, culture and tech — projects like Turisme Jaén, La Rioja Turismo, Fundació elBulli and Enoturismo Madrid. My edge: I design full interface systems in Figma and bring them to the browser with Framer, Next.js and Claude Code. No files-only delivery.",
+      contactLabel: "Contact",
+      fieldEmail: "Email",
+      fieldTel: "Phone",
+      fieldCity: "City",
+      fieldLinkedin: "LinkedIn",
+      city: "Barcelona",
+      toolsLabel: "Tools",
+      skillsLabel: "Skills",
+      languagesLabel: "Languages",
+      experienceLabel: "Professional experience",
+      educationLabel: "Education",
+      languages: [
+        { name: "Catalan", level: "Native" },
+        { name: "Spanish", level: "Native" },
+        { name: "English", level: "Intermediate" },
+      ],
+      experience: [
+        {
+          company: "Dosgrapas",
+          period: "Oct. 2025 – Present",
+          role: "Web Designer / Frontend",
+          bullets: [
+            "Full interface system design for clients in tourism, culture and tech",
+            "Clients: Turisme Jaén, La Rioja Turismo, Fundació elBulli, GNOSS (AI), BICCO",
+            "Design in Figma and implementation with Framer, Next.js and Claude Code",
+            "Design and maintenance of design systems at scale",
+            "Delivery through to production — not just Figma files",
+          ],
+        },
+        {
+          company: "8000 Estels",
+          period: "2024",
+          role: "Volunteer · UX Designer",
+          bullets: [
+            "Information architecture and user experience analysis",
+            "Website audits and usability analysis",
+            "Brand manuals, wireframes and client presentations",
+          ],
+        },
+        {
+          company: "BAU – Universitat d'Art i Disseny",
+          period: "2024",
+          role: "UX Designer · Internship",
+          bullets: [
+            "User research, UX and business mapping",
+            "Brand, trend and competitor analysis",
+          ],
+        },
+        {
+          company: "EREBUS / Ionfilter / BMK",
+          period: "2021 – 2023",
+          role: "Graphic Designer",
+          bullets: [
+            "Graphic design and visual communication for brands in industrial and consumer sectors",
+          ],
+        },
+      ],
+      education: [
+        {
+          degree: "Master in Marketing & Digital Communication",
+          school: "Ongoing",
+          period: "2025 – present",
+          tags: ["Google Ads", "Meta Ads", "Figma", "WordPress"],
+        },
+        {
+          degree: "Master in Digital Experience Design",
+          school: "BAU – Universitat d'Art i Disseny · Barcelona",
+          period: "2023 – 2024",
+          tags: [],
+        },
+        {
+          degree: "Higher Degree in Graphic Design · 2x3",
+          school: "EMAD · La Garriga",
+          period: "2020 – 2023",
+          tags: [],
+        },
+      ],
+    },
   },
   es: {
     nav: {
@@ -114,6 +197,89 @@ export const t = {
       copy: "Albert Canadas",
       rights: "Todos los derechos reservados",
     },
+    cv: {
+      label: "Currículum",
+      roleTitle: "Diseñador Web · UI/UX · Frontend",
+      downloadPdf: "Descargar PDF",
+      bio: "Diseñador web con experiencia real en producción. Trabajo en turismo, cultura y tecnología — proyectos como Turisme Jaén, La Rioja Turismo, Fundació elBulli y Enoturismo Madrid. Mi diferencial: diseño sistemas de interfaz completos en Figma y los llevo al navegador con Framer, Next.js y Claude Code. No entrego solo archivos.",
+      contactLabel: "Contacto",
+      fieldEmail: "Email",
+      fieldTel: "Tel",
+      fieldCity: "Ciudad",
+      fieldLinkedin: "LinkedIn",
+      city: "Barcelona",
+      toolsLabel: "Herramientas",
+      skillsLabel: "Competencias",
+      languagesLabel: "Idiomas",
+      experienceLabel: "Experiencia profesional",
+      educationLabel: "Formación",
+      languages: [
+        { name: "Catalán", level: "Nativo" },
+        { name: "Castellano", level: "Nativo" },
+        { name: "Inglés", level: "Intermedio" },
+      ],
+      experience: [
+        {
+          company: "Dosgrapas",
+          period: "Oct. 2025 – Actualidad",
+          role: "Diseñador Web / Frontend",
+          bullets: [
+            "Diseño de sistemas de interfaz completos para clientes de turismo, cultura y tecnología",
+            "Clientes: Turisme Jaén, La Rioja Turismo, Fundació elBulli, GNOSS (IA), BICCO",
+            "Diseño en Figma e implementación con Framer, Next.js y Claude Code",
+            "Diseño y mantenimiento de sistemas de diseño a escala",
+            "Entrega hasta producción — no solo archivos Figma",
+          ],
+        },
+        {
+          company: "8000 Estels",
+          period: "2024",
+          role: "Voluntario · UX Designer",
+          bullets: [
+            "Arquitectura de la información y análisis de experiencia de usuario",
+            "Auditoría de webs y análisis de usabilidad",
+            "Manuales de marca, wireframes y presentaciones para clientes",
+          ],
+        },
+        {
+          company: "BAU – Universitat d'Art i Disseny",
+          period: "2024",
+          role: "UX Designer · Prácticas",
+          bullets: [
+            "Investigación de usuarios, UX y business mapping",
+            "Análisis de marca, tendencias y competencia",
+          ],
+        },
+        {
+          company: "EREBUS / Ionfilter / BMK",
+          period: "2021 – 2023",
+          role: "Diseñador Gráfico",
+          bullets: [
+            "Diseño gráfico y comunicación visual para marcas de sectores industriales y de consumo",
+          ],
+        },
+      ],
+      education: [
+        {
+          degree: "Máster en Marketing y Comunicación Digital",
+          school: "En curso",
+          period: "2025 – actualidad",
+          tags: ["Google Ads", "Meta Ads", "Figma", "WordPress"],
+        },
+        {
+          degree: "Máster en Digital Experience Design",
+          school: "BAU – Universitat d'Art i Disseny · Barcelona",
+          period: "2023 – 2024",
+          tags: [],
+        },
+        {
+          degree: "CFGS Diseño Gráfico · 2x3",
+          school: "EMAD · La Garriga",
+          period: "2020 – 2023",
+          tags: [],
+        },
+      ],
+    },
   },
   ca: {
     nav: {
@@ -171,6 +337,89 @@ export const t = {
     footer: {
       copy: "Albert Canadas",
       rights: "Tots els drets reservats",
+    },
+    cv: {
+      label: "Currículum",
+      roleTitle: "Dissenyador Web · UI/UX · Frontend",
+      downloadPdf: "Descarrega el PDF",
+      bio: "Dissenyador web amb experiència real en producció. Treballo en turisme, cultura i tecnologia — projectes com Turisme Jaén, La Rioja Turismo, Fundació elBulli i Enoturisme Madrid. El meu diferencial: dissenyo sistemes d'interfície complets a Figma i els porto al navegador amb Framer, Next.js i Claude Code. Res d'entregar només arxius.",
+      contactLabel: "Contacte",
+      fieldEmail: "Email",
+      fieldTel: "Tel",
+      fieldCity: "Ciutat",
+      fieldLinkedin: "LinkedIn",
+      city: "Barcelona",
+      toolsLabel: "Eines",
+      skillsLabel: "Competències",
+      languagesLabel: "Idiomes",
+      experienceLabel: "Experiència professional",
+      educationLabel: "Formació",
+      languages: [
+        { name: "Català", level: "Natiu" },
+        { name: "Castellà", level: "Natiu" },
+        { name: "Anglès", level: "Intermedi" },
+      ],
+      experience: [
+        {
+          company: "Dosgrapas",
+          period: "Oct. 2025 – Actualitat",
+          role: "Dissenyador Web / Frontend",
+          bullets: [
+            "Disseny de sistemes d'interfície complets per a clients de turisme, cultura i tecnologia",
+            "Clients: Turisme Jaén, La Rioja Turismo, Fundació elBulli, GNOSS (IA), BICCO",
+            "Disseny a Figma i implementació amb Framer, Next.js i Claude Code",
+            "Disseny i manteniment de sistemes de disseny a escala",
+            "Entrega fins a producció — no només arxius Figma",
+          ],
+        },
+        {
+          company: "8000 Estels",
+          period: "2024",
+          role: "Voluntari · UX Designer",
+          bullets: [
+            "Arquitectura de la informació i anàlisi d'experiència d'usuari",
+            "Auditoria de webs i anàlisi d'usabilitat",
+            "Manuals de marca, wireframes i presentacions per a clients",
+          ],
+        },
+        {
+          company: "BAU – Universitat d'Art i Disseny",
+          period: "2024",
+          role: "UX Designer · Pràctiques",
+          bullets: [
+            "Recerca d'usuaris, UX i business mapping",
+            "Anàlisi de marca, tendències i competència",
+          ],
+        },
+        {
+          company: "EREBUS / Ionfilter / BMK",
+          period: "2021 – 2023",
+          role: "Dissenyador Gràfic",
+          bullets: [
+            "Disseny gràfic i comunicació visual per a marques de sectors industrials i de consum",
+          ],
+        },
+      ],
+      education: [
+        {
+          degree: "Màster en Màrqueting i Comunicació Digital",
+          school: "En curs",
+          period: "2025 – actualitat",
+          tags: ["Google Ads", "Meta Ads", "Figma", "WordPress"],
+        },
+        {
+          degree: "Màster en Digital Experience Design",
+          school: "BAU – Universitat d'Art i Disseny · Barcelona",
+          period: "2023 – 2024",
+          tags: [],
+        },
+        {
+          degree: "CFGS Disseny Gràfic · 2x3",
+          school: "EMAD · La Garriga",
+          period: "2020 – 2023",
+          tags: [],
+        },
+      ],
     },
   },
 };
