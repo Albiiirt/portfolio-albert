@@ -14,7 +14,7 @@ const ACCENT = "#b5386e";
 
 const meta = [
   { label: "Cliente",  value: "La Rioja Turismo" },
-  { label: "Año",      value: "2024" },
+  { label: "Año",      value: "2026" },
   { label: "Estado",   value: "Completado" },
   { label: "Rol",      value: "Diseño web · Figma" },
   { label: "Stack",    value: "Figma · Framer" },

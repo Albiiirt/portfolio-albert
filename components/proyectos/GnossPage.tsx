@@ -14,7 +14,7 @@ const ACCENT = "#c4a35a";
 
 const meta = [
   { label: "Cliente",  value: "GNOSS" },
-  { label: "Año",      value: "2024" },
+  { label: "Año",      value: "2026" },
   { label: "Estado",   value: "Completado" },
   { label: "Rol",      value: "Diseño web · Mantenimiento UI" },
   { label: "Stack",    value: "Figma" },

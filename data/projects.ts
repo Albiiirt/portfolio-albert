@@ -175,7 +175,7 @@ export const projects: Project[] = [
     num: "06",
     title: { en: "GNOSS AI Platform", es: "GNOSS AI Platform", ca: "GNOSS AI Platform" },
     category: { en: "Design System", es: "Sistema de Diseño", ca: "Sistema de Disseny" },
-    year: "2024",
+    year: "2026",
     problem: {
       en: "Entering an existing design system built by others — and expanding it without breaking its internal logic or visual coherence.",
       es: "Entrar en un sistema de diseño existente construido por otros — y ampliarlo sin romper su lógica interna ni su coherencia visual.",
@@ -206,7 +206,7 @@ export const projects: Project[] = [
     num: "07",
     title: { en: "La Rioja Turismo", es: "La Rioja Turismo", ca: "La Rioja Turisme" },
     category: { en: "Web Design", es: "Diseño Web", ca: "Disseny Web" },
-    year: "2024",
+    year: "2026",
     problem: {
       en: "A tourism portal that needed to match the identity of a destination with strong personality — already underway when I joined.",
       es: "Un portal de turismo que tenía que estar a la altura de un destino con personalidad propia — ya en marcha cuando me incorporé.",
