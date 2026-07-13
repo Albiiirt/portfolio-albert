@@ -50,7 +50,17 @@ function IconWand() {
   );
 }
 
-const icons = [IconFrames, IconTree, IconWand];
+function IconBrackets() {
+  return (
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+      <path d="M24 12L12 32l12 20" stroke="var(--text-muted)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path d="M40 12l12 20-12 20" stroke="var(--text-muted)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <line x1="36" y1="16" x2="28" y2="48" stroke="var(--text-muted)" strokeWidth="1" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+const icons = [IconFrames, IconTree, IconWand, IconBrackets];
 
 export default function About() {
   const { lang } = useLang();
@@ -93,8 +103,8 @@ export default function About() {
         </div>
 
         {/* Service blocks — staggered */}
-        <div className="about-services" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0", borderTop: "1px solid var(--border)" }}>
-          {tx.services.slice(0, 3).map((service, i) => {
+        <div className="about-services" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0", borderTop: "1px solid var(--border)" }}>
+          {tx.services.map((service, i) => {
             const Icon = icons[i];
             return (
               <FadeInView key={i} delay={i * 0.1} y={16}>
