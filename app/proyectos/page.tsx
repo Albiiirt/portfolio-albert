@@ -24,6 +24,7 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
       href={`/proyectos/${project.id}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      className="cursor-hidden"
       style={{
         display: "block",
         position: "relative",
@@ -32,7 +33,6 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
         background: project.gradient,
         aspectRatio: "16/9",
         textDecoration: "none",
-        cursor: "none",
         width: "100%",
       }}
     >

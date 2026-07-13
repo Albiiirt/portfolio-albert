@@ -210,7 +210,7 @@ export default function Timeline() {
                     aria-expanded={isActive}
                     style={{
                       all: "unset",
-                      cursor: "none",
+                      cursor: "inherit",
                       width: `${ITEM_W}px`,
                       display: "flex",
                       flexDirection: "column",
@@ -403,7 +403,7 @@ export default function Timeline() {
                 onClick={() => setSelected(null)}
                 aria-label={t.close}
                 style={{
-                  all: "unset", cursor: "none",
+                  all: "unset", cursor: "inherit",
                   width: "28px", height: "28px",
                   display: "flex", alignItems: "center", justifyContent: "center",
                   borderRadius: "50%",

@@ -192,10 +192,11 @@ function AnimatedPageTypes() {
             <button
               key={i}
               onClick={() => setCurrent(i)}
+              className="cursor-hidden"
               style={{
                 width: i === current ? 18 : 6, height: 6, borderRadius: 3, padding: 0, border: "none",
                 background: i === current ? ACCENT : "var(--border-mid)",
-                cursor: "none", transition: "all 0.3s ease",
+                transition: "all 0.3s ease",
               }}
             />
           ))}

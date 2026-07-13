@@ -25,7 +25,8 @@ export default function NextProjectCard({ ids }: { ids: [string, string, string]
               <Link
                 key={project.id}
                 href={`/proyectos/${project.id}`}
-                style={{ display: "block", textDecoration: "none", cursor: "none" }}
+                className="cursor-hidden"
+                style={{ display: "block", textDecoration: "none" }}
               >
                 <div
                   style={{

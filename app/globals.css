@@ -216,14 +216,25 @@ body {
   color: var(--text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  cursor: none;
   overflow-x: hidden;
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 section { transition: background-color 0.4s ease; }
 
-@media (pointer: coarse) { body { cursor: auto; } }
+/* Hide the native cursor only once CustomCursor has actually mounted
+   (html.custom-cursor-active). Falls back to the normal system cursor
+   otherwise, so nothing is broken if that component fails to mount. */
+html.custom-cursor-active body,
+html.custom-cursor-active .nav-link,
+html.custom-cursor-active .btn-primary,
+html.custom-cursor-active .btn-ghost,
+html.custom-cursor-active .project-row,
+html.custom-cursor-active .cursor-hidden {
+  cursor: none;
+}
+
+@media (pointer: coarse) { html.custom-cursor-active body { cursor: auto; } }
 
 ::selection { background: rgba(26,23,20,0.1); color: var(--text); }
 
@@ -392,7 +403,6 @@ section { transition: background-color 0.4s ease; }
   text-decoration: none;
   background: none;
   border: none;
-  cursor: none;
   transition: color 0.22s;
 }
 .nav-link:hover { color: var(--text); }
@@ -408,7 +418,6 @@ section { transition: background-color 0.4s ease; }
   font-weight: 600;
   letter-spacing: 0.01em;
   text-decoration: none;
-  cursor: none;
   color: var(--text);
   background: var(--btn-primary-bg);
   backdrop-filter: blur(24px) saturate(140%);
@@ -436,7 +445,6 @@ section { transition: background-color 0.4s ease; }
   font-size: 0.88rem;
   font-weight: 500;
   text-decoration: none;
-  cursor: none;
   color: var(--btn-ghost-text);
   background: var(--btn-ghost-bg);
   backdrop-filter: blur(24px) saturate(140%);
@@ -513,7 +521,6 @@ section { transition: background-color 0.4s ease; }
 .project-row {
   position: relative;
   border-top: 1px solid var(--border);
-  cursor: none;
 }
 
 /* ── Reduce motion ── */

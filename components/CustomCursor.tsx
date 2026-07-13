@@ -11,6 +11,11 @@ export default function CustomCursor() {
     const ring = ringRef.current;
     if (!dot || !ring) return;
 
+    // Only hide the native cursor (via CSS scoped to this class) once the
+    // custom cursor has actually mounted — avoids leaving users with no
+    // visible cursor at all if this component fails to mount.
+    document.documentElement.classList.add("custom-cursor-active");
+
     let mouseX = 0, mouseY = 0;
     let ringX = 0, ringY = 0;
     let rafId: number;
@@ -65,6 +70,7 @@ export default function CustomCursor() {
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mouseover", onMouseOver);
       cancelAnimationFrame(rafId);
+      document.documentElement.classList.remove("custom-cursor-active");
     };
   }, []);
 

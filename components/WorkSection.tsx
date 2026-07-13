@@ -20,7 +20,7 @@ const cardVariants = {
 
 function AccordionCard({ p, lang, viewCase }: { p: typeof featured[0]; lang: string; viewCase: string }) {
   return (
-    <Link href={`/proyectos/${p.id}`} style={{ display: "block", textDecoration: "none", cursor: "none" }}>
+    <Link href={`/proyectos/${p.id}`} className="cursor-hidden" style={{ display: "block", textDecoration: "none" }}>
       <div style={{
         position: "relative",
         height: "clamp(200px, 38vw, 300px)",
@@ -138,7 +138,7 @@ export default function WorkSection() {
                     <button
                       onClick={() => goTo(i)}
                       style={{
-                        all: "unset", cursor: "none",
+                        all: "unset", cursor: "inherit",
                         display: "flex", alignItems: "center", gap: "1rem",
                         padding: "0.85rem 0",
                         borderBottom: "1px solid var(--border)",
@@ -214,7 +214,8 @@ export default function WorkSection() {
                 >
                   <Link
                     href={`/proyectos/${project.id}`}
-                    style={{ display: "block", position: "absolute", inset: 0, textDecoration: "none", cursor: "none" }}
+                    className="cursor-hidden"
+                    style={{ display: "block", position: "absolute", inset: 0, textDecoration: "none" }}
                   >
                     {project.video && (
                       <video autoPlay muted loop playsInline

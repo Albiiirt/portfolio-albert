@@ -77,7 +77,8 @@ export default function Navigation() {
         {/* Logo */}
         <Link
           href="/"
-          style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text)", textDecoration: "none", padding: "0.35rem 0.8rem", cursor: "none" }}
+          className="cursor-hidden"
+          style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text)", textDecoration: "none", padding: "0.35rem 0.8rem" }}
         >
           AC
         </Link>
@@ -100,9 +101,10 @@ export default function Navigation() {
             <span key={code} style={{ display: "flex", alignItems: "center", gap: "0.05rem" }}>
               <button
                 onClick={() => setLang(code)}
+                className="cursor-hidden"
                 style={{
                   fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
-                  background: "none", border: "none", cursor: "none", padding: "0.35rem 0.45rem",
+                  background: "none", border: "none", padding: "0.35rem 0.45rem",
                   color: lang === code ? "var(--text)" : "var(--text-subtle)", transition: "color 0.2s",
                 }}
               >
@@ -118,13 +120,14 @@ export default function Navigation() {
         {/* Theme toggle */}
         <button
           onClick={toggleTheme}
+          className="cursor-hidden"
           style={{
             display: "flex", alignItems: "center", justifyContent: "center",
             width: "28px", height: "28px", borderRadius: "50%",
             background: "var(--glass-bg)", backdropFilter: "var(--glass-filter)", WebkitBackdropFilter: "var(--glass-filter)",
             border: "1px solid var(--glass-border)",
             boxShadow: "0 1px 0 var(--glass-inset) inset",
-            cursor: "none", color: "var(--text)", transition: "background 0.3s, border-color 0.3s",
+            color: "var(--text)", transition: "background 0.3s, border-color 0.3s",
             marginLeft: "0.2rem",
           }}
           aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
