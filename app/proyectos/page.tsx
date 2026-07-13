@@ -10,11 +10,13 @@ import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import FadeInView from "@/components/FadeInView";
 import { useLang } from "@/lib/LanguageContext";
+import { t } from "@/data/translations";
 import { projects } from "@/data/projects";
 import { EASE } from "@/lib/animations";
 
 function ProjectCard({ project }: { project: (typeof projects)[0] }) {
   const { lang } = useLang();
+  const tx = t[lang].work;
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -127,7 +129,7 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
               paddingBottom: "2px", whiteSpace: "nowrap",
             }}
           >
-            Ver caso →
+            {tx.viewCase} →
           </span>
         </div>
       </div>

@@ -82,9 +82,9 @@ const items: TimelineItem[] = [
 ];
 
 const tx = {
-  en: { label: "background", heading: "Trajectory &\nexperience", education: "Education", work: "Experience", current: "Current", close: "Close" },
-  es: { label: "trayectoria", heading: "Formación y\nexperiencia", education: "Formación", work: "Experiencia", current: "Actual", close: "Cerrar" },
-  ca: { label: "trajectòria", heading: "Formació i\nexperiència", education: "Formació", work: "Experiència", current: "Actual", close: "Tancar" },
+  en: { label: "background", heading: "Trajectory &\nexperience", education: "Education", work: "Experience", current: "Current", close: "Close", swipe: "Swipe" },
+  es: { label: "trayectoria", heading: "Formación y\nexperiencia", education: "Formación", work: "Experiencia", current: "Actual", close: "Cerrar", swipe: "Desliza" },
+  ca: { label: "trajectòria", heading: "Formació i\nexperiència", education: "Formació", work: "Experiència", current: "Actual", close: "Tancar", swipe: "Llisca" },
 };
 
 // Education icon (graduation cap simplified)
@@ -171,7 +171,7 @@ export default function Timeline() {
           <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden>
             <path d="M1 5h12M8 1l4 4-4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
-          Desliza
+          {t.swipe}
         </div>
         <div
           ref={scrollRef}
@@ -401,7 +401,7 @@ export default function Timeline() {
               </div>
               <button
                 onClick={() => setSelected(null)}
-                aria-label="Cerrar"
+                aria-label={t.close}
                 style={{
                   all: "unset", cursor: "none",
                   width: "28px", height: "28px",

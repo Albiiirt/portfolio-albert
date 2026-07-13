@@ -23,6 +23,8 @@ export const t = {
       viewCase: "View case study",
       viewAll: "View all projects",
       close: "Close",
+      relatedProjects: "Related projects",
+      view: "View",
     },
     about: {
       label: "about me",
@@ -79,6 +81,8 @@ export const t = {
       viewCase: "Ver caso de estudio",
       viewAll: "Ver todos los proyectos",
       close: "Cerrar",
+      relatedProjects: "Proyectos relacionados",
+      view: "Ver",
     },
     about: {
       label: "sobre mí",
@@ -135,6 +139,8 @@ export const t = {
       viewCase: "Veure cas d'estudi",
       viewAll: "Veure tots els projectes",
       close: "Tancar",
+      relatedProjects: "Projectes relacionats",
+      view: "Veure",
     },
     about: {
       label: "sobre mi",
