@@ -94,6 +94,11 @@ export default function About() {
               <span className="status-dot" style={{ width: "6px", height: "6px" }} aria-hidden="true" />
               <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--text-muted)", letterSpacing: "0.04em" }}>{tx.availability}</span>
             </div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "1.5rem" }}>
+              {tx.skills.map((skill) => (
+                <span key={skill} className="tag">{skill}</span>
+              ))}
+            </div>
           </FadeInView>
 
           <FadeInView className="about-orbit" delay={0.15} y={16}>
