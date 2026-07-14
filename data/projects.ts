@@ -23,19 +23,19 @@ export const projects: Project[] = [
     category: { en: "Design System", es: "Sistema de Diseño", ca: "Sistema de Disseny" },
     year: "2026",
     problem: {
-      en: "The elBulli Foundation archive is a living digital monument to one of the most influential restaurants in history. Keeping its design system consistent and scalable across hundreds of archive pages required ongoing, careful collaboration.",
-      es: "El archivo de la Fundación elBulli es un monumento digital vivo a uno de los restaurantes más influyentes de la historia. Mantener su sistema de diseño consistente y escalable a lo largo de cientos de páginas de archivo requería una colaboración continua y cuidadosa.",
-      ca: "L'arxiu de la Fundació elBulli és un monument digital viu a un dels restaurants més influents de la història. Mantenir el seu sistema de disseny consistent i escalable al llarg de centenars de pàgines d'arxiu requeria una col·laboració contínua i acurada.",
+      en: "The elBulli Foundation archive is a living digital monument to one of the most influential restaurants in history, with hundreds of pages and content that keeps growing. The product challenge: give the editorial team the ability to publish new content without depending on a developer every time, without breaking the archive's visual consistency.",
+      es: "El archivo de la Fundació elBulli es un monumento digital vivo a uno de los restaurantes más influyentes de la historia, con cientos de páginas y contenido que no deja de crecer. El reto de producto: dar al equipo editorial la capacidad de publicar contenido nuevo sin depender de un desarrollador cada vez, sin romper la consistencia visual del archivo.",
+      ca: "L'arxiu de la Fundació elBulli és un monument digital viu a un dels restaurants més influents de la història, amb centenars de pàgines i contingut que no deixa de créixer. El repte de producte: donar a l'equip editorial la capacitat de publicar contingut nou sense dependre d'un desenvolupador cada vegada, sense trencar la consistència visual de l'arxiu.",
     },
     process: {
-      en: "I collaborated with the team to maintain and evolve the design system, ensuring coherence across new archive sections. My role also included designing and building specific pages of the digital archive, always working in close coordination with the broader project.",
-      es: "Colaboré con el equipo para mantener y evolucionar el sistema de diseño, asegurando coherencia en las nuevas secciones del archivo. Mi rol también incluyó diseñar y construir páginas concretas del archivo digital, trabajando siempre en estrecha coordinación con el proyecto.",
-      ca: "Vaig col·laborar amb l'equip per mantenir i evolucionar el sistema de disseny, assegurant coherència en les noves seccions de l'arxiu. El meu rol també va incloure dissenyar i construir pàgines concretes de l'arxiu digital, treballant sempre en estreta coordinació amb el projecte.",
+      en: "I designed and maintained the design system, and made the call to model it as reusable content blocks in Strapi — dish entries, timelines, galleries, quotes — each with its own visual rules inherited from the system. That lets the editorial team combine blocks and publish without needing me for every new page. I also designed and coded specific pages of the archive myself.",
+      es: "Diseñé y mantuve el sistema de diseño, y tomé la decisión de modelarlo como bloques de contenido reutilizables en Strapi — fichas de platos, cronologías, galerías, citas — cada uno con sus propias reglas visuales heredadas del sistema. Así el equipo editorial puede combinar bloques y publicar sin depender de mí para cada página nueva. Además diseñé y construí en código páginas concretas del archivo.",
+      ca: "Vaig dissenyar i mantenir el sistema de disseny, i vaig prendre la decisió de modelar-lo com a blocs de contingut reutilitzables a Strapi — fitxes de plats, cronologies, galeries, cites — cadascun amb les seves pròpies regles visuals heretades del sistema. Així l'equip editorial pot combinar blocs i publicar sense dependre de mi per a cada pàgina nova. A més, vaig dissenyar i construir en codi pàgines concretes de l'arxiu.",
     },
     result: {
-      en: "A consistent and well-maintained design system that supports the growth of the archive, with new pages that respect the visual language and cultural weight of the elBulli legacy.",
-      es: "Un sistema de diseño consistente y bien mantenido que soporta el crecimiento del archivo, con nuevas páginas que respetan el lenguaje visual y el peso cultural del legado elBulli.",
-      ca: "Un sistema de disseny consistent i ben mantingut que suporta el creixement de l'arxiu, amb noves pàgines que respecten el llenguatge visual i el pes cultural del llegat elBulli.",
+      en: "A design and content system that doubles as a CMS: the archive grows with new pages without losing visual consistency, and the team edits and publishes on its own thanks to the Strapi structure.",
+      es: "Un sistema de diseño y de contenido que funciona a la vez como CMS: el archivo crece con nuevas páginas sin perder consistencia visual, y el equipo edita y publica de forma autónoma gracias a la estructura en Strapi.",
+      ca: "Un sistema de disseny i de contingut que funciona alhora com a CMS: l'arxiu creix amb noves pàgines sense perdre consistència visual, i l'equip edita i publica de forma autònoma gràcies a l'estructura a Strapi.",
     },
     description: {
       en: "Design and code implementation for the elBulli Foundation archive — building existing designs into production-ready, responsive pages and designing new ones as the project grows.",
@@ -54,19 +54,19 @@ export const projects: Project[] = [
     category: { en: "Web Design", es: "Diseño Web", ca: "Disseny Web" },
     year: "2026",
     problem: {
-      en: "The wine tourism sector around Madrid lacked a digital presence that matched the quality of its wineries. Existing sites were outdated, hard to navigate, and not converting visitors into bookings.",
-      es: "El sector del enoturismo en la Comunidad de Madrid carecía de una presencia digital a la altura de sus bodegas. Los sitios existentes eran obsoletos, difíciles de navegar y no convertían visitas en reservas.",
-      ca: "El sector de l'enoturisme a la Comunitat de Madrid mancava d'una presència digital a l'altura dels seus cellers. Els llocs existents eren obsolets, difícils de navegar i no convertien visites en reserves.",
+      en: "The wine tourism sector around Madrid lacked a digital presence that matched the quality of its wineries. Existing sites were outdated, hard to navigate, and not converting visitors into bookings — a product problem as much as a visual one.",
+      es: "El sector del enoturismo en la Comunidad de Madrid carecía de una presencia digital a la altura de sus bodegas. Los sitios existentes eran obsoletos, difíciles de navegar y no convertían visitas en reservas — un problema de producto tanto como de estilo visual.",
+      ca: "El sector de l'enoturisme a la Comunitat de Madrid mancava d'una presència digital a l'altura dels seus cellers. Els llocs existents eren obsolets, difícils de navegar i no convertien visites en reserves — un problema de producte tant com d'estil visual.",
     },
     process: {
-      en: "Designed a full UI system in Figma — mood, typography, and components built around a wine-and-land visual language. Then implemented in Framer with smooth scroll, route maps, and a booking-optimized structure.",
-      es: "Diseñé un sistema UI completo en Figma — mood, tipografía y componentes construidos alrededor de un lenguaje visual de vino y tierra. Luego implementé en Framer con scroll suave, mapas de rutas y una estructura optimizada para reservas.",
-      ca: "Vaig dissenyar un sistema UI complet a Figma — mood, tipografia i components construïts al voltant d'un llenguatge visual de vi i terra. Després vaig implementar a Framer amb scroll suau, mapes de rutes i una estructura optimitzada per a reserves.",
+      en: "Designed a full UI system in Figma — mood, typography and components — and decided the information architecture: how routes, wineries and experiences are organised to take a visitor from discovery to booking with no friction. Migrated the project off a fragile AI-generated HTML base onto Next.js, then implemented everything in Framer with smooth scroll, route maps and a structure built to convert, not just to look good.",
+      es: "Diseñé un sistema UI completo en Figma — mood, tipografía y componentes — y decidí la arquitectura de la información: cómo se organizan rutas, bodegas y experiencias para llevar al visitante del descubrimiento a la reserva sin fricción. Migré el proyecto de una base HTML frágil generada por IA a Next.js, y luego implementé todo en Framer con scroll suave, mapas de rutas y una estructura pensada para convertir, no solo para verse bien.",
+      ca: "Vaig dissenyar un sistema UI complet a Figma — mood, tipografia i components — i vaig decidir l'arquitectura de la informació: com s'organitzen rutes, cellers i experiències per portar el visitant del descobriment a la reserva sense fricció. Vaig migrar el projecte d'una base HTML fràgil generada per IA a Next.js, i després vaig implementar-ho tot a Framer amb scroll suau, mapes de rutes i una estructura pensada per convertir, no només per fer bonic.",
     },
     result: {
-      en: "A premium web experience that positions Madrid's wine routes as a top-tier cultural destination, with a clear conversion path from discovery to booking.",
-      es: "Una experiencia web premium que posiciona las rutas del vino de Madrid como destino cultural de primer nivel, con un camino de conversión claro desde el descubrimiento hasta la reserva.",
-      ca: "Una experiència web premium que posiciona les rutes del vi de Madrid com a destinació cultural de primer nivell, amb un camí de conversió clar des del descobriment fins a la reserva.",
+      en: "A premium web experience, designed and implemented end to end, that positions Madrid's wine routes as a top-tier cultural destination — with a structure built to turn visits into bookings.",
+      es: "Una experiencia web premium, diseñada e implementada de principio a fin, que posiciona las rutas del vino de Madrid como destino cultural de primer nivel — con una estructura pensada para convertir visitas en reservas.",
+      ca: "Una experiència web premium, dissenyada i implementada de principi a fi, que posiciona les rutes del vi de Madrid com a destinació cultural de primer nivell — amb una estructura pensada per convertir visites en reserves.",
     },
     description: {
       en: "Full project, solo — migrated an AI-generated HTML base to Next.js and designed and built every page of Madrid's wine tourism site.",
@@ -85,9 +85,9 @@ export const projects: Project[] = [
     category: { en: "Web Design & Dev", es: "Diseño y desarrollo web", ca: "Disseny i desenvolupament web" },
     year: "2026",
     problem: {
-      en: "A castellers association needed a website that the team could update themselves — without touching code — and with working contact forms connected to their corporate emails.",
-      es: "Una colla castellera necesitaba una web que el equipo pudiera actualizar sin tocar código, con formularios de contacto conectados a sus correos corporativos.",
-      ca: "Una colla castellera necessitava una web que l'equip pogués actualitzar sense tocar codi, amb formularis de contacte connectats als seus correus corporatius.",
+      en: "A castellers association needed more than a nice-looking website: they needed to update content themselves without touching code, and contact forms that actually reached their corporate emails. A product and operations problem, not just a design one.",
+      es: "Una colla castellera necesitaba mucho más que una web bonita: necesitaban poder actualizar el contenido ellos mismos sin tocar código, y formularios de contacto que llegaran de verdad a sus correos corporativos. Un problema de producto y de operativa, no solo de diseño.",
+      ca: "Una colla castellera necessitava molt més que una web bonica: necessitaven poder actualitzar el contingut ells mateixos sense tocar codi, i formularis de contacte que arribessin de veritat als seus correus corporatius. Un problema de producte i d'operativa, no només de disseny.",
     },
     process: {
       en: "Designed and developed the website with Claude Code, set up a Notion CMS for content management, wired contact forms to corporate emails, and deployed the site from GitHub to the contracted server and domain.",
@@ -121,9 +121,9 @@ export const projects: Project[] = [
       ca: "El portal de turisme de Jaén — una de les destinacions amb més patrimoni d'Espanya — necessitava un redisseny complet capaç de gestionar centenars de pàgines, categories creuades i contingut dens sense perdre claredat.",
     },
     process: {
-      en: "Designed in Figma as a duo — full-page proposals to find the right visual direction. Once defined, we built the component system. Implementation is handled by an internal colleague from the same studio.",
-      es: "Diseñado en Figma a cuatro manos — propuestas de página completa para encontrar la dirección visual correcta. Con la dirección definida, construimos el sistema de componentes. La implementación la lleva un compañero interno del mismo estudio.",
-      ca: "Dissenyat a Figma a quatre mans — propostes de pàgina completa per trobar la direcció visual correcta. Amb la direcció definida, vam construir el sistema de components. La implementació la porta un company intern del mateix estudi.",
+      en: "Designed in Figma as a duo — we tried several full-page proposals, thinking first about how content would be navigated and organised, not just how it would look. Once that direction was set, we built the component system to support it. Code implementation is handled by an internal colleague from the same studio.",
+      es: "Diseñado en Figma a cuatro manos — probamos varias propuestas de página completa hasta encontrar la dirección correcta, pensando primero en cómo se iba a navegar y organizar el contenido, no solo en el estilo visual. Con la dirección definida, construimos el sistema de componentes que soporta esa arquitectura. La implementación en código la lleva un compañero interno del mismo estudio.",
+      ca: "Dissenyat a Figma a quatre mans — vam provar diverses propostes de pàgina completa fins a trobar la direcció correcta, pensant primer en com es navegaria i s'organitzaria el contingut, no només en l'estil visual. Amb la direcció definida, vam construir el sistema de components que suporta aquesta arquitectura. La implementació en codi la porta un company intern del mateix estudi.",
     },
     result: {
       en: "A visual system ready for production, currently in implementation phase. Working with the developer in the same studio means faster adjustments and a final result closer to the original design.",
@@ -152,14 +152,14 @@ export const projects: Project[] = [
       ca: "Com portes un restaurant de tres estrelles Michelin al món digital — no com a fulletó, sinó com a experiència?",
     },
     process: {
-      en: "Designed the main pages of a recipe portal in Figma — listing, individual recipe, access flow and restaurant profile. Then built an experience page with Claude Design to translate what it feels like to dine at Mirazur.",
-      es: "Diseñé las páginas principales de un portal de recetas en Figma — listado, ficha, flujo de acceso y perfil del restaurante. Después construí una página de experiencia con Claude Design para traducir qué se siente comiendo en el Mirazur.",
-      ca: "Vaig dissenyar les pàgines principals d'un portal de receptes a Figma — llistat, fitxa, flux d'accés i perfil del restaurant. Després vaig construir una pàgina d'experiència amb Claude Design per traduir com és dinar al Mirazur.",
+      en: "Designed the main pages of a recipe portal in Figma — listing, individual recipe, access flow and restaurant profile. For the experience page, I used Claude Design as a build partner: I took it from Figma to a working page myself, without needing a developer for that deliverable.",
+      es: "Diseñé las páginas principales de un portal de recetas en Figma — listado, ficha, flujo de acceso y perfil del restaurante. Para la página de experiencia usé Claude Design como compañero de construcción: pasé del diseño en Figma a una página funcionando yo mismo, sin necesitar a un desarrollador para ese entregable.",
+      ca: "Vaig dissenyar les pàgines principals d'un portal de receptes a Figma — llistat, fitxa, flux d'accés i perfil del restaurant. Per a la pàgina d'experiència vaig fer servir Claude Design com a company de construcció: vaig passar del disseny a Figma a una pàgina funcionant jo mateix, sense necessitar un desenvolupador per a aquest lliurable.",
     },
     result: {
-      en: "Two complementary design proposals — one transactional, one narrative — exploring how a restaurant like Mirazur can extend its experience beyond the table.",
-      es: "Dos propuestas de diseño complementarias — una transaccional, una narrativa — explorando cómo un restaurante como Mirazur puede extender su experiencia más allá de la mesa.",
-      ca: "Dues propostes de disseny complementàries — una transaccional, una narrativa — explorant com un restaurant com el Mirazur pot estendre la seva experiència més enllà de la taula.",
+      en: "Two complementary design proposals — one transactional, one narrative — showing how a restaurant like Mirazur can extend its experience beyond the table, and how AI let me take one of them all the way to a working page on my own.",
+      es: "Dos propuestas de diseño complementarias — una transaccional, una narrativa — que muestran cómo un restaurante como Mirazur puede extender su experiencia más allá de la mesa, y cómo la IA me permitió llevar una de ellas hasta una página funcionando yo solo.",
+      ca: "Dues propostes de disseny complementàries — una transaccional, una narrativa — que mostren com un restaurant com el Mirazur pot estendre la seva experiència més enllà de la taula, i com la IA em va permetre portar-ne una fins a una pàgina funcionant jo sol.",
     },
     description: {
       en: "Two real projects with Mirazur — both picked up mid-process and completed: a recipe portal finished in Figma, and an experience page built with Claude Design.",
@@ -182,9 +182,9 @@ export const projects: Project[] = [
       ca: "Entrar en un sistema de disseny existent construït per altres — i ampliar-lo sense trencar la seva lògica interna ni la seva coherència visual.",
     },
     process: {
-      en: "Maintained existing pages and created new ones following the established design system — always ensuring the new work felt part of the same whole, not an addition.",
-      es: "Mantuve páginas existentes y creé nuevas siguiendo el sistema de diseño establecido — asegurando siempre que el trabajo nuevo pareciera parte del mismo conjunto, no un añadido.",
-      ca: "Vaig mantenir pàgines existents i en vaig crear de noves seguint el sistema de disseny establert — assegurant sempre que el treball nou semblés part del mateix conjunt, no un afegit.",
+      en: "Maintained existing pages and designed new ones within the established system — deciding which patterns to reuse and which to create, so the platform could keep growing without fragmenting or losing consistency.",
+      es: "Mantuve páginas existentes y diseñé otras nuevas dentro del sistema establecido — decidiendo qué patrones reutilizar y cuáles crear, para que la plataforma pudiera seguir creciendo sin fragmentarse ni perder consistencia.",
+      ca: "Vaig mantenir pàgines existents i en vaig dissenyar de noves dins del sistema establert — decidint quins patrons reutilitzar i quins crear, perquè la plataforma pogués seguir creixent sense fragmentar-se ni perdre consistència.",
     },
     result: {
       en: "A coherent web at scale — new pages that feel part of the same system, maintaining visual and structural consistency across hundreds of pages.",
