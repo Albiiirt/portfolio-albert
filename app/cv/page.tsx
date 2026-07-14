@@ -229,9 +229,11 @@ export default function CvPage() {
                             {ed.period}
                           </span>
                         </div>
-                        <p style={{ fontSize: "0.78rem", color: "var(--text-subtle)", marginBottom: ed.tags.length ? "0.75rem" : 0 }}>
-                          {ed.school}
-                        </p>
+                        {ed.school && (
+                          <p style={{ fontSize: "0.78rem", color: "var(--text-subtle)", marginBottom: ed.tags.length ? "0.75rem" : 0 }}>
+                            {ed.school}
+                          </p>
+                        )}
                         {ed.tags.length > 0 && (
                           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem" }}>
                             {ed.tags.map((tag) => (

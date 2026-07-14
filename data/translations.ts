@@ -101,12 +101,8 @@ export const t = {
         {
           company: "8000 Estels",
           period: "2024",
-          role: "Volunteer · UX Designer",
-          bullets: [
-            "Information architecture and user experience analysis",
-            "Website audits and usability analysis",
-            "Brand manuals, wireframes and client presentations",
-          ],
+          role: "Consulting",
+          bullets: [],
         },
         {
           company: "BAU – Universitat d'Art i Disseny",
@@ -129,7 +125,7 @@ export const t = {
       education: [
         {
           degree: "Master in Marketing & Digital Communication",
-          school: "Ongoing",
+          school: "",
           period: "2025 – present",
           tags: ["Google Ads", "Meta Ads", "Figma", "WordPress"],
         },
@@ -250,12 +246,8 @@ export const t = {
         {
           company: "8000 Estels",
           period: "2024",
-          role: "Voluntario · UX Designer",
-          bullets: [
-            "Arquitectura de la información y análisis de experiencia de usuario",
-            "Auditoría de webs y análisis de usabilidad",
-            "Manuales de marca, wireframes y presentaciones para clientes",
-          ],
+          role: "Consultoría",
+          bullets: [],
         },
         {
           company: "BAU – Universitat d'Art i Disseny",
@@ -278,7 +270,7 @@ export const t = {
       education: [
         {
           degree: "Máster en Marketing y Comunicación Digital",
-          school: "En curso",
+          school: "",
           period: "2025 – actualidad",
           tags: ["Google Ads", "Meta Ads", "Figma", "WordPress"],
         },
@@ -399,12 +391,8 @@ export const t = {
         {
           company: "8000 Estels",
           period: "2024",
-          role: "Voluntari · UX Designer",
-          bullets: [
-            "Arquitectura de la informació i anàlisi d'experiència d'usuari",
-            "Auditoria de webs i anàlisi d'usabilitat",
-            "Manuals de marca, wireframes i presentacions per a clients",
-          ],
+          role: "Consultoria",
+          bullets: [],
         },
         {
           company: "BAU – Universitat d'Art i Disseny",
@@ -427,7 +415,7 @@ export const t = {
       education: [
         {
           degree: "Màster en Màrqueting i Comunicació Digital",
-          school: "En curs",
+          school: "",
           period: "2025 – actualitat",
           tags: ["Google Ads", "Meta Ads", "Figma", "WordPress"],
         },
