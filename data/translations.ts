@@ -91,6 +91,14 @@ export const t = {
           ],
         },
         {
+          company: "Bihotz",
+          period: "May – July 2025",
+          role: "Web Designer / UX·UI · Internship",
+          bullets: [
+            "UX/UI interface design and development for the fashion and ecommerce sector, focused on the shopping experience",
+          ],
+        },
+        {
           company: "8000 Estels",
           period: "2024",
           role: "Volunteer · UX Designer",
@@ -232,6 +240,14 @@ export const t = {
           ],
         },
         {
+          company: "Bihotz",
+          period: "Mayo – Julio 2025",
+          role: "Diseñador Web / UX·UI · Prácticas",
+          bullets: [
+            "Diseño y desarrollo de interfaces UX/UI para el sector moda y ecommerce, centradas en la experiencia de compra",
+          ],
+        },
+        {
           company: "8000 Estels",
           period: "2024",
           role: "Voluntario · UX Designer",
@@ -370,6 +386,14 @@ export const t = {
             "Disseny a Figma, modelatge de contingut en CMS headless (Strapi) i implementació amb Framer, Next.js i Claude Code",
             "Disseny i manteniment de sistemes de disseny a escala, incloent-hi estructures de CMS que l'equip editorial fa servir sense tocar codi",
             "Entrega fins a producció — no només arxius Figma",
+          ],
+        },
+        {
+          company: "Bihotz",
+          period: "Maig – Juliol 2025",
+          role: "Dissenyador Web / UX·UI · Pràctiques",
+          bullets: [
+            "Disseny i desenvolupament d'interfícies UX/UI per al sector de la moda i l'ecommerce, centrades en l'experiència de compra",
           ],
         },
         {
