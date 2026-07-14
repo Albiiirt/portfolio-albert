@@ -12,31 +12,14 @@ import SmoothScroll from "@/components/SmoothScroll";
 import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
+import { t } from "@/data/translations";
 import Image from "next/image";
 
 const ACCENT = "#c4813a";
 const project = projects.find((p) => p.id === "turisme-jaen")!;
-const resultLabel = { en: "The result", es: "El resultado", ca: "El resultat" };
-
-const meta = [
-  { label: "Cliente",   value: "Turismo de Jaén" },
-  { label: "Año",       value: "2026" },
-  { label: "Duración",  value: "2 – 3 meses" },
-  { label: "Estado",    value: "En producción" },
-  { label: "Rol",       value: "Diseño web · UX · Figma" },
-  { label: "Stack",     value: "Figma" },
-  { label: "Equipo",    value: "Diseño + Desarrollo interno" },
-];
+const page = project.page!;
 
 const chips = ["Figma", "Web Design"];
-
-// ── Animated page types ──────────────────────────────────────────────────────
-const PAGE_TYPES = [
-  { label: "Portada",           sub: "Orientar y seducir" },
-  { label: "Listado",           sub: "Filtrar y explorar" },
-  { label: "Ruta",              sub: "Guiar paso a paso" },
-  { label: "Ficha de municipio",sub: "Informar en detalle" },
-];
 
 function Bar({ w = "100%", h = 8, accent = false, opacity = 1, mt = 0 }: {
   w?: string | number; h?: number; accent?: boolean; opacity?: number; mt?: number;
@@ -135,13 +118,14 @@ function FichaLayout() {
 
 const LAYOUTS = [PortadaLayout, ListadoLayout, RutaLayout, FichaLayout];
 
-function AnimatedPageTypes() {
+function AnimatedPageTypes({ lang }: { lang: "en" | "es" | "ca" }) {
   const [current, setCurrent] = useState(0);
+  const PAGE_TYPES = page.pageTypes!;
 
   useEffect(() => {
     const id = setInterval(() => setCurrent(i => (i + 1) % PAGE_TYPES.length), 3000);
     return () => clearInterval(id);
-  }, []);
+  }, [PAGE_TYPES.length]);
 
   const Layout = LAYOUTS[current];
 
@@ -184,11 +168,11 @@ function AnimatedPageTypes() {
               transition={{ duration: 0.3, ease: EASE }}
               style={{ fontSize: "0.8rem", fontWeight: 700, color: ACCENT, margin: 0 }}
             >
-              {PAGE_TYPES[current].label}
+              {PAGE_TYPES[current].label[lang]}
             </motion.p>
           </AnimatePresence>
           <p style={{ fontSize: "0.7rem", color: "var(--text-subtle)", margin: "0.2rem 0 0" }}>
-            {PAGE_TYPES[current].sub}
+            {PAGE_TYPES[current].sub[lang]}
           </p>
         </div>
         <div style={{ display: "flex", gap: 5, alignItems: "center" }}>
@@ -332,7 +316,7 @@ export default function JaenPage() {
                 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
               >
-                04 · Diseño Web
+                {project.num} · {project.category[lang]}
               </motion.p>
 
               <motion.h1
@@ -351,7 +335,7 @@ export default function JaenPage() {
                   lineHeight: 1.25, color: "rgba(255,255,255,0.6)",
                   marginTop: "0.5rem",
                 }}>
-                  rediseño del portal de turismo de la provincia
+                  {project.heroTagline![lang]}
                 </span>
               </motion.h1>
 
@@ -373,7 +357,7 @@ export default function JaenPage() {
           <div className="site-content">
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
               <FadeInView>
-                <p className="section-label" style={{ marginBottom: "1.5rem" }}>El proyecto</p>
+                <p className="section-label" style={{ marginBottom: "1.5rem" }}>{t[lang].projectPage.sectionLabels.project}</p>
                 <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
                   {project.problem[lang]}
                 </p>
@@ -381,18 +365,18 @@ export default function JaenPage() {
 
               <FadeInView delay={0.1}>
                 <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-                  {meta.map(({ label, value }, i) => (
-                    <div key={label} style={{
+                  {project.meta!.map((item, i) => (
+                    <div key={i} style={{
                       display: "grid", gridTemplateColumns: "120px 1fr",
                       padding: "0.9rem 0",
-                      borderBottom: i < meta.length - 1 ? "1px solid var(--border)" : "none",
+                      borderBottom: i < project.meta!.length - 1 ? "1px solid var(--border)" : "none",
                       gap: "1rem",
                     }}>
                       <span style={{ fontSize: "0.67rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text-subtle)" }}>
-                        {label}
+                        {item.labelKey ? t[lang].projectPage.metaLabels[item.labelKey] : item.label![lang]}
                       </span>
                       <span style={{ fontSize: "0.88rem", color: "var(--text-muted)", fontWeight: 500 }}>
-                        {value}
+                        {typeof item.value === "string" ? item.value : item.value[lang]}
                       </span>
                     </div>
                   ))}
@@ -406,52 +390,34 @@ export default function JaenPage() {
         <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content">
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>El reto</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.challenge}</p>
               <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "clamp(2.5rem, 4vh, 4rem)" }}>
-                Dos retos en uno
+                {page.challengeHeading![lang]}
               </h2>
             </FadeInView>
 
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(1.5rem, 3vw, 3rem)" }}>
-              <FadeInView>
-                <div style={{
-                  padding: "clamp(1.5rem, 3vw, 2.5rem)",
-                  borderRadius: "1rem",
-                  border: "1px solid var(--border-mid)",
-                  background: "var(--bg-alt)",
-                  height: "100%",
-                }}>
-                  <p style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-subtle)", marginBottom: "1rem" }}>
-                    Reto del cliente
-                  </p>
-                  <h3 style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.4rem)", fontWeight: 700, color: "var(--text)", marginBottom: "1rem", lineHeight: 1.25 }}>
-                    Modernizar un portal de referencia
-                  </h3>
-                  <p style={{ fontSize: "0.95rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                    Rediseñar el portal de turismo de Jaén — uno de los destinos con más patrimonio de España — y hacer que el diseño estuviese a la altura del contenido: cientos de páginas, categorías cruzadas y una cantidad enorme de información útil que no podía perderse por el camino.
-                  </p>
-                </div>
-              </FadeInView>
-
-              <FadeInView delay={0.1}>
-                <div style={{
-                  padding: "clamp(1.5rem, 3vw, 2.5rem)",
-                  borderRadius: "1rem",
-                  border: `1px solid ${ACCENT}55`,
-                  background: `${ACCENT}08`,
-                  height: "100%",
-                }}>
-                  <p style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: ACCENT, marginBottom: "1rem" }}>
-                    Reto del diseñador
-                  </p>
-                  <h3 style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.4rem)", fontWeight: 700, color: "var(--text)", marginBottom: "1rem", lineHeight: 1.25 }}>
-                    Atractivo, funcional y con personalidad
-                  </h3>
-                  <p style={{ fontSize: "0.95rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                    Hacer que el portal pareciera ligero a pesar del volumen. Distinguir visualmente los tipos de página — una ruta de montaña no se lee igual que la ficha de un municipio — sin que el sistema se fragmentara. Y darle personalidad sin caer en los patrones más usados del diseño turístico.
-                  </p>
-                </div>
-              </FadeInView>
+              {page.challengeCards!.map((card, i) => (
+                <FadeInView key={i} delay={i * 0.1}>
+                  <div style={{
+                    padding: "clamp(1.5rem, 3vw, 2.5rem)",
+                    borderRadius: "1rem",
+                    border: i === 0 ? "1px solid var(--border-mid)" : `1px solid ${ACCENT}55`,
+                    background: i === 0 ? "var(--bg-alt)" : `${ACCENT}08`,
+                    height: "100%",
+                  }}>
+                    <p style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: i === 0 ? "var(--text-subtle)" : ACCENT, marginBottom: "1rem" }}>
+                      {card.badge[lang]}
+                    </p>
+                    <h3 style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.4rem)", fontWeight: 700, color: "var(--text)", marginBottom: "1rem", lineHeight: 1.25 }}>
+                      {card.heading[lang]}
+                    </h3>
+                    <p style={{ fontSize: "0.95rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                      {card.body[lang]}
+                    </p>
+                  </div>
+                </FadeInView>
+              ))}
             </div>
           </div>
         </section>
@@ -460,23 +426,23 @@ export default function JaenPage() {
         <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content">
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>La estructura</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.structure}</p>
             </FadeInView>
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
               <FadeInView>
                 <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
-                  Un sistema, cuatro voces
+                  {page.structureHeading![lang]}
                 </h2>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                  El primer trabajo fue mapear los tipos de página que existían y entender qué información era esencial en cada uno. Una portada necesita orientar; un listado necesita filtrar; una ruta necesita guiar; una ficha necesita informar.
+                  {page.structureBody![0][lang]}
                 </p>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                  Cada tipo tiene su propia lógica visual, pero todos comparten la misma base estructural. <span style={{ color: "var(--text)", fontWeight: 600 }}>El sistema unifica sin igualar.</span>
+                  {page.structureBodyBold!.prefix[lang]}<span style={{ color: "var(--text)", fontWeight: 600 }}>{page.structureBodyBold!.bold[lang]}</span>
                 </p>
               </FadeInView>
               <FadeInView delay={0.12}>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <AnimatedPageTypes />
+                  <AnimatedPageTypes lang={lang} />
                 </div>
               </FadeInView>
             </div>
@@ -487,7 +453,7 @@ export default function JaenPage() {
         <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content">
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>El proceso</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.process}</p>
             </FadeInView>
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
               <FadeInView delay={0.1}>
@@ -497,7 +463,7 @@ export default function JaenPage() {
               </FadeInView>
               <FadeInView>
                 <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
-                  Primero el estilo, luego el sistema
+                  {page.processHeading![lang]}
                 </h2>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                   {project.process[lang]}
@@ -511,7 +477,7 @@ export default function JaenPage() {
         <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content" style={{ maxWidth: 720 }}>
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{resultLabel[lang]}</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                 {project.result[lang]}
               </p>
@@ -523,20 +489,16 @@ export default function JaenPage() {
         <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content" style={{ maxWidth: 720 }}>
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>Aprendizajes</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>
               <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.75rem" }}>
-                Lo que me llevé
+                {t[lang].projectPage.learningsHeading}
               </h2>
 
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-                {[
-                  { n: "01", text: "Interpretar sin perder. El reto no era inventar desde cero, sino mejorar sin eliminar. Cada elemento del portal antiguo existía porque alguien lo necesitaba." },
-                  { n: "02", text: "Tener el sistema de componentes construido fue lo que hizo que las revisiones fueran absorbibles. Sin él, cada cambio habría supuesto rehacer páginas enteras. Y siempre hay revisiones." },
-                  { n: "03", text: "Trabajar con un volumen grande de páginas distintas me obligó a pensar el diseño de forma más sistemática. No se trata solo de que cada página quede bien por separado, sino de que todas juntas formen un sitio coherente. Eso cambia cómo tomas cada decisión." },
-                ].map(({ n, text }) => (
-                  <div key={n} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
-                    <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: ACCENT, paddingTop: "0.2rem" }}>{n}</span>
-                    <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>{text}</p>
+                {page.learningsItems!.map((text, i) => (
+                  <div key={i} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
+                    <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: ACCENT, paddingTop: "0.2rem" }}>{String(i + 1).padStart(2, "0")}</span>
+                    <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>{text[lang]}</p>
                   </div>
                 ))}
               </div>

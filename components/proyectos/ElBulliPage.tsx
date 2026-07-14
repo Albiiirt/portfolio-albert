@@ -11,21 +11,14 @@ import SmoothScroll from "@/components/SmoothScroll";
 import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
+import { t } from "@/data/translations";
 import Image from "next/image";
 
 const ACCENT = "#4a8fcc";
 const project = projects.find((p) => p.id === "elbulli")!;
-const resultLabel = { en: "The result", es: "El resultado", ca: "El resultat" };
+const page = project.page!;
 
-const meta = [
-  { label: "Cliente",       value: "Fundació elBulli" },
-  { label: "Año",           value: "2026" },
-  { label: "Estado",        value: "En curso" },
-  { label: "Rol",           value: "Diseño web · Implementación en código · React" },
-  { label: "Stack",         value: "Figma · Strapi · React" },
-];
-
-const chips = ["IA", "Strapi", "Figma"];
+const chips = ["AI", "Strapi", "Figma"];
 
 // ── SVG 1: Antes / Después ──────────────────────────────────────────────────
 function SvgBottleneck() {
@@ -350,7 +343,7 @@ export default function ElBulliPage() {
                 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
               >
-                01 · Sistema de Diseño
+                {project.num} · {project.category[lang]}
               </motion.p>
 
               <motion.h1
@@ -369,7 +362,7 @@ export default function ElBulliPage() {
                   lineHeight: 1.25, color: "rgba(255,255,255,0.6)",
                   marginTop: "0.5rem",
                 }}>
-                  sistema de páginas para un archivo cultural
+                  {project.heroTagline![lang]}
                 </span>
               </motion.h1>
 
@@ -391,7 +384,7 @@ export default function ElBulliPage() {
           <div className="site-content">
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
               <FadeInView>
-                <p className="section-label" style={{ marginBottom: "1.5rem" }}>El proyecto</p>
+                <p className="section-label" style={{ marginBottom: "1.5rem" }}>{t[lang].projectPage.sectionLabels.project}</p>
                 <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
                   {project.problem[lang]}
                 </p>
@@ -399,18 +392,18 @@ export default function ElBulliPage() {
 
               <FadeInView delay={0.1}>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-                  {meta.map(({ label, value }, i) => (
-                    <div key={label} style={{
+                  {project.meta!.map((item, i) => (
+                    <div key={i} style={{
                       display: "grid", gridTemplateColumns: "120px 1fr",
                       padding: "0.9rem 0",
-                      borderBottom: i < meta.length - 1 ? "1px solid var(--border)" : "none",
+                      borderBottom: i < project.meta!.length - 1 ? "1px solid var(--border)" : "none",
                       gap: "1rem",
                     }}>
                       <span style={{ fontSize: "0.67rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text-subtle)" }}>
-                        {label}
+                        {item.labelKey ? t[lang].projectPage.metaLabels[item.labelKey] : item.label![lang]}
                       </span>
                       <span style={{ fontSize: "0.88rem", color: "var(--text-muted)", fontWeight: 500 }}>
-                        {value}
+                        {typeof item.value === "string" ? item.value : item.value[lang]}
                       </span>
                     </div>
                   ))}
@@ -424,18 +417,18 @@ export default function ElBulliPage() {
         <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content">
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>El reto</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.challenge}</p>
             </FadeInView>
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
               <FadeInView>
                 <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
-                  Diseñar y construir dentro de un sistema vivo
+                  {page.challengeHeading![lang]}
                 </h2>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                  El archivo de la Fundació elBulli no se detiene. Algunas páginas llegaron con diseño definido — y mi trabajo fue llevarlas a código, responsive y lista para producción. Otras las estoy diseñando directamente, a medida que el proyecto avanza.
+                  {page.challengeBody![0][lang]}
                 </p>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                  El reto no es solo diseñar o solo implementar. Es hacer las dos cosas con coherencia, dentro de un sistema visual que tiene que funcionar en producción y seguir creciendo.
+                  {page.challengeBody![1][lang]}
                 </p>
               </FadeInView>
               <FadeInView delay={0.12}>
@@ -451,7 +444,7 @@ export default function ElBulliPage() {
         <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content">
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>La solución</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.solution}</p>
             </FadeInView>
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
               <FadeInView delay={0.1}>
@@ -461,7 +454,7 @@ export default function ElBulliPage() {
               </FadeInView>
               <FadeInView>
                 <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
-                  El diseño se decide una sola vez
+                  {page.solutionHeading![lang]}
                 </h2>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                   {project.process[lang]}
@@ -475,18 +468,18 @@ export default function ElBulliPage() {
         <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content">
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>El sistema</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.system}</p>
             </FadeInView>
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
               <FadeInView>
                 <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
-                  Bloques como piezas modulares
+                  {page.systemHeading![lang]}
                 </h2>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                  El archivo se construye con tipos de contenido bien definidos — fichas de platos, cronologías, galerías, artículos, citas — cada uno convertido en un bloque combinable en Strapi.
+                  {page.systemBody![0][lang]}
                 </p>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.75rem" }}>
-                  El editor elige los bloques, rellena los campos y publica. No puede romper el diseño aunque quiera: cada bloque tiene sus propias reglas visuales, heredadas del design system.
+                  {page.systemBody![1][lang]}
                 </p>
               </FadeInView>
               <FadeInView delay={0.12}>
@@ -502,7 +495,7 @@ export default function ElBulliPage() {
         <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content" style={{ maxWidth: 720 }}>
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{resultLabel[lang]}</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                 {project.result[lang]}
               </p>
@@ -515,7 +508,7 @@ export default function ElBulliPage() {
           <div className="site-content" style={{ maxWidth: 720 }}>
             <FadeInView>
               <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.75rem" }}>
-                <p className="section-label" style={{ margin: 0 }}>Aprendizajes</p>
+                <p className="section-label" style={{ margin: 0 }}>{t[lang].projectPage.sectionLabels.learnings}</p>
                 <span style={{
                   display: "inline-flex", alignItems: "center", gap: "0.35rem",
                   fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase",
@@ -523,28 +516,25 @@ export default function ElBulliPage() {
                   color: ACCENT, padding: "0.2rem 0.6rem", borderRadius: "100px",
                 }}>
                   <span style={{ width: 5, height: 5, borderRadius: "50%", background: ACCENT, display: "inline-block" }} />
-                  En progreso
+                  {page.learningsBadge![lang]}
                 </span>
               </div>
 
               <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.75rem" }}>
-                Lo que estoy aprendiendo
+                {page.learningsHeading![lang]}
               </h2>
 
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-                {[
-                  { n: "01", text: "El proyecto me permitió trabajar con Strapi como CMS headless y profundizar en herramientas de diseño asistido por IA. Aprender a encajar estas piezas dentro de un flujo de trabajo real ha sido una de las partes más valiosas de la colaboración." },
-                  { n: "02", text: "Colaborar en un proyecto de esta escala y sensibilidad cultural me ha dado perspectiva sobre cómo el diseño de sistemas no acaba cuando se entrega — evoluciona con el uso, y mantenerlo es tan importante como construirlo." },
-                ].map(({ n, text }) => (
-                  <div key={n} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
-                    <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: ACCENT, paddingTop: "0.2rem" }}>{n}</span>
-                    <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>{text}</p>
+                {page.learningsItems!.map((text, i) => (
+                  <div key={i} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
+                    <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: ACCENT, paddingTop: "0.2rem" }}>{String(i + 1).padStart(2, "0")}</span>
+                    <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>{text[lang]}</p>
                   </div>
                 ))}
               </div>
 
               <p style={{ fontSize: "0.82rem", color: "var(--text-subtle)", fontStyle: "italic", marginTop: "2.5rem", borderTop: "1px solid var(--border)", paddingTop: "1.5rem" }}>
-                Esta sección se actualizará a medida que avance el proyecto y se recojan observaciones reales del uso.
+                {page.learningsFootnote![lang]}
               </p>
             </FadeInView>
           </div>

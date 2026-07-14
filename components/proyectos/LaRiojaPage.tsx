@@ -11,18 +11,11 @@ import SmoothScroll from "@/components/SmoothScroll";
 import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
+import { t } from "@/data/translations";
 
 const ACCENT = "#b5386e";
 const project = projects.find((p) => p.id === "la-rioja-turismo")!;
-
-const meta = [
-  { label: "Cliente",  value: "La Rioja Turismo" },
-  { label: "Año",      value: "2026" },
-  { label: "Estado",   value: "Completado" },
-  { label: "Rol",      value: "Diseño web · Figma" },
-  { label: "Stack",    value: "Figma · Framer" },
-  { label: "Estudio",  value: "Dosgrapas" },
-];
+const page = project.page!;
 
 const chips = ["Figma", "Framer", "Web Design", "Tourism"];
 
@@ -91,7 +84,7 @@ export default function LaRiojaPage() {
                 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
               >
-                07 · Diseño Web
+                {project.num} · {project.category[lang]}
               </motion.p>
               <motion.h1
                 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
@@ -109,7 +102,7 @@ export default function LaRiojaPage() {
                   lineHeight: 1.25, color: "rgba(255,255,255,0.6)",
                   marginTop: "0.5rem",
                 }}>
-                  diseño de páginas para el portal turístico de La Rioja
+                  {project.heroTagline![lang]}
                 </span>
               </motion.h1>
               <motion.div
@@ -130,25 +123,25 @@ export default function LaRiojaPage() {
           <div className="site-content">
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
               <FadeInView>
-                <p className="section-label" style={{ marginBottom: "1.5rem" }}>El proyecto</p>
+                <p className="section-label" style={{ marginBottom: "1.5rem" }}>{t[lang].projectPage.sectionLabels.project}</p>
                 <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
                   {project.problem[lang]}
                 </p>
               </FadeInView>
               <FadeInView delay={0.1}>
                 <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-                  {meta.map(({ label, value }, i) => (
-                    <div key={label} style={{
+                  {project.meta!.map((item, i) => (
+                    <div key={i} style={{
                       display: "grid", gridTemplateColumns: "120px 1fr",
                       padding: "0.9rem 0",
-                      borderBottom: i < meta.length - 1 ? "1px solid var(--border)" : "none",
+                      borderBottom: i < project.meta!.length - 1 ? "1px solid var(--border)" : "none",
                       gap: "1rem",
                     }}>
                       <span style={{ fontSize: "0.67rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text-subtle)" }}>
-                        {label}
+                        {item.labelKey ? t[lang].projectPage.metaLabels[item.labelKey] : item.label![lang]}
                       </span>
                       <span style={{ fontSize: "0.88rem", color: "var(--text-muted)", fontWeight: 500 }}>
-                        {value}
+                        {typeof item.value === "string" ? item.value : item.value[lang]}
                       </span>
                     </div>
                   ))}
@@ -162,12 +155,12 @@ export default function LaRiojaPage() {
         <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content">
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>El trabajo</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.work}</p>
             </FadeInView>
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
               <FadeInView>
                 <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
-                  Entrar en un proyecto en marcha
+                  {page.workHeading![lang]}
                 </h2>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                   {project.process[lang]}
@@ -175,22 +168,18 @@ export default function LaRiojaPage() {
               </FadeInView>
               <FadeInView delay={0.1}>
                 <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                  {[
-                    { label: "Diseño de páginas", desc: "Diseñé páginas concretas del portal en Figma, dentro del sistema visual ya establecido por el estudio." },
-                    { label: "Coherencia de sistema", desc: "Cada página nueva tenía que encajar con el lenguaje visual existente — mismos componentes, mismo ritmo, mismo tono." },
-                    { label: "Figma → Framer", desc: "El diseño se entregó en Figma y fue implementado en Framer por el equipo de producción del estudio." },
-                  ].map(({ label, desc }) => (
-                    <div key={label} style={{
+                  {page.workCards!.map(({ label, desc }, i) => (
+                    <div key={i} style={{
                       padding: "1.25rem 1.5rem",
                       borderRadius: "0.75rem",
                       border: `1px solid ${ACCENT}44`,
                       background: `${ACCENT}06`,
                     }}>
                       <p style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: ACCENT, marginBottom: "0.5rem" }}>
-                        {label}
+                        {label[lang]}
                       </p>
                       <p style={{ fontSize: "0.9rem", lineHeight: 1.65, color: "var(--text-muted)", margin: 0 }}>
-                        {desc}
+                        {desc[lang]}
                       </p>
                     </div>
                   ))}
@@ -204,15 +193,15 @@ export default function LaRiojaPage() {
         <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content" style={{ maxWidth: 720 }}>
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>El resultado</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
               <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
-                El proyecto que abrió la puerta a Jaén
+                {page.resultHeading![lang]}
               </h2>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
                 {project.result[lang]}
               </p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                El proyecto de Jaén —&nbsp;<Link href="/proyectos/turisme-jaen" style={{ color: ACCENT, textDecoration: "none", borderBottom: `1px solid ${ACCENT}55`, paddingBottom: "1px" }}>que puedes ver aquí</Link>&nbsp;— es directamente heredero de este.
+                {page.closingLink!.prefix[lang]}<Link href={page.closingLink!.href} style={{ color: ACCENT, textDecoration: "none", borderBottom: `1px solid ${ACCENT}55`, paddingBottom: "1px" }}>{page.closingLink!.linkText[lang]}</Link>{page.closingLink!.suffix[lang]}
               </p>
             </FadeInView>
           </div>

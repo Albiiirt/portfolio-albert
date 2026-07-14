@@ -11,19 +11,12 @@ import SmoothScroll from "@/components/SmoothScroll";
 import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
+import { t } from "@/data/translations";
 import Image from "next/image";
 
 const ACCENT = "#8c3a5a";
 const project = projects.find((p) => p.id === "madrid")!;
-const resultLabel = { en: "The result", es: "El resultado", ca: "El resultat" };
-
-const meta = [
-  { label: "Cliente",  value: "Enoturismo Madrid" },
-  { label: "Año",      value: "2026" },
-  { label: "Estado",   value: "Completado · Live" },
-  { label: "Rol",      value: "Diseño y desarrollo · Proyecto en solitario" },
-  { label: "Stack",    value: "Next.js · Claude Code · Figma" },
-];
+const page = project.page!;
 
 const chips = ["Next.js", "Claude Code", "Figma"];
 
@@ -166,7 +159,7 @@ export default function MadridPage() {
                 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
               >
-                02 · Diseño Web
+                {project.num} · {project.category[lang]}
               </motion.p>
               <motion.h1
                 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
@@ -184,7 +177,7 @@ export default function MadridPage() {
                   lineHeight: 1.25, color: "rgba(255,255,255,0.6)",
                   marginTop: "0.5rem",
                 }}>
-                  diseño y desarrollo de las rutas del vino de Madrid
+                  {project.heroTagline![lang]}
                 </span>
               </motion.h1>
               <motion.div
@@ -221,7 +214,7 @@ export default function MadridPage() {
                   <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
                     <path d="M2 11L11 2M11 2H5M11 2v6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  Ver el resultado
+                  {page.heroCta![lang]}
                 </a>
               </motion.div>
             </div>
@@ -233,25 +226,25 @@ export default function MadridPage() {
           <div className="site-content">
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
               <FadeInView>
-                <p className="section-label" style={{ marginBottom: "1.5rem" }}>El proyecto</p>
+                <p className="section-label" style={{ marginBottom: "1.5rem" }}>{t[lang].projectPage.sectionLabels.project}</p>
                 <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
                   {project.problem[lang]}
                 </p>
               </FadeInView>
               <FadeInView delay={0.1}>
                 <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-                  {meta.map(({ label, value }, i) => (
-                    <div key={label} style={{
+                  {project.meta!.map((item, i) => (
+                    <div key={i} style={{
                       display: "grid", gridTemplateColumns: "120px 1fr",
                       padding: "0.9rem 0",
-                      borderBottom: i < meta.length - 1 ? "1px solid var(--border)" : "none",
+                      borderBottom: i < project.meta!.length - 1 ? "1px solid var(--border)" : "none",
                       gap: "1rem",
                     }}>
                       <span style={{ fontSize: "0.67rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text-subtle)" }}>
-                        {label}
+                        {item.labelKey ? t[lang].projectPage.metaLabels[item.labelKey] : item.label![lang]}
                       </span>
                       <span style={{ fontSize: "0.88rem", color: "var(--text-muted)", fontWeight: 500 }}>
-                        {value}
+                        {typeof item.value === "string" ? item.value : item.value[lang]}
                       </span>
                     </div>
                   ))}
@@ -265,12 +258,12 @@ export default function MadridPage() {
         <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content">
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>El punto de partida</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.startingPoint}</p>
             </FadeInView>
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
               <FadeInView>
                 <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
-                  Una base generada por IA
+                  {page.startingPointHeading![lang]}
                 </h2>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                   {project.process[lang]}
@@ -289,28 +282,15 @@ export default function MadridPage() {
         <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content">
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>El trabajo</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.work}</p>
               <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "clamp(2.5rem, 4vh, 4rem)" }}>
-                De la base al producto terminado
+                {page.workHeading![lang]}
               </h2>
             </FadeInView>
 
             <div className="proj-grid-3" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "clamp(1rem, 2vw, 1.5rem)" }}>
-              {[
-                {
-                  label: "De la primera a la última",
-                  desc: "Diseñé y desarrollé cada página del site en solitario — en Next.js, con componentes compartidos que garantizan coherencia sin repetir trabajo.",
-                },
-                {
-                  label: "Consistencia",
-                  desc: "Un sistema de estilos compartidos. Independientemente del contenido, todas las páginas hablan el mismo lenguaje visual.",
-                },
-                {
-                  label: "Responsive y animaciones",
-                  desc: "La base no tenía responsive. Cada página, ajustada para desktop, tablet y móvil. Las animaciones, exploradas en Figma e implementadas en código.",
-                },
-              ].map(({ label, desc }) => (
-                <FadeInView key={label}>
+              {page.workCards!.map(({ label, desc }, i) => (
+                <FadeInView key={i}>
                   <div style={{
                     padding: "clamp(1.5rem, 2.5vw, 2rem)",
                     borderRadius: "1rem",
@@ -319,10 +299,10 @@ export default function MadridPage() {
                     height: "100%",
                   }}>
                     <p style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: ACCENT, marginBottom: "1rem" }}>
-                      {label}
+                      {label[lang]}
                     </p>
                     <p style={{ fontSize: "0.95rem", lineHeight: 1.8, color: "var(--text-muted)", margin: 0 }}>
-                      {desc}
+                      {desc[lang]}
                     </p>
                   </div>
                 </FadeInView>
@@ -335,7 +315,7 @@ export default function MadridPage() {
         <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content" style={{ maxWidth: 720 }}>
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{resultLabel[lang]}</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                 {project.result[lang]}
               </p>
@@ -347,18 +327,15 @@ export default function MadridPage() {
         <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content" style={{ maxWidth: 720 }}>
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>Aprendizajes</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>
               <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.75rem" }}>
-                Lo que me llevé
+                {t[lang].projectPage.learningsHeading}
               </h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-                {[
-                  { n: "01", text: "Código como medio de diseño. Ver el resultado real en el navegador es más rápido — y más honesto — que cualquier prototipo." },
-                  { n: "02", text: "Extender es un ejercicio de escucha. Antes de añadir nada, hay que entender las decisiones que ya se tomaron — para continuarlas, no romperlas." },
-                ].map(({ n, text }) => (
-                  <div key={n} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
-                    <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: ACCENT, paddingTop: "0.2rem" }}>{n}</span>
-                    <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>{text}</p>
+                {page.learningsItems!.map((text, i) => (
+                  <div key={i} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
+                    <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: ACCENT, paddingTop: "0.2rem" }}>{String(i + 1).padStart(2, "0")}</span>
+                    <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>{text[lang]}</p>
                   </div>
                 ))}
               </div>

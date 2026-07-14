@@ -11,20 +11,11 @@ import SmoothScroll from "@/components/SmoothScroll";
 import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
+import { t } from "@/data/translations";
 
 const ACCENT = "#7aad3a";
 const project = projects.find((p) => p.id === "mirazur")!;
-const processLabel = { en: "The approach", es: "El enfoque", ca: "L'enfocament" };
-const resultLabel = { en: "The result", es: "El resultado", ca: "El resultat" };
-
-const meta = [
-  { label: "Cliente",      value: "Mirazur" },
-  { label: "Proyecto 01",  value: "2025 · Portal de recetas" },
-  { label: "Proyecto 02",  value: "2026 · Página de experiencia" },
-  { label: "Estado",       value: "Diseño completado" },
-  { label: "Rol",          value: "Diseño web · UX" },
-  { label: "Stack",        value: "Figma · Claude Design" },
-];
+const page = project.page!;
 
 const chips = ["Figma", "Claude Design", "Web Design"];
 
@@ -161,7 +152,7 @@ export default function MirazurPage() {
                 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
               >
-                05 · Diseño Web
+                {project.num} · {project.category[lang]}
               </motion.p>
               <motion.h1
                 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
@@ -179,7 +170,7 @@ export default function MirazurPage() {
                   lineHeight: 1.25, color: "rgba(255,255,255,0.6)",
                   marginTop: "0.5rem",
                 }}>
-                  portal de recetas y página de experiencia
+                  {project.heroTagline![lang]}
                 </span>
               </motion.h1>
               <motion.div
@@ -200,25 +191,25 @@ export default function MirazurPage() {
           <div className="site-content">
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
               <FadeInView>
-                <p className="section-label" style={{ marginBottom: "1.5rem" }}>El proyecto</p>
+                <p className="section-label" style={{ marginBottom: "1.5rem" }}>{t[lang].projectPage.sectionLabels.project}</p>
                 <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)" }}>
                   {project.problem[lang]}
                 </p>
               </FadeInView>
               <FadeInView delay={0.1}>
                 <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-                  {meta.map(({ label, value }, i) => (
-                    <div key={label} style={{
+                  {project.meta!.map((item, i) => (
+                    <div key={i} style={{
                       display: "grid", gridTemplateColumns: "120px 1fr",
                       padding: "0.9rem 0",
-                      borderBottom: i < meta.length - 1 ? "1px solid var(--border)" : "none",
+                      borderBottom: i < project.meta!.length - 1 ? "1px solid var(--border)" : "none",
                       gap: "1rem",
                     }}>
                       <span style={{ fontSize: "0.67rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text-subtle)" }}>
-                        {label}
+                        {item.labelKey ? t[lang].projectPage.metaLabels[item.labelKey] : item.label![lang]}
                       </span>
                       <span style={{ fontSize: "0.88rem", color: "var(--text-muted)", fontWeight: 500 }}>
-                        {value}
+                        {typeof item.value === "string" ? item.value : item.value[lang]}
                       </span>
                     </div>
                   ))}
@@ -232,19 +223,19 @@ export default function MirazurPage() {
         <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content">
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "0.5rem", color: ACCENT }}>Proyecto 01</p>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>Portal de recetas</p>
+              <p className="section-label" style={{ marginBottom: "0.5rem", color: ACCENT }}>{page.project1Label![lang]}</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{page.project1SectionLabel![lang]}</p>
             </FadeInView>
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
               <FadeInView>
                 <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
-                  Alta cocina accesible
+                  {page.project1Heading![lang]}
                 </h2>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                  El proyecto llegó a medias. La idea era clara — un portal donde los usuarios pagan para acceder a las recetas del restaurante, un modelo que lleva la alta cocina más allá de la mesa — pero el diseño estaba incompleto.
+                  {page.project1Body![0][lang]}
                 </p>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                  Lo retomé y lo terminé en Figma: el listado de recetas, la ficha individual, el flujo de acceso y el perfil del restaurante.
+                  {page.project1Body![1][lang]}
                 </p>
               </FadeInView>
               <FadeInView delay={0.12}>
@@ -260,39 +251,35 @@ export default function MirazurPage() {
         <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content">
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "0.5rem", color: ACCENT }}>Proyecto 02</p>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>Página de experiencia</p>
+              <p className="section-label" style={{ marginBottom: "0.5rem", color: ACCENT }}>{page.project2Label![lang]}</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{page.project2SectionLabel![lang]}</p>
             </FadeInView>
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
               <FadeInView>
                 <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
-                  Diseñar una experiencia antes de vivirla
+                  {page.project2Heading![lang]}
                 </h2>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                  Este también llegó a medias. Elegí terminarlo con Claude Design por una razón concreta: el sistema de diseño ya estaba construido, y usarlo como base me daba velocidad sin sacrificar coherencia visual.
+                  {page.project2Body![0][lang]}
                 </p>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                  El resultado es una página narrativa — no una carta ni una web corporativa — que explica qué significa comer en el Mirazur antes de haber ido: el entorno, los platos, la filosofía, la secuencia del menú.
+                  {page.project2Body![1][lang]}
                 </p>
               </FadeInView>
               <FadeInView delay={0.1}>
                 <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                  {[
-                    { label: "El entorno",    desc: "El jardín y la ubicación en Menton, al borde del Mediterráneo." },
-                    { label: "Los platos",    desc: "Los ingredientes de temporada, la filosofía de Mauro Colagreco." },
-                    { label: "La experiencia",desc: "Cómo es la secuencia de un menú degustación en el restaurante." },
-                  ].map(({ label, desc }) => (
-                    <div key={label} style={{
+                  {page.project2Cards!.map(({ label, desc }, i) => (
+                    <div key={i} style={{
                       padding: "1.25rem 1.5rem",
                       borderRadius: "0.75rem",
                       border: "1px solid var(--border-mid)",
                       background: "var(--bg)",
                     }}>
                       <p style={{ fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: ACCENT, marginBottom: "0.5rem" }}>
-                        {label}
+                        {label[lang]}
                       </p>
                       <p style={{ fontSize: "0.9rem", lineHeight: 1.65, color: "var(--text-muted)", margin: 0 }}>
-                        {desc}
+                        {desc[lang]}
                       </p>
                     </div>
                   ))}
@@ -306,13 +293,13 @@ export default function MirazurPage() {
         <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content" style={{ maxWidth: 720, display: "flex", flexDirection: "column", gap: "clamp(2.5rem, 5vh, 3.5rem)" }}>
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{processLabel[lang]}</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.approach}</p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                 {project.process[lang]}
               </p>
             </FadeInView>
             <FadeInView delay={0.05}>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{resultLabel[lang]}</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                 {project.result[lang]}
               </p>
@@ -324,18 +311,15 @@ export default function MirazurPage() {
         <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content" style={{ maxWidth: 720 }}>
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>Aprendizajes</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>
               <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.75rem" }}>
-                Lo que me llevé
+                {t[lang].projectPage.learningsHeading}
               </h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-                {[
-                  { n: "01", text: "Retomar un proyecto a medias obliga a entender antes de tocar. Primero hay que leer lo que ya está — las decisiones, la lógica, el tono — para poder continuarlo sin que se note la costura." },
-                  { n: "02", text: "La página de experiencia la construí con Claude Design. Lo que en Figma habría tardado días, tomó horas — sin perder el control sobre las decisiones de diseño." },
-                ].map(({ n, text }) => (
-                  <div key={n} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
-                    <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: ACCENT, paddingTop: "0.2rem" }}>{n}</span>
-                    <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>{text}</p>
+                {page.learningsItems!.map((text, i) => (
+                  <div key={i} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
+                    <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: ACCENT, paddingTop: "0.2rem" }}>{String(i + 1).padStart(2, "0")}</span>
+                    <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>{text[lang]}</p>
                   </div>
                 ))}
               </div>
