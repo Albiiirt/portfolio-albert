@@ -72,9 +72,9 @@ const items: TimelineItem[] = [
     title: { en: "Web Designer / Frontend", es: "Diseñador Web / Frontend", ca: "Dissenyador Web / Frontend" },
     place: "Dosgrapas",
     description: {
-      en: "UI design for clients in tourism, tech and culture. Figma → Framer. Clients: Turisme Jaén, La Rioja, GNOSS (AI), Fundació Picasso.",
-      es: "Diseño UI para clientes de turismo, tecnología y cultura. Figma → Framer. Clientes: Turisme Jaén, La Rioja, GNOSS (IA), Fundació Picasso.",
-      ca: "Disseny UI per a clients de turisme, tecnologia i cultura. Figma → Framer. Clients: Turisme Jaén, La Rioja, GNOSS (IA), Fundació Picasso.",
+      en: "UI design for clients in tourism, tech and culture. Figma → Framer. Clients: Turisme Jaén, La Rioja, GNOSS (AI), Fundació elBulli.",
+      es: "Diseño UI para clientes de turismo, tecnología y cultura. Figma → Framer. Clientes: Turisme Jaén, La Rioja, GNOSS (IA), Fundació elBulli.",
+      ca: "Disseny UI per a clients de turisme, tecnologia i cultura. Figma → Framer. Clients: Turisme Jaén, La Rioja, GNOSS (IA), Fundació elBulli.",
     },
     type: "work",
     current: true,
