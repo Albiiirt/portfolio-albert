@@ -53,6 +53,8 @@ export async function generateMetadata({
   };
 }
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://portfolio-albert-six.vercel.app";
+
 export default async function Page({
   params,
 }: {
@@ -61,5 +63,30 @@ export default async function Page({
   const { id } = await params;
   const ProjectPage = pages[id];
   if (!ProjectPage) notFound();
-  return <ProjectPage />;
+
+  const project = projects.find((p) => p.id === id);
+  const schema = project && {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: project.title.es,
+    description: project.description.es,
+    url: `${SITE_URL}/proyectos/${project.id}`,
+    creator: { "@type": "Person", name: "Albert Canadas", url: SITE_URL },
+    datePublished: project.year,
+    keywords: project.tags.join(", "),
+    about: project.problem.es,
+    ...(project.cover ? { image: `${SITE_URL}${project.cover}` } : {}),
+  };
+
+  return (
+    <>
+      {schema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      )}
+      <ProjectPage />
+    </>
+  );
 }

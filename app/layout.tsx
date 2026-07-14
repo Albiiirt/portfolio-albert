@@ -22,30 +22,30 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://portfolio-albert-s
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Albert Canadas · Diseñador UX/UI & Web — Barcelona",
-  description: "Diseñador UX/UI y web con sede en Barcelona. Trabajo con marcas de turismo, cultura y tecnología — de Figma al navegador. Disponible para proyectos.",
-  keywords: ["diseñador UX Barcelona", "diseñador UI freelance", "web designer Barcelona", "UX designer Barcelona", "Figma", "Framer", "diseño de producto", "identidad visual"],
+  title: "Albert Canadas · Diseñador UX/UI & Web con enfoque de producto — Barcelona",
+  description: "Diseñador UX/UI y web orientado a producto, con sede en Barcelona. Tomo decisiones de funcionalidad y contenido, no solo de estilo, y las implemento — Figma, Next.js, Framer, CMS headless (Strapi, Notion) e IA generativa aplicada al desarrollo (Claude Code). Trabajo con marcas de turismo, cultura y tecnología. Disponible para proyectos.",
+  keywords: ["diseñador UX Barcelona", "diseñador UI freelance", "web designer Barcelona", "UX designer Barcelona", "product designer Barcelona", "diseño de producto", "design engineer", "Figma", "Framer", "Next.js", "Strapi", "CMS headless", "IA generativa aplicada al desarrollo", "identidad visual"],
   authors: [{ name: "Albert Canadas", url: SITE_URL }],
   creator: "Albert Canadas",
   openGraph: {
     type: "website",
     url: SITE_URL,
-    title: "Albert Canadas · Diseñador UX/UI & Web — Barcelona",
-    description: "Diseñador UX/UI y web con sede en Barcelona. Trabajo con marcas de turismo, cultura y tecnología — de Figma al navegador.",
+    title: "Albert Canadas · Diseñador UX/UI & Web con enfoque de producto — Barcelona",
+    description: "Diseñador UX/UI y web orientado a producto. Decisiones de funcionalidad y contenido, no solo de estilo — implementadas con Figma, Next.js, Framer, CMS headless e IA generativa aplicada al desarrollo.",
     siteName: "Albert Canadas",
     images: [
       {
         url: "/room.png",
         width: 2048,
         height: 1314,
-        alt: "Albert Canadas — Diseñador UX/UI & Web en Barcelona",
+        alt: "Albert Canadas — Diseñador UX/UI & Web con enfoque de producto en Barcelona",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Albert Canadas · Diseñador UX/UI & Web — Barcelona",
-    description: "Diseñador UX/UI y web en Barcelona. Disponible para proyectos.",
+    title: "Albert Canadas · Diseñador UX/UI & Web con enfoque de producto — Barcelona",
+    description: "Diseñador UX/UI y web en Barcelona. Diseño y también implemento. Disponible para proyectos.",
     images: ["/room.png"],
   },
   robots: {
@@ -62,7 +62,8 @@ const schemaOrg = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Albert Canadas",
-  jobTitle: "Diseñador UX/UI & Web",
+  jobTitle: "Product Designer · UX/UI & Web Designer",
+  description: "Diseñador UX/UI y web orientado a producto: toma decisiones de funcionalidad y contenido además de visuales, e implementa lo que diseña con Next.js, Framer y CMS headless, apoyado en IA generativa aplicada al desarrollo.",
   url: SITE_URL,
   email: "acanades@gmail.com",
   address: {
@@ -72,11 +73,31 @@ const schemaOrg = {
     addressCountry: "ES",
   },
   sameAs: ["https://www.linkedin.com/in/albertcanadas/"],
-  knowsAbout: ["UX Design", "UI Design", "Web Design", "Figma", "Framer", "Diseño de producto", "Identidad de marca", "Inteligencia Artificial"],
+  knowsAbout: [
+    "UX Design",
+    "UI Design",
+    "Product Design",
+    "Web Design",
+    "Design Systems",
+    "Figma",
+    "Framer",
+    "Next.js",
+    "Strapi",
+    "Headless CMS",
+    "Notion CMS",
+    "Generative AI for development",
+    "Claude Code",
+    "Accessibility (WCAG)",
+    "Identidad de marca",
+  ],
   worksFor: {
     "@type": "Organization",
     name: "Dosgrapas",
   },
+  alumniOf: [
+    { "@type": "CollegeOrUniversity", name: "BAU, Centre Universitari d'Arts i Disseny · Barcelona" },
+    { "@type": "CollegeOrUniversity", name: "EMAD · La Garriga" },
+  ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
