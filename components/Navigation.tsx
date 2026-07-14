@@ -46,6 +46,10 @@ export default function Navigation() {
   const [dark, setDark] = useState(true);
 
   useEffect(() => {
+    // One-time sync read of the theme set synchronously by the anti-flash
+    // inline script in app/layout.tsx before hydration — not available during
+    // SSR, so it can't be read as a lazy initial state instead.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDark(document.documentElement.dataset.theme === "dark");
   }, []);
 

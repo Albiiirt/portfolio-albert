@@ -6,8 +6,6 @@ import { useLang } from "@/lib/LanguageContext";
 import { EASE } from "@/lib/animations";
 import FadeInView from "@/components/FadeInView";
 
-type Lang = "en" | "es" | "ca";
-
 type TimelineItem = {
   year: string;
   title: { en: string; es: string; ca: string };

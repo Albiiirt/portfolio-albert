@@ -92,57 +92,6 @@ function SvgWorkflow() {
   );
 }
 
-// ── SVG: responsive breakpoints ──────────────────────────────────────────────
-function SvgResponsive() {
-  const devices = [
-    { label: "Desktop",  w: 160, h: 110, x: 0 },
-    { label: "Tablet",   w: 100, h: 130, x: 175 },
-    { label: "Mobile",   w: 60,  h: 130, x: 290 },
-  ];
-
-  return (
-    <svg viewBox="0 0 370 160" fill="none" style={{ width: "100%", maxWidth: 400, height: "auto" }} aria-hidden>
-      {devices.map((d, i) => {
-        const isFirst = i === 0;
-        const frameY = isFirst ? 10 : 0;
-        return (
-          <g key={d.label}>
-            {/* Device frame */}
-            <rect x={d.x} y={frameY} width={d.w} height={d.h} rx={6}
-              fill="var(--bg-alt)"
-              stroke={isFirst ? ACCENT : "var(--border-mid)"}
-              strokeWidth={isFirst ? 1.5 : 1} />
-            {/* Screen area */}
-            <rect x={d.x + 5} y={frameY + 5} width={d.w - 10} height={d.h - 14} rx={3}
-              fill="var(--bg)" />
-            {/* Content bars */}
-            <rect x={d.x + 9} y={frameY + 10} width={d.w - 22} height={isFirst ? 14 : 10} rx={2}
-              fill={`${ACCENT}30`} />
-            {[0, 1, 2].map((j) => (
-              <rect key={j}
-                x={d.x + 9}
-                y={frameY + (isFirst ? 30 : 26) + j * (isFirst ? 14 : 12)}
-                width={`${[100, 75, 85][j]}%`.replace("%", "")}
-                height={isFirst ? 6 : 5}
-                rx={2}
-                fill="var(--border)"
-                style={{ width: `${[d.w - 22, (d.w - 22) * 0.75, (d.w - 22) * 0.85][j]}px` }}
-              />
-            ))}
-            {/* Label */}
-            <text x={d.x + d.w / 2} y={frameY + d.h + 14}
-              textAnchor="middle"
-              fill={isFirst ? ACCENT : "var(--text-subtle)"}
-              fontSize={9} fontWeight={isFirst ? 700 : 400} fontFamily="var(--font-sans)">
-              {d.label}
-            </text>
-          </g>
-        );
-      })}
-    </svg>
-  );
-}
-
 // ── Page ────────────────────────────────────────────────────────────────────
 export default function MadridPage() {
   const { lang } = useLang();

@@ -34,7 +34,7 @@ function TestimonialCard({ quote, name, role, org, lang }: { quote: Quote; name:
         display: "block",
         marginBottom: "-1rem",
       }}>
-        "
+        &ldquo;
       </span>
 
       {/* Quote text */}

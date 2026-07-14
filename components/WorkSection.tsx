@@ -187,9 +187,9 @@ export default function WorkSection() {
 
               {/* Ver todos */}
               <div style={{ paddingTop: "0.75rem" }}>
-                <a href="/proyectos" className="btn-ghost">
+                <Link href="/proyectos" className="btn-ghost">
                   {tx.viewAll} →
-                </a>
+                </Link>
               </div>
             </div>
 

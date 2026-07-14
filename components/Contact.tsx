@@ -11,9 +11,13 @@ export default function Contact() {
   const tx = t[lang].contact;
   const [phraseIndex, setPhraseIndex] = useState(0);
 
-  useEffect(() => {
+  // Reset the cycling phrase when the language changes — adjusted during
+  // render (React-recommended pattern) instead of in an effect.
+  const [prevLang, setPrevLang] = useState(lang);
+  if (lang !== prevLang) {
+    setPrevLang(lang);
     setPhraseIndex(0);
-  }, [lang]);
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
