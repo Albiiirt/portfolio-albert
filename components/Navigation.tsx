@@ -23,6 +23,14 @@ function MoonIcon() {
   );
 }
 
+function MenuIcon({ open }: { open: boolean }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+    </svg>
+  );
+}
+
 function NavAnchor({ id, children }: { id: string; children: React.ReactNode }) {
   const pathname = usePathname();
 
@@ -44,6 +52,18 @@ export default function Navigation() {
   const { lang, setLang } = useLang();
   const tx = t[lang].nav;
   const [dark, setDark] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const closeMenu = () => setMenuOpen(false);
+
+  const scrollToSection = (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+    closeMenu();
+    if (pathname === "/") {
+      e.preventDefault();
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     // One-time sync read of the theme set synchronously by the anti-flash
@@ -87,7 +107,7 @@ export default function Navigation() {
           AC
         </Link>
 
-        {/* Nav links + separators — hidden on mobile */}
+        {/* Nav links + separators — hidden on mobile, replaced by hamburger below */}
         <nav className="nav-links" style={{ display: "flex", alignItems: "center", gap: 0 }}>
           <div style={{ width: 1, height: 16, background: "var(--border-mid)", flexShrink: 0 }} />
           <NavAnchor id="work">{tx.work}</NavAnchor>
@@ -98,6 +118,21 @@ export default function Navigation() {
           </Link>
           <div style={{ width: 1, height: 16, background: "var(--border-mid)", flexShrink: 0 }} />
         </nav>
+
+        {/* Hamburger — mobile only, gives access to the links hidden above */}
+        <button
+          onClick={() => setMenuOpen((v) => !v)}
+          className="nav-hamburger cursor-hidden"
+          style={{
+            display: "none", alignItems: "center", justifyContent: "center",
+            width: "28px", height: "28px", borderRadius: "50%",
+            background: "none", border: "none", color: "var(--text)",
+          }}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+        >
+          <MenuIcon open={menuOpen} />
+        </button>
 
         {/* Language selector */}
         <div style={{ display: "flex", alignItems: "center", padding: "0 0.3rem", gap: "0.05rem" }}>
@@ -140,6 +175,33 @@ export default function Navigation() {
         </button>
 
       </div>
+
+      {/* Mobile menu panel */}
+      {menuOpen && (
+        <nav
+          className="liquid-pill nav-mobile-panel"
+          style={{
+            marginTop: "0.6rem",
+            display: "flex",
+            flexDirection: "column",
+            padding: "0.65rem",
+            gap: "0.1rem",
+          }}
+        >
+          <Link href="/#work" className="nav-link" style={{ padding: "0.7rem 0.9rem", textDecoration: "none" }} onClick={scrollToSection("work")}>
+            {tx.work}
+          </Link>
+          <Link href="/#about" className="nav-link" style={{ padding: "0.7rem 0.9rem", textDecoration: "none" }} onClick={scrollToSection("about")}>
+            {tx.about}
+          </Link>
+          <Link href="/#contact" className="nav-link" style={{ padding: "0.7rem 0.9rem", textDecoration: "none" }} onClick={scrollToSection("contact")}>
+            {tx.contact}
+          </Link>
+          <Link href="/cv" className="nav-link" style={{ padding: "0.7rem 0.9rem", textDecoration: "none" }} onClick={closeMenu}>
+            CV
+          </Link>
+        </nav>
+      )}
     </div>
   );
 }

@@ -175,6 +175,9 @@ html { scroll-behavior: auto; background: var(--bg); }
 
 /* Mobile (≤640px) */
 @media (max-width: 640px) {
+  /* Nav: swap the link row for a hamburger + dropdown panel */
+  .nav-hamburger { display: flex !important; }
+
   /* Hero: stack vertically, hide orbit */
   .hero-inner { flex-direction: column !important; align-items: stretch !important; }
   .hero-orbit { display: none !important; }
@@ -198,8 +201,11 @@ html { scroll-behavior: auto; background: var(--bg); }
   .proj-grid-3 { grid-template-columns: 1fr !important; }
   .proj-next-grid { grid-template-columns: 1fr !important; }
 
-  /* Projects listing: 1 col */
+  /* Projects listing: 1 col, taller cards with less padding so title/desc/tags/CTA fit */
   .projects-grid { grid-template-columns: 1fr !important; }
+  .project-card { aspect-ratio: 4/5 !important; }
+  .project-card-body { padding: 1.25rem !important; gap: 0.5rem !important; }
+  .project-card-desc { display: none !important; }
 
   /* Timeline scroll hint */
   .timeline-hint { display: flex !important; }
@@ -230,8 +236,6 @@ html.custom-cursor-active .project-row,
 html.custom-cursor-active .cursor-hidden {
   cursor: none;
 }
-
-@media (pointer: coarse) { html.custom-cursor-active body { cursor: auto; } }
 
 ::selection { background: rgba(26,23,20,0.1); color: var(--text); }
 
@@ -403,6 +407,10 @@ html.custom-cursor-active .cursor-hidden {
   transition: color 0.22s;
 }
 .nav-link:hover { color: var(--text); }
+
+.nav-mobile-panel { border-radius: 1.25rem !important; }
+.nav-mobile-panel .nav-link { border-radius: 0.75rem; }
+.nav-mobile-panel .nav-link:hover { background: var(--surface-bg); }
 
 /* ── Buttons ── */
 .btn-primary {

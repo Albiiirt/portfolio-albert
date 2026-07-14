@@ -24,7 +24,7 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
       href={`/proyectos/${project.id}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="cursor-hidden"
+      className="cursor-hidden project-card"
       style={{
         display: "block",
         position: "relative",
@@ -82,7 +82,7 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
       </div>
 
       {/* Bottom content */}
-      <div style={{
+      <div className="project-card-body" style={{
         position: "absolute", bottom: 0, left: 0, right: 0,
         padding: "1.75rem",
         display: "flex", flexDirection: "column", gap: "0.65rem",
@@ -95,7 +95,7 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
           {project.title[lang]}
         </h2>
 
-        <p style={{
+        <p className="project-card-desc" style={{
           fontSize: "0.85rem", lineHeight: 1.6,
           color: "rgba(255,255,255,0.65)", margin: 0, maxWidth: "520px",
         }}>

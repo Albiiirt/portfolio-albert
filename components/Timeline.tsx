@@ -180,8 +180,9 @@ export default function Timeline() {
             scrollbarWidth: "none",
           }}
         >
-          {/* Inner container with known height for absolute positioning of line */}
-          <div style={{ position: "relative", minWidth: "max-content", height: "260px" }}>
+          {/* Inner container — explicit width, since its only children are absolutely
+              positioned and so don't contribute to a min-width:max-content measurement */}
+          <div style={{ position: "relative", width: `${items.length * ITEM_W}px`, height: "260px" }}>
 
             {/* The real timeline line */}
             <div style={{
