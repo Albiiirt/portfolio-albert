@@ -179,7 +179,7 @@ html { scroll-behavior: auto; background: var(--bg); }
 /* Mobile (≤640px) */
 @media (max-width: 640px) {
   /* Hero: stack vertically, hide orbit */
-  .hero-inner { flex-direction: column !important; }
+  .hero-inner { flex-direction: column !important; align-items: stretch !important; }
   .hero-orbit { display: none !important; }
 
   /* Work: disable scroll trap, accordion handles navigation */

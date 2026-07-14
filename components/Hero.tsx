@@ -63,15 +63,15 @@ export default function Hero() {
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, ease: EASE, delay: 0.12 }}
-            style={{ margin: 0, lineHeight: 1, display: "flex", flexDirection: "column" }}
+            style={{ margin: 0, lineHeight: 1, display: "flex", flexDirection: "column", minWidth: 0 }}
           >
-            <span style={{ color: "var(--text)", fontSize: "clamp(1.8rem, 4vw, 5rem)", fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.03em" }}>
+            <span style={{ color: "var(--text)", fontSize: "clamp(1.8rem, 4vw, 5rem)", fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.03em", minWidth: 0, maxWidth: "100%", overflowWrap: "break-word" }}>
               {`${tx.line1} ${tx.line2}`}
             </span>
-            <span className="text-gradient" style={{ fontSize: "clamp(3.5rem, 8vw, 9.5rem)", fontFamily: "var(--font-serif), 'Playfair Display', serif", fontStyle: "italic", fontWeight: 400, letterSpacing: "0em", lineHeight: 0.92 }}>
+            <span className="text-gradient" style={{ fontSize: "clamp(2.4rem, 8vw, 9.5rem)", fontFamily: "var(--font-serif), 'Playfair Display', serif", fontStyle: "italic", fontWeight: 400, letterSpacing: "0em", lineHeight: 0.92, minWidth: 0, maxWidth: "100%", overflowWrap: "break-word" }}>
               {tx.line3}
             </span>
-            <span style={{ color: "var(--text)", fontSize: "clamp(3.5rem, 8vw, 9.5rem)", fontFamily: "var(--font-serif), 'Playfair Display', serif", fontStyle: "italic", fontWeight: 400, letterSpacing: "0em", lineHeight: 0.92 }}>
+            <span style={{ color: "var(--text)", fontSize: "clamp(2.4rem, 8vw, 9.5rem)", fontFamily: "var(--font-serif), 'Playfair Display', serif", fontStyle: "italic", fontWeight: 400, letterSpacing: "0em", lineHeight: 0.92, minWidth: 0, maxWidth: "100%", overflowWrap: "break-word" }}>
               {tx.line4}
             </span>
           </motion.h1>
