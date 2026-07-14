@@ -159,9 +159,6 @@ html { scroll-behavior: auto; background: var(--bg); }
   .about-top { flex-wrap: wrap !important; }
   .about-orbit { display: none !important; }
 
-  /* About services: 2 col */
-  .about-services { grid-template-columns: 1fr 1fr !important; }
-
   /* Project page content grids */
   .proj-grid-2 { grid-template-columns: 1fr !important; }
   .proj-grid-3 { grid-template-columns: 1fr 1fr !important; }

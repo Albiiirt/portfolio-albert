@@ -5,31 +5,14 @@ import { t } from "@/data/translations";
 import PlanetOrbit from "@/components/PlanetOrbit";
 import FadeInView from "@/components/FadeInView";
 
-function IconFrames() {
+function IconWireframe() {
   return (
     <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-      <rect x="4" y="8" width="56" height="48" rx="5" stroke="var(--text-muted)" strokeWidth="1" fill="none" />
-      <rect x="12" y="16" width="40" height="32" rx="4" stroke="var(--text-muted)" strokeWidth="1" fill="none" />
-      <rect x="20" y="24" width="24" height="16" rx="3" stroke="var(--text-muted)" strokeWidth="1" fill="none" />
-    </svg>
-  );
-}
-
-function IconTree() {
-  const nodes: [number, number][] = [
-    [32, 10],
-    [16, 32], [48, 32],
-    [8, 54], [24, 54], [40, 54], [56, 54],
-  ];
-  const edges: [number, number][] = [[0,1],[0,2],[1,3],[1,4],[2,5],[2,6]];
-  return (
-    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-      {edges.map(([a, b], i) => (
-        <line key={i} x1={nodes[a][0]} y1={nodes[a][1]} x2={nodes[b][0]} y2={nodes[b][1]} stroke="var(--text-muted)" strokeWidth="1" />
-      ))}
-      {nodes.map(([x, y], i) => (
-        <circle key={i} cx={x} cy={y} r="3.5" stroke="var(--text-muted)" strokeWidth="1" fill="none" />
-      ))}
+      <rect x="8" y="8" width="48" height="48" rx="4" stroke="var(--text-muted)" strokeWidth="1" fill="none" />
+      <rect x="14" y="16" width="36" height="8" rx="2" stroke="var(--text-muted)" strokeWidth="1" fill="none" />
+      <line x1="14" y1="34" x2="50" y2="34" stroke="var(--text-muted)" strokeWidth="1" strokeLinecap="round" />
+      <line x1="14" y1="42" x2="38" y2="42" stroke="var(--text-muted)" strokeWidth="1" strokeLinecap="round" />
+      <line x1="14" y1="50" x2="44" y2="50" stroke="var(--text-muted)" strokeWidth="1" strokeLinecap="round" />
     </svg>
   );
 }
@@ -53,14 +36,14 @@ function IconWand() {
 function IconBrackets() {
   return (
     <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-      <path d="M24 12L12 32l12 20" stroke="var(--text-muted)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-      <path d="M40 12l12 20-12 20" stroke="var(--text-muted)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-      <line x1="36" y1="16" x2="28" y2="48" stroke="var(--text-muted)" strokeWidth="1" strokeLinecap="round" />
+      <path d="M24 12L12 32l12 20" stroke="var(--text-muted)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path d="M40 12l12 20-12 20" stroke="var(--text-muted)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <line x1="36" y1="16" x2="28" y2="48" stroke="var(--text-muted)" strokeWidth="1.6" strokeLinecap="round" />
     </svg>
   );
 }
 
-const icons = [IconFrames, IconTree, IconWand, IconBrackets];
+const icons = [IconWireframe, IconBrackets, IconWand];
 
 export default function About() {
   const { lang } = useLang();
@@ -108,7 +91,7 @@ export default function About() {
         </div>
 
         {/* Service blocks — staggered */}
-        <div className="about-services" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0", borderTop: "1px solid var(--border)" }}>
+        <div className="about-services" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0", borderTop: "1px solid var(--border)" }}>
           {tx.services.map((service, i) => {
             const Icon = icons[i];
             return (

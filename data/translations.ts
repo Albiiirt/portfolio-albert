@@ -36,10 +36,9 @@ export const t = {
       skills: ["Product & UX/UI Design", "Design Systems", "Wireframing & Prototyping", "Front-end Implementation (Next.js, Framer)", "Headless CMS (Strapi, Notion)", "AI-assisted Development", "Accessibility (WCAG)"],
       langs: ["Catalan", "Spanish", "English"],
       services: [
-        { title: "Product Design.", desc: "Interfaces that start from what the product needs to do — features, content and flow decisions before visual style." },
-        { title: "Design Systems.", desc: "Scalable visual systems that keep consistency across pages, components and teams." },
-        { title: "AI-powered Development.", desc: "I use AI every day as a build partner — to prototype faster and to ship more of the implementation myself." },
-        { title: "Design & Build.", desc: "From Figma to a working site, with Next.js, Framer and CMS like Strapi or Notion. No files-only delivery." },
+        { title: "Product Design.", desc: "Before opening Figma, I decide what the page needs to do, who edits it, and how it grows. Visual style comes after." },
+        { title: "Design & Build.", desc: "From Figma to production — systems that scale, with Next.js, Framer and headless CMS. No files-only delivery." },
+        { title: "AI as an Ally.", desc: "I use it every day to move faster and to implement more of the final result myself — not just to prototype." },
       ],
     },
     contact: {
@@ -215,10 +214,9 @@ export const t = {
       skills: ["Diseño de producto y UI/UX", "Sistemas de diseño", "Wireframing y prototipado", "Implementación frontend (Next.js, Framer)", "CMS headless (Strapi, Notion)", "Desarrollo asistido por IA", "Accesibilidad (WCAG)"],
       langs: ["Catalán", "Castellano", "Inglés"],
       services: [
-        { title: "Diseño de producto.", desc: "Interfaces que parten de qué tiene que hacer el producto — decisiones de funcionalidad, contenido y flujo antes que de estilo visual." },
-        { title: "Sistemas de diseño.", desc: "Sistemas visuales escalables que mantienen la coherencia entre páginas, componentes y equipos." },
-        { title: "Desarrollo con IA.", desc: "Uso la IA cada día como compañero de construcción — para prototipar más rápido y para implementar yo mismo más parte del resultado final." },
-        { title: "Diseño y construyo.", desc: "De Figma a una web funcionando, con Next.js, Framer y CMS como Strapi o Notion. Sin entrega de solo archivos." },
+        { title: "Pienso en producto.", desc: "Antes de abrir Figma, decido qué tiene que hacer la página, quién la edita y cómo crece. El estilo visual viene después." },
+        { title: "Diseño y construyo.", desc: "De Figma a producción — sistemas que escalan, con Next.js, Framer y CMS headless. No entrego solo archivos." },
+        { title: "La IA como aliado.", desc: "La uso cada día para ir más rápido y para implementar yo mismo más parte del resultado final — no solo para prototipar." },
       ],
     },
     contact: {
@@ -394,10 +392,9 @@ export const t = {
       skills: ["Disseny de producte i UI/UX", "Sistemes de disseny", "Wireframing i prototipat", "Implementació frontend (Next.js, Framer)", "CMS headless (Strapi, Notion)", "Desenvolupament assistit per IA", "Accessibilitat (WCAG)"],
       langs: ["Català", "Castellà", "Anglès"],
       services: [
-        { title: "Disseny de producte.", desc: "Interfícies que parteixen de què ha de fer el producte — decisions de funcionalitat, contingut i flux abans que d'estil visual." },
-        { title: "Sistemes de disseny.", desc: "Sistemes visuals escalables que mantenen la coherència entre pàgines, components i equips." },
-        { title: "Desenvolupament amb IA.", desc: "Faig servir la IA cada dia com a company de construcció — per prototipar més ràpid i per implementar jo mateix més part del resultat final." },
-        { title: "Dissenyo i construeixo.", desc: "De Figma a una web funcionant, amb Next.js, Framer i CMS com Strapi o Notion. Sense entrega de sols arxius." },
+        { title: "Penso en producte.", desc: "Abans d'obrir Figma, decideixo què ha de fer la pàgina, qui l'edita i com creix. L'estil visual arriba després." },
+        { title: "Dissenyo i construeixo.", desc: "De Figma a producció — sistemes que escalen, amb Next.js, Framer i CMS headless. Sense entrega de sols arxius." },
+        { title: "La IA com a aliada.", desc: "La faig servir cada dia per anar més ràpid i per implementar jo mateix més part del resultat final — no només per prototipar." },
       ],
     },
     contact: {
