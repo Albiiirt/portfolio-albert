@@ -364,7 +364,13 @@ export default function Timeline() {
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              width: "min(560px, calc(100vw - 3rem))",
+              // `%` (not vw) so this resolves against the fixed-position containing
+              // block, which excludes the scrollbar gutter — `100vw` overcounts it,
+              // which was pushing the panel a few px past the right edge and
+              // hard-clipping its content (body has overflow-x: hidden).
+              width: "min(560px, calc(100% - 3rem))",
+              maxHeight: "calc(100% - 3rem)",
+              overflowY: "auto",
               zIndex: 50,
               background: "var(--glass-bg)",
               backdropFilter: "var(--glass-filter)",

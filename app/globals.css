@@ -126,9 +126,6 @@ html { scroll-behavior: auto; background: var(--bg); }
   width: clamp(300px, 40vw, 500px);
 }
 
-/* Accordion — hidden on desktop, shown on tablet/mobile */
-.work-accordion { display: none; }
-
 /* Card description — capped at 2 lines with ellipsis */
 .work-card-desc {
   display: -webkit-box;
@@ -149,11 +146,6 @@ html { scroll-behavior: auto; background: var(--bg); }
   .about-grid { grid-template-columns: 1fr !important; }
   .hero-float-cards,
   .hero-profile-section { display: none !important; }
-
-  /* Work: accordion mode — hide right card column, show inline panels */
-  .work-grid { grid-template-columns: 1fr !important; }
-  .work-card-wrap { display: none !important; }
-  .work-accordion { display: block !important; }
 
   /* About top row */
   .about-top { flex-wrap: wrap !important; }
@@ -181,10 +173,6 @@ html { scroll-behavior: auto; background: var(--bg); }
   /* Hero: stack vertically, hide orbit */
   .hero-inner { flex-direction: column !important; align-items: stretch !important; }
   .hero-orbit { display: none !important; }
-
-  /* Work: disable scroll trap, accordion handles navigation */
-  .work-section { height: auto !important; }
-  .work-sticky  { position: static !important; height: auto !important; overflow: visible !important; }
 
   /* About services: 1 col */
   .about-services { grid-template-columns: 1fr !important; }
