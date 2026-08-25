@@ -126,23 +126,15 @@ html { scroll-behavior: auto; background: var(--bg); }
   width: clamp(300px, 40vw, 500px);
 }
 
+/* Accordion — hidden on desktop, shown on tablet/mobile */
+.work-accordion { display: none; }
+
 /* Card description — capped at 2 lines with ellipsis */
 .work-card-desc {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-/* Work section: featured desktop card hidden by default, slider shown by
-   default. Swapped by breakpoint below. Kept as two sibling blocks (not a
-   single JS/matchMedia conditional) so there's no hydration flash. */
-.work-featured-wrap { display: none; }
-
-/* Work nav — visible focus ring (buttons use all:unset, which strips it) */
-.work-nav-item:focus-visible {
-  outline: 2px solid var(--text);
-  outline-offset: 2px;
 }
 
 /* Projects listing page — 2 cols on tablet */
@@ -152,17 +144,16 @@ html { scroll-behavior: auto; background: var(--bg); }
 
 /* ── Responsive ── */
 
-/* Desktop (≥901px): featured work card replaces the horizontal slider */
-@media (min-width: 901px) {
-  .work-slider-wrap   { display: none !important; }
-  .work-featured-wrap { display: block !important; }
-}
-
 /* Tablet (≤900px) */
 @media (max-width: 900px) {
   .about-grid { grid-template-columns: 1fr !important; }
   .hero-float-cards,
   .hero-profile-section { display: none !important; }
+
+  /* Work: accordion mode — hide right card column, show inline panels */
+  .work-grid { grid-template-columns: 1fr !important; }
+  .work-card-wrap { display: none !important; }
+  .work-accordion { display: block !important; }
 
   /* About top row */
   .about-top { flex-wrap: wrap !important; }
@@ -190,6 +181,10 @@ html { scroll-behavior: auto; background: var(--bg); }
   /* Hero: stack vertically, hide orbit */
   .hero-inner { flex-direction: column !important; align-items: stretch !important; }
   .hero-orbit { display: none !important; }
+
+  /* Work: disable scroll trap, accordion handles navigation */
+  .work-section { height: auto !important; }
+  .work-sticky  { position: static !important; height: auto !important; overflow: visible !important; }
 
   /* About services: 1 col */
   .about-services { grid-template-columns: 1fr !important; }
