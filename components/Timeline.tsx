@@ -118,12 +118,6 @@ export default function Timeline() {
   const [selected, setSelected] = useState<number | null>(null);
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollLeft = scrollRef.current.scrollWidth;
-    }
-  }, []);
-
-  useEffect(() => {
     if (selected === null) return;
     const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") setSelected(null); };
     window.addEventListener("keydown", handleKey);
