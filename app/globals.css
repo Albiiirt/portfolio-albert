@@ -134,12 +134,29 @@ html { scroll-behavior: auto; background: var(--bg); }
   overflow: hidden;
 }
 
+/* Work section: featured desktop card hidden by default, slider shown by
+   default. Swapped by breakpoint below. Kept as two sibling blocks (not a
+   single JS/matchMedia conditional) so there's no hydration flash. */
+.work-featured-wrap { display: none; }
+
+/* Work nav — visible focus ring (buttons use all:unset, which strips it) */
+.work-nav-item:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
 /* Projects listing page — 2 cols on tablet */
 @media (max-width: 900px) and (min-width: 641px) {
   .projects-grid { grid-template-columns: 1fr 1fr !important; }
 }
 
 /* ── Responsive ── */
+
+/* Desktop (≥901px): featured work card replaces the horizontal slider */
+@media (min-width: 901px) {
+  .work-slider-wrap   { display: none !important; }
+  .work-featured-wrap { display: block !important; }
+}
 
 /* Tablet (≤900px) */
 @media (max-width: 900px) {
