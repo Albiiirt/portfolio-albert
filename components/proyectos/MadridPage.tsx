@@ -195,7 +195,7 @@ export default function MadridPage() {
                 style={{ marginTop: "1.5rem" }}
               >
                 <a
-                  href="https://madridenoturismo.gnoss.com/"
+                  href="https://enoturismo.comunidad.madrid/"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
