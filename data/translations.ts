@@ -177,6 +177,10 @@ export const t = {
       },
       learningsHeading: "What I took away",
       screensPreviewNote: "Preview — real screens from the project, coming soon.",
+      expandLabel: "Expand {title}",
+      interactivePreviewBadge: "Interactive preview",
+      closeLightbox: "Close",
+      lightboxAriaLabel: "Enlarged view: {title}",
     },
   },
   es: {
@@ -357,6 +361,10 @@ export const t = {
       },
       learningsHeading: "Lo que me llevé",
       screensPreviewNote: "Vista previa — pantallas reales del proyecto, próximamente.",
+      expandLabel: "Ampliar {title}",
+      interactivePreviewBadge: "Vista previa interactiva",
+      closeLightbox: "Cerrar",
+      lightboxAriaLabel: "Vista ampliada: {title}",
     },
   },
   ca: {
@@ -537,6 +545,10 @@ export const t = {
       },
       learningsHeading: "El que me'n vaig emportar",
       screensPreviewNote: "Vista prèvia — pantalles reals del projecte, properament.",
+      expandLabel: "Ampliar {title}",
+      interactivePreviewBadge: "Vista prèvia interactiva",
+      closeLightbox: "Tancar",
+      lightboxAriaLabel: "Vista ampliada: {title}",
     },
   },
 };

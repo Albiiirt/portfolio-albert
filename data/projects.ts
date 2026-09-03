@@ -37,6 +37,9 @@ export type DesktopWalkthroughStep = {
   alt: LocalizedText;
   title: LocalizedText;
   caption: LocalizedText;
+  // Real, interactive HTML page shown in the lightbox iframe when this step's
+  // frame is clicked/expanded — a live mockup, not just the static screenshot.
+  htmlSrc: string;
 };
 
 // Shared status values, sourced from data/translations.ts so the same
@@ -182,7 +185,7 @@ export const projects: Project[] = [
     subProjects: [
       {
         id: "archivo",
-        tabLabel: { en: "Archive", es: "Archivo", ca: "Arxiu" },
+        tabLabel: { en: "elBulli Archive", es: "Archivo elBulli", ca: "Arxiu elBulli" },
         num: "01",
         category: { en: "Design System", es: "Sistema de Diseño", ca: "Sistema de Disseny" },
         year: "2026",
@@ -270,7 +273,7 @@ export const projects: Project[] = [
       },
       {
         id: "marketplace",
-        tabLabel: { en: "Marketplace", es: "Marketplace", ca: "Marketplace" },
+        tabLabel: { en: "Bullipedia", es: "Bullipedia", ca: "Bullipedia" },
         num: "02",
         category: { en: "E-commerce", es: "E-commerce", ca: "E-commerce" },
         year: "2026",
@@ -299,6 +302,7 @@ export const projects: Project[] = [
         desktopWalkthrough: [
           {
             src: "/mockups/bullipedia/01-catalogo.jpg",
+            htmlSrc: "/mockups/bullipedia-html/1-catalogo-libros.html",
             alt: {
               en: "Bullipedia book catalogue, showing the covers of purchased volumes",
               es: "Catálogo de libros de Bullipedia, con las portadas de los volúmenes comprados",
@@ -313,6 +317,7 @@ export const projects: Project[] = [
           },
           {
             src: "/mockups/bullipedia/02-libro.jpg",
+            htmlSrc: "/mockups/bullipedia-html/2-libro-plan-genhesis.html",
             alt: {
               en: "A book's page with its cover, a button to start reading, and the full chapter index",
               es: "Ficha de un libro con su portada, botón para empezar a leer, e índice completo de capítulos",
@@ -327,6 +332,7 @@ export const projects: Project[] = [
           },
           {
             src: "/mockups/bullipedia/03-capitulo.jpg",
+            htmlSrc: "/mockups/bullipedia-html/3-capitulo-introduccion-al-plan-genhesis.html",
             alt: {
               en: "View of a chapter with its sections, external links and downloadable resources",
               es: "Vista de un capítulo con sus apartados, enlaces externos y recursos descargables",
@@ -341,6 +347,7 @@ export const projects: Project[] = [
           },
           {
             src: "/mockups/bullipedia/04-articulo.jpg",
+            htmlSrc: "/mockups/bullipedia-html/4-articulo-el-sapiens-de-la-rg.html",
             alt: {
               en: "An article page in reading mode, with continuous text and side progress navigation",
               es: "Página de un artículo en modo lectura, con texto corrido y navegación lateral de progreso",

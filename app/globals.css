@@ -552,8 +552,191 @@ html.custom-cursor-active .cursor-hidden {
 @media (max-width: 640px) {
   .browser-chrome-bar { height: 28px; }
 }
-@media (max-width: 480px) {
-  .browser-chrome-pill { display: none; }
+
+/* Desktop walkthrough: ≥900px shows the overlapping collage stage,
+   <900px keeps the original stacked list untouched. */
+.walkthrough-stage { display: block; }
+.walkthrough-list { display: none; }
+@media (max-width: 900px) {
+  .walkthrough-stage { display: none !important; }
+  .walkthrough-list { display: flex !important; }
+}
+
+.collage-frame {
+  cursor: pointer;
+}
+.collage-frame:focus-visible {
+  outline: 2px solid rgba(255,255,255,0.9);
+  outline-offset: 4px;
+  border-radius: 16px;
+}
+
+/* Expand affordance — appears on the same hover/focus moment that used to
+   also reveal a caption pill (removed: only the lift/shadow hover effect
+   plus this icon remain now). Sits inside the content panel, not the
+   frame's outer edge, so it never spills outside the card. */
+.collage-expand-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10,14,20,0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.14);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease-out;
+}
+@media (hover: hover) and (pointer: fine) {
+  .collage-frame:hover .collage-expand-icon { opacity: 1; }
+}
+.collage-frame:focus-visible .collage-expand-icon { opacity: 1; }
+
+.collage-legend {
+  margin-top: 1.75rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ── Walkthrough lightbox (desktop shared-element modal + mobile sheet) ── */
+
+.mobile-frame-trigger {
+  cursor: pointer;
+  border-radius: 16px;
+}
+.mobile-frame-trigger:focus-visible {
+  outline: 2px solid rgba(255,255,255,0.9);
+  outline-offset: 4px;
+  border-radius: 16px;
+}
+
+.walkthrough-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 8, 14, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 300;
+}
+
+/* Outer positioning shell — sized/centered with fixed + margin:auto (not a
+   transform) so the shared-element frame inside is free to own `transform`
+   for its layoutId morph without the two fighting over the same property. */
+.walkthrough-popup {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(92vw, 1200px);
+  height: min(86vh, 820px);
+  z-index: 300;
+  outline: none;
+}
+@media (max-width: 900px) {
+  .walkthrough-popup {
+    margin: 0;
+    width: 100vw;
+    height: 100dvh;
+  }
+}
+
+/* The actual "browser window" — carries the shared layoutId on desktop, so
+   border-radius/shadow live here (framer-motion corrects their scale
+   distortion automatically only on the element that owns the layout id). */
+.walkthrough-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(20,22,28,0.98);
+  border: 1.5px solid rgba(255,255,255,0.16);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.14) inset, 0 24px 80px rgba(0,0,0,0.6);
+  border-radius: 16px;
+  overflow: hidden;
+}
+@media (max-width: 900px) {
+  .walkthrough-frame {
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+.walkthrough-frame-content {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  background: #fff;
+}
+
+.walkthrough-badge {
+  position: absolute;
+  top: -14px;
+  left: 24px;
+  z-index: 1;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 100px;
+  color: rgba(255,255,255,0.85);
+  font-size: 0.8rem;
+  padding: 0.4rem 1rem;
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  .walkthrough-badge {
+    position: static;
+    display: block;
+    width: 100%;
+    text-align: center;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+    padding: 0.6rem 1rem;
+    white-space: normal;
+  }
+}
+
+.walkthrough-close-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10,14,20,0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.14);
+  cursor: pointer;
+  padding: 0;
+}
+.walkthrough-close-btn:focus-visible {
+  outline: 2px solid rgba(255,255,255,0.9);
+  outline-offset: 2px;
+}
+
+/* Mobile sheet — full-screen native sheet, chrome bar reused as-is. */
+.walkthrough-sheet {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  background: rgba(20,22,28,0.98);
+  outline: none;
+}
+.walkthrough-sheet .walkthrough-frame-content {
+  flex: 1;
 }
 
 /* ── Reduce motion ── */

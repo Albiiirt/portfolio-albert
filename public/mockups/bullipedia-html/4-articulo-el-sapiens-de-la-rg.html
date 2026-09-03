@@ -1,0 +1,4082 @@
+<!DOCTYPE html><html lang="es" class="din_f7e74a2e-module__LoppDW__variable h-full antialiased"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><style>
+/* [project]/app/din_f7e74a2e.module.css [app-client] (css) */
+@font-face {
+  font-family: din;
+  src: url("assets/font-DINNextLTPro_Light-s.p.44d-1du75cx56-94507b.otf") format("opentype");
+  font-display: swap;
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: din;
+  src: url("assets/font-DINNextLTPro_LightItalic-s.p.2l-3c9fecsjjo-2c3fcc.otf") format("opentype");
+  font-display: swap;
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: din;
+  src: url("assets/font-DINNextLTPro_Regular-s.p.35ofgb3uto3m4-34827e.otf") format("opentype");
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: din;
+  src: url("assets/font-DINNextLTPro_Italic-s.p.10l-zndktk0l3-6332eb.otf") format("opentype");
+  font-display: swap;
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: din;
+  src: url("assets/font-DINNextLTPro_Bold-s.p.2h5n10oqhvlau-9868fe.otf") format("opentype");
+  font-display: swap;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: din;
+  src: url("assets/font-DINNextLTPro_BoldItalic-s.p.2e20enj03vmlz-799cf5.otf") format("opentype");
+  font-display: swap;
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: din Fallback;
+  src: local(Arial);
+  ascent-override: 76.71%;
+  descent-override: 25.57%;
+  line-gap-override: 20.46%;
+  size-adjust: 97.77%;
+}
+
+.din_f7e74a2e-module__LoppDW__className {
+  font-family: din, din Fallback;
+}
+
+.din_f7e74a2e-module__LoppDW__variable {
+  --font-din: "din", "din Fallback";
+}
+
+/* [project]/app/globals.css [app-client] (css) */
+@layer properties {
+  @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
+    *, :before, :after, ::backdrop {
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-translate-z: 0;
+      --tw-rotate-x: initial;
+      --tw-rotate-y: initial;
+      --tw-rotate-z: initial;
+      --tw-skew-x: initial;
+      --tw-skew-y: initial;
+      --tw-border-style: solid;
+      --tw-leading: initial;
+      --tw-font-weight: initial;
+      --tw-tracking: initial;
+      --tw-ordinal: initial;
+      --tw-slashed-zero: initial;
+      --tw-numeric-figure: initial;
+      --tw-numeric-spacing: initial;
+      --tw-numeric-fraction: initial;
+      --tw-shadow: 0 0 #0000;
+      --tw-shadow-color: initial;
+      --tw-shadow-alpha: 100%;
+      --tw-inset-shadow: 0 0 #0000;
+      --tw-inset-shadow-color: initial;
+      --tw-inset-shadow-alpha: 100%;
+      --tw-ring-color: initial;
+      --tw-ring-shadow: 0 0 #0000;
+      --tw-inset-ring-color: initial;
+      --tw-inset-ring-shadow: 0 0 #0000;
+      --tw-ring-inset: initial;
+      --tw-ring-offset-width: 0px;
+      --tw-ring-offset-color: #fff;
+      --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-blur: initial;
+      --tw-brightness: initial;
+      --tw-contrast: initial;
+      --tw-grayscale: initial;
+      --tw-hue-rotate: initial;
+      --tw-invert: initial;
+      --tw-opacity: initial;
+      --tw-saturate: initial;
+      --tw-sepia: initial;
+      --tw-drop-shadow: initial;
+      --tw-drop-shadow-color: initial;
+      --tw-drop-shadow-alpha: 100%;
+      --tw-drop-shadow-size: initial;
+      --tw-backdrop-blur: initial;
+      --tw-backdrop-brightness: initial;
+      --tw-backdrop-contrast: initial;
+      --tw-backdrop-grayscale: initial;
+      --tw-backdrop-hue-rotate: initial;
+      --tw-backdrop-invert: initial;
+      --tw-backdrop-opacity: initial;
+      --tw-backdrop-saturate: initial;
+      --tw-backdrop-sepia: initial;
+      --tw-duration: initial;
+    }
+  }
+}
+
+@layer theme {
+  :root, :host {
+    --font-sans: var(--font-din), "Helvetica Neue", Arial, sans-serif;
+    --font-serif: Georgia, "Times New Roman", serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --color-black: #000;
+    --color-white: #fff;
+    --spacing: .25rem;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --tracking-wide: .025em;
+    --leading-tight: 1.25;
+    --leading-snug: 1.375;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.625;
+    --radius-md: .375rem;
+    --radius-lg: .5rem;
+    --aspect-video: 16 / 9;
+    --default-transition-duration: .15s;
+    --default-transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+    --color-green: #8dc63f;
+    --color-green-dark: #5a8a1f;
+    --color-navy: #000;
+    --color-navy-deep: #1a1a1a;
+    --color-panel: #ececec;
+    --color-soft: #fafafa;
+    --color-ink: #333;
+    --color-ink-soft: #555;
+    --color-muted: #888;
+    --color-rule: #ececec;
+    --color-rule-strong: #d0d0d0;
+    --font-display: var(--font-din), "Helvetica Neue", Arial, sans-serif;
+    --text-label: 11px;
+    --text-eyebrow: 12px;
+    --text-meta: 13px;
+    --text-body: 18px;
+    --text-lead: 20px;
+    --text-h3: 22px;
+    --text-h2: 26px;
+    --shadow-pop: 0 18px 44px #00000024;
+  }
+}
+
+@layer base {
+  *, :after, :before, ::backdrop {
+    box-sizing: border-box;
+    border: 0 solid;
+    margin: 0;
+    padding: 0;
+  }
+
+  ::file-selector-button {
+    box-sizing: border-box;
+    border: 0 solid;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, :host {
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    line-height: 1.5;
+    font-family: var(--default-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+
+  b, strong {
+    font-weight: bolder;
+  }
+
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+
+  small {
+    font-size: 80%;
+  }
+
+  sub, sup {
+    vertical-align: baseline;
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+  }
+
+  sub {
+    bottom: -.25em;
+  }
+
+  sup {
+    top: -.5em;
+  }
+
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+
+  :-moz-focusring:where(:not(iframe)) {
+    outline: auto;
+  }
+
+  progress {
+    vertical-align: baseline;
+  }
+
+  summary {
+    display: list-item;
+  }
+
+  ol, ul, menu {
+    list-style: none;
+  }
+
+  img, svg, video, canvas, audio, iframe, embed, object {
+    vertical-align: middle;
+    display: block;
+  }
+
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  button, input, select, optgroup, textarea {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    opacity: 1;
+    background-color: #0000;
+    border-radius: 0;
+  }
+
+  ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    opacity: 1;
+    background-color: #0000;
+    border-radius: 0;
+  }
+
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+
+  ::placeholder {
+    opacity: 1;
+  }
+
+  @supports (not ((-webkit-appearance: -apple-pay-button))) or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentColor;
+    }
+
+    @supports (color: color-mix(in lab, red, red)) {
+      ::placeholder {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+
+  ::-webkit-datetime-edit {
+    padding-block: 0;
+  }
+
+  ::-webkit-datetime-edit-year-field {
+    padding-block: 0;
+  }
+
+  ::-webkit-datetime-edit-month-field {
+    padding-block: 0;
+  }
+
+  ::-webkit-datetime-edit-day-field {
+    padding-block: 0;
+  }
+
+  ::-webkit-datetime-edit-hour-field {
+    padding-block: 0;
+  }
+
+  ::-webkit-datetime-edit-minute-field {
+    padding-block: 0;
+  }
+
+  ::-webkit-datetime-edit-second-field {
+    padding-block: 0;
+  }
+
+  ::-webkit-datetime-edit-millisecond-field {
+    padding-block: 0;
+  }
+
+  ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+
+  button, input:where([type="button"], [type="reset"], [type="submit"]) {
+    appearance: button;
+  }
+
+  ::file-selector-button {
+    appearance: button;
+  }
+
+  ::-webkit-inner-spin-button {
+    height: auto;
+  }
+
+  ::-webkit-outer-spin-button {
+    height: auto;
+  }
+
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+
+  body {
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    background: #fff;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@layer components {
+  .ds-pullquote {
+    color: var(--color-green-dark);
+    padding: 0 38px;
+    font-size: 22px;
+    line-height: 1.45;
+    position: relative;
+  }
+
+  .ds-pullquote:before, .ds-pullquote:after {
+    font-family: var(--font-serif);
+    color: var(--color-green);
+    font-size: 54px;
+    line-height: 1;
+    position: absolute;
+  }
+
+  .ds-pullquote:before {
+    content: "“";
+    top: -8px;
+    left: 0;
+  }
+
+  .ds-pullquote:after {
+    content: "”";
+    bottom: -30px;
+    right: 0;
+  }
+
+  .fig-right, .fig-left {
+    width: 46%;
+  }
+
+  .fig-right {
+    float: right;
+    margin: 6px 0 22px 28px;
+  }
+
+  .fig-left {
+    float: left;
+    margin: 6px 28px 22px 0;
+  }
+
+  @media (max-width: 700px) {
+    .fig-right, .fig-left {
+      float: none;
+      width: 100%;
+      margin: 28px 0;
+    }
+  }
+
+  .book-stage, .book-stage-detail {
+    aspect-ratio: 3 / 4;
+    position: relative;
+  }
+
+  .book-stage {
+    perspective: 1100px;
+    perspective-origin: 52% 42%;
+  }
+
+  .book-stage-detail {
+    perspective: 1500px;
+    perspective-origin: 54% 44%;
+  }
+
+  .book-cover {
+    transform-origin: 0;
+    backface-visibility: hidden;
+    box-shadow: 2px 4px 15px #0000003d;
+  }
+
+  .book-cover-shade, .book-page-shade {
+    opacity: 0;
+  }
+
+  .book-stage .book-cover {
+    will-change: transform;
+    transition: transform .6s cubic-bezier(.2, .62, .24, 1), box-shadow .5s;
+  }
+
+  .book-stage .book-cover-shade {
+    transition: opacity .5s;
+  }
+
+  .book-stage .book-page-shade {
+    transition: opacity .55s;
+  }
+
+  .book-stage:hover .book-cover {
+    transform: rotateY(-40deg);
+    box-shadow: 26px 22px 50px #0006;
+  }
+
+  .book-stage:hover .book-cover-shade, .book-stage:hover .book-page-shade {
+    opacity: 1;
+  }
+
+  .book-stage-detail .book-cover {
+    box-shadow: var(--shadow-pop);
+    animation: 1.1s cubic-bezier(.22, 1, .36, 1) .15s both book-open;
+  }
+
+  .book-stage-detail .book-page-shade {
+    background: linear-gradient(90deg, #00000047, #0000);
+    width: 40%;
+    animation: 1.1s .15s both book-shade-open;
+  }
+
+  @keyframes book-open {
+    from {
+      transform: rotateY(0);
+    }
+
+    to {
+      transform: rotateY(-30deg);
+    }
+  }
+
+  @keyframes book-shade-open {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .book-stage-detail .book-cover, .book-stage-detail .book-page-shade {
+      animation-duration: 1ms;
+    }
+  }
+
+  .prose p {
+    color: var(--color-ink);
+    margin: 22px 0;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .prose p.lead, .prose p.entradilla {
+    font-size: 20px;
+    line-height: 1.55;
+  }
+
+  .prose h2, .prose h3 {
+    scroll-margin-top: 130px;
+  }
+
+  .prose h2 {
+    font-family: var(--font-display);
+    color: var(--color-navy);
+    margin: 50px 0 -6px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .prose h3 {
+    border-bottom: 1px solid var(--color-rule-strong);
+    font-family: var(--font-display);
+    letter-spacing: .9px;
+    text-transform: uppercase;
+    color: var(--color-navy);
+    margin: 42px 0 -6px;
+    padding-bottom: 8px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .prose h4 {
+    border-top: 2px solid var(--color-green);
+    font-family: var(--font-display);
+    color: var(--color-navy);
+    margin: 38px 0 0;
+    padding-top: 12px;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .prose ul, .prose ol {
+    color: var(--color-ink);
+    margin: 22px 0;
+    padding-left: 24px;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .prose ul {
+    list-style: outside;
+  }
+
+  .prose ol {
+    list-style: decimal;
+  }
+
+  .prose li {
+    margin: 8px 0;
+  }
+
+  .prose a {
+    color: var(--color-green-dark);
+    text-decoration: underline;
+  }
+
+  .prose strong {
+    font-weight: 700;
+  }
+
+  .prose em {
+    font-style: italic;
+  }
+
+  .prose figure {
+    margin: 34px 0;
+  }
+
+  .prose figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .prose figcaption {
+    color: var(--color-muted);
+    margin-top: 8px;
+    font-size: 12px;
+  }
+
+  .prose figure.fig-right, .prose figure.figura-derecha, .prose figure.fig-left, .prose figure.figura-izquierda {
+    width: 46%;
+  }
+
+  .prose figure.figura-media {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .prose .galeria {
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 18px;
+    margin: 34px 0;
+    display: grid;
+  }
+
+  .prose .galeria figure {
+    width: 100%;
+    margin: 0;
+  }
+
+  .prose figure.figura-negra {
+    background: var(--color-navy);
+    padding: 46px;
+  }
+
+  .prose figure.fig-right, .prose figure.figura-derecha {
+    float: right;
+    margin: 6px 0 22px 28px;
+  }
+
+  .prose figure.fig-left, .prose figure.figura-izquierda {
+    float: left;
+    margin: 6px 28px 22px 0;
+  }
+
+  @media (max-width: 700px) {
+    .prose figure.fig-right, .prose figure.figura-derecha, .prose figure.fig-left, .prose figure.figura-izquierda {
+      float: none;
+      width: 100%;
+      margin: 28px 0;
+    }
+  }
+
+  .prose blockquote {
+    color: var(--color-green-dark);
+    margin: 40px 0 46px;
+    padding: 0 38px;
+    position: relative;
+  }
+
+  .prose blockquote p {
+    color: inherit;
+    font-size: 22px;
+    line-height: 1.45;
+  }
+
+  .prose blockquote:before, .prose blockquote:after {
+    font-family: var(--font-serif);
+    color: var(--color-green);
+    font-size: 54px;
+    line-height: 1;
+    position: absolute;
+  }
+
+  .prose blockquote:before {
+    content: "“";
+    top: -8px;
+    left: 0;
+  }
+
+  .prose blockquote:after {
+    content: "”";
+    bottom: -30px;
+    right: 0;
+  }
+
+  .prose blockquote cite {
+    color: var(--color-muted);
+    margin-top: 14px;
+    font-size: 12px;
+    font-style: normal;
+    display: block;
+  }
+
+  .prose .cronologia {
+    border-top: 2px solid var(--color-green);
+    margin: 34px 0;
+    padding-top: 6px;
+  }
+
+  .prose .cronologia-ambito {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    margin: 22px 0 0;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .prose .cronologia ul {
+    margin: 10px 0 0;
+    font-size: 16px;
+  }
+
+  .prose .cronologia li {
+    margin: 4px 0;
+  }
+
+  .prose .ficha, .prose .ficha-rae {
+    background: var(--color-panel);
+    border-left: 4px solid var(--color-green);
+    margin: 34px 0;
+    padding: 26px 30px 28px;
+  }
+
+  .prose .ficha .ficha-termino, .prose .ficha-rae .termino {
+    font-family: var(--font-display);
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    color: var(--color-navy);
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .prose .ficha .ficha-termino .ficha-fuente, .prose .ficha-rae .termino .fuente {
+    border-bottom: 1px solid var(--color-rule-strong);
+    letter-spacing: 1.4px;
+    color: var(--color-ink-soft);
+    margin-top: 14px;
+    padding-bottom: 9px;
+    font-size: 12px;
+    display: block;
+  }
+
+  .prose .ficha ol, .prose .ficha-rae ol {
+    margin: 14px 0 0;
+    padding-left: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .prose .ficha li, .prose .ficha-rae li {
+    margin: 8px 0;
+  }
+
+  .prose .ficha li::marker {
+    color: var(--color-green-dark);
+    font-weight: 600;
+  }
+
+  .prose .ficha-rae li::marker {
+    color: var(--color-green-dark);
+    font-weight: 600;
+  }
+
+  .prose .nota {
+    background: var(--color-panel);
+    margin: 34px 0;
+    padding: 24px 28px;
+    font-size: 16px;
+  }
+
+  .prose .nota > :first-child {
+    margin-top: 0;
+  }
+
+  .prose .nota > :last-child {
+    margin-bottom: 0;
+  }
+
+  .prose .nota p {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .prose .cifra {
+    border-bottom: 1px solid var(--color-rule);
+    font-family: var(--font-display);
+    color: var(--color-navy);
+    margin: 0;
+    padding: 10px 0;
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  .prose .cifra + .cifra {
+    padding-top: 10px;
+  }
+
+  .prose p:not(.cifra) + .cifra {
+    border-top: 3px solid var(--color-green);
+    margin-top: 30px;
+  }
+
+  .prose .cifra:last-child {
+    margin-bottom: 30px;
+  }
+
+  .prose table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 32px 0;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .prose p:has( + table) {
+    margin-top: 44px;
+    margin-bottom: 0;
+  }
+
+  .prose p:has( + table) + table {
+    margin-top: 16px;
+  }
+
+  .prose thead {
+    background: var(--color-navy);
+  }
+
+  .prose th {
+    color: #fff;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 12px 14px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .prose tbody tr {
+    border-bottom: 1px solid var(--color-rule-strong);
+  }
+
+  .prose td {
+    color: var(--color-ink);
+    vertical-align: top;
+    padding: 12px 14px;
+  }
+
+  .prose td:first-child {
+    width: 34%;
+    color: var(--color-navy);
+    font-weight: 600;
+  }
+
+  @media (max-width: 700px) {
+    .prose td:first-child {
+      width: auto;
+    }
+  }
+
+  .prose .remisiones {
+    gap: 16px;
+    margin: 30px 0;
+    display: grid;
+  }
+
+  .prose .remision {
+    border: 1px solid var(--color-rule-strong);
+    background: #fff;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 16px 18px;
+    display: flex;
+  }
+
+  .prose .remision img {
+    background: var(--color-panel);
+    flex-shrink: 0;
+    width: 86px;
+    height: auto;
+    display: block;
+  }
+
+  .prose .remision > div {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .prose .remision p {
+    margin: 0;
+  }
+
+  .prose .remision .volumen, .prose .remision .remision-volumen {
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-green-dark);
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .prose .remision .titulo, .prose .remision .remision-titulo {
+    font-family: var(--font-display);
+    color: var(--color-navy);
+    margin-top: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .prose .remision .subtitulo, .prose .remision .remision-subtitulo {
+    color: var(--color-muted);
+    margin-top: 3px;
+    font-size: 12.5px;
+  }
+
+  .prose .remision p:last-child {
+    color: var(--color-ink);
+    margin-top: 9px;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .hl-track {
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .hl-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hl-cover {
+    transition: box-shadow .28s, transform .28s;
+    box-shadow: 0 1px 3px #0000000f;
+  }
+
+  .hl-card:not(:disabled):hover .hl-cover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 38px #00000029;
+  }
+
+  .hl-card:not(:disabled):hover .hl-play {
+    transform: scale(1.09);
+  }
+
+  .sidebar-rail {
+    flex-shrink: 0;
+    width: 64px;
+    position: relative;
+  }
+
+  .sidebar-panel {
+    border-right: 1px solid var(--color-rule);
+    background: #fff;
+    flex-direction: column;
+    width: 64px;
+    transition: width .62s cubic-bezier(.22, 1, .36, 1), box-shadow .62s;
+    display: flex;
+    position: fixed;
+    top: 113px;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+  }
+
+  .sidebar-rail:hover .sidebar-panel, .sidebar-rail[data-open="true"] .sidebar-panel {
+    z-index: 15;
+    width: 308px;
+    box-shadow: 16px 0 44px #00000017;
+  }
+
+  .sidebar-panel > * {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    width: 308px;
+  }
+
+  .sidebar-panel > .sidebar-scroll {
+    flex: auto;
+    padding-top: 10px;
+    overflow: hidden;
+  }
+
+  .sidebar-rail:hover .sidebar-scroll, .sidebar-rail[data-open="true"] .sidebar-scroll {
+    overflow-y: auto;
+  }
+
+  .sidebar-fade {
+    opacity: 0;
+    transition: opacity .2s, transform .2s;
+    transform: translateX(-6px);
+  }
+
+  .sidebar-rail:hover .sidebar-fade, .sidebar-rail[data-open="true"] .sidebar-fade {
+    opacity: 1;
+    transition: opacity .5s .36s, transform .6s cubic-bezier(.22, 1, .36, 1) .34s;
+    transform: none;
+  }
+
+  .sidebar-sec-row {
+    transition: padding .62s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .sidebar-rail:not(:hover):not([data-open="true"]) .sidebar-sec-row {
+    padding: 3px 0 3px 8px !important;
+  }
+
+  .sidebar-sec-title {
+    white-space: normal;
+    max-height: 200px;
+    transition: max-height .62s cubic-bezier(.22, 1, .36, 1), color .3s;
+    overflow: hidden;
+  }
+
+  .sidebar-rail:not(:hover):not([data-open="true"]) .sidebar-sec-title {
+    max-height: 0;
+  }
+
+  .sidebar-sec-row:hover .sidebar-dash {
+    background: var(--color-navy);
+  }
+
+  .sidebar-sec-row:hover .sidebar-sec-title {
+    color: var(--color-navy);
+  }
+
+  .entry-row {
+    border-radius: 9px;
+    transition: background .22s;
+  }
+
+  .entry-row:not([data-active="true"]):hover {
+    background: var(--color-soft);
+  }
+
+  .entry-row[data-active="true"]:hover {
+    background: var(--color-rule-strong);
+  }
+
+  .sub-row {
+    border-radius: 7px;
+    transition: background .18s, color .18s;
+  }
+
+  .sub-row:hover {
+    background: var(--color-soft);
+    color: var(--color-navy);
+  }
+
+  .acc {
+    opacity: 0;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .36s cubic-bezier(.22, 1, .36, 1), opacity .26s;
+    display: grid;
+  }
+
+  .acc[data-open="true"] {
+    opacity: 1;
+    grid-template-rows: 1fr;
+  }
+
+  .acc > * {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .sidebar-rail:not(:hover):not([data-open="true"]) .acc {
+    opacity: 0 !important;
+    grid-template-rows: 0fr !important;
+  }
+
+  .sidebar-rail:hover .acc[data-open="true"], .sidebar-rail[data-open="true"] .acc[data-open="true"] {
+    transition: grid-template-rows .62s cubic-bezier(.22, 1, .36, 1) .14s, opacity .48s .32s;
+  }
+}
+
+@layer utilities {
+  .pointer-events-none {
+    pointer-events: none;
+  }
+
+  .invisible {
+    visibility: hidden;
+  }
+
+  .visible {
+    visibility: visible;
+  }
+
+  .absolute {
+    position: absolute;
+  }
+
+  .fixed {
+    position: fixed;
+  }
+
+  .relative {
+    position: relative;
+  }
+
+  .sticky {
+    position: sticky;
+  }
+
+  .inset-0 {
+    inset: 0;
+  }
+
+  .top-0 {
+    top: 0;
+  }
+
+  .top-16 {
+    top: calc(var(--spacing) * 16);
+  }
+
+  .top-\[calc\(\(100\%-56px\)\/2\)\] {
+    top: calc(50% - 28px);
+  }
+
+  .right-0 {
+    right: 0;
+  }
+
+  .right-\[-62px\] {
+    right: -62px;
+  }
+
+  .bottom-0 {
+    bottom: 0;
+  }
+
+  .left-0 {
+    left: 0;
+  }
+
+  .left-\[-62px\] {
+    left: -62px;
+  }
+
+  .z-5 {
+    z-index: 5;
+  }
+
+  .z-10 {
+    z-index: 10;
+  }
+
+  .z-20 {
+    z-index: 20;
+  }
+
+  .z-30 {
+    z-index: 30;
+  }
+
+  .z-50 {
+    z-index: 50;
+  }
+
+  .clear-both {
+    clear: both;
+  }
+
+  .m-auto {
+    margin: auto;
+  }
+
+  .mx-auto {
+    margin-inline: auto;
+  }
+
+  .-my-1 {
+    margin-block: calc(var(--spacing) * -1);
+  }
+
+  .my-2 {
+    margin-block: calc(var(--spacing) * 2);
+  }
+
+  .my-5 {
+    margin-block: calc(var(--spacing) * 5);
+  }
+
+  .my-8 {
+    margin-block: calc(var(--spacing) * 8);
+  }
+
+  .my-10 {
+    margin-block: calc(var(--spacing) * 10);
+  }
+
+  .my-\[22px\] {
+    margin-block: 22px;
+  }
+
+  .my-\[30px\] {
+    margin-block: 30px;
+  }
+
+  .my-\[34px\] {
+    margin-block: 34px;
+  }
+
+  .my-px {
+    margin-block: 1px;
+  }
+
+  .mt-0\.5 {
+    margin-top: calc(var(--spacing) * .5);
+  }
+
+  .mt-1 {
+    margin-top: var(--spacing);
+  }
+
+  .mt-1\.5 {
+    margin-top: calc(var(--spacing) * 1.5);
+  }
+
+  .mt-2 {
+    margin-top: calc(var(--spacing) * 2);
+  }
+
+  .mt-2\.5 {
+    margin-top: calc(var(--spacing) * 2.5);
+  }
+
+  .mt-3 {
+    margin-top: calc(var(--spacing) * 3);
+  }
+
+  .mt-3\.5 {
+    margin-top: calc(var(--spacing) * 3.5);
+  }
+
+  .mt-4 {
+    margin-top: calc(var(--spacing) * 4);
+  }
+
+  .mt-5 {
+    margin-top: calc(var(--spacing) * 5);
+  }
+
+  .mt-6 {
+    margin-top: calc(var(--spacing) * 6);
+  }
+
+  .mt-7 {
+    margin-top: calc(var(--spacing) * 7);
+  }
+
+  .mt-7\.5 {
+    margin-top: calc(var(--spacing) * 7.5);
+  }
+
+  .mt-8 {
+    margin-top: calc(var(--spacing) * 8);
+  }
+
+  .mt-10 {
+    margin-top: calc(var(--spacing) * 10);
+  }
+
+  .mt-12 {
+    margin-top: calc(var(--spacing) * 12);
+  }
+
+  .mt-\[13px\] {
+    margin-top: 13px;
+  }
+
+  .mt-\[26px\] {
+    margin-top: 26px;
+  }
+
+  .mt-\[42px\] {
+    margin-top: 42px;
+  }
+
+  .mt-\[50px\] {
+    margin-top: 50px;
+  }
+
+  .mt-auto {
+    margin-top: auto;
+  }
+
+  .-mb-1\.5 {
+    margin-bottom: calc(var(--spacing) * -1.5);
+  }
+
+  .mb-1 {
+    margin-bottom: var(--spacing);
+  }
+
+  .mb-2 {
+    margin-bottom: calc(var(--spacing) * 2);
+  }
+
+  .mb-2\.5 {
+    margin-bottom: calc(var(--spacing) * 2.5);
+  }
+
+  .mb-3 {
+    margin-bottom: calc(var(--spacing) * 3);
+  }
+
+  .mb-3\.5 {
+    margin-bottom: calc(var(--spacing) * 3.5);
+  }
+
+  .mb-4 {
+    margin-bottom: calc(var(--spacing) * 4);
+  }
+
+  .mb-5 {
+    margin-bottom: calc(var(--spacing) * 5);
+  }
+
+  .mb-6 {
+    margin-bottom: calc(var(--spacing) * 6);
+  }
+
+  .mb-\[18px\] {
+    margin-bottom: 18px;
+  }
+
+  .mb-\[46px\] {
+    margin-bottom: 46px;
+  }
+
+  .ml-3 {
+    margin-left: calc(var(--spacing) * 3);
+  }
+
+  .ml-auto {
+    margin-left: auto;
+  }
+
+  .line-clamp-2 {
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+  }
+
+  .block {
+    display: block;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .grid {
+    display: grid;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .inline {
+    display: inline;
+  }
+
+  .inline-block {
+    display: inline-block;
+  }
+
+  .inline-flex {
+    display: inline-flex;
+  }
+
+  .list-item {
+    display: list-item;
+  }
+
+  .table {
+    display: table;
+  }
+
+  .aspect-\[4\/3\] {
+    aspect-ratio: 4 / 3;
+  }
+
+  .aspect-video {
+    aspect-ratio: var(--aspect-video);
+  }
+
+  .h-0\.5 {
+    height: calc(var(--spacing) * .5);
+  }
+
+  .h-2 {
+    height: calc(var(--spacing) * 2);
+  }
+
+  .h-6 {
+    height: calc(var(--spacing) * 6);
+  }
+
+  .h-7 {
+    height: calc(var(--spacing) * 7);
+  }
+
+  .h-9 {
+    height: calc(var(--spacing) * 9);
+  }
+
+  .h-10 {
+    height: calc(var(--spacing) * 10);
+  }
+
+  .h-15 {
+    height: calc(var(--spacing) * 15);
+  }
+
+  .h-16 {
+    height: calc(var(--spacing) * 16);
+  }
+
+  .h-\[3px\] {
+    height: 3px;
+  }
+
+  .h-\[46px\] {
+    height: 46px;
+  }
+
+  .h-auto {
+    height: auto;
+  }
+
+  .h-full {
+    height: 100%;
+  }
+
+  .h-px {
+    height: 1px;
+  }
+
+  .min-h-8 {
+    min-height: calc(var(--spacing) * 8);
+  }
+
+  .min-h-full {
+    min-height: 100%;
+  }
+
+  .w-1 {
+    width: var(--spacing);
+  }
+
+  .w-2 {
+    width: calc(var(--spacing) * 2);
+  }
+
+  .w-6 {
+    width: calc(var(--spacing) * 6);
+  }
+
+  .w-7 {
+    width: calc(var(--spacing) * 7);
+  }
+
+  .w-10 {
+    width: calc(var(--spacing) * 10);
+  }
+
+  .w-15 {
+    width: calc(var(--spacing) * 15);
+  }
+
+  .w-16 {
+    width: calc(var(--spacing) * 16);
+  }
+
+  .w-\[34\%\] {
+    width: 34%;
+  }
+
+  .w-\[46px\] {
+    width: 46px;
+  }
+
+  .w-\[52\%\] {
+    width: 52%;
+  }
+
+  .w-\[86px\] {
+    width: 86px;
+  }
+
+  .w-auto {
+    width: auto;
+  }
+
+  .w-full {
+    width: 100%;
+  }
+
+  .max-w-\[220px\] {
+    max-width: 220px;
+  }
+
+  .max-w-\[440px\] {
+    max-width: 440px;
+  }
+
+  .max-w-\[480px\] {
+    max-width: 480px;
+  }
+
+  .max-w-\[560px\] {
+    max-width: 560px;
+  }
+
+  .max-w-\[620px\] {
+    max-width: 620px;
+  }
+
+  .max-w-\[640px\] {
+    max-width: 640px;
+  }
+
+  .max-w-\[760px\] {
+    max-width: 760px;
+  }
+
+  .max-w-\[880px\] {
+    max-width: 880px;
+  }
+
+  .max-w-\[1000px\] {
+    max-width: 1000px;
+  }
+
+  .max-w-\[1400px\] {
+    max-width: 1400px;
+  }
+
+  .min-w-0 {
+    min-width: 0;
+  }
+
+  .min-w-\[26px\] {
+    min-width: 26px;
+  }
+
+  .flex-1 {
+    flex: 1;
+  }
+
+  .shrink-0 {
+    flex-shrink: 0;
+  }
+
+  .basis-\[calc\(50\%-12px\)\] {
+    flex-basis: calc(50% - 12px);
+  }
+
+  .-translate-y-1\/2 {
+    --tw-translate-y: calc(calc(1 / 2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+
+  .scale-\[1\.9\] {
+    scale: 1.9;
+  }
+
+  .transform {
+    transform: var(--tw-rotate-x, ) var(--tw-rotate-y, ) var(--tw-rotate-z, ) var(--tw-skew-x, ) var(--tw-skew-y, );
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  .snap-start {
+    scroll-snap-align: start;
+  }
+
+  .scroll-mt-32 {
+    scroll-margin-top: calc(var(--spacing) * 32);
+  }
+
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .grid-cols-\[34\%_1fr\] {
+    grid-template-columns: 34% 1fr;
+  }
+
+  .grid-cols-\[repeat\(auto-fill\,minmax\(210px\,1fr\)\)\] {
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  }
+
+  .grid-cols-\[repeat\(auto-fill\,minmax\(240px\,1fr\)\)\] {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+
+  .flex-col {
+    flex-direction: column;
+  }
+
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+
+  .items-baseline {
+    align-items: baseline;
+  }
+
+  .items-center {
+    align-items: center;
+  }
+
+  .items-start {
+    align-items: flex-start;
+  }
+
+  .items-stretch {
+    align-items: stretch;
+  }
+
+  .justify-between {
+    justify-content: space-between;
+  }
+
+  .justify-center {
+    justify-content: center;
+  }
+
+  .justify-end {
+    justify-content: flex-end;
+  }
+
+  .gap-1\.5 {
+    gap: calc(var(--spacing) * 1.5);
+  }
+
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
+  }
+
+  .gap-2\.5 {
+    gap: calc(var(--spacing) * 2.5);
+  }
+
+  .gap-3 {
+    gap: calc(var(--spacing) * 3);
+  }
+
+  .gap-3\.5 {
+    gap: calc(var(--spacing) * 3.5);
+  }
+
+  .gap-4 {
+    gap: calc(var(--spacing) * 4);
+  }
+
+  .gap-5 {
+    gap: calc(var(--spacing) * 5);
+  }
+
+  .gap-6 {
+    gap: calc(var(--spacing) * 6);
+  }
+
+  .gap-\[18px\] {
+    gap: 18px;
+  }
+
+  .gap-\[50px\] {
+    gap: 50px;
+  }
+
+  .gap-x-\[26px\] {
+    column-gap: 26px;
+  }
+
+  .gap-y-\[34px\] {
+    row-gap: 34px;
+  }
+
+  .self-stretch {
+    align-self: stretch;
+  }
+
+  .truncate {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .overflow-hidden {
+    overflow: hidden;
+  }
+
+  .overflow-x-auto {
+    overflow-x: auto;
+  }
+
+  .rounded-full {
+    border-radius: 3.40282e38px;
+  }
+
+  .rounded-lg {
+    border-radius: var(--radius-lg);
+  }
+
+  .rounded-md {
+    border-radius: var(--radius-md);
+  }
+
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
+
+  .border-2 {
+    border-style: var(--tw-border-style);
+    border-width: 2px;
+  }
+
+  .border-y {
+    border-block-style: var(--tw-border-style);
+    border-block-width: 1px;
+  }
+
+  .border-t {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+  }
+
+  .border-b {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+  }
+
+  .border-l {
+    border-left-style: var(--tw-border-style);
+    border-left-width: 1px;
+  }
+
+  .border-l-4 {
+    border-left-style: var(--tw-border-style);
+    border-left-width: 4px;
+  }
+
+  .border-green {
+    border-color: var(--color-green);
+  }
+
+  .border-navy {
+    border-color: var(--color-navy);
+  }
+
+  .border-rule {
+    border-color: var(--color-rule);
+  }
+
+  .border-rule-strong {
+    border-color: var(--color-rule-strong);
+  }
+
+  .bg-\[\#1c1c1c\] {
+    background-color: #1c1c1c;
+  }
+
+  .bg-\[\#fbfaf6\] {
+    background-color: #fbfaf6;
+  }
+
+  .bg-\[rgba\(20\,26\,34\,\.34\)\] {
+    background-color: #141a2257;
+  }
+
+  .bg-black\/40 {
+    background-color: #0006;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-black\/40 {
+      background-color: color-mix(in oklab, var(--color-black) 40%, transparent);
+    }
+  }
+
+  .bg-black\/78 {
+    background-color: #000000c7;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-black\/78 {
+      background-color: color-mix(in oklab, var(--color-black) 78%, transparent);
+    }
+  }
+
+  .bg-green {
+    background-color: var(--color-green);
+  }
+
+  .bg-navy {
+    background-color: var(--color-navy);
+  }
+
+  .bg-navy\/4 {
+    background-color: #0000000a;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-navy\/4 {
+      background-color: color-mix(in oklab, var(--color-navy) 4%, transparent);
+    }
+  }
+
+  .bg-navy\/7 {
+    background-color: #00000012;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-navy\/7 {
+      background-color: color-mix(in oklab, var(--color-navy) 7%, transparent);
+    }
+  }
+
+  .bg-panel {
+    background-color: var(--color-panel);
+  }
+
+  .bg-rule {
+    background-color: var(--color-rule);
+  }
+
+  .bg-rule-strong {
+    background-color: var(--color-rule-strong);
+  }
+
+  .bg-soft {
+    background-color: var(--color-soft);
+  }
+
+  .bg-white {
+    background-color: var(--color-white);
+  }
+
+  .bg-white\/94 {
+    background-color: #fffffff0;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-white\/94 {
+      background-color: color-mix(in oklab, var(--color-white) 94%, transparent);
+    }
+  }
+
+  .bg-white\/95 {
+    background-color: #fffffff2;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-white\/95 {
+      background-color: color-mix(in oklab, var(--color-white) 95%, transparent);
+    }
+  }
+
+  .bg-\[linear-gradient\(90deg\,rgba\(0\,0\,0\,\.22\)\,transparent\)\] {
+    background-image: linear-gradient(90deg, #00000038, #0000);
+  }
+
+  .bg-\[linear-gradient\(90deg\,rgba\(0\,0\,0\,\.34\)\,rgba\(0\,0\,0\,\.08\)_52\%\,transparent\)\] {
+    background-image: linear-gradient(90deg, #00000057, #00000014 52%, #0000);
+  }
+
+  .bg-\[repeating-linear-gradient\(90deg\,\#e8e6de\,\#e8e6de_1px\,\#f7f6f2_1px\,\#f7f6f2_2px\)\] {
+    background-image: repeating-linear-gradient(90deg, #e8e6de, #e8e6de 1px, #f7f6f2 1px 2px);
+  }
+
+  .fill-navy {
+    fill: var(--color-navy);
+  }
+
+  .fill-rule {
+    fill: var(--color-rule);
+  }
+
+  .object-cover {
+    object-fit: cover;
+  }
+
+  .object-top {
+    object-position: top;
+  }
+
+  .p-6 {
+    padding: calc(var(--spacing) * 6);
+  }
+
+  .p-8 {
+    padding: calc(var(--spacing) * 8);
+  }
+
+  .px-1 {
+    padding-inline: var(--spacing);
+  }
+
+  .px-2 {
+    padding-inline: calc(var(--spacing) * 2);
+  }
+
+  .px-2\.5 {
+    padding-inline: calc(var(--spacing) * 2.5);
+  }
+
+  .px-3 {
+    padding-inline: calc(var(--spacing) * 3);
+  }
+
+  .px-3\.5 {
+    padding-inline: calc(var(--spacing) * 3.5);
+  }
+
+  .px-4 {
+    padding-inline: calc(var(--spacing) * 4);
+  }
+
+  .px-4\.5 {
+    padding-inline: calc(var(--spacing) * 4.5);
+  }
+
+  .px-5 {
+    padding-inline: calc(var(--spacing) * 5);
+  }
+
+  .px-6 {
+    padding-inline: calc(var(--spacing) * 6);
+  }
+
+  .px-8 {
+    padding-inline: calc(var(--spacing) * 8);
+  }
+
+  .px-10 {
+    padding-inline: calc(var(--spacing) * 10);
+  }
+
+  .px-\[18px\] {
+    padding-inline: 18px;
+  }
+
+  .px-\[30px\] {
+    padding-inline: 30px;
+  }
+
+  .py-0\.5 {
+    padding-block: calc(var(--spacing) * .5);
+  }
+
+  .py-1 {
+    padding-block: var(--spacing);
+  }
+
+  .py-1\.5 {
+    padding-block: calc(var(--spacing) * 1.5);
+  }
+
+  .py-2 {
+    padding-block: calc(var(--spacing) * 2);
+  }
+
+  .py-2\.5 {
+    padding-block: calc(var(--spacing) * 2.5);
+  }
+
+  .py-3 {
+    padding-block: calc(var(--spacing) * 3);
+  }
+
+  .py-3\.5 {
+    padding-block: calc(var(--spacing) * 3.5);
+  }
+
+  .py-4 {
+    padding-block: calc(var(--spacing) * 4);
+  }
+
+  .py-5 {
+    padding-block: calc(var(--spacing) * 5);
+  }
+
+  .py-6 {
+    padding-block: calc(var(--spacing) * 6);
+  }
+
+  .py-7 {
+    padding-block: calc(var(--spacing) * 7);
+  }
+
+  .py-24 {
+    padding-block: calc(var(--spacing) * 24);
+  }
+
+  .py-\[7px\] {
+    padding-block: 7px;
+  }
+
+  .py-\[9px\] {
+    padding-block: 9px;
+  }
+
+  .py-\[18px\] {
+    padding-block: 18px;
+  }
+
+  .pt-1\.5 {
+    padding-top: calc(var(--spacing) * 1.5);
+  }
+
+  .pt-3 {
+    padding-top: calc(var(--spacing) * 3);
+  }
+
+  .pt-3\.5 {
+    padding-top: calc(var(--spacing) * 3.5);
+  }
+
+  .pt-4 {
+    padding-top: calc(var(--spacing) * 4);
+  }
+
+  .pt-5\.5 {
+    padding-top: calc(var(--spacing) * 5.5);
+  }
+
+  .pt-6\.5 {
+    padding-top: calc(var(--spacing) * 6.5);
+  }
+
+  .pt-8 {
+    padding-top: calc(var(--spacing) * 8);
+  }
+
+  .pt-10 {
+    padding-top: calc(var(--spacing) * 10);
+  }
+
+  .pt-13 {
+    padding-top: calc(var(--spacing) * 13);
+  }
+
+  .pt-14 {
+    padding-top: calc(var(--spacing) * 14);
+  }
+
+  .pt-16 {
+    padding-top: calc(var(--spacing) * 16);
+  }
+
+  .pt-\[13px\] {
+    padding-top: 13px;
+  }
+
+  .pt-\[15px\] {
+    padding-top: 15px;
+  }
+
+  .pt-\[22px\] {
+    padding-top: 22px;
+  }
+
+  .pt-\[26px\] {
+    padding-top: 26px;
+  }
+
+  .pt-\[30px\] {
+    padding-top: 30px;
+  }
+
+  .pt-\[34px\] {
+    padding-top: 34px;
+  }
+
+  .pr-1 {
+    padding-right: var(--spacing);
+  }
+
+  .pr-3 {
+    padding-right: calc(var(--spacing) * 3);
+  }
+
+  .pr-5 {
+    padding-right: calc(var(--spacing) * 5);
+  }
+
+  .pr-8 {
+    padding-right: calc(var(--spacing) * 8);
+  }
+
+  .pb-1 {
+    padding-bottom: var(--spacing);
+  }
+
+  .pb-2 {
+    padding-bottom: calc(var(--spacing) * 2);
+  }
+
+  .pb-3 {
+    padding-bottom: calc(var(--spacing) * 3);
+  }
+
+  .pb-3\.5 {
+    padding-bottom: calc(var(--spacing) * 3.5);
+  }
+
+  .pb-4 {
+    padding-bottom: calc(var(--spacing) * 4);
+  }
+
+  .pb-5 {
+    padding-bottom: calc(var(--spacing) * 5);
+  }
+
+  .pb-6 {
+    padding-bottom: calc(var(--spacing) * 6);
+  }
+
+  .pb-6\.5 {
+    padding-bottom: calc(var(--spacing) * 6.5);
+  }
+
+  .pb-7 {
+    padding-bottom: calc(var(--spacing) * 7);
+  }
+
+  .pb-10 {
+    padding-bottom: calc(var(--spacing) * 10);
+  }
+
+  .pb-20 {
+    padding-bottom: calc(var(--spacing) * 20);
+  }
+
+  .pb-24 {
+    padding-bottom: calc(var(--spacing) * 24);
+  }
+
+  .pb-\[5px\] {
+    padding-bottom: 5px;
+  }
+
+  .pb-\[11px\] {
+    padding-bottom: 11px;
+  }
+
+  .pb-\[13px\] {
+    padding-bottom: 13px;
+  }
+
+  .pb-\[30px\] {
+    padding-bottom: 30px;
+  }
+
+  .pl-3 {
+    padding-left: calc(var(--spacing) * 3);
+  }
+
+  .pl-4 {
+    padding-left: calc(var(--spacing) * 4);
+  }
+
+  .pl-5 {
+    padding-left: calc(var(--spacing) * 5);
+  }
+
+  .pl-6 {
+    padding-left: calc(var(--spacing) * 6);
+  }
+
+  .pl-10 {
+    padding-left: calc(var(--spacing) * 10);
+  }
+
+  .pl-\[26px\] {
+    padding-left: 26px;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .text-left {
+    text-align: left;
+  }
+
+  .text-right {
+    text-align: right;
+  }
+
+  .indent-\[\.5px\] {
+    text-indent: .5px;
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+
+  .text-\[8px\] {
+    font-size: 8px;
+  }
+
+  .text-\[9px\] {
+    font-size: 9px;
+  }
+
+  .text-\[10\.5px\] {
+    font-size: 10.5px;
+  }
+
+  .text-\[10px\] {
+    font-size: 10px;
+  }
+
+  .text-\[11px\] {
+    font-size: 11px;
+  }
+
+  .text-\[12\.5px\] {
+    font-size: 12.5px;
+  }
+
+  .text-\[12px\] {
+    font-size: 12px;
+  }
+
+  .text-\[13\.5px\] {
+    font-size: 13.5px;
+  }
+
+  .text-\[13px\] {
+    font-size: 13px;
+  }
+
+  .text-\[14px\] {
+    font-size: 14px;
+  }
+
+  .text-\[15\.5px\] {
+    font-size: 15.5px;
+  }
+
+  .text-\[15px\] {
+    font-size: 15px;
+  }
+
+  .text-\[16px\] {
+    font-size: 16px;
+  }
+
+  .text-\[17px\] {
+    font-size: 17px;
+  }
+
+  .text-\[18px\] {
+    font-size: 18px;
+  }
+
+  .text-\[20px\] {
+    font-size: 20px;
+  }
+
+  .text-\[22px\] {
+    font-size: 22px;
+  }
+
+  .text-\[24px\] {
+    font-size: 24px;
+  }
+
+  .text-\[32px\] {
+    font-size: 32px;
+  }
+
+  .text-\[38px\] {
+    font-size: 38px;
+  }
+
+  .text-\[44px\] {
+    font-size: 44px;
+  }
+
+  .text-body {
+    font-size: var(--text-body);
+  }
+
+  .text-eyebrow {
+    font-size: var(--text-eyebrow);
+  }
+
+  .text-h2 {
+    font-size: var(--text-h2);
+  }
+
+  .text-h3 {
+    font-size: var(--text-h3);
+  }
+
+  .text-label {
+    font-size: var(--text-label);
+  }
+
+  .text-lead {
+    font-size: var(--text-lead);
+  }
+
+  .text-meta {
+    font-size: var(--text-meta);
+  }
+
+  .leading-\[1\.1\] {
+    --tw-leading: 1.1;
+    line-height: 1.1;
+  }
+
+  .leading-\[1\.5\] {
+    --tw-leading: 1.5;
+    line-height: 1.5;
+  }
+
+  .leading-\[1\.6\] {
+    --tw-leading: 1.6;
+    line-height: 1.6;
+  }
+
+  .leading-\[1\.08\] {
+    --tw-leading: 1.08;
+    line-height: 1.08;
+  }
+
+  .leading-\[1\.15\] {
+    --tw-leading: 1.15;
+    line-height: 1.15;
+  }
+
+  .leading-\[1\.55\] {
+    --tw-leading: 1.55;
+    line-height: 1.55;
+  }
+
+  .leading-none {
+    --tw-leading: 1;
+    line-height: 1;
+  }
+
+  .leading-normal {
+    --tw-leading: var(--leading-normal);
+    line-height: var(--leading-normal);
+  }
+
+  .leading-relaxed {
+    --tw-leading: var(--leading-relaxed);
+    line-height: var(--leading-relaxed);
+  }
+
+  .leading-snug {
+    --tw-leading: var(--leading-snug);
+    line-height: var(--leading-snug);
+  }
+
+  .leading-tight {
+    --tw-leading: var(--leading-tight);
+    line-height: var(--leading-tight);
+  }
+
+  .font-bold {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .font-medium {
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .font-semibold {
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .tracking-\[\.3px\] {
+    --tw-tracking: .3px;
+    letter-spacing: .3px;
+  }
+
+  .tracking-\[\.5px\] {
+    --tw-tracking: .5px;
+    letter-spacing: .5px;
+  }
+
+  .tracking-\[\.6px\] {
+    --tw-tracking: .6px;
+    letter-spacing: .6px;
+  }
+
+  .tracking-\[0\.9px\] {
+    --tw-tracking: .9px;
+    letter-spacing: .9px;
+  }
+
+  .tracking-\[1\.1px\] {
+    --tw-tracking: 1.1px;
+    letter-spacing: 1.1px;
+  }
+
+  .tracking-\[1\.4px\] {
+    --tw-tracking: 1.4px;
+    letter-spacing: 1.4px;
+  }
+
+  .tracking-\[1\.5px\] {
+    --tw-tracking: 1.5px;
+    letter-spacing: 1.5px;
+  }
+
+  .tracking-\[1\.6px\] {
+    --tw-tracking: 1.6px;
+    letter-spacing: 1.6px;
+  }
+
+  .tracking-\[1px\] {
+    --tw-tracking: 1px;
+    letter-spacing: 1px;
+  }
+
+  .tracking-wide {
+    --tw-tracking: var(--tracking-wide);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  .text-\[\#b3261e\] {
+    color: #b3261e;
+  }
+
+  .text-\[\#c0392b\] {
+    color: #c0392b;
+  }
+
+  .text-green-dark {
+    color: var(--color-green-dark);
+  }
+
+  .text-ink {
+    color: var(--color-ink);
+  }
+
+  .text-ink-soft {
+    color: var(--color-ink-soft);
+  }
+
+  .text-muted {
+    color: var(--color-muted);
+  }
+
+  .text-navy {
+    color: var(--color-navy);
+  }
+
+  .text-white {
+    color: var(--color-white);
+  }
+
+  .text-white\/60 {
+    color: #fff9;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .text-white\/60 {
+      color: color-mix(in oklab, var(--color-white) 60%, transparent);
+    }
+  }
+
+  .text-white\/70 {
+    color: #ffffffb3;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .text-white\/70 {
+      color: color-mix(in oklab, var(--color-white) 70%, transparent);
+    }
+  }
+
+  .uppercase {
+    text-transform: uppercase;
+  }
+
+  .italic {
+    font-style: italic;
+  }
+
+  .tabular-nums {
+    --tw-numeric-spacing: tabular-nums;
+    font-variant-numeric: var(--tw-ordinal, ) var(--tw-slashed-zero, ) var(--tw-numeric-figure, ) var(--tw-numeric-spacing, ) var(--tw-numeric-fraction, );
+  }
+
+  .underline {
+    text-decoration-line: underline;
+  }
+
+  .antialiased {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .opacity-0 {
+    opacity: 0;
+  }
+
+  .opacity-45 {
+    opacity: .45;
+  }
+
+  .shadow-\[0_4px_14px_rgba\(0\,0\,0\,\.22\)\] {
+    --tw-shadow: 0 4px 14px var(--tw-shadow-color, #00000038);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+
+  .shadow-\[0_6px_20px_rgba\(0\,0\,0\,\.28\)\] {
+    --tw-shadow: 0 6px 20px var(--tw-shadow-color, #00000047);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+
+  .shadow-\[0_6px_22px_rgba\(0\,0\,0\,\.14\)\] {
+    --tw-shadow: 0 6px 22px var(--tw-shadow-color, #00000024);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+
+  .shadow-\[inset_-14px_0_22px_-10px_rgba\(0\,0\,0\,\.14\)\] {
+    --tw-shadow: inset -14px 0 22px -10px var(--tw-shadow-color, #00000024);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+
+  .shadow-pop {
+    --tw-shadow: 0 18px 44px var(--tw-shadow-color, #00000024);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+
+  .filter {
+    filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, );
+  }
+
+  .backdrop-blur-\[1px\] {
+    --tw-backdrop-blur: blur(1px);
+    -webkit-backdrop-filter: var(--tw-backdrop-blur, ) var(--tw-backdrop-brightness, ) var(--tw-backdrop-contrast, ) var(--tw-backdrop-grayscale, ) var(--tw-backdrop-hue-rotate, ) var(--tw-backdrop-invert, ) var(--tw-backdrop-opacity, ) var(--tw-backdrop-saturate, ) var(--tw-backdrop-sepia, );
+    backdrop-filter: var(--tw-backdrop-blur, ) var(--tw-backdrop-brightness, ) var(--tw-backdrop-contrast, ) var(--tw-backdrop-grayscale, ) var(--tw-backdrop-hue-rotate, ) var(--tw-backdrop-invert, ) var(--tw-backdrop-opacity, ) var(--tw-backdrop-saturate, ) var(--tw-backdrop-sepia, );
+  }
+
+  .transition-\[transform\,color\] {
+    transition-property: transform, color;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+
+  .transition-\[width\] {
+    transition-property: width;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+
+  .transition-all {
+    transition-property: all;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+
+  .transition-colors {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+
+  .transition-opacity {
+    transition-property: opacity;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+
+  .transition-transform {
+    transition-property: transform, translate, scale, rotate;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+
+  .duration-200 {
+    --tw-duration: .2s;
+    transition-duration: .2s;
+  }
+
+  .duration-300 {
+    --tw-duration: .3s;
+    transition-duration: .3s;
+  }
+
+  .duration-\[250ms\] {
+    --tw-duration: .25s;
+    transition-duration: .25s;
+  }
+
+  .outline-none {
+    --tw-outline-style: none;
+    outline-style: none;
+  }
+
+  @media (hover: hover) {
+    .group-hover\:-translate-x-1\.5:is(:where(.group):hover *) {
+      --tw-translate-x: calc(var(--spacing) * -1.5);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
+
+    .group-hover\:translate-x-1\.5:is(:where(.group):hover *) {
+      --tw-translate-x: calc(var(--spacing) * 1.5);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
+
+    .group-hover\:text-green-dark:is(:where(.group):hover *) {
+      color: var(--color-green-dark);
+    }
+
+    .group-hover\:opacity-100:is(:where(.group):hover *) {
+      opacity: 1;
+    }
+  }
+
+  .group-focus-visible\:opacity-100:is(:where(.group):focus-visible *) {
+    opacity: 1;
+  }
+
+  .first\:mt-0:first-child {
+    margin-top: 0;
+  }
+
+  .first\:mt-1:first-child {
+    margin-top: var(--spacing);
+  }
+
+  @media (hover: hover) {
+    .hover\:-translate-y-0\.5:hover {
+      --tw-translate-y: calc(var(--spacing) * -.5);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
+
+    .hover\:border-navy:hover {
+      border-color: var(--color-navy);
+    }
+
+    .hover\:bg-navy:hover {
+      background-color: var(--color-navy);
+    }
+
+    .hover\:bg-navy-deep:hover {
+      background-color: var(--color-navy-deep);
+    }
+
+    .hover\:bg-navy\/9:hover {
+      background-color: #00000017;
+    }
+
+    @supports (color: color-mix(in lab, red, red)) {
+      .hover\:bg-navy\/9:hover {
+        background-color: color-mix(in oklab, var(--color-navy) 9%, transparent);
+      }
+    }
+
+    .hover\:bg-soft:hover {
+      background-color: var(--color-soft);
+    }
+
+    .hover\:text-green-dark:hover {
+      color: var(--color-green-dark);
+    }
+
+    .hover\:text-navy:hover {
+      color: var(--color-navy);
+    }
+
+    .hover\:text-white:hover {
+      color: var(--color-white);
+    }
+
+    .hover\:shadow-\[0_12px_28px_rgba\(0\,0\,0\,\.09\)\]:hover {
+      --tw-shadow: 0 12px 28px var(--tw-shadow-color, #00000017);
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    }
+  }
+
+  .focus\:border-navy:focus {
+    border-color: var(--color-navy);
+  }
+
+  .disabled\:cursor-default:disabled {
+    cursor: default;
+  }
+
+  .disabled\:opacity-60:disabled {
+    opacity: .6;
+  }
+
+  @media not (min-width: 40rem) {
+    .max-sm\:grid-cols-1 {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .max-sm\:py-1 {
+      padding-block: var(--spacing);
+    }
+
+    .max-sm\:pt-0 {
+      padding-top: 0;
+    }
+
+    .max-sm\:pb-0\.5 {
+      padding-bottom: calc(var(--spacing) * .5);
+    }
+  }
+
+  @media (min-width: 40rem) {
+    .sm\:block {
+      display: block;
+    }
+
+    .sm\:grid-cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .sm\:flex-row {
+      flex-direction: row;
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .md\:grid-cols-\[340px_minmax\(0\,1fr\)\] {
+      grid-template-columns: 340px minmax(0, 1fr);
+    }
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade {
+  animation: .25s fade-in;
+}
+
+@property --tw-translate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --tw-translate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --tw-translate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+
+@property --tw-leading {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-tracking {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-ordinal {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-slashed-zero {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-numeric-figure {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-numeric-spacing {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-numeric-fraction {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+
+@property --tw-shadow-color {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+
+@property --tw-inset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+
+@property --tw-inset-shadow-color {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-inset-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+
+@property --tw-ring-color {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+
+@property --tw-inset-ring-color {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-inset-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+
+@property --tw-ring-inset {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-ring-offset-width {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --tw-ring-offset-color {
+  syntax: "*";
+  inherits: false;
+  initial-value: #fff;
+}
+
+@property --tw-ring-offset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+
+@property --tw-blur {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-brightness {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-contrast {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-grayscale {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-hue-rotate {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-invert {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-opacity {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-saturate {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-sepia {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow-color {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+
+@property --tw-drop-shadow-size {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-backdrop-blur {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-backdrop-brightness {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-backdrop-contrast {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-backdrop-grayscale {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-backdrop-hue-rotate {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-backdrop-invert {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-backdrop-opacity {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-backdrop-saturate {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-backdrop-sepia {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-duration {
+  syntax: "*";
+  inherits: false
+}
+
+/*# sourceMappingURL=app_0kl5o2o._.css.map*/
+</style><meta name="next-size-adjust" content=""/><title>El Sapiens de la restauración gastronómica · Bullipedia</title><meta name="description" content="La enciclopedia de la restauración gastronómica. Edición digital de la obra de elBullifoundation."/><link rel="icon" href="/favicon.ico?favicon.2vob68tjqpejf.ico" sizes="256x256" type="image/x-icon"/></head><body class="min-h-full flex flex-col font-sans"><div hidden=""><!--$--><!--/$--></div><header class="sticky top-0 z-30 border-b border-rule bg-white"><div class="mx-auto flex h-16 max-w-[1400px] items-center gap-4 px-8"><a href="1-catalogo-libros.html"><img src="assets/logo-bullipedia-18cec3.svg" alt="Bullipedia" class="h-6 w-auto"/></a></div></header><div class="sticky top-16 z-20 border-b border-rule bg-white"><div class="flex items-center gap-4 px-8 py-3"><a class="flex shrink-0 items-center gap-1.5 text-meta font-semibold text-ink-soft transition-colors hover:text-navy" href="#" aria-disabled="true"><span class="text-[17px] leading-none">‹</span> <!-- -->Volver al capítulo</a><div class="min-w-0 flex-1 truncate text-meta font-semibold text-navy">Capítulo 3 — El Sapiens de la restauración gastronómica</div><div class="shrink-0 text-label tracking-wide text-muted">Apartado <!-- -->2<!-- --> de <!-- -->13</div></div><div class="h-[3px] bg-rule"><div class="h-[3px] bg-green transition-[width] duration-300" style="width:15%"></div></div></div><div class="flex flex-1"><aside class="sidebar-rail"><div class="sidebar-panel"><div class="px-5 pt-5.5 pb-3.5"><span class="sidebar-fade text-[10.5px] font-bold tracking-[1.6px] text-muted uppercase">Índice del libro</span></div><div class="sidebar-scroll px-3 pb-6.5"><div class="mb-1"><div class="sidebar-sec-row flex w-full items-center"><button class="flex min-w-0 flex-1 items-center gap-4 px-2.5 py-3 text-left"><span class="sidebar-dash h-0.5 w-6 shrink-0 transition-colors" style="background:var(--color-green)"></span><span class="sidebar-sec-title sidebar-fade min-w-0 flex-1 text-[15.5px] leading-tight font-bold" style="color:var(--color-green-dark)">Introducción al plan Genhesis</span></button><a aria-label="Abrir Introducción al plan Genhesis" class="sidebar-fade shrink-0 px-2.5 py-3 text-[13px] leading-none text-muted transition-colors hover:text-navy" href="3-capitulo-introduccion-al-plan-genhesis.html">›</a></div><div class="acc" data-open="true"><div><div class="sidebar-fade py-0.5 pb-2 pl-10"><div class="mt-2.5 first:mt-1"><a class="entry-row my-px flex items-center gap-2 px-3 py-[7px]" href="3-capitulo-introduccion-al-plan-genhesis.html#la-metodologia-sapiens"><span class="min-w-0 flex-1 leading-snug text-[11px] font-bold tracking-[1.1px] uppercase text-ink">La metodología Sapiens</span><span aria-hidden="true" class="shrink-0 text-[12px] text-muted">›</span></a></div><div class="mt-2.5 first:mt-1"><a class="entry-row my-px flex items-center gap-2 px-3 py-[7px]" href="3-capitulo-introduccion-al-plan-genhesis.html#el-sapiens-de-la-rg"><span class="min-w-0 flex-1 leading-snug text-[11px] font-bold tracking-[1.1px] uppercase text-ink">El Sapiens de la RG</span><span aria-hidden="true" class="shrink-0 text-[12px] text-muted">›</span></a></div></div></div></div></div><div class="mb-1"><div class="sidebar-sec-row flex w-full items-center"><button class="flex min-w-0 flex-1 items-center gap-4 px-2.5 py-3 text-left"><span class="sidebar-dash h-0.5 w-6 shrink-0 transition-colors" style="background:var(--color-rule-strong)"></span><span class="sidebar-sec-title sidebar-fade min-w-0 flex-1 text-[15.5px] leading-tight font-bold" style="color:var(--color-ink-soft)">Las 10 preguntas clave</span></button><a aria-label="Abrir Las 10 preguntas clave" class="sidebar-fade shrink-0 px-2.5 py-3 text-[13px] leading-none text-muted transition-colors hover:text-navy" href="#" aria-disabled="true">›</a></div><div class="acc" data-open="false"><div><div class="sidebar-fade py-0.5 pb-2 pl-10"><a data-active="false" class="entry-row my-px flex items-start gap-2 px-3 py-[9px]" style="background:transparent" href="#" aria-disabled="true"><span class="min-w-0 flex-1 text-[13.5px] leading-snug" style="color:var(--color-ink-soft);font-weight:400">¿Por qué y para qué quieres montar un restaurante?</span></a><a data-active="false" class="entry-row my-px flex items-start gap-2 px-3 py-[9px]" style="background:transparent" href="#" aria-disabled="true"><span class="min-w-0 flex-1 text-[13.5px] leading-snug" style="color:var(--color-ink-soft);font-weight:400">¿Tienes claro dónde te metes?</span></a><a data-active="false" class="entry-row my-px flex items-start gap-2 px-3 py-[9px]" style="background:transparent" href="#" aria-disabled="true"><span class="min-w-0 flex-1 text-[13.5px] leading-snug" style="color:var(--color-ink-soft);font-weight:400">¿Cuánto quieres ganar con tu proyecto?</span></a><a data-active="false" class="entry-row my-px flex items-start gap-2 px-3 py-[9px]" style="background:transparent" href="#" aria-disabled="true"><span class="min-w-0 flex-1 text-[13.5px] leading-snug" style="color:var(--color-ink-soft);font-weight:400">¿Cuánto dinero tienes o puedes conseguir para tu negocio?</span></a><a data-active="false" class="entry-row my-px flex items-start gap-2 px-3 py-[9px]" style="background:transparent" href="#" aria-disabled="true"><span class="min-w-0 flex-1 text-[13.5px] leading-snug" style="color:var(--color-ink-soft);font-weight:400">¿Dónde lo quieres montar?</span></a><a data-active="false" class="entry-row my-px flex items-start gap-2 px-3 py-[9px]" style="background:transparent" href="#" aria-disabled="true"><span class="min-w-0 flex-1 text-[13.5px] leading-snug" style="color:var(--color-ink-soft);font-weight:400">¿Cuándo quieres abrir tu restaurante?</span></a><a data-active="false" class="entry-row my-px flex items-start gap-2 px-3 py-[9px]" style="background:transparent" href="#" aria-disabled="true"><span class="min-w-0 flex-1 text-[13.5px] leading-snug" style="color:var(--color-ink-soft);font-weight:400">¿Qué nivel de innovación quieres desarrollar en tu restaurante?</span></a><a data-active="false" class="entry-row my-px flex items-start gap-2 px-3 py-[9px]" style="background:transparent" href="#" aria-disabled="true"><span class="min-w-0 flex-1 text-[13.5px] leading-snug" style="color:var(--color-ink-soft);font-weight:400">¿Qué postura vas a adoptar con relación a la sostenibilidad y la inclusión?</span></a><a data-active="false" class="entry-row my-px flex items-start gap-2 px-3 py-[9px]" style="background:transparent" href="#" aria-disabled="true"><span class="min-w-0 flex-1 text-[13.5px] leading-snug" style="color:var(--color-ink-soft);font-weight:400">¿Con quién vas a montar el restaurante?</span></a><a data-active="false" class="entry-row my-px flex items-start gap-2 px-3 py-[9px]" style="background:transparent" href="#" aria-disabled="true"><span class="min-w-0 flex-1 text-[13.5px] leading-snug" style="color:var(--color-ink-soft);font-weight:400">¿Quién eres tú en este proyecto?</span></a></div></div></div></div><div class="mb-1"><div class="sidebar-sec-row flex w-full items-center"><button class="flex min-w-0 flex-1 items-center gap-4 px-2.5 py-3 text-left"><span class="sidebar-dash h-0.5 w-6 shrink-0 transition-colors" style="background:var(--color-rule-strong)"></span><span class="sidebar-sec-title sidebar-fade min-w-0 flex-1 text-[15.5px] leading-tight font-bold" style="color:var(--color-ink-soft)">Plan Genhesis</span></button><a aria-label="Abrir Plan Genhesis" class="sidebar-fade shrink-0 px-2.5 py-3 text-[13px] leading-none text-muted transition-colors hover:text-navy" href="#" aria-disabled="true">›</a></div><div class="acc" data-open="false"><div><div class="sidebar-fade py-0.5 pb-2 pl-10"><div class="mt-2.5 first:mt-1"><a class="entry-row my-px flex items-center gap-2 px-3 py-[7px]" href="#" aria-disabled="true"><span class="min-w-0 flex-1 leading-snug text-[11px] font-bold tracking-[1.1px] uppercase text-ink">Sapiens de la empresa</span><span aria-hidden="true" class="shrink-0 text-[12px] text-muted">›</span></a></div><div class="mt-2.5 first:mt-1"><a class="entry-row my-px flex items-center gap-2 px-3 py-[7px]" href="#" aria-disabled="true"><span class="min-w-0 flex-1 leading-snug text-[11px] font-bold tracking-[1.1px] uppercase text-ink">El modelo de negocio RBMC</span><span aria-hidden="true" class="shrink-0 text-[12px] text-muted">›</span></a></div><div class="mt-2.5 first:mt-1"><a class="entry-row my-px flex items-center gap-2 px-3 py-[7px]" href="#" aria-disabled="true"><span class="min-w-0 flex-1 leading-snug text-[11px] font-bold tracking-[1.1px] uppercase text-ink">El plan económico</span><span aria-hidden="true" class="shrink-0 text-[12px] text-muted">›</span></a></div><div class="mt-2.5 first:mt-1"><a class="entry-row my-px flex items-center gap-2 px-3 py-[7px]" href="#" aria-disabled="true"><span class="min-w-0 flex-1 leading-snug text-[11px] font-bold tracking-[1.1px] uppercase text-ink">El plan financiero</span><span aria-hidden="true" class="shrink-0 text-[12px] text-muted">›</span></a></div></div></div></div></div><div class="mb-1"><div class="sidebar-sec-row flex w-full items-center"><button class="flex min-w-0 flex-1 items-center gap-4 px-2.5 py-3 text-left"><span class="sidebar-dash h-0.5 w-6 shrink-0 transition-colors" style="background:var(--color-rule-strong)"></span><span class="sidebar-sec-title sidebar-fade min-w-0 flex-1 text-[15.5px] leading-tight font-bold" style="color:var(--color-ink-soft)">De la búsqueda del local a las llaves en mano</span></button><a aria-label="Abrir De la búsqueda del local a las llaves en mano" class="sidebar-fade shrink-0 px-2.5 py-3 text-[13px] leading-none text-muted transition-colors hover:text-navy" href="#" aria-disabled="true">›</a></div><div class="acc" data-open="false"><div><div class="sidebar-fade py-0.5 pb-2 pl-10"></div></div></div></div><div class="mb-1"><div class="sidebar-sec-row flex w-full items-center"><button class="flex min-w-0 flex-1 items-center gap-4 px-2.5 py-3 text-left"><span class="sidebar-dash h-0.5 w-6 shrink-0 transition-colors" style="background:var(--color-rule-strong)"></span><span class="sidebar-sec-title sidebar-fade min-w-0 flex-1 text-[15.5px] leading-tight font-bold" style="color:var(--color-ink-soft)">Se acerca el día D</span></button><a aria-label="Abrir Se acerca el día D" class="sidebar-fade shrink-0 px-2.5 py-3 text-[13px] leading-none text-muted transition-colors hover:text-navy" href="#" aria-disabled="true">›</a></div><div class="acc" data-open="false"><div><div class="sidebar-fade py-0.5 pb-2 pl-10"><div class="mt-2.5 first:mt-1"><a class="entry-row my-px flex items-center gap-2 px-3 py-[7px]" href="#" aria-disabled="true"><span class="min-w-0 flex-1 leading-snug text-[11px] font-bold tracking-[1.1px] uppercase text-ink">Se acerca el día D</span><span aria-hidden="true" class="shrink-0 text-[12px] text-muted">›</span></a></div></div></div></div></div><div class="mb-1"><div class="sidebar-sec-row flex w-full items-center"><button class="flex min-w-0 flex-1 items-center gap-4 px-2.5 py-3 text-left"><span class="sidebar-dash h-0.5 w-6 shrink-0 transition-colors" style="background:var(--color-rule-strong)"></span><span class="sidebar-sec-title sidebar-fade min-w-0 flex-1 text-[15.5px] leading-tight font-bold" style="color:var(--color-ink-soft)">El SIGE</span></button><a aria-label="Abrir El SIGE" class="sidebar-fade shrink-0 px-2.5 py-3 text-[13px] leading-none text-muted transition-colors hover:text-navy" href="#" aria-disabled="true">›</a></div><div class="acc" data-open="false"><div><div class="sidebar-fade py-0.5 pb-2 pl-10"><div class="mt-2.5 first:mt-1"><a class="entry-row my-px flex items-center gap-2 px-3 py-[7px]" href="#" aria-disabled="true"><span class="min-w-0 flex-1 leading-snug text-[11px] font-bold tracking-[1.1px] uppercase text-ink">La cultura corporativa</span><span aria-hidden="true" class="shrink-0 text-[12px] text-muted">›</span></a></div><div class="mt-2.5 first:mt-1"><a class="entry-row my-px flex items-center gap-2 px-3 py-[7px]" href="#" aria-disabled="true"><span class="min-w-0 flex-1 leading-snug text-[11px] font-bold tracking-[1.1px] uppercase text-ink">Los manuales del RG</span><span aria-hidden="true" class="shrink-0 text-[12px] text-muted">›</span></a></div></div></div></div></div><div class="mb-1"><div class="sidebar-sec-row flex w-full items-center"><button class="flex min-w-0 flex-1 items-center gap-4 px-2.5 py-3 text-left"><span class="sidebar-dash h-0.5 w-6 shrink-0 transition-colors" style="background:var(--color-rule-strong)"></span><span class="sidebar-sec-title sidebar-fade min-w-0 flex-1 text-[15.5px] leading-tight font-bold" style="color:var(--color-ink-soft)">Y después de abrir, ¿qué?</span></button><a aria-label="Abrir Y después de abrir, ¿qué?" class="sidebar-fade shrink-0 px-2.5 py-3 text-[13px] leading-none text-muted transition-colors hover:text-navy" href="#" aria-disabled="true">›</a></div><div class="acc" data-open="false"><div><div class="sidebar-fade py-0.5 pb-2 pl-10"></div></div></div></div><div class="mb-1"><div class="sidebar-sec-row flex w-full items-center"><button class="flex min-w-0 flex-1 items-center gap-4 px-2.5 py-3 text-left"><span class="sidebar-dash h-0.5 w-6 shrink-0 transition-colors" style="background:var(--color-rule-strong)"></span><span class="sidebar-sec-title sidebar-fade min-w-0 flex-1 text-[15.5px] leading-tight font-bold" style="color:var(--color-ink-soft)">Un día en Can Toni</span></button><a aria-label="Abrir Un día en Can Toni" class="sidebar-fade shrink-0 px-2.5 py-3 text-[13px] leading-none text-muted transition-colors hover:text-navy" href="#" aria-disabled="true">›</a></div><div class="acc" data-open="false"><div><div class="sidebar-fade py-0.5 pb-2 pl-10"><div class="mt-2.5 first:mt-1"><a class="entry-row my-px flex items-center gap-2 px-3 py-[7px]" href="#" aria-disabled="true"><span class="min-w-0 flex-1 leading-snug text-[11px] font-bold tracking-[1.1px] uppercase text-ink">Un día en Can Toni ejemplo práctico</span><span aria-hidden="true" class="shrink-0 text-[12px] text-muted">›</span></a></div></div></div></div></div></div></div></aside><div class="min-w-0 flex-1 bg-white"><article class="animate-fade mx-auto max-w-[1000px] px-10 pt-14 pb-24"><div class="text-eyebrow font-bold tracking-[1.5px] text-green-dark uppercase">Capítulo 3 · Plan Genhesis</div><h1 class="mt-2.5 font-display text-[38px] leading-[1.1] font-bold text-navy">El Sapiens de la restauración gastronómica</h1><div class="mt-7.5 mb-2 h-px bg-rule"></div><div class="prose"><figure>
+  <img src="assets/lifestyle_wars_install_2_ok_retoc_100x70_afd36aac_50f0bf36ae-58d359.jpg" alt="" loading="lazy" />
+</figure>
+
+<figure>
+  <img src="assets/shutterstock_171268337_5c207ef9_3f824a597f-16b557.png" alt="" loading="lazy" />
+</figure>
+
+<p class="entradilla">Una vez explicado todo esto, veamos el Sapiens de la restauración gastronómica.</p>
+
+<p class="entradilla">A partir de ahora, utilizaremos RG para referirnos a la restauración gastronómica o el restaurante gastronómico</p>
+
+<p>LOS métodos de sapiens aplicados a un RESTAURANTE GASTRONÓMICO (RG)</p>
+
+<p><strong>Los cinco métodos de Sapiens sintetizados cada uno en una pregunta</strong></p>
+
+<p>Como hemos visto, la metodología Sapiens está formada por cinco métodos, cada uno con un desarrollo y un listado de pasos en los que se propone hacer varios ejercicios para desarrollar en profundidad el prisma que corresponde a cada método.</p>
+
+<p>También es posible sintetizar cada uno de los métodos en una sola pregunta, que se puede responder de forma intuitiva, para hacer una primera aproximación al estudio aplicando esos diferentes prismas, de manera muy simplificada.</p>
+
+<p>En este libro nos centramos en el restaurante gastronómico, aunque en una aplicación completa de la metodología Sapiens, para comprender el restaurante gastronómico habría que comprender también la restauración, el restaurante, la gastronomía, cocinar, la cocina, la alimentación, etc.</p>
+
+<p><strong>Cocinar</strong></p>
+
+<p><strong>Necesidad fisiológica</strong></p>
+
+<p><strong>Alimentación</strong></p>
+
+<p><strong>Hambre - sed</strong></p>
+
+<p><strong>Tradicional foráneo</strong></p>
+
+<p><strong>Tradicional país</strong></p>
+
+<p><strong>TradicionaL</strong></p>
+
+<p><strong>Comida</strong></p>
+
+<p><strong>Mundo salado</strong></p>
+
+<p><strong>Mundo dulce</strong></p>
+
+<p><strong>Comer/beber</strong></p>
+
+<p><strong>restaurante gastronómico</strong></p>
+
+<p><strong>Cocina</strong></p>
+
+<p><strong>Gastronomía</strong></p>
+
+<p><strong>Servicio</strong></p>
+
+<p><strong>Bebida</strong></p>
+
+<p><strong>Actitud gastronómica</strong></p>
+
+<p><strong>Degustar</strong></p>
+
+<p><strong>Alta cocina</strong></p>
+
+<p><strong>creativa</strong></p>
+
+<p><strong>clásica</strong></p>
+
+<p><strong>restaurante</strong></p>
+
+<p><strong>Restauración gastronómica</strong></p>
+
+<p><strong>Hostelería</strong></p>
+
+<p><strong>Restauración</strong></p>
+
+<p><strong>Restaurantes</strong></p>
+
+<p><strong>Bares</strong></p>
+
+<p><strong>Catering</strong></p>
+
+<p>¿Qué es?</p>
+
+<p>¿A qué se parece y no es?</p>
+
+<p>Un restaurante es, en primer lugar, una empresa: un lugar, un establecimiento público, en el que se cocina y se sirve comida y bebida. Se sirve en mesas individuales, con un número determinado de EQSD, a un precio fijo, en menú y/o carta. Se come, se bebe y se paga. Puede ser, o no, un restaurante gastronómico, que es un restaurante que se guía por la premisa de la actitud gastronómica y la apuesta por la calidad, y pretende ofrecer una experiencia lúdica y memorable.</p>
+
+<p>Un restaurante se parece a un bar, pero no siemprees lo mismo. Cuando no es un bar de comidas, también es un establecimiento público y puede servir comida, pero principalmente bebidas, la comida que sirve son principalmente aperitivos o raciones, y permite consumir en la barra y no necesariamente en las mesas. También se parece a otros establecimientos públicos, como los hoteles, que tienen como servicio principal el alojamiento, aunque también sirven comida y bebida en sus restaurantes. Y el restaurante gastronómico, que pretende ofrecer una experiencia lúdica, se parece a otras ofertas de entretenimiento, como el teatro.</p>
+
+<p>¿CÓMO SE RELACIONA EL RG CON EL MUNDO?</p>
+
+<p>Los otros métodos existen ya en diferentes disciplinas. Es mucho menos normal el método sistémico, que nosotros enfocamos a través de tres megasistemas: la naturaleza, el ser humano y las necesidades del ser humano. Para comprender el restaurante como un sistema de gestión empresarial, ver SIGE, pág. 65.</p>
+
+<p>Método léxico, semántico y conceptual</p>
+
+<p>Método comparativo</p>
+
+<p>Método SISTÉMICO</p>
+
+<p>El orden de aplicación de los métodos es una propuesta flexible. En función del proyecto, este orden puede cambiar y puede ser necesario trabajarlos de manera paralela, ya que todos los métodos tienen puntos de conexión con todos los demás.</p>
+
+<p>¿Qué tipos hay?</p>
+
+<p>¿DE DÓNDE VIENE?</p>
+
+<p>Existen muchos tipos de restaurantes, según múltiples criterios, empezando por el precio/target y el nivel de sofisticación de la oferta (en este sentido, el restaurante gastronómico y la alta gastronomía ocupan el nivel más alto). También según los productos, técnicas y elaboraciones dominantes, el tipo de servicio, espacios, o criterios de entorno (desde la geopolítica hasta la religión), orientación de la cocina (producto de proximidad o no, fast food o slow food, época/movimiento/estilo) o especificidades (temáticos o con espectáculo). Como empresa puede ser individual o formar parte de un grupo, de ámbito local, regional, nacional, internacional, de mayor o menor tamaño, de una u otra forma jurídica, etc.</p>
+
+<p>El restaurante nace a finales del siglo xviii, aunque hay antecedentes de cocinas públicas como las tabernas. Originalmente, la gastronomía se circunscribía a los domicilios de las clases acomodadas, no a los establecimientos públicos. Cuando nacieron los primeros restaurantes, el arte culinario se introdujo en ellos. A partir de 1800 coexisten la restauración popular y la más sofisticada, y en los últimos 40 o 50 años los formatos se han multiplicado: desde la cocina más tradicional hasta la más lujosa o vanguardista, difuminándose las fronteras entre ellas.</p>
+
+<p>Método clásificatorio</p>
+
+<p>Método histórico</p>
+
+<h2 id="empezamos-por-contextualizar-la-alimentacion-y-la-gastronomi-1">Empezamos por contextualizar la alimentación y la gastronomía</h2>
+
+<p>Antes de introducirnos en el análisis y estudio del restaurante gastronómico, es importante que nos detengamos a reflexionar sobre la alimentación y la gastronomía. Según la RAE, «alimentación» es:</p>
+
+<p>La alimentación está impulsada por la necesidad biológica de nutrirse y subsistir, es una respuesta al hambre que sentimos y una necesidad vital ineludible. La RAE, define nutrir como «aumentar la sustancia del cuerpo animal o vegetal por medio del alimento, reparando las partes que se van perdiendo en virtud de las acciones catabólicas», y alimento como «conjunto de sustancias que los seres vivos comen o beben para subsistir» y «cada una de las sustancias que un ser vivo toma o recibe para su nutrición». Por tanto, para satisfacer esta necesidad, ingerimos alimentos —que pueden ser en forma de comida o de bebida—. Existen muchas formas de clasificar los tipos de alimentación, según el criterio que se utilice:</p>
+
+<ul>
+  <li><strong>Según el origen o tipo de los productos:</strong> omnívora, vegetariana, flexitariana, etc.</li>
+  <li><strong>Según la finalidad o propósito:</strong> saludable, terapéutica, deportiva, adelgazante, etc.</li>
+  <li><strong>Según la cultura y contexto geográfico:</strong>mediterránea, asiática, nórdica, fusión, etc.</li>
+  <li><strong>Según el grado o tipo de procesamiento:</strong>natural, procesada, ultraprocesada, artesanal, etc.</li>
+  <li><strong>Según criterios religiosos o filosóficos:</strong> kosher, halal, macrobiótica, naturista, etc.</li>
+</ul>
+
+<p>Acudiendo de nuevo a la RAE, «gastronomía» es:</p>
+
+<div class="ficha">
+  <ol>
+    <li>f. Arte de preparar una buena comida. Sin.: cocina, culinaria, restauración.</li>
+    <li>f. Afición al buen comer.</li>
+    <li>f. Conjunto de los platos y usos culinarios propios de un determinado lugar.</li>
+  </ol>
+</div>
+
+<p>Esta definición asocia la gastronomía a lo «bueno». Aunque existen interpretaciones de la gastronomía que la entienden como todo aquello que relaciona al ser humano con cualquier aspecto de su alimentación, en Sapiens la asociamos a una búsqueda ineludible de la calidad y a una actitud hedonista. La actitud gastronómica trasciende la mera alimentación, y lo hace a través de la búsqueda de la excelencia en aquellos aspectos que influyen en la experiencia final: producto, elaboración, servicio, interiorismo… El gastrónomo (y también el gourmet) es el individuo que recibe o disfruta de la experiencia gastronómica. En inglés, existe la denominación foodie, aunque tiene matices distintos a los de gastrónomo o gourmet.</p>
+
+<p>A menudo, se tiende a asimilar la gastronomía con el arte culinario, la alta cocina o el fine dining, aunque esta asociación es un error. La gastronomía sucede en múltiples ámbitos, que pueden ser privados o públicos, y actualmente existe una oferta gastronómica muy diversa en la que conviven restaurantes de alta cocina y restaurantes con oferta de cocina tradicional refinada, junto a otros más accesibles como, por ejemplo, los bistronómicos, que practican la alta cocina casual e, incluso, ofertas gastronómicas donde la calidad se concentra en unos de los aspectos y es menos exigente en otros.</p>
+
+<p>Clasificar los tipos de gastronomía es un asunto complejo, ya que se puede hacer desde distintos enfoques. En función de qué criterio apliquemos, obtendremos distintos resultados:</p>
+
+<ul>
+  <li><strong>Según el ámbito o contexto en que se realiza:</strong> doméstica, profesional, de calle, institucional, etc.</li>
+  <li><strong>Según el origen cultural o geográfico:</strong> local, regional, nacional, fusión, diáspora, etc.</li>
+  <li><strong>Según un enfoque global e histórico:</strong>mediterránea, mundo oriental, mundo occidental, etc.</li>
+  <li><strong>Según el enfoque temporal:</strong>tradicional, moderna, de autor, de vanguardia, etc.</li>
+  <li><strong>Según el nivel de sofisticación y calidad:</strong> alta gastronomía y media gastronomía (que es un concepto difícil de definir) No existe la baja gastronomía por la propia naturaleza de la definición de gastronomía, ligada a la calidad y excelencia.</li>
+  <li><strong>Según la finalidad o propósito:</strong> saludable, sostenible, turística, solidaria, etc.</li>
+  <li><strong>Según la relación con el conocimiento:</strong> científica, histórica, cultural, académica, etc.</li>
+  <li><strong>Según el compromiso ético o filosófico:</strong> slow food, consciente, circular, vegana, etc.</li>
+  <li><strong>Otras posibles clasificaciones según diferentes criterios.</strong></li>
+</ul>
+
+<h2 id="que-es-un-restaurante-y-que-es-un-rg-2">¿Qué es un restaurante y qué es un RG?</h2>
+
+<p>Según la RAE, un restaurante se define como un «establecimiento público donde se sirven comidas y bebidas, principalmente almuerzos y cenas». En esta definición no se explicita que la actividad se realiza a cambio del pago de un precio, y tampoco se especifica dónde se consume la comida y bebida.</p>
+
+<p>Pero para Sapiens, el restaurante es: «Un establecimiento público donde se produce una transacción comercial entre quien ofrece una oferta y quien los recibe a cambio de una contraprestación económica. Habitualmente, la comida y la bebida se consumen in situ, aunque existe una zona gris formada por establecimientos en los que conviven modalidades como el take away o el delivery».</p>
+
+<h2 id="entonces-que-es-la-rg-3">Entonces, ¿qué es la RG?</h2>
+
+<p>La restauración gastronómica es aquella restauración que opera desde la actitud gastronómica y realiza una apuesta por la calidad del producto y de su elaboración y por la excelencia en todos los demás factores que contribuyen a construir el resultado final ofrecido al cliente, es decir, la oferta gastronómica. Designa un sector económico que pertenece a la hostelería: el universo de establecimientos dedicados a la prestación de servicios de alojamiento y restauración fuera del hogar, también denominado con el acrónimo HORECA (hoteles, restaurantes y cafeterías). Este sector forma parte del sector terciario y pertenece al ámbito de los servicios y el comercio.</p>
+
+<p>El restaurante alimenticio (nombre que nadie usa y que no encontramos alternativa, lo usamos para designar los restaurantes que usamos para nutrirnos con independencia de la calidad y la excelencia).</p>
+
+<div class="ficha">
+  <ol>
+    <li>f. Acción y efecto de alimentar o alimentarse. Sin.: nutrición, manutención, ingestión.</li>
+    <li>f. Conjunto de las cosas que se toman o se proporcionan como alimento.</li>
+    <li>f. Actividad industrial o comercial de productos alimenticios.</li>
+  </ol>
+</div>
+
+<p>Método léxico, semántico y conceptual</p>
+
+<p><strong>El restaurante gastronómico son empresas de tipo pyme compuestas por un número reducido de trabajadores y con un volumen de facturación moderado. Si no generan beneficios, no son viables.</strong></p>
+
+<figure>
+  <img src="assets/shutterstock_98081855_862159a7_98a9ee4f74-1de118.jpg" alt="" loading="lazy" />
+</figure>
+
+<p>Contextualizamos el restaurante gastronómico a través de su historia: sus antecedentes, el momento de su aparición y la evolución que ha experimentado hasta nuestros días.</p>
+
+<h2 id="prehistoria-2-5-ma-a-3500-a-c-4">Prehistoria (-2,5 MA a 3500 a. C.)</h2>
+
+<p>Durante la prehistoria no existe la cocina en el ámbito público, por tanto no existen en este periodo antecedentes del restaurante gastronómico más allá del propio nacimiento de la cocina.</p>
+
+<h2 id="civilizaciones-antiguas-3500-a-c-476-d-c-5">Civilizaciones antiguas (3500 a. C.-476 d. C.)</h2>
+
+<p>Hacia el iii milenio a. C., en el marco de la civilización mesopotámica, los sumerios crearon las primeras tabernas, siendo este el momento en que nació la oferta culinaria en el ámbito público. Estaban vinculadas a la cocina popular, porque las elaboraciones servidas en ellas procedían de la comida nacida en el pueblo. Más tarde nació la cocina tradicional, que se transmite entre generaciones. Tras ellos llegaron otras civilizaciones: la egipcia (inventores del comedor público con menú limitado), la griega (primeras casas de hospedaje y comida) y la romana, que diferenció las tabernas por tipos: thermopalia, cauponae y popinae (las primeras ofrecían elaboraciones calientes, las segundas, elaboraciones frías que se degustaban sin mesa y las terceras, elaboraciones sencillas consumidas de pie, siendo establecimientos ligados al vino y al juego que por la noche se convertían en locales de alterne). Las cocinas de los palacios, castillos y casas nobles fueron los centros neurálgicos de «lo gastronómico», que se desarrollaba en el ámbito privado. Esta cocina gastronómica disfrutada por las élites se denominó durante siglos «arte culinario».</p>
+
+<figure>
+  <img src="assets/shutterstock_1043019997_e224c68a_1a7b211e23-0b89ac.jpg" alt="" loading="lazy" />
+</figure>
+
+<p>Taberna romana (thermopolium) de Vetutius Placidus en la ciudad de Pompeya (Italia).</p>
+
+<p>Método histórico</p>
+
+<p><strong>En Roma, los historiadores han podido concluir que existieron tabernas donde se ofrecían productos de calidad que se podían pedir de forma concreta a un camarero o sirviente. Muchas de estas elaboraciones pertenecían a la cocina refinada, al arte culinario: venado, jabalí, pies de cerdo, gansos engordados, pan blanco… Eran, por tanto, espacios para gozar de placeres hedonistas en un espacio público. ¿No es esta una escena más propia de un restaurante como lo entendemos actualmente que de una taberna de la Antigüedad?</strong></p>
+
+<h2 id="edad-media-476-1492-6">Edad media (476-1492)</h2>
+
+<p>La Edad Media dio paso a un sistema de posadas y tabernas donde el señor feudal se encargaba de fijar los precios del vino. La alternativa a estas tabernas eran a menudo los monasterios, que ofrecían posada gratuita a los viajeros. Existen pruebas documentales de que ya en el año 803 existía la posada Stiftskeller St. Peter, en Salzburgo, que todavía está en funcionamiento como restaurante gastronómico. En Londres y París también se conservan referencias a casas de comidas abiertas en la Baja Edad Media. A este mismo grupo de establecimientos históricos pertenecen las posadas Lindenkeller (1435) y Griechenbeisl (1447), en Viena, que aún siguen abiertas.</p>
+
+<p>En el año 1420, el maestro Chiquart, en su obra <em>Du fait de cuisine</em>, dejó constancia de una elaboración hecha a base de caldo de capón que él denominaba «restaurante» debido a su capacidad de restaurar las fuerzas a quien la degustaba, era una preparación reconstituyente.</p>
+
+<h2 id="renacimiento-1492-1600-7">Renacimiento (1492-1600)</h2>
+
+<p>La taberna La Campana (1518, fecha estimada) en Roma o la taberna U Malí (1543) en Praga son establecimientos que se pusieron en marcha durante el Renacimiento y que todavía siguen existiendo. A lo largo del siglo xvi, en Inglaterra hubo una eclosión de tabernas y a mediados de siglo, en 1552, se legisló sobre las public houses (pubs). En 1582 (fecha afirmada por el propio establecimiento) y en la ciudad de París, se inauguró el célebre —y aún existente— La Tour d’Argent.</p>
+
+<h2 id="la-gran-cocina-francesa-1600-1780-8">La gran cocina francesa (1600-1780)</h2>
+
+<p>Aunque todavía no existía la prensa y la crítica gastronómica, se publicó la obra <em>Séjour de Paris</em>, c’est à dire, instructions fidèles pour les voyageurs de condition de J. C. Nemeitz, donde se mostraban comentarios críticos que aludían a la mala reputación de las tabernas de la ciudad.</p>
+
+<p>El restaurante como elaboración vivificante y reparadora seguía haciendo fortuna, y apareció en obras como la enciclopedia de Diderot &amp; D’Alembert publicada entre 1751 y 1772, que aún resaltaba su utilización como remedio médico. En 1765, un tal Boulanger, cuyo nombre parece ser Roze de Chantoiseau, abrió un establecimiento en París (Rue des Poulies, cerca del Louvre) al que llamó restaurante. El nombre procedía de la oferta de sopas y caldos calientes que actuaban como «restaurantes de la salud».</p>
+
+<h2 id="aparicion-del-restaurante-gastronomico-1780-1903-9">Aparición del restaurante gastronómico (1780-1903)</h2>
+
+<p>A lo largo del siglo xix, surgió la figura del chef como gran referente de la cocina de calidad y del restaurante gastronómico. La influencia global de la cocina y la restauración francesa en este periodo se puede apreciar con ejemplos como los del Le Chat Noir (1881), un café/cabaret que fue replicado en Nueva York en el Au Chat Noir (1895). Bajo la influencia de Auguste Escoffier, la restauración en los hoteles evolucionó convirtiendo sus restaurantes en grandes referentes. De hecho, con César Ritz fundaron en 1898 el Hotel Ritz de París y en 1899 pasó a dirigir las cocinas del Hotel Carlton de Londres.</p>
+
+<p><strong>Por supuesto, no todo ocurría en Europa. En 1794 se inauguró el lujoso City Hotel en Nueva York, influyendo en el inicio de la era de los bares de lujo en los hoteles y del arte de la coctelería. Por su parte, la restauración en el mundo oriental no queda contemplada en la presente obra y tuvo su propio recorrido histórico.</strong></p>
+
+<h2 id="clasicismo-codificado-1903-1965-10">Clasicismo codificado (1903-1965)</h2>
+
+<p>Con la llegada del siglo xx, como resultado del inmenso trabajo de codificación culinaria y de organización realizado por August Escoffier en colaboración con César Ritz, y con la consolidación de la Guide Michelin (la primera edición data de 1900), cambió el paradigma. El comensal adquirió capacidad de desplazamiento, siendo capaz de seleccionar el restaurante gastronómico de su interés.</p>
+
+<h2 id="posclasicismo-la-nouvelle-cuisine-1965-presente-11">Posclasicismo: la nouvelle cuisine (1965-presente)</h2>
+
+<p>Más allá de cambios profundos en la oferta culinaria, el modelo de restaurante gastronómico no sufrió modificaciones rupturistas durante este periodo. Cabe señalar, sin embargo, que se impuso una concepción más globalizada de la experiencia gastronómica, en la que se contemplaba el entorno, el servicio, el ritmo y la armonía visual. Y con el emplatado individual, también se potenció la figura del chef, siendo el primer paso hacia la consolidación de la idea de la cocina «de autor». Para comprender la nouvelle cuisine está el decálogo que publicó la revista Gault-Millau en 1973.</p>
+
+<h2 id="posclasicismo-cocina-tecnoemocional-1994-presente-12">Posclasicismo: cocina tecnoemocional (1994-presente)</h2>
+
+<p>El restaurante gastronómico amplió su alcance y, en ocasiones, los establecimientos se convirtieron en centros de creatividad e investigación en diálogo con otros ámbitos y disciplinas. El objetivo pasó de centrarse en agradar al comensal a crear una experiencia capaz de despertar emoción, sorpresa y reflexión. En este periodo, se incorporó el servicio informal a entornos de la alta cocina y el comensal se convirtió en un elemento capaz de desarrollar un papel activo en la experiencia del restaurante.En España, tras la génesis producida en elBulli, figuras tan importantes como Juan Mari Arzak, Pedro Subijana, Martín Berasategui, Joan Roca, Carme Ruscalleda, Andoni Luis Aduriz, Quique Dacosta, Ángel León y otros grandes chefs han formado parte integrante de este movimiento, que con el tiempo se ha expandido globalmente a numerosos países, como México, Perú y Dinamarca.</p>
+
+<p>Consecuencias de este movimiento: este movimiento resultó en un empoderamiento gastronómico de alcance global que tuvo especial repercusión en el ámbito del restaurante gastronómico promoviendo la libertad y la oferta relacionada al territorio.</p>
+
+<p>Asimismo durante este periodo hemos asistido a una enorme evolución y diversificación de la oferta. Es el caso, por ejemplo, de la aparición de la barra como forma de degustación en el restaurante gastronómico, gracias a la influencia japonesa en la gastronomía occidental.</p>
+
+<p>En España, y durante las últimas décadas, han surgido una multiplicidad de formatos de restauración gastronómica, creándose un amplio abanico que va desde la cocina tradicional hasta la más lujosa o creativa. El gastrobar, el restaurante bistronómico y algunos casos de tabernas gastronómicas que incorporan la creatividad son ejemplos de esta evolución y de la aparición de nuevos formatos de restaurantes gastronómicos.</p>
+
+<p>La Grande Taverne de Londres, abierta en 1782 en París, se considera el establecimiento icónico que dio comienzo a la era de los restaurantes gastronómicos.</p>
+
+<h2 id="el-nacimiento-del-restaurante-gastronomico-1782-13">El nacimiento del restaurante gastronómico: 1782</h2>
+
+<p>En el último tercio del siglo xviii apareció el servicio a la carta y se abrieron numerosos establecimientos parisinos en forma de fondas y casas de comidas. Fue un proceso paulatino que culminó en 1782 con la apertura del que se considera el primer restaurante gastronómico propiamente dicho: La Grande Taverne de Londres, en París, con Antoine Beauvilliers como cocinero y propietario.</p>
+
+<p>Antes de 1800, la restauración estaba vinculada a la cocina tradicional, que a su vez era popular, de las tabernas y mesones, mientras que el arte culinario se desarrollaba en el ámbito privado. A partir de esta fecha, asistimos a una coexistencia entre la restauración tradicional y la alta cocina que se lleva a cabo en los RG. Es en este periodo, y en el contexto de estos RG, cuando este arte culinario saltó a la esfera pública y comenzó a denominarse haute cuisine (en España, alta cocina, término que usaremos a lo largo del presente libro para referirnos a la cocina de origen palaciego que se expandió a la restauración pública). En inglés, también se la suele asociar al término fine dining. Fue durante el siglo xix cuando los grandes RG hicieron su aparición y pasaron a dominar la cocina de prestigio.</p>
+
+<p>periodos de la historia de la restauración gastronómica</p>
+
+<div class="cronologia">
+  <p class="cronologia-ambito">Edad Contemporánea</p>
+  <p class="cronologia-ambito">Edad moderna</p>
+  <p class="cronologia-ambito">edad antigua</p>
+  <p class="cronologia-ambito">Prehistoria</p>
+  <p class="cronologia-ambito">Edad media</p>
+  <p class="cronologia-ambito">Hoy</p>
+  <p class="cronologia-ambito">3500 A. c.</p>
+  <p class="cronologia-ambito">476 D. c.</p>
+  <p class="cronologia-ambito">1492</p>
+  <p class="cronologia-ambito">1600</p>
+  <p class="cronologia-ambito">1789</p>
+  <p class="cronologia-ambito">1903</p>
+  <p class="cronologia-ambito">1965</p>
+  <p class="cronologia-ambito">1994</p>
+  <p class="cronologia-ambito">1780</p>
+  <p class="cronologia-ambito">2,5 MA - 3500 a. c.</p>
+  <p class="cronologia-ambito">Paleolítico y Neolítico: los orígenes de la cocina</p>
+  <p class="cronologia-ambito">3500 A. c. - 476 d. c.</p>
+  <p class="cronologia-ambito">Civilizaciones antiguas: la génesis de la gastronomía</p>
+  <p class="cronologia-ambito">476 - 1492</p>
+  <p class="cronologia-ambito">la Gastronomía europea en la edad mediA</p>
+  <p class="cronologia-ambito">1492 - 1600</p>
+  <p class="cronologia-ambito">LA Gastronomía europea en el renacimiento</p>
+  <p class="cronologia-ambito">1600 - 1780</p>
+  <p class="cronologia-ambito">la gran cocina francesa</p>
+  <p class="cronologia-ambito">1780 - 1903</p>
+  <p class="cronologia-ambito">Aparición del restaurante gastronómico</p>
+  <p class="cronologia-ambito">1903 - 1965</p>
+  <p class="cronologia-ambito">Clasicismo codificado</p>
+  <p class="cronologia-ambito">1965 - Presente</p>
+  <p class="cronologia-ambito">Posclasicismo</p>
+  <p class="cronologia-ambito">1965 - Presente</p>
+  <p class="cronologia-ambito">Primera vanguardia</p>
+  <p class="cronologia-ambito">Nouvelle cuisine</p>
+  <p class="cronologia-ambito">1994 - Presente</p>
+  <p class="cronologia-ambito">Segunda vanguardia</p>
+  <p class="cronologia-ambito">Cocina tecnoemocional</p>
+</div>
+
+<h2 id="nombres-con-los-que-denominamos-a-los-rg-segun-su-oferta-de--14">Nombres con los que denominamos a los RG según su oferta de comida</h2>
+
+<p>En España, que es el ámbito de referencia que vamos a utilizar para este apartado, los establecimientos reciben diferentes nombres según su especialización. En general, este nombre especializado puede aparecer en la propia denominación del establecimiento, aunque no es obligatorio. Un establecimiento como el Restaurante Botafumeiro de Barcelona ocasionalmente podría haberse llamado también Marisquería Botafumeiro o Restaurante-Marisquería Botafumeiro.</p>
+
+<p>Debemos tener en cuenta que hay que distinguir entre tipo de comida (para la RAE, comida es «lo que se come y bebe para nutrirse») y tipo de cocina (para la RAE, cocina es «arte o manera especial de guisar de cada país y de cada cocinero»). Existen restaurantes que centran su oferta en un tipo de comida —por ejemplo, los que se centran en un producto protagonista, como la comida vegetariana o el arroz— y otros, en tipos de cocina —por ejemplo, los que se centran en una técnica concreta (como los asadores), en cocinas foráneas (como la china o la mexicana) o en conceptos (como el bufet o la barra)—.</p>
+
+<p>En ocasiones, algunos nombres pueden ser casi coincidentes y el uso de uno u otro puede depender más de la decisión del propietario que de una definición estricta que separe uno de otro. Es el caso de las fondas, mesones y casas de comidas, por ejemplo, que a menudo se confunden en el imaginario público y resultan casi equivalentes. En España, algunos de los nombres que se utilizan para denominar los establecimientos pueden tener origen regional (por ejemplo, chigre), nacional e incluso extranjero (por ejemplo, ramen bar).</p>
+
+<p>Arrocería: restaurante especializado en arroces, con una oferta que suele incluir paellas, arroces caldosos y otras recetas tradicionales. Muy común en la Comunidad Valenciana.</p>
+
+<p>Asador: establecimiento de restauración cuya identidad culinaria se basa en el asado de productos —especialmente carnes— en hornos, parrillas o dispositivos de fuego directo, generando cocciones uniformes, doradas y aromáticas.</p>
+
+<p>Bar: establecimiento público donde se sirven bebidas —alcohólicas o no— y, con frecuencia, comidas ligeras o tapas, para consumirse en la barra o en mesas, en un ambiente informal y social.</p>
+
+<p>Bar de menú: establecimiento de restauración que ofrece comidas completas a precio fijo, generalmente en formato de menú del día, con primeros, segundos y postre o café, con bebidas incluidas o no, destinado a un público cotidiano.</p>
+
+<p>Bistró: restaurante de inspiración francesa con una carta reducida pero cuidada, basado en productos frescos de mercado y con un ambiente íntimo y acogedor.</p>
+
+<p>Bodega: local vinculado al vino, dedicado a su almacenamiento y servicio, donde suelen ofrecerse también tapas o comidas sencillas.</p>
+
+<p>Brasería: establecimiento especializado en platos cocinados a la brasa, ya sea con carbón vegetal, leña o parrilla metálica a alta temperatura. Prioriza el sabor ahumado y las técnicas de asado tradicionales.</p>
+
+<p>Brunch: combina desayuno (breakfast) y almuerzo (lunch), y suele hacerse a media mañana o a mediodía, normalmente los fines de semana.</p>
+
+<p>Bufet: establecimiento donde los comensales se sirven ellos mismos y eligen libremente entre una variedad de EQSD expuestas, pagando un precio fijo y pudiendo repetir las veces que deseen.</p>
+
+<p>Casa de comidas: Ofrece elaboraciones caseras y de cocina popular, elaboradas de forma sencilla y a menudo con productos locales y de temporada, en un ambiente familiar y sin pretensiones.</p>
+
+<p>Cevichería: restaurante de cocina peruana centrado en ceviches, tiraditos y otros platos de mariscos y pescados.</p>
+
+<p>Chigre: Variante asturiana de la sidrería, caracterizada por un ambiente popular y rústico donde se escancia sidra y se sirven tapas tradicionales.</p>
+
+<p>Fonda: restaurante modesto, generalmente dentro de un alojamiento pequeño, con comida casera a precios accesibles.</p>
+
+<p>Gastrobar: establecimiento basado en las tapas cuya propuesta gastronómica la elabora un gran chef, con una actitud creativa. Su nivel e intensidad dependerán del chef que lidere el proyecto.</p>
+
+<p>Hamburguesería: restaurante especializado en una oferta de hamburguesas y los complementos asociados a estas.</p>
+
+<p>Kebab/Döner kebab: establecimientos de comida rápida con carne asada en un pincho vertical, servida en pan de pita o durum con ensalada y salsas. Estamos en una zona gris: puede haber distintos niveles de calidad y aunque puede existir alguno en formato restaurante, lo habitual y mayoritario es el formato street food.</p>
+
+<p>Marisquería: restaurante donde el marisco es el protagonista, preparado a la plancha, cocido o generalmente con recetas tradicionales. Son habituales en zonas costeras y grandes ciudades. Hoy existen las marisquerías de autor, donde se han acortado las cocciones y existe una actitud creativa.</p>
+
+<p>Mezze bar: establecimiento de cocina árabe o mediterránea que sirve pequeños platos para compartir, como hummus, falafel y kebabs.</p>
+
+<p>Mesón: restaurante de cocina tradicional, generalmente con decoración rústica y una oferta de EQSD caseras, carnes a la brasa y vinos de la tierra. Suele asociarse con ambientes acogedores y comida abundante.</p>
+
+<p>Ostrería: restaurante especializado en ostras. Inicialmente abiertas sin elaboración, en tiempos recientes también se elaboran a la gallega, en ceviche, con suquet, etc.</p>
+
+<p>Pizzería: restaurante especializado en pizzas, generalmente en un horno de leña, y de varios estilos: napolitano, romano, americano, etc. Los entrantes se conocen como antipasti.</p>
+
+<p>Pulpería: local especializado en la preparación del pulpo, especialmente en la receta gallega «pulpo a feira». Es habitual en ferias y eventos gastronómicos.</p>
+
+<p>Ramen-ya/Ramen bar: pequeño local especializado en ramen japonés.</p>
+
+<p>Rodizio: restaurante brasileño donde se sirven carnes asadas en espadas, en un servicio con cortes ilimitados.</p>
+
+<p>Sidrería: establecimiento típico del norte de España donde se sirve sidra natural acompañada de platos tradicionales, como tortillas de bacalao o chuletas a la brasa.</p>
+
+<p>Steakhouse: restaurante de estilo americano donde la carne de vacuno es la protagonista. Se sirve en diferentes cortes y grados de cocción.</p>
+
+<p>Sushi bar: restaurante japonés especializado en sushi y sashimi. Donde se puede servir también tempura y otros platos típicos de la gastronomía nipona.</p>
+
+<p>Taberna gastronómica: combina la esencia de una taberna tradicional con una propuesta culinaria innovadora y de calidad, fusionando tradición y modernidad.</p>
+
+<p>Taquería: establecimiento de comida mexicana especializado en tacos, quesadillas y otros antojitos.</p>
+
+<p>Trattoria: restaurante italiano de ambiente familiar y acogedor que ofrece platos tradicionales, como antipasto, pasta, risotto, pescados y carnes. Es más informal que un ristorante.</p>
+
+<p>Venta: restaurante de carretera que ofrece comida casera y abundante, ideal para viajeros. Tradicionalmente se situaban en caminos y rutas comerciales.</p>
+
+<p>Wok: bufet libre de comida asiática donde el cliente elige los productos y el chef los cocina al wok o a la plancha en el momento.</p>
+
+<h2 id="casos-especiales-que-no-son-restaurantes-15">Casos especiales que no son restaurantes</h2>
+
+<p>Bar de vinos/Wine bar/Enoteca: establecimientos donde se sirven vinos por copa o botella con cierto nivel de asesoramiento experto, acompañados de oferta de comida, habitualmente en forma de tapas o pequeñas raciones. En el caso de la enoteca, los vinos suelen ser de alta gama.</p>
+
+<p>Coctelería/Lounge bar: especializado en cócteles clásicos y de autor, con un ambiente elegante y bartenders profesionales. En el caso del lounge bar el ambiente suele ser moderno y sofisticado, con música relajada y cócteles prémium.</p>
+
+<p><strong>Restaurante: según Sapiens: establecimiento público donde se produce una transacción comercial entre quien ofrece un producto y un servicio —comida y bebida— y quien los recibe a cambio de una contraprestación económica. Habitualmente, la comida y la bebida se consumen in situ, aunque existe una zona gris formada por establecimientos en los que conviven modalidades como el take away o el delivery.</strong></p>
+
+<p>Método comparativo</p>
+
+<figure>
+  <img src="assets/mg_2756_66170e64_0e93c150f1-60b940.jpg" alt="" loading="lazy" />
+</figure>
+
+<figure>
+  <img src="assets/shutterstock_2552262695_ceadeb34_8b021e7b97-34ac08.jpg" alt="" loading="lazy" />
+</figure>
+
+<figure>
+  <img src="assets/mg_3529_5dedf0d9_3c98ce7f69-9e13c9.jpg" alt="" loading="lazy" />
+</figure>
+
+<figure>
+  <img src="assets/shutterstock_2175517647_0a8e7dc4_59368d7dc7-c2120b.png" alt="" loading="lazy" />
+</figure>
+
+<figure>
+  <img src="assets/shutterstock_686582344_5e5758e4_2a7d2cc1ff-d9aecf.jpg" alt="" loading="lazy" />
+</figure>
+
+<figure>
+  <img src="assets/nino_viejo_espai_4_49810eef_e6b2abedef-53e4e6.jpg" alt="" loading="lazy" />
+</figure>
+
+<figure>
+  <img src="assets/mg_0523_58546769_d0f8af8c29-0792ad.jpg" alt="" loading="lazy" />
+</figure>
+
+<p><strong>Existen diferentes guías con distintas clasificaciones. Cada una hace la suya y clasifica los restaurantes según su criterio.</strong></p>
+
+<figure>
+  <img src="assets/mockup_01_edeafe39_447a433948-8425a8.png" alt="" loading="lazy" />
+</figure>
+
+<h2 id="tipos-de-rg-16">Tipos de RG</h2>
+
+<p>Todos los tipos de oferta de comida pueden ser o no gastronómicos, ya que la gastronomía se basa en la búsqueda rigurosa de la calidad en todos los aspectos que intervienen en la oferta (los productos, los procesos, las elaboraciones, el servicio, el interiorismo, etc.).</p>
+
+<p>Por ejemplo, existen establecimientos gastronómicos basados en la oferta excelente de una elaboración concreta, como podrían ser la mejor pizzería o la mejor hamburguesería de tu ciudad, que por su calidad de comida y de elaboración, son gastronómicos, aunque el servicio o el interiorismo puedan ser relajados o sencillos. Hay que descartar la asociación del RG con un único tipo de establecimiento ligado a una oferta de alta cocina con servicio formal.</p>
+
+<p>Existen numerosas preguntas que nos podemos hacer para obtener diferentes clasificaciones de restaurantes gastronómicos y, al contrario de lo que sucede en el caso de los nombres, puede pasar que un mismo establecimiento aparezca en diferentes clasificaciones. En función del tipo de oferta, podemos distinguir diversos tipos de restaurantes gastronómicos.</p>
+
+<h3 id="1-segun-el-tipo-de-producto-dominante-17">1. Según el tipo de producto dominante*</h3>
+
+<ul>
+  <li>Mund<strong>o ve</strong>getal: restaurantes donde lo vegetal predomina, llegando al caso extremo de los restaurantes vegetarianos y veganos.</li>
+  <li>Mundo animal terrestre: restaurantes especializados, por ejemplo, en la cocina de caza.</li>
+  <li>Mundo animal acuático: restaurantes habitualmente especializados en la cocina del mundo acuático como pescados y mariscos.</li>
+  <li>Oferta integral: restaurantes no especializados donde la oferta abarca todas las familias de producto.</li>
+</ul>
+
+<p>* Tal como hemos visto en la clasificación por nombres, este criterio permite también diferenciar con precisión cuando utilizamos el criterio de un producto concreto, por ejemplo: marisquerías, arrocerías, etc.</p>
+
+<h3 id="2-segun-el-origen-y-tratamiento-del-producto-18">2. Según el origen y tratamiento del producto</h3>
+
+<p>Nos enfocamos en establecimientos basados en productos de calidad.</p>
+
+<ul>
+  <li><strong>Productos de kilómetro cero o territorio:</strong> productos locales, estacionales y con identidad geográfica.</li>
+  <li><strong>Productos externos, lejanos o importados:</strong> no existe una definición estandarizada de producto lejano, pero existen establecimientos con amplia oferta o especialización en productos no locales, en ocasiones centrados en la importación.</li>
+  <li><strong>Producto de lujo:</strong> ingredientes exclusivos, muchas veces exóticos o difíciles de conseguir.</li>
+  <li><strong>Producto transformado de autor:</strong> la materia prima es recreada, fermentada, madurada o intervenida con técnicas y una filosofía propia.</li>
+</ul>
+
+<h3 id="3-segun-la-tecnica-o-tecnicas-principales-19">3. Según la técnica o técnicas principales</h3>
+
+<ul>
+  <li><strong>Restaurantes con técnica de cocción dominante:</strong> establecimientos especializados, por ejemplo, un asador (cocción con parrilla u horno), una cevichería (marinados ácidos), un restaurante centrado en la cocina de fermentación, etc.</li>
+</ul>
+
+<h3 id="4-segun-el-criterio-geografico-o-cultural-20">4. Según el criterio geográfico o cultural</h3>
+
+<ul>
+  <li><strong>Restaurante de cocina local:</strong>corresponde a ámbitos como una comarca, una población o un conjunto de poblaciones. Está profundamente arraigada a productos y técnicas de una zona específica.</li>
+  <li><strong>Restaurante de cocina regional:</strong>en relación con una región concreta, por ejemplo, catalana, andaluza, madrileña, gallega, etc.</li>
+  <li><strong>Restaurante de cocina de un país:</strong>en relación con un país: japonesa, española, mexicana, etc.</li>
+  <li><strong>Restaurante de cocina por ámbito geográfico o cultural amplio:</strong> en relación con una región amplia que abarca diversos países: mediterránea, asiática, africana, etc.</li>
+  <li><strong>Restaurante de cocina fusión:</strong> este concepto es muy amplio y puede crear confusión. El diálogo cultural entre cocinas ha existido desde las civilizaciones antiguas. Aun así, denominamos cocina fusión al concepto nacido en la década de los 70 del siglo xx, cuando los cocineros occidentales mezclaron técnicas europeas con ingredientes asiáticos. En los años 90 se popularizó en Estados Unidos (especialmente en California/Los Ángeles) y países como Australia y Singapur también fueron relevantes en la expansión de esta mezcla consciente y creativa de tradiciones culinarias distintas para crear algo nuevo. Junto a otras razones estructurales, este tipo de restaurantes que ofrecen elaboraciones de distintas cocinas puede ser un factor de homogenización global de la oferta.</li>
+  <li><strong>Restaurante de oferta ecléctica:</strong> productos y técnicas de múltiples orígenes se ofrecen en forma de EQSD dentro de un mismo restaurante.</li>
+</ul>
+
+<h3 id="5-segun-la-localizacion-del-restaurante-21">5. Según la localización del restaurante</h3>
+
+<ul>
+  <li><strong>Urbana:</strong> restaurantes gastronómicos localizados en una ciudad; son los más habituales y existen con todo tipo de oferta.</li>
+  <li><strong>Rural:</strong>localizados en el campo, su oferta está generalmente ligada a la cocina tradicional, aunque sea refinada, y suele ser estacional. Existen también ejemplos de restaurantes en el mundo rural dedicados por completo a la creatividad e incluso la vanguardia.</li>
+  <li><strong>Litoral:</strong> situados en la costa, son restaurantes donde suele prevalecer una oferta de productos del mar y cocina asociada a los mismos.</li>
+  <li><strong>Montaña:</strong> situados en zonas montañosas, suele tener asociada una cocina estacional sincronizada con los productos locales, aunque no es imprescindible.</li>
+</ul>
+
+<h3 id="6-casos-especiales-de-localizacion-singular-22">6. Casos especiales de localización singular</h3>
+
+<ul>
+  <li><strong>Restaurante de hotel:</strong> restaurante dentro de un hotel, que puede ir desde un bufet básico hasta un espacio de alta cocina con estrella Michelin.</li>
+  <li><strong>Restaurante de club deportivo:</strong> local dentro de un club de golf, náutico o polideportivo, con menús adaptados a los socios y eventos del club.</li>
+  <li><strong>Restaurante en un barco:</strong> establecimiento instalado a bordo de una embarcación, que ofrece comidas y bebidas durante la navegación o el puerto, adaptado al espacio y condiciones marítimas.</li>
+  <li><strong>Refugio de montaña:</strong> establecimiento situado en un refugio donde se prepara comida contundente de alto contenido calórico y fortificante.</li>
+  <li><strong>Otras clasificaciones posibles</strong></li>
+</ul>
+
+<h3 id="7-segun-si-es-alta-cocina-o-tradicional-23">7. Según si es alta cocina o tradicional</h3>
+
+<ul>
+  <li><strong>Restaurantes de cocina tradicional refinada:</strong> centrados en la preservación de recetas y métodos históricos con excelencia técnica y rigor cultural. Denominamos refinada a la interpretación de la cocina tradicional con el filtro de la máxima calidad y la actitud gastronómica.</li>
+  <li><strong>Restaurantes de alta cocina creativa:</strong> ofrecen propuestas culinarias de alta calidad, técnicas avanzadas, investigación gastronómica y un alto componente estético y simbólico.</li>
+  <li><strong>Restaurante de oferta ecléctica:</strong> su oferta es una mezcla de tipos de cocina, aunque habitualmente uno de los tipos representa la columna vertebral de la oferta.</li>
+</ul>
+
+<h3 id="8-segun-la-epoca-movimiento-estilo-24">8. Según la época/movimiento/estilo</h3>
+
+<ul>
+  <li><strong>Restaurante de cocina tradicional</strong></li>
+  <li><strong>Restaurante de alta cocina clásica (clasicismo codificado)</strong></li>
+  <li><strong>Restaurante del movimientonouvelle cuisine</strong></li>
+  <li><strong>Restaurante del movimiento tecnoemocional</strong></li>
+  <li><strong>Restaurante ecléctico que ofrece varios de los movimientos anteriores</strong></li>
+  <li><strong>Sin referencia a época o movimiento concreto</strong></li>
+</ul>
+
+<h3 id="9-segun-el-nivel-de-innovacion-culinaria-25">9. Según el nivel de innovación culinaria</h3>
+
+<p>En los restaurantes gastronómicos, se contempla el enfoque clásico (basado en la reproducción de las bases de la codificación de Escoffier) y el creativo, que admite distintos niveles: desde aportaciones puntuales hasta el grado máximo de creación e innovación, personificado en la cocina de vanguardia. La diferencia entre innovación y creatividad es que la innovación es el resultado exitoso —a nivel comercial— de la aplicación de alguna propuesta creativa.Los restaurantes de cocina tradicional no tienen un enfoque creativo si no es su origen, aunque cuando su oferta es de cocina tradicional refinada, sí que admiten una mirada creativa y estamos en una zona gris.</p>
+
+<h3 id="10-segun-si-dispone-o-no-de-una-propuesta-adaptada-a-princip-26">10. Según si dispone o no de una propuesta adaptada a principios morales y/o éticos</h3>
+
+<ul>
+  <li><strong>Restaurante gastronómico vegetariano</strong></li>
+  <li><strong>Restaurante gastronómico vegano</strong></li>
+  <li><strong>Restaurante gastronómico crudivegano</strong></li>
+  <li><strong>Restaurante gastronómico deslow food/km0</strong></li>
+  <li><strong>Otras clasificaciones posibles</strong></li>
+</ul>
+
+<p>Actualmente también existe una creciente categoría de restaurantes sensibles a diferentes alergias e intolerancias, como por ejemplo al gluten, que no se definen estrictamente por un motivo ético pero que moldean su oferta para adaptarse y ser sensible a estas necesidades.</p>
+
+<h3 id="11-segun-si-dispone-o-no-de-una-propuesta-adaptada-a-princip-27">11. Según si dispone o no de una propuesta adaptada a principios religiosos</h3>
+
+<p>Existen restaurantes gastronómicos adscritos a alguna tendencia religiosa:</p>
+
+<ul>
+  <li><strong>Restaurante gastronómico de comida halal</strong></li>
+  <li><strong>Restaurante gastronómico de comida kosher</strong></li>
+  <li><strong>No adscrito a ninguna tendencia religiosa</strong></li>
+  <li><strong>Otras clasificaciones posibles</strong></li>
+</ul>
+
+<h3 id="12-segun-la-estructura-de-la-oferta-de-comida-28">12. Según la estructura de la oferta de comida</h3>
+
+<ul>
+  <li><strong>Menú (a elegir entre opciones cerradas)</strong></li>
+  <li><strong>Menú degustación largo</strong></li>
+  <li><strong>Menú degustación corto</strong></li>
+  <li><strong>Carta</strong></li>
+  <li><strong>Bufet</strong></li>
+  <li><strong>Formato tapas</strong></li>
+  <li><strong>Combinación de las anteriores</strong></li>
+</ul>
+
+<h3 id="13-segun-la-estructura-de-la-oferta-de-bebida-29">13. Según la estructura de la oferta de bebida</h3>
+
+<ul>
+  <li><strong>Oferta de bebida incluida en la oferta general:</strong> sin especialista en bebida.</li>
+  <li><strong>Oferta de bebida diferenciada de la oferta de comida:</strong>con especialista, oferta estructurada en carta y diferenciada por tipos de bebidas (aguas, vino, cerveza, cócteles, destilados, etc.).</li>
+  <li><strong>Oferta de bebida integrada con la oferta de comida:</strong> con especialista y estructurada en maridaje.</li>
+</ul>
+
+<h3 id="14-segun-el-modelo-de-servicio-y-la-experiencia-del-comensal-30">14. Según el modelo de servicio y la experiencia del comensal</h3>
+
+<ul>
+  <li><strong>Experiencia formal de lujo:</strong> servicio altamente protocolizado, sumiller, maridajes, menús degustación largos.</li>
+  <li><strong>Experiencia inmersiva o sensorial:</strong> intervenciones artísticas, narrativas gastronómicas, interacciones con el chef.</li>
+  <li><strong>Experiencia personalizada:</strong> adaptabilidad a alergias, preferencias, historia del comensal como parte del menú.</li>
+  <li><strong>Experiencia informal:</strong> propuesta más relajada donde el protocolo se rebaja y la interacción es distendida.</li>
+</ul>
+
+<h3 id="15-segun-el-tipo-de-servicio-31">15. Según el tipo de servicio</h3>
+
+<ul>
+  <li><strong>Se sirve en mesa al comensal.</strong></li>
+  <li><strong>Se sirve en barra al comensal.</strong></li>
+  <li><strong>El cliente va a buscar la comida:</strong>bufet y autoservicio.</li>
+</ul>
+
+<h3 id="16-segun-el-precio-target-32">16. Según el precio/target</h3>
+
+<ul>
+  <li><strong>Restaurantes con ticket medio de más de 300 €:</strong>son los restaurantes de más alta gama dentro del restaurante gastronómico.</li>
+  <li><strong>Restaurantes con ticket medio de 100 a 300 €:</strong>habitual en restaurantes de alta cocina y de cocina tradicional refinada, sobre todo con presencia importante de oferta de marisco.</li>
+  <li><strong>Restaurantes con ticket medio de 50 a 100 €:</strong>frecuentemente ligado a propuestas tipo bistró o gastrobar, por ejemplo.</li>
+  <li><strong>Restaurantes con ticket medio de menos de 50 €:</strong>infrecuente en los restaurantes gastronómicos no especializados, pero muy plausible en algunas de las especializaciones (pizzería, hamburguesería, etc.) o en las ofertas de carácter más informal y distendido, como las tabernas gastronómicas.</li>
+</ul>
+
+<h3 id="17-segun-el-nivel-de-lujo-33">17. Según el nivel de lujo</h3>
+
+<p>Aspecto íntimamente ligado al nivel de precio, aunque podemos encontrar ofertas con una oferta lujosa que pueden resultar en niveles de precio que no son necesariamente los más elevados, pese a que el lujo siempre conlleva un coste asociado, por supuesto.</p>
+
+<ul>
+  <li><strong>Nivel de lujo muy alto</strong></li>
+  <li><strong>Nivel de lujo alto</strong></li>
+  <li><strong>Nivel de lujo medio</strong></li>
+  <li><strong>Nivel de lujo bajo</strong></li>
+</ul>
+
+<h3 id="18-segun-el-tipo-de-cliente-34">18. Según el tipo de cliente</h3>
+
+<ul>
+  <li><strong>Restaurantes enfocados en un público de determinada edad:</strong> jóvenes, tercera edad, etc.</li>
+  <li><strong>Restaurantes enfocados según el género:</strong> aunque infrecuentes, existen establecimientos más pensados o enfocados para público masculino o femenino…</li>
+</ul>
+
+<h3 id="19-segun-el-ambiente-35">19. Según el ambiente</h3>
+
+<p>El ambiente está formado por la suma de la oferta gastronómica (comida, bebida, interiorismo, servicio, etc.) y por los clientes (jóvenes, tercera edad, marchosos, tranquilos, etc.).</p>
+
+<ul>
+  <li><strong>Restaurantes de ambiente formal</strong></li>
+  <li><strong>Restaurantes de ambiente casual</strong></li>
+  <li><strong>Restaurantes de ambiente popular</strong></li>
+  <li><strong>Otras clasificaciones posibles</strong></li>
+</ul>
+
+<h3 id="20-segun-el-numero-de-personas-que-asisten-a-un-rg-36">20. Según el número de personas que asisten a un RG</h3>
+
+<ul>
+  <li><strong>Restaurantes especializados en grupos:</strong>para celebraciones, salidas en grupo de gente joven, etc.</li>
+  <li><strong>Restaurantes enfocados en parejas:</strong> suelen ser establecimientos enfocados en un ambiente romántico.</li>
+  <li><strong>Restaurantes con enfoque individual:</strong>pensados para personas que buscan intimidad o rapidez, o que viajan o trabajan solas.</li>
+</ul>
+
+<h3 id="21-segun-donde-se-degustan-sus-eqsd-37">21. Según dónde se degustan sus EQSD</h3>
+
+<p>Para Sapiens, el restaurante requiere que las elaboraciones se consuman in situ. Por tanto, quedan en la zona gris aquellas ofertas de take away y delivery de restaurantes que ofrecen también estas opciones.</p>
+
+<h3 id="22-segun-las-posibles-opciones-de-reserva-38">22. Según las posibles opciones de reserva</h3>
+
+<ul>
+  <li><strong>Walk in, sin sistema de reserva</strong></li>
+  <li><strong>Con reserva (sin depósito)</strong></li>
+  <li><strong>Por teléfono</strong></li>
+  <li><strong>En web</strong></li>
+  <li><strong>En plataformas de reservas</strong></li>
+  <li><strong>In situ</strong></li>
+  <li><strong>Combinación de las anteriores/todas las anteriores</strong></li>
+  <li>Con reserva y depósito que se cobra en caso de no show</li>
+  <li>Combinación de walk in junto a sistema de reserva</li>
+</ul>
+
+<h3 id="23-segun-las-franjas-horarias-en-las-que-presta-servicio-39">23. Según las franjas horarias en las que presta servicio</h3>
+
+<ul>
+  <li><strong>Restaurante gastronómico que presta servicio de mañana (desayuno)</strong></li>
+  <li><strong>Restaurante gastronómico que presta servicio de media mañana (brunch)</strong></li>
+  <li><strong>Restaurante gastronómico que presta servicio de mediodía (aperitivo y/o almuerzo o comida)</strong></li>
+  <li><strong>Restaurante gastronómico que presta servicio de media tarde (merienda)</strong></li>
+  <li><strong>Restaurante gastronómico que presta servicio de tarde (aperitivo de tarde o cóctel)</strong></li>
+  <li><strong>Restaurante gastronómico que presta servicio de noche (cena y/o recena)</strong></li>
+  <li><strong>Restaurante gastronómico que presta servicio en dos franjas horarias (combinación de las anteriores)</strong></li>
+  <li><strong>Restaurante gastronómico que presta servicio en más de dos franjas horarias (combinación de las anteriores)</strong></li>
+</ul>
+
+<h3 id="24-segun-presencia-mediatica-y-en-redes-sociales-40">24. Según presencia mediática y en redes sociales</h3>
+
+<ul>
+  <li><strong>Con mucha presencia mediática/con nivel alto de presencia mediática</strong></li>
+  <li><strong>Con presencia mediática/con nivel medio de presencia mediática</strong></li>
+  <li><strong>Con poca presencia mediática/con nivel bajo de presencia mediática</strong></li>
+  <li><strong>Sin presencia mediática</strong></li>
+</ul>
+
+<h3 id="25-segun-inclusion-en-rankings-de-prestigio-y-guias-gastrono-41">25. Según inclusión en rankings de prestigio y guías gastronómicas</h3>
+
+<ul>
+  <li><strong>Restaurante gastronómico que está referenciado en al menos una guía gastronómica o ranking</strong></li>
+  <li><strong>Restaurante gastronómico que aparece en guías de prestigio concretas, por ejemplo, la Guía Michelin</strong></li>
+  <li><strong>Restaurante gastronómico que está referenciado en varias guías gastronómicas</strong></li>
+  <li><strong>Restaurante gastronómico que ha sido galardonado por al menos una guía gastronómica.</strong></li>
+  <li><strong>Restaurante gastronómico que ha sido galardonado por varias guías gastronómicas</strong></li>
+  <li><strong>Restaurante gastronómico no referenciado ni premiado por ninguna guía gastronómica</strong></li>
+</ul>
+
+<h3 id="26-estructura-empresarial-o-modelo-de-gestion-42">26. Estructura empresarial o modelo de gestión</h3>
+
+<ul>
+  <li><strong>Restaurante independiente, propiedad individual, de grupo reducido o de familia</strong></li>
+  <li><strong>Restaurante asociado a un grupo gastronómico o marca de lujo</strong></li>
+  <li><strong>Restaurante dentro de un hotel de alta gama.</strong></li>
+  <li><strong>Restaurante efímero opop-upgastronómico (a veces itinerante, temporal, experimental)</strong></li>
+</ul>
+
+<p>Método clasificatorio</p>
+
+<figure>
+  <img src="assets/shutterstock_2477898011_4244137e_7830809b30-2cda2a.jpg" alt="" loading="lazy" />
+</figure>
+
+<figure>
+  <img src="assets/shutterstock_2267795921_a74f4984_5e335d0bba-438e3f.jpg" alt="" loading="lazy" />
+</figure>
+
+<figure>
+  <img src="assets/shutterstock_2479302217_c3190dfd_110d00f631-9dd9b2.jpg" alt="" loading="lazy" />
+</figure>
+
+<figure>
+  <img src="assets/shutterstock_2522753805_b931415c_75b04f933b-fbddfe.jpg" alt="" loading="lazy" />
+</figure>
+
+<figure>
+  <img src="assets/shutterstock_2336775699_7b52acf4_fea54dc4e1-8ba826.jpg" alt="" loading="lazy" />
+</figure>
+
+<figure>
+  <img src="assets/shutterstock_2097638398_d3bf8bcb_e693b165c2-c916b0.jpg" alt="" loading="lazy" />
+</figure>
+
+<figure>
+  <img src="assets/shutterstock_2590409067_3bec413b_1f0389d697-4a854c.jpg" alt="" loading="lazy" />
+</figure>
+
+<figure>
+  <img src="assets/shutterstock_2583396761_15aeb012_8f9c2a3c5b-49dce5.jpg" alt="" loading="lazy" />
+</figure>
+
+<p><strong>Restaurante gastronómico</strong></p>
+
+<p>La piedra angular de Sapiens</p>
+
+<p>Primero aplicamos la</p>
+
+<p>y después el</p>
+
+<p>al</p>
+
+<p><strong>El método sistémico</strong></p>
+
+<p><strong>Teoría general de sistemas</strong></p>
+
+<p><strong>Pensamiento sistémico</strong></p>
+
+<figure>
+  <img src="assets/naturaleza_5ade1831_2b9e31a5d5-507627.png" alt="" loading="lazy" />
+</figure>
+
+<h2 id="el-restaurante-el-contexto-de-la-naturaleza-el-ser-humano-y--43">El restaurante: el contexto de la naturaleza, el ser humano y las actividades humanas en la sociedad</h2>
+
+<p>Nuestra interpretación de la teoría general de sistemas consiste en contextualizar el objeto de estudio en la naturaleza, el ser humano y la acción del ser humano.</p>
+
+<p>La contextualización del restaurante, en primer lugar, en relación con la naturaleza, implica fijarnos especialmente en la biosfera, y en los recursos naturales. De la naturaleza proviene la materia prima de los productos alimentarios, tanto los no elaborados como los elaborados, que se utilizan en el restaurante, así como la energía.</p>
+
+<p>En muchos casos, esos productos, en su estado original, no provienen de la naturaleza directamente, sino que son resultado de actividades humanas, principalmente la agricultura, ganadería, pesca y acuicultura. Aun así, la naturaleza es el origen histórico y el entorno en el que se desarrollan esas actividades humanas que abastecen al restaurante.</p>
+
+<p>La naturaleza comprende la geografía, el relieve, el tipo de suelo, el agua, la atmósfera y, por extensión, el clima en todas sus escalas: desde las estaciones del año hasta los microclimas de una zona concreta. También incluye los materiales inorgánicos y los seres vivos no comestibles que conforman el paisaje y el entorno físico del restaurante. Todos estos elementos actúan como condicionantes fundamentales: tanto aquellos relativamente estables y de evolución lenta —que pueden representar oportunidades o amenazas— como aquellos asociados a fenómenos climáticos extremos, más imprevisibles y potencialmente disruptivos.</p>
+
+<p>El entorno natural también es receptor de impactos, que pueden ser perjudiciales y están generados por el restaurante: desde los residuos que provienen de la merma, el desperdicio y los deshechos alimentarios y de todo tipo, incluidos los envases, hasta la huella de carbono y la contaminación atmosférica, directa o indirectamente. También existen impactos más indirectos y sutiles, como la huella hídrica o la contaminación lumínica, acústica o térmica. E incluso los hay positivos, como la recuperación del suelo, de la biodiversidad, etc.</p>
+
+<p>La contextualización del restaurante en relación con el ser humano pasa, en primer lugar, por la vertiente física y la relación más directa con el cuerpo humano y sus diferentes sistemas, tanto desde el punto de vista del comensal como del profesional.</p>
+
+<p>También hay relaciones menos obvias, a nivel físico, con el resto de sistemas del cuerpo humano. Por ejemplo, la ergonomía del mobiliario (sillas y altura de la mesa) impacta en la postura del cuerpo; la comodidad, la calidad del aire, la ventilación y los olores de la sala impactan en el sistema respiratorio; la activación o relajación provocadas por el ruido o la iluminación impactan en el sistema sensorial y también en el nervioso y el cardiorespiratorio y en la vertiente sensorial…</p>
+
+<p>Para el personal del restaurante también son relevantes el impacto físico de estar de pie de forma prolongada, de hacer movimientos repetitivos, del ritmo acelerado, de estar expuesto a humos u otros vapores o sustancias en la cocina, del riesgo de lesiones, de insensibilidad o fatiga olfativa o gustativa por la sobreexposición a estímulos, del estrés auditivo por el ruido, de la paradoja de comer rápido, mal y a deshoras, del riesgo de deshidratación, etc.</p>
+
+<p>También otras vertientes como la genética, la de salud o la psíquica, que conectan la salud mental con el bienestar emocional y lo social. Tienen un rol importante la memoria y los recuerdos, o la posibilidad de disfrutar, de sorprenderse positiva o negativamente, de frustrarse cuando no se corresponden expectativa y realidad.</p>
+
+<p>Y para el personal, a nivel emocional, son relevantes la adrenalina y el estrés del directo y la inmediatez, y en el caso del personal de sala, la posible disonancia emocional por la necesidad de mostrar amabilidad al margen del estado de ánimo real.</p>
+
+<p><strong>El rg en relación con la naturaleza</strong></p>
+
+<figure>
+  <img src="assets/oil_pump_on_the_oil_field_in_the_night_2025_01_16_23_28_26_u-78e0e5.jpg" alt="" loading="lazy" />
+</figure>
+
+<p><strong>Petróleo</strong></p>
+
+<figure>
+  <img src="assets/wind_generator_turbines_view_in_the_station_on_the_2025_02_0-ef7d72.jpg" alt="" loading="lazy" />
+</figure>
+
+<p><strong>Viento</strong></p>
+
+<p>y gracias a ella hacemos funcionar la sociedad</p>
+
+<figure>
+  <img src="assets/oil_refinery_factory_at_the_cloudy_sky_petrochemi_2025_01_08-7aaa1f.jpg" alt="" loading="lazy" />
+</figure>
+
+<p><strong>Gas natural</strong></p>
+
+<p><strong>Recursos naturales</strong></p>
+
+<p>Se genera</p>
+
+<p>La naturaleza nos da recursos</p>
+
+<p><strong>renovable</strong></p>
+
+<figure>
+  <img src="assets/european_beech_fagus_sylvatica_woodland_in_rugen_2025_03_10_-e0bf87.jpg" alt="" loading="lazy" />
+</figure>
+
+<p><strong>bosques</strong></p>
+
+<p><strong>energía</strong></p>
+
+<figure>
+  <img src="assets/charcoal_on_black_floor_2025_03_12_22_35_52_utc_eb1a5de1_afc-cb7d4e.png" alt="" loading="lazy" />
+</figure>
+
+<p><strong>Carbón</strong></p>
+
+<p>Gracias a</p>
+
+<p><strong>No renovable</strong></p>
+
+<figure>
+  <img src="assets/green_jungle_of_the_national_park_2025_03_15_01_53_35_utc_98-dd7171.jpg" alt="" loading="lazy" />
+</figure>
+
+<p><strong>selvas</strong></p>
+
+<figure>
+  <img src="assets/sea_water_close_up_2024_12_02_18_28_45_utc_1e655a36_453a6ec2-042c93.jpg" alt="" loading="lazy" />
+</figure>
+
+<p><strong>Agua</strong></p>
+
+<figure>
+  <img src="assets/krafla_geothermal_power_plant_iceland_2025_03_18_14_58_00_ut-c99eea.jpg" alt="" loading="lazy" />
+</figure>
+
+<p><strong>geotermia</strong></p>
+
+<figure>
+  <img src="assets/sun_lit_earth_fast_motion_reduce_sight_zoom_out_2025_01_07_1-2321ff.jpg" alt="" loading="lazy" />
+</figure>
+
+<p><strong>Sol</strong></p>
+
+<figure>
+  <img src="assets/ser_humano_6523e395_664ddf5305-688854.png" alt="" loading="lazy" />
+</figure>
+
+<p>Además de los recursos naturales, qué recursos tiene el ser humano</p>
+
+<p><strong>El RG en relación con el ser humano</strong></p>
+
+<p><strong>Recursos inmateriales</strong></p>
+
+<p><strong>Recursos materiales</strong></p>
+
+<blockquote>
+  <p>Igual que una persona sorda no puede oír o una persona ciega no puede ver, también puede estar limitada la capacidad de percibir gustos, aromas o texturas. Al contrario, también existe el talento sensoperceptivo: cuando se tiene una capacidad extraordinaria</p>
+</blockquote>
+
+<p><strong>Recursos económicos</strong></p>
+
+<p><strong>Recursos personales</strong></p>
+
+<p><strong>Recursos cognitivos</strong></p>
+
+<p><strong>Capacidades</strong></p>
+
+<p><strong>Habilidades</strong></p>
+
+<p>Por último, en relación con los ámbitos de la actividad humana, con los que se da respuesta a las necesidades básicas, el restaurante está en el ámbito de la alimentación (comer y beber para nutrirse) y la gastronomía (degustar por placer) en estrecha relación con la agricultura, ganadería, pesca y acuicultura, y también con la industria alimentaria o el transporte de mercancías que abastecen al restaurante, o el ocio, del que forma parte el restaurante.</p>
+
+<p>Por su propia existencia, en tanto que empresa, es economía, concretamente microeconomía, y afectado por la macroeconomía, y tiene relación con el empleo y con todo lo relacionado con lo laboral (como las asociaciones empresariales y los sindicatos) y con el dinero (como, por ejemplo, la banca).</p>
+
+<p>También está conectado con muchos otros ámbitos, con conexiones más directas por su actividad del día a día o más indirectas, esporádicas, simbólicas… De hecho, conecta con otros muchos sectores de actividad económica y profesional, pero también con la educación, la cultura, el arte, el bienestar social, el activismo, etc.</p>
+
+<p>Nos dan los productos para cocinar y alimentarnos</p>
+
+<p><strong>Agricultura</strong></p>
+
+<p><strong>Pesca</strong></p>
+
+<p>Degustar por placer, hedonismo</p>
+
+<p><strong>Hostelería</strong></p>
+
+<p>Comer y beber para nutrirse</p>
+
+<p><strong>alimentación</strong></p>
+
+<p>Nuestro ámbito es la</p>
+
+<p><strong>Ganadería</strong></p>
+
+<p><strong>…</strong></p>
+
+<p><strong>gastronomía</strong></p>
+
+<p><strong>El RG en relación con las necesidades y las actividades del ser humano</strong></p>
+
+<p><strong>Catering</strong></p>
+
+<p>Tiene una vida</p>
+
+<p><strong>Industria alimentaria</strong></p>
+
+<p>La industria alimentaria cocina para nosotros</p>
+
+<p>Primero básicas y después cognitivas, emocionales, sociales, culturales, espirituales, etc.</p>
+
+<p><strong>privada</strong></p>
+
+<p><strong>Necesidades</strong></p>
+
+<p>Se tienen unas</p>
+
+<p><strong>Pública</strong></p>
+
+<p>Nos informamos</p>
+
+<p><strong>Información</strong></p>
+
+<p>Tenemos que estar sanos y tener una vivienda</p>
+
+<p>crean profesiones en distintos sectores</p>
+
+<p><strong>Salud</strong></p>
+
+<p>y nos expresamos a través del</p>
+
+<p>Se necesita trabajar y generar dinero</p>
+
+<p>Tenemos movilidad gracias al</p>
+
+<p><strong>empleo</strong></p>
+
+<p><strong>laboral</strong></p>
+
+<p><strong>Bienestar social</strong></p>
+
+<p><strong>transporte</strong></p>
+
+<p>Buscamos el</p>
+
+<p><strong>infraestructuras</strong></p>
+
+<p>Nos comunicamos gracias a las</p>
+
+<p><strong>Seguridad</strong></p>
+
+<p><strong>Justicia</strong></p>
+
+<p><strong>Telecomunicaciones</strong></p>
+
+<p><strong>Arte</strong></p>
+
+<p><strong>Ocio</strong></p>
+
+<p>Queremos</p>
+
+<p><strong>Vivienda</strong></p>
+
+<p><strong>Identidad humana</strong></p>
+
+<p><strong>social</strong></p>
+
+<p><strong>Dinero</strong></p>
+
+<p><strong>Artes aplicadas</strong></p>
+
+<p><strong>Bellas artes</strong></p>
+
+<p><strong>Turismo</strong></p>
+
+<p><strong>Urbanismo</strong></p>
+
+<p>Y nos educamos a través del conocimiento</p>
+
+<p>También podemos hacer autoaprendizaje</p>
+
+<p><strong>Educación</strong></p>
+
+<p>Y nos comunicamos</p>
+
+<p><strong>Comunicación</strong></p>
+
+<p><strong>Medios de comunicación (papel y digital)</strong></p>
+
+<p><strong>Redes sociales</strong></p>
+
+<p><strong>Audiovisual</strong></p>
+
+<p><strong>Radio</strong></p>
+
+<p><strong>Formación</strong></p>
+
+<p><strong>Personalidad</strong></p>
+</div><section class="clear-both mt-12 border-t border-rule pt-6.5"><h2 class="mb-5 font-display text-[22px] leading-tight font-bold text-navy">Recursos del capítulo</h2><ul class="grid grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-5"><li><a href="https://metodologiasapiens.com/" target="_blank" rel="noopener noreferrer" class="group flex h-full flex-col border border-rule transition-all hover:-translate-y-0.5 hover:border-navy hover:shadow-[0_12px_28px_rgba(0,0,0,.09)]"><div class="relative aspect-[4/3] overflow-hidden bg-panel"><img src="assets/da31b9b0_8e73_41cc_86dc_2f13e75452fc_8dfb6ec279-6bda73.png" alt="" loading="lazy" class="h-full w-full object-cover object-top"/></div><div class="flex flex-1 flex-col gap-1.5 px-4 pt-3.5 pb-4"><span class="text-label font-bold tracking-[1.4px] text-green-dark uppercase">Enlace</span><span class="font-display text-[15px] leading-tight font-semibold text-navy">metodologiasapiens.com</span></div></a></li><li><a href="https://open.spotify.com/show/321v8cP0X9Pu4oC6OB3Eic?si=9090988377a94e0e&amp;nd=1&amp;dlsi=12413ff1e4f84039" target="_blank" rel="noopener noreferrer" class="group flex h-full flex-col border border-rule transition-all hover:-translate-y-0.5 hover:border-navy hover:shadow-[0_12px_28px_rgba(0,0,0,.09)]"><div class="relative aspect-[4/3] overflow-hidden bg-panel"><img src="assets/79ff3229_ded0_4d22_9fb6_7babeb0d4ccb_5c3b60cbf5-3cf21f.png" alt="" loading="lazy" class="h-full w-full object-cover object-top"/></div><div class="flex flex-1 flex-col gap-1.5 px-4 pt-3.5 pb-4"><span class="text-label font-bold tracking-[1.4px] text-green-dark uppercase">Enlace</span><span class="font-display text-[15px] leading-tight font-semibold text-navy">open.spotify.com</span></div></a></li><li><a href="assets/sapiens_restauracion_009b9d3f4f-ede297.pdf" target="_blank" rel="noopener noreferrer" class="group flex h-full flex-col border border-rule transition-all hover:-translate-y-0.5 hover:border-navy hover:shadow-[0_12px_28px_rgba(0,0,0,.09)]"><div class="relative aspect-[4/3] overflow-hidden bg-panel"><img src="assets/sapiens_restauracion_gastronomica_algzwuwafc5v2e6pe41wp78h_6-bc4c0c.jpg" alt="" loading="lazy" class="h-full w-full object-cover object-top"/></div><div class="flex flex-1 flex-col gap-1.5 px-4 pt-3.5 pb-4"><span class="text-label font-bold tracking-[1.4px] text-green-dark uppercase">PDF</span><span class="font-display text-[15px] leading-tight font-semibold text-navy">Sapiens restauración gastronómica</span></div></a></li><li><a href="assets/SIGE_3a14844c75-cf1c9c.pdf" target="_blank" rel="noopener noreferrer" class="group flex h-full flex-col border border-rule transition-all hover:-translate-y-0.5 hover:border-navy hover:shadow-[0_12px_28px_rgba(0,0,0,.09)]"><div class="relative aspect-[4/3] overflow-hidden bg-panel"><img src="assets/mapa_sige_cu6i8jlol46bwi0cmhg0vl4n_557f01d76b-73e6f6.jpg" alt="" loading="lazy" class="h-full w-full object-cover object-top"/></div><div class="flex flex-1 flex-col gap-1.5 px-4 pt-3.5 pb-4"><span class="text-label font-bold tracking-[1.4px] text-green-dark uppercase">PDF</span><span class="font-display text-[15px] leading-tight font-semibold text-navy">Mapa SIGE</span></div></a></li><li><a href="assets/SPOECM_2f2c6919b3-34eeae.pdf" target="_blank" rel="noopener noreferrer" class="group flex h-full flex-col border border-rule transition-all hover:-translate-y-0.5 hover:border-navy hover:shadow-[0_12px_28px_rgba(0,0,0,.09)]"><div class="relative aspect-[4/3] overflow-hidden bg-panel"><img src="assets/spoecm_e9o3tqi20jap9gs3gkfpjrtr_ac2a830f2c-cc0505.jpg" alt="" loading="lazy" class="h-full w-full object-cover object-top"/></div><div class="flex flex-1 flex-col gap-1.5 px-4 pt-3.5 pb-4"><span class="text-label font-bold tracking-[1.4px] text-green-dark uppercase">PDF</span><span class="font-display text-[15px] leading-tight font-semibold text-navy">SPOECM</span></div></a></li><li><a href="assets/SIPES_e553ba5350-71ec0d.pdf" target="_blank" rel="noopener noreferrer" class="group flex h-full flex-col border border-rule transition-all hover:-translate-y-0.5 hover:border-navy hover:shadow-[0_12px_28px_rgba(0,0,0,.09)]"><div class="relative aspect-[4/3] overflow-hidden bg-panel"><img src="assets/sipes_kapkwwxp1wantzqk1arjlj0v_d5288f84bd-e49c83.jpg" alt="" loading="lazy" class="h-full w-full object-cover object-top"/></div><div class="flex flex-1 flex-col gap-1.5 px-4 pt-3.5 pb-4"><span class="text-label font-bold tracking-[1.4px] text-green-dark uppercase">PDF</span><span class="font-display text-[15px] leading-tight font-semibold text-navy">SIPES</span></div></a></li></ul></section><div class="clear-both mt-12 grid grid-cols-1 gap-4 border-t border-rule pt-6.5 sm:grid-cols-2"><div><a class="group flex h-full items-center gap-3.5 border border-rule px-4.5 py-4 transition-all hover:-translate-y-0.5 hover:border-navy hover:shadow-[0_12px_28px_rgba(0,0,0,.09)]" href="#" aria-disabled="true"><span class="shrink-0 text-[20px] text-navy transition-transform group-hover:-translate-x-1.5">←</span><span class="min-w-0"><span class="block text-[10px] tracking-[1.5px] text-green-dark uppercase">Anterior</span><span class="mt-1.5 block font-display text-[17px] leading-tight font-semibold text-navy">La metodología Sapiens</span></span></a></div><div class="flex justify-end"><a class="group flex w-full items-center gap-3.5 border border-rule px-4.5 py-4 transition-all hover:-translate-y-0.5 hover:border-navy hover:shadow-[0_12px_28px_rgba(0,0,0,.09)]" href="#" aria-disabled="true"><span class="min-w-0 flex-1"><span class="block text-[10px] tracking-[1.5px] text-green-dark uppercase">Siguiente</span><span class="mt-1.5 block font-display text-[17px] leading-tight font-semibold text-navy">Pensamiento sistémico</span></span><span class="shrink-0 text-[20px] text-navy transition-transform group-hover:translate-x-1.5">→</span></a></div></div></article></div></div><!--$--><!--/$--></body></html>
