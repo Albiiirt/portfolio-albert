@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import NextProjectCard from "@/components/proyectos/NextProjectCard";
+import ProjectScreensShowcase from "@/components/proyectos/ProjectScreensShowcase";
 import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
@@ -232,6 +233,8 @@ export default function CastelleraPage() {
             </div>
           </div>
         </section>
+
+        <ProjectScreensShowcase project={project} />
 
         {/* ── El trabajo ── */}
         <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>

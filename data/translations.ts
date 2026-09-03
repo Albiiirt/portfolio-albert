@@ -155,6 +155,7 @@ export const t = {
         startingPoint: "The starting point",
         process: "The process",
         structure: "The structure",
+        screens: "The screens",
       },
       metaLabels: {
         client: "Client",
@@ -175,6 +176,7 @@ export const t = {
         inProduction: "In production",
       },
       learningsHeading: "What I took away",
+      screensPreviewNote: "Preview — real screens from the project, coming soon.",
     },
   },
   es: {
@@ -333,6 +335,7 @@ export const t = {
         startingPoint: "El punto de partida",
         process: "El proceso",
         structure: "La estructura",
+        screens: "Las pantallas",
       },
       metaLabels: {
         client: "Cliente",
@@ -353,6 +356,7 @@ export const t = {
         inProduction: "En producción",
       },
       learningsHeading: "Lo que me llevé",
+      screensPreviewNote: "Vista previa — pantallas reales del proyecto, próximamente.",
     },
   },
   ca: {
@@ -511,6 +515,7 @@ export const t = {
         startingPoint: "El punt de partida",
         process: "El procés",
         structure: "L'estructura",
+        screens: "Les pantalles",
       },
       metaLabels: {
         client: "Client",
@@ -531,6 +536,7 @@ export const t = {
         inProduction: "En producció",
       },
       learningsHeading: "El que me'n vaig emportar",
+      screensPreviewNote: "Vista prèvia — pantalles reals del projecte, properament.",
     },
   },
 };

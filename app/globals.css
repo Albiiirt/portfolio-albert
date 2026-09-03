@@ -528,6 +528,34 @@ html.custom-cursor-active .cursor-hidden {
   border-top: 1px solid var(--border);
 }
 
+/* ── Project screens showcase ── */
+.screens-dot:focus-visible {
+  outline: 2px solid rgba(255,255,255,0.9);
+  outline-offset: 3px;
+}
+
+.screens-idle-float {
+  animation: screensIdleFloat 6s ease-in-out infinite alternate;
+}
+@keyframes screensIdleFloat {
+  0%   { transform: translateY(-6px); }
+  100% { transform: translateY(6px); }
+}
+
+/* ── Project desktop walkthrough (browser-chrome frame) ── */
+.browser-chrome-bar {
+  height: 40px;
+}
+@media (max-width: 900px) {
+  .browser-chrome-bar { height: 34px; }
+}
+@media (max-width: 640px) {
+  .browser-chrome-bar { height: 28px; }
+}
+@media (max-width: 480px) {
+  .browser-chrome-pill { display: none; }
+}
+
 /* ── Reduce motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

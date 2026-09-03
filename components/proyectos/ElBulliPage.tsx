@@ -1,24 +1,38 @@
 "use client";
 
+import type { KeyboardEvent } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import NextProjectCard from "@/components/proyectos/NextProjectCard";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
+import ProjectScreensShowcase from "@/components/proyectos/ProjectScreensShowcase";
+import ProjectDesktopWalkthrough from "@/components/proyectos/ProjectDesktopWalkthrough";
 import { EASE } from "@/lib/animations";
-import { useLang } from "@/lib/LanguageContext";
+import { useLang, type Lang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
 import { t } from "@/data/translations";
 import Image from "next/image";
 
 const ACCENT = "#4a8fcc";
 const project = projects.find((p) => p.id === "elbulli")!;
-const page = project.page!;
+const subProjects = project.subProjects!;
+const DEFAULT_SUB_ID = "archivo";
 
-const chips = ["AI", "Strapi", "Figma"];
+const tabsAriaLabel: Record<Lang, string> = {
+  en: "Fundació elBulli — projects",
+  es: "Fundació elBulli — proyectos",
+  ca: "Fundació elBulli — projectes",
+};
+
+function resolveSubId(id?: string): string {
+  return subProjects.some((s) => s.id === id) ? (id as string) : DEFAULT_SUB_ID;
+}
 
 // ── SVG 1: Antes / Después ──────────────────────────────────────────────────
 function SvgBottleneck() {
@@ -265,15 +279,50 @@ function SvgBlocks() {
 }
 
 // ── Page ────────────────────────────────────────────────────────────────────
-export default function ElBulliPage() {
+export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}) {
   const { lang } = useLang();
+  const router = useRouter();
+  const [activeId, setActiveId] = useState(() => resolveSubId(initialTab));
+  const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
+  const activeSubProject = subProjects.find((s) => s.id === activeId) ?? subProjects[0];
+  const page = activeSubProject.page;
+  const hasSystem = !!(page?.systemHeading && page?.systemBody);
+  const hasChallenge = !!(page?.challengeHeading && page?.challengeBody);
+  const hasLearnings = !!(page?.learningsHeading && page?.learningsItems);
+
+  const selectTab = (id: string) => {
+    if (id === activeId) return;
+    setActiveId(id);
+    router.replace(`/proyectos/elbulli?p=${id}`, { scroll: false });
+  };
+
+  const handleTabKeyDown = (e: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    e.preventDefault();
+    const dir = e.key === "ArrowRight" ? 1 : -1;
+    const next = subProjects[(index + dir + subProjects.length) % subProjects.length];
+    selectTab(next.id);
+    tabRefs.current[next.id]?.focus();
+  };
+
+  // Screens showcase reads from the client project shape — merge in the
+  // active sub-project's own screens/cover/video, falling back to nothing
+  // when the sub-project doesn't have any yet (e.g. Marketplace).
+  const screensProject = {
+    ...project,
+    screens: activeSubProject.screens,
+    cover: activeSubProject.cover,
+    video: activeSubProject.video,
+  };
+
   return (
     <SmoothScroll>
       <CustomCursor />
       <Navigation />
       <main>
 
-        {/* ── Hero ── */}
+        {/* ── Hero (shared, client-level — doesn't re-animate on tab switch) ── */}
         <section style={{
           position: "relative",
           overflow: "hidden",
@@ -371,15 +420,15 @@ export default function ElBulliPage() {
                 transition={{ duration: 0.5, ease: EASE, delay: 0.34 }}
                 style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "clamp(1.5rem, 3vh, 2.5rem)" }}
               >
-                {chips.map((chip) => (
-                  <span key={chip} className="tag">{chip}</span>
+                {project.tags.map((tag) => (
+                  <span key={tag} className="tag">{tag}</span>
                 ))}
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* ── Overview ── */}
+        {/* ── Intro compartida (cliente) — no se re-anima al cambiar de pestaña ── */}
         <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
           <div className="site-content">
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
@@ -413,132 +462,245 @@ export default function ElBulliPage() {
           </div>
         </section>
 
-        {/* ── El reto ── */}
-        <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+        {/* ── Control de pestañas ── */}
+        <section style={{ background: "var(--bg)", padding: "clamp(2.5rem, 5vh, 3.5rem) clamp(1.5rem, 5vw, 5rem) 0" }}>
           <div className="site-content">
-            <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.challenge}</p>
-            </FadeInView>
-            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
-              <FadeInView>
-                <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
-                  {page.challengeHeading![lang]}
-                </h2>
-                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                  {page.challengeBody![0][lang]}
-                </p>
-                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                  {page.challengeBody![1][lang]}
-                </p>
-              </FadeInView>
-              <FadeInView delay={0.12}>
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <SvgBottleneck />
-                </div>
-              </FadeInView>
+            <div role="tablist" aria-label={tabsAriaLabel[lang]} style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem" }}>
+              {subProjects.map((sp, i) => {
+                const selected = sp.id === activeId;
+                return (
+                  <button
+                    key={sp.id}
+                    ref={(el) => { tabRefs.current[sp.id] = el; }}
+                    type="button"
+                    role="tab"
+                    id={`tab-${sp.id}`}
+                    aria-selected={selected}
+                    aria-controls={`panel-${sp.id}`}
+                    tabIndex={selected ? 0 : -1}
+                    onClick={() => selectTab(sp.id)}
+                    onKeyDown={(e) => handleTabKeyDown(e, i)}
+                    style={{
+                      all: "unset",
+                      cursor: "pointer",
+                      padding: "0.6rem 1.4rem",
+                      borderRadius: "100px",
+                      fontSize: "0.8rem",
+                      fontWeight: 600,
+                      letterSpacing: "0.02em",
+                      border: `1px solid ${selected ? ACCENT : "var(--border-mid)"}`,
+                      background: selected ? ACCENT : "transparent",
+                      color: selected ? "#fff" : "var(--text-muted)",
+                      transition: "background 0.2s, color 0.2s, border-color 0.2s",
+                    }}
+                  >
+                    {sp.tabLabel[lang]}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* ── La solución ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-          <div className="site-content">
-            <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.solution}</p>
-            </FadeInView>
-            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
-              <FadeInView delay={0.1}>
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <SvgLayers />
-                </div>
-              </FadeInView>
-              <FadeInView>
-                <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
-                  {page.solutionHeading![lang]}
-                </h2>
-                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                  {project.process[lang]}
-                </p>
-              </FadeInView>
-            </div>
-          </div>
-        </section>
-
-        {/* ── El sistema de bloques ── */}
-        <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-          <div className="site-content">
-            <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.system}</p>
-            </FadeInView>
-            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
-              <FadeInView>
-                <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
-                  {page.systemHeading![lang]}
-                </h2>
-                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                  {page.systemBody![0][lang]}
-                </p>
-                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.75rem" }}>
-                  {page.systemBody![1][lang]}
-                </p>
-              </FadeInView>
-              <FadeInView delay={0.12}>
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <SvgBlocks />
-                </div>
-              </FadeInView>
-            </div>
-          </div>
-        </section>
-
-        {/* ── El resultado ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-          <div className="site-content" style={{ maxWidth: 720 }}>
-            <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
-              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                {project.result[lang]}
-              </p>
-            </FadeInView>
-          </div>
-        </section>
-
-        {/* ── Aprendizajes ── */}
-        <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-          <div className="site-content" style={{ maxWidth: 720 }}>
-            <FadeInView>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.75rem" }}>
-                <p className="section-label" style={{ margin: 0 }}>{t[lang].projectPage.sectionLabels.learnings}</p>
-                <span style={{
-                  display: "inline-flex", alignItems: "center", gap: "0.35rem",
-                  fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase",
-                  background: `${ACCENT}18`, border: `1px solid ${ACCENT}55`,
-                  color: ACCENT, padding: "0.2rem 0.6rem", borderRadius: "100px",
-                }}>
-                  <span style={{ width: 5, height: 5, borderRadius: "50%", background: ACCENT, display: "inline-block" }} />
-                  {page.learningsBadge![lang]}
-                </span>
-              </div>
-
-              <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.75rem" }}>
-                {page.learningsHeading![lang]}
-              </h2>
-
-              <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-                {page.learningsItems!.map((text, i) => (
-                  <div key={i} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
-                    <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: ACCENT, paddingTop: "0.2rem" }}>{String(i + 1).padStart(2, "0")}</span>
-                    <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>{text[lang]}</p>
+        {/* ── Cuerpo de ficha — parametrizado por la pestaña activa ── */}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={activeSubProject.id}
+            id={`panel-${activeSubProject.id}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${activeSubProject.id}`}
+            tabIndex={0}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: EASE }}
+          >
+            {/* ── Overview del sub-proyecto ── */}
+            <section style={{ background: "var(--bg)", padding: "clamp(2.5rem, 5vh, 3.5rem) clamp(1.5rem, 5vw, 5rem) clamp(4rem, 8vh, 7rem)" }}>
+              <div className="site-content">
+                <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
+                  <div>
+                    <p className="section-label" style={{ marginBottom: "1.5rem", color: ACCENT }}>
+                      {activeSubProject.num} · {activeSubProject.category[lang]} · {activeSubProject.year}
+                    </p>
+                    <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
+                      {activeSubProject.problem[lang]}
+                    </p>
                   </div>
-                ))}
+                  {activeSubProject.meta && (
+                    <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
+                      {activeSubProject.meta.map((item, i) => (
+                        <div key={i} style={{
+                          display: "grid", gridTemplateColumns: "120px 1fr",
+                          padding: "0.9rem 0",
+                          borderBottom: i < activeSubProject.meta!.length - 1 ? "1px solid var(--border)" : "none",
+                          gap: "1rem",
+                        }}>
+                          <span style={{ fontSize: "0.67rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text-subtle)" }}>
+                            {item.labelKey ? t[lang].projectPage.metaLabels[item.labelKey] : item.label![lang]}
+                          </span>
+                          <span style={{ fontSize: "0.88rem", color: "var(--text-muted)", fontWeight: 500 }}>
+                            {typeof item.value === "string" ? item.value : item.value[lang]}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
+            </section>
 
-              <p style={{ fontSize: "0.82rem", color: "var(--text-subtle)", fontStyle: "italic", marginTop: "2.5rem", borderTop: "1px solid var(--border)", paddingTop: "1.5rem" }}>
-                {page.learningsFootnote![lang]}
-              </p>
-            </FadeInView>
-          </div>
-        </section>
+            {activeSubProject.screensFrame === "desktop" ? (
+              <ProjectDesktopWalkthrough project={project} steps={activeSubProject.desktopWalkthrough ?? []} />
+            ) : (
+              <ProjectScreensShowcase project={screensProject} />
+            )}
+
+            {/* ── El reto (solo si el sub-proyecto tiene contenido propio) ── */}
+            {hasChallenge && (
+              <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+                <div className="site-content">
+                  <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.challenge}</p>
+                  <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
+                    <div>
+                      <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
+                        {page!.challengeHeading![lang]}
+                      </h2>
+                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
+                        {page!.challengeBody![0][lang]}
+                      </p>
+                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                        {page!.challengeBody![1][lang]}
+                      </p>
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      <SvgBottleneck />
+                    </div>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {/* ── La solución / El proceso (siempre, con la ilustración solo si hay sistema propio) ── */}
+            <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+              <div className="site-content" style={hasSystem ? undefined : { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
+                {hasSystem ? (
+                  <>
+                    <p className="section-label" style={{ marginBottom: page?.solutionHeading ? "1.75rem" : "1.5rem" }}>
+                      {t[lang].projectPage.sectionLabels.solution}
+                    </p>
+                    <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
+                      <div style={{ display: "flex", justifyContent: "center" }}>
+                        <SvgLayers />
+                      </div>
+                      <div>
+                        {page?.solutionHeading && (
+                          <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
+                            {page.solutionHeading[lang]}
+                          </h2>
+                        )}
+                        <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                          {activeSubProject.process[lang]}
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div>
+                    <p className="section-label" style={{ marginBottom: page?.solutionHeading ? "1.75rem" : "1.5rem" }}>
+                      {t[lang].projectPage.sectionLabels.solution}
+                    </p>
+                    <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                      {activeSubProject.process[lang]}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </section>
+
+            {/* ── El sistema de bloques (solo archivo) ── */}
+            {hasSystem && (
+              <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+                <div className="site-content">
+                  <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.system}</p>
+                  <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
+                    <div>
+                      <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
+                        {page!.systemHeading![lang]}
+                      </h2>
+                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
+                        {page!.systemBody![0][lang]}
+                      </p>
+                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.75rem" }}>
+                        {page!.systemBody![1][lang]}
+                      </p>
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      <SvgBlocks />
+                    </div>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {/* ── El resultado (siempre) ── */}
+            <section style={{ background: hasSystem ? "var(--bg)" : "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+              <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
+                <div>
+                  <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
+                  <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                    {activeSubProject.result[lang]}
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* ── Aprendizajes (solo si el sub-proyecto tiene contenido propio) ── */}
+            {hasLearnings && (
+              <section style={{ background: hasSystem ? "var(--bg-alt)" : "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+                <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
+                  <div>
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.75rem" }}>
+                      <p className="section-label" style={{ margin: 0 }}>{t[lang].projectPage.sectionLabels.learnings}</p>
+                      {page!.learningsBadge && (
+                        <span style={{
+                          display: "inline-flex", alignItems: "center", gap: "0.35rem",
+                          fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase",
+                          background: `${ACCENT}18`, border: `1px solid ${ACCENT}55`,
+                          color: ACCENT, padding: "0.2rem 0.6rem", borderRadius: "100px",
+                        }}>
+                          <span style={{ width: 5, height: 5, borderRadius: "50%", background: ACCENT, display: "inline-block" }} />
+                          {page!.learningsBadge[lang]}
+                        </span>
+                      )}
+                    </div>
+
+                    {page!.learningsHeading && (
+                      <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.75rem" }}>
+                        {page!.learningsHeading[lang]}
+                      </h2>
+                    )}
+
+                    <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                      {page!.learningsItems!.map((text, i) => (
+                        <div key={i} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
+                          <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: ACCENT, paddingTop: "0.2rem" }}>{String(i + 1).padStart(2, "0")}</span>
+                          <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>{text[lang]}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    {page!.learningsFootnote && (
+                      <p style={{ fontSize: "0.82rem", color: "var(--text-subtle)", fontStyle: "italic", marginTop: "2.5rem", borderTop: "1px solid var(--border)", paddingTop: "1.5rem" }}>
+                        {page!.learningsFootnote[lang]}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </section>
+            )}
+          </motion.div>
+        </AnimatePresence>
 
         <NextProjectCard ids={["madrid", "castellera", "gnoss-ai"]} />
 

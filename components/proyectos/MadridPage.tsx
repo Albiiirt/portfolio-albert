@@ -18,22 +18,22 @@ const ACCENT = "#8c3a5a";
 const project = projects.find((p) => p.id === "madrid")!;
 const page = project.page!;
 
-const chips = ["Next.js", "Claude Code", "Figma"];
+const chips = ["Next.js", "Claude Code", "Strapi"];
 
 // ── SVG: flujo de trabajo ────────────────────────────────────────────────────
 function SvgWorkflow() {
   const steps = [
-    { label: "Base IA",         sub: "entregada por el cliente" },
-    { label: "Nuevas páginas",  sub: "diseño y desarrollo",      accent: true },
-    { label: "Consistencia",    sub: "entre todas las vistas",   accent: true },
-    { label: "Responsive",      sub: "todas las resoluciones",   accent: true },
+    { label: "Base IA",         sub: ["entregada por", "el cliente"] },
+    { label: "Nuevas páginas",  sub: ["diseño y", "desarrollo"],      accent: true },
+    { label: "Consistencia",    sub: ["entre todas", "las vistas"],   accent: true },
+    { label: "Responsive",      sub: ["todas las", "resoluciones"],   accent: true },
   ];
 
-  const BOX_W = 100, BOX_H = 68, GAP = 16;
+  const BOX_W = 140, BOX_H = 84, GAP = 14;
   const totalW = steps.length * BOX_W + (steps.length - 1) * GAP + 24;
 
   return (
-    <svg viewBox={`0 0 ${totalW} 100`} fill="none" style={{ width: "100%", maxWidth: 520, height: "auto" }} aria-hidden>
+    <svg viewBox={`0 0 ${totalW} 126`} fill="none" style={{ width: "100%", maxWidth: totalW, height: "auto" }} aria-hidden>
       <defs>
         <marker id="arr-mad" markerWidth={7} markerHeight={7} refX={6} refY={3} orient="auto">
           <path d="M0,0.5 L0,6 L7,3 z" fill={ACCENT} />
@@ -46,28 +46,30 @@ function SvgWorkflow() {
       {steps.map((s, i) => {
         const x = 12 + i * (BOX_W + GAP);
         const isLast = i === steps.length - 1;
+        const textX = x + (s.accent ? 14 : 10);
         return (
           <g key={i}>
-            <rect x={x} y={8} width={BOX_W} height={BOX_H} rx={8}
+            <rect x={x} y={10} width={BOX_W} height={BOX_H} rx={8}
               fill="var(--bg-alt)"
               stroke={s.accent ? ACCENT : "var(--border-mid)"}
               strokeWidth={s.accent ? 1.5 : 1} />
             {s.accent && (
-              <rect x={x + 1} y={18} width={3} height={BOX_H - 28} rx={1.5} fill={ACCENT} />
+              <rect x={x + 1} y={23} width={3} height={BOX_H - 30} rx={1.5} fill={ACCENT} />
             )}
-            <text x={x + (s.accent ? 13 : 9)} y={38}
+            <text x={textX} y={36}
               fill={s.accent ? ACCENT : "var(--text-subtle)"}
-              fontSize={9.5} fontWeight={s.accent ? 700 : 500} fontFamily="var(--font-sans)">
+              fontSize={13} fontWeight={s.accent ? 700 : 600} fontFamily="var(--font-sans)">
               {s.label}
             </text>
-            <text x={x + (s.accent ? 13 : 9)} y={54}
-              fill="var(--text-subtle)" fontSize={8} fontFamily="var(--font-sans)">
-              {s.sub}
+            <text x={textX} y={58}
+              fill="var(--text-subtle)" fontSize={11} fontFamily="var(--font-sans)">
+              <tspan x={textX}>{s.sub[0]}</tspan>
+              <tspan x={textX} dy={14}>{s.sub[1]}</tspan>
             </text>
             {!isLast && (
               <line
-                x1={x + BOX_W + 3} y1={42}
-                x2={x + BOX_W + GAP - 4} y2={42}
+                x1={x + BOX_W + 3} y1={52}
+                x2={x + BOX_W + GAP - 4} y2={52}
                 stroke={s.accent ? ACCENT : "var(--border-mid)"}
                 strokeWidth={1.5}
                 markerEnd={s.accent ? "url(#arr-mad)" : "url(#arr-mad-n)"}
@@ -77,8 +79,8 @@ function SvgWorkflow() {
         );
       })}
 
-      <text x={totalW / 2} y={94} textAnchor="middle"
-        fill="var(--text-subtle)" fontSize={9} fontFamily="var(--font-sans)" fontStyle="italic" letterSpacing={0.3}>
+      <text x={totalW / 2} y={116} textAnchor="middle"
+        fill="var(--text-subtle)" fontSize={12} fontFamily="var(--font-sans)" fontStyle="italic" letterSpacing={0.3}>
         De una base generada por IA a un producto terminado
       </text>
     </svg>
@@ -313,7 +315,7 @@ export default function MadridPage() {
 
         {/* ── El resultado ── */}
         <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-          <div className="site-content" style={{ maxWidth: 720 }}>
+          <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
@@ -325,7 +327,7 @@ export default function MadridPage() {
 
         {/* ── Aprendizajes ── */}
         <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-          <div className="site-content" style={{ maxWidth: 720 }}>
+          <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>
               <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.75rem" }}>

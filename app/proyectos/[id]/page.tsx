@@ -25,17 +25,41 @@ export function generateStaticParams() {
   return Object.keys(pages).map((id) => ({ id }));
 }
 
+// elBulli is the only project rendered with tabbed sub-projects today —
+// resolves the ?p= query param to a valid sub-project id, defaulting to
+// "archivo" when the param is missing or doesn't match one.
+function resolveSubProjectId(project: (typeof projects)[number], raw?: string): string | undefined {
+  if (!project.subProjects?.length) return undefined;
+  const valid = project.subProjects.some((s) => s.id === raw);
+  return valid ? raw : project.subProjects[0].id;
+}
+
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+
 export async function generateMetadata({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: SearchParams;
 }): Promise<Metadata> {
   const { id } = await params;
   const project = projects.find((p) => p.id === id);
   if (!project) return {};
 
-  const title = `${project.title.es} · Albert Canadas`;
-  const description = project.description.es;
+  let title = `${project.title.es} · Albert Canadas`;
+  let description = project.description.es;
+
+  if (project.subProjects?.length) {
+    const sp = await searchParams;
+    const raw = typeof sp.p === "string" ? sp.p : undefined;
+    const activeId = resolveSubProjectId(project, raw);
+    const activeSubProject = project.subProjects.find((s) => s.id === activeId);
+    if (activeSubProject) {
+      title = `${project.title.es} — ${activeSubProject.tabLabel.es} · Albert Canadas`;
+      description = activeSubProject.problem.es;
+    }
+  }
 
   return {
     title,
@@ -57,8 +81,10 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://portfolio-albert-s
 
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: SearchParams;
 }) {
   const { id } = await params;
   const ProjectPage = pages[id];
@@ -78,6 +104,17 @@ export default async function Page({
     ...(project.cover ? { image: `${SITE_URL}${project.cover}` } : {}),
   };
 
+  // elBulli renders with tabbed sub-projects; every other project page
+  // takes no props, so it keeps using the generic PageComponent map.
+  let body: React.JSX.Element;
+  if (id === "elbulli" && project) {
+    const sp = await searchParams;
+    const raw = typeof sp.p === "string" ? sp.p : undefined;
+    body = <ElBulliPage initialTab={resolveSubProjectId(project, raw)} />;
+  } else {
+    body = <ProjectPage />;
+  }
+
   return (
     <>
       {schema && (
@@ -86,7 +123,7 @@ export default async function Page({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       )}
-      <ProjectPage />
+      {body}
     </>
   );
 }
