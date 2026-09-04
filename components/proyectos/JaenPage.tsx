@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import ProjectScreensShowcase from "@/components/proyectos/ProjectScreensShowcase";
+import ProjectDesktopWalkthrough from "@/components/proyectos/ProjectDesktopWalkthrough";
 import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
@@ -387,7 +388,11 @@ export default function JaenPage() {
           </div>
         </section>
 
-        <ProjectScreensShowcase project={project} />
+        {project.screensFrame === "desktop" ? (
+          <ProjectDesktopWalkthrough project={project} steps={project.desktopWalkthrough ?? []} />
+        ) : (
+          <ProjectScreensShowcase project={project} />
+        )}
 
         {/* ── El doble reto ── */}
         <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
@@ -399,17 +404,24 @@ export default function JaenPage() {
               </h2>
             </FadeInView>
 
-            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(1.5rem, 3vw, 3rem)" }}>
+            <div
+              className={page.challengeCards!.length > 1 ? "proj-grid-2" : undefined}
+              style={
+                page.challengeCards!.length > 1
+                  ? { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(1.5rem, 3vw, 3rem)" }
+                  : { display: "flex", justifyContent: "center" }
+              }
+            >
               {page.challengeCards!.map((card, i) => (
-                <FadeInView key={i} delay={i * 0.1}>
+                <FadeInView key={i} delay={i * 0.1} style={page.challengeCards!.length > 1 ? undefined : { width: "100%", maxWidth: 640 }}>
                   <div style={{
                     padding: "clamp(1.5rem, 3vw, 2.5rem)",
                     borderRadius: "1rem",
-                    border: i === 0 ? "1px solid var(--border-mid)" : `1px solid ${ACCENT}55`,
-                    background: i === 0 ? "var(--bg-alt)" : `${ACCENT}08`,
+                    border: i === 0 && page.challengeCards!.length > 1 ? "1px solid var(--border-mid)" : `1px solid ${ACCENT}55`,
+                    background: i === 0 && page.challengeCards!.length > 1 ? "var(--bg-alt)" : `${ACCENT}08`,
                     height: "100%",
                   }}>
-                    <p style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: i === 0 ? "var(--text-subtle)" : ACCENT, marginBottom: "1rem" }}>
+                    <p style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: i === 0 && page.challengeCards!.length > 1 ? "var(--text-subtle)" : ACCENT, marginBottom: "1rem" }}>
                       {card.badge[lang]}
                     </p>
                     <h3 style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.4rem)", fontWeight: 700, color: "var(--text)", marginBottom: "1rem", lineHeight: 1.25 }}>
@@ -478,7 +490,7 @@ export default function JaenPage() {
 
         {/* ── El resultado ── */}
         <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-          <div className="site-content" style={{ maxWidth: 720 }}>
+          <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
@@ -490,7 +502,7 @@ export default function JaenPage() {
 
         {/* ── Aprendizajes ── */}
         <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-          <div className="site-content" style={{ maxWidth: 720 }}>
+          <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>
               <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.75rem" }}>

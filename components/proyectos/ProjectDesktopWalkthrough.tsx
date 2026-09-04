@@ -61,6 +61,13 @@ export default function ProjectDesktopWalkthrough({
 
   if (!steps.length) return null;
 
+  // The ≥900px collage only has fixed positions for COLLAGE_LAYOUT.length
+  // cards. With more steps than that, reusing positions via modulo would
+  // stack a later card exactly on top of an earlier one — so beyond that
+  // count we skip the collage entirely and always use the stacked list
+  // (full viewport width, one frame per scroll block) instead.
+  const useCollage = steps.length <= COLLAGE_LAYOUT.length;
+
   return (
     <section
       style={{
@@ -73,9 +80,12 @@ export default function ProjectDesktopWalkthrough({
           {tx.sectionLabels.screens}
         </p>
 
-        <WalkthroughCollage steps={steps} lang={lang} reducedMotion={!!reducedMotion} tx={tx} />
+        {useCollage && <WalkthroughCollage steps={steps} lang={lang} reducedMotion={!!reducedMotion} tx={tx} />}
 
-        <div className="walkthrough-list" style={{ flexDirection: "column", gap: "clamp(3rem, 6vh, 5rem)" }}>
+        <div
+          className="walkthrough-list"
+          style={{ flexDirection: "column", gap: "clamp(3rem, 6vh, 5rem)", ...(useCollage ? null : { display: "flex" }) }}
+        >
           {steps.map((step, i) => {
             const textMotion = reducedMotion
               ? { initial: { opacity: 1 }, animate: { opacity: 1 } }
@@ -92,6 +102,11 @@ export default function ProjectDesktopWalkthrough({
                   viewport: { once: true, amount: 0.35 },
                 };
 
+            // Odd steps (2nd, 4th, 6th... 0-based i = 1, 3, 5) mirror the
+            // column order — image on the left, text on the right — so the
+            // stacked list doesn't read as one long, monotonous column.
+            const isMirrored = i % 2 === 1;
+
             return (
               <div
                 key={step.src}
@@ -103,7 +118,7 @@ export default function ProjectDesktopWalkthrough({
                   alignItems: "center",
                 }}
               >
-                <motion.div {...textMotion} transition={{ duration: 0.6, ease: EASE }}>
+                <motion.div {...textMotion} transition={{ duration: 0.6, ease: EASE }} style={{ order: isMirrored ? 2 : 1 }}>
                   <p
                     style={{
                       fontSize: "0.8rem",
@@ -120,7 +135,11 @@ export default function ProjectDesktopWalkthrough({
                   </p>
                 </motion.div>
 
-                <motion.div {...frameMotion} transition={{ duration: 0.6, ease: EASE, delay: 0.08 }} style={{ minWidth: 0 }}>
+                <motion.div
+                  {...frameMotion}
+                  transition={{ duration: 0.6, ease: EASE, delay: 0.08 }}
+                  style={{ minWidth: 0, order: isMirrored ? 1 : 2 }}
+                >
                   <MobileFrameLightbox step={step} lang={lang} reducedMotion={!!reducedMotion} tx={tx} priority={i === 0} />
                 </motion.div>
               </div>
@@ -353,6 +372,30 @@ function CollageCardLightbox({
     }, 100);
   }
 
+  // No interactive mockup behind this step — keep the card's collage
+  // position and entrance animation, but drop every affordance that would
+  // promise a click does something: no Dialog.Trigger, no expand icon, no
+  // hover/focus lift, no "interactive" badge. All the hooks above still ran
+  // unconditionally, so this early return stays consistent across renders.
+  if (!step.htmlSrc) {
+    return (
+      <motion.div
+        {...entranceProps}
+        transition={entranceTransition}
+        className="collage-frame-static"
+        style={{
+          position: "absolute",
+          width: `${layout.widthPct}%`,
+          top: `${layout.top}%`,
+          left: layout.left != null ? `${layout.left}%` : undefined,
+          right: layout.right != null ? `${layout.right}%` : undefined,
+        }}
+      >
+        <BrowserFrameInner src={step.src} alt={step.alt[lang]} priority={i === 0} />
+      </motion.div>
+    );
+  }
+
   // Three ways to close, all wired: the X button (Dialog.Close below),
   // clicking the backdrop (Base UI's own outside-press dismissal — more
   // robust than a hand-rolled `event.target === event.currentTarget` check,
@@ -546,6 +589,14 @@ function MobileFrameLightbox({
     });
     return () => cancelAnimationFrame(raf);
   }, [open]);
+
+  // No interactive mockup behind this step (e.g. Turisme Jaén, screenshots
+  // only) — render the same browser-chrome frame with no click affordance:
+  // no Dialog.Trigger, no pointer cursor/focus ring, no lightbox at all.
+  // Showing any of that would promise an interaction that isn't there.
+  if (!step.htmlSrc) {
+    return <BrowserFrame src={step.src} alt={step.alt[lang]} priority={priority} />;
+  }
 
   // Two close paths here (X button, Escape) — no visible/clickable backdrop
   // by spec, since the sheet already covers the full viewport, so there's no

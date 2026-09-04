@@ -39,7 +39,9 @@ export type DesktopWalkthroughStep = {
   caption: LocalizedText;
   // Real, interactive HTML page shown in the lightbox iframe when this step's
   // frame is clicked/expanded — a live mockup, not just the static screenshot.
-  htmlSrc: string;
+  // Optional: when absent, the frame renders as a static screenshot with no
+  // click affordance (no trigger, no expand icon, no "interactive" badge).
+  htmlSrc?: string;
 };
 
 // Shared status values, sourced from data/translations.ts so the same
@@ -582,14 +584,14 @@ export const projects: Project[] = [
       ca: "El portal de turisme de Jaén — una de les destinacions amb més patrimoni d'Espanya — necessitava un redisseny complet capaç de gestionar centenars de pàgines, categories creuades i contingut dens sense perdre claredat.",
     },
     process: {
-      en: "Designed in Figma as a duo — we tried several full-page proposals, thinking first about how content would be navigated and organised, not just how it would look. Once that direction was set, we built the component system to support it. Code implementation is handled by an internal colleague from the same studio.",
-      es: "Diseñado en Figma a cuatro manos — probamos varias propuestas de página completa hasta encontrar la dirección correcta, pensando primero en cómo se iba a navegar y organizar el contenido, no solo en el estilo visual. Con la dirección definida, construimos el sistema de componentes que soporta esa arquitectura. La implementación en código la lleva un compañero interno del mismo estudio.",
-      ca: "Dissenyat a Figma a quatre mans — vam provar diverses propostes de pàgina completa fins a trobar la direcció correcta, pensant primer en com es navegaria i s'organitzaria el contingut, no només en l'estil visual. Amb la direcció definida, vam construir el sistema de components que suporta aquesta arquitectura. La implementació en codi la porta un company intern del mateix estudi.",
+      en: "Designed in Figma, we tried several full-page proposals, thinking first about how content would be navigated and organised, not just how it would look. Once that direction was set, we built the component system to support it. Code implementation is handled by an internal colleague from the same studio.",
+      es: "Diseñado en Figma, probamos varias propuestas de página completa hasta encontrar la dirección correcta, pensando primero en cómo se iba a navegar y organizar el contenido, no solo en el estilo visual. Con la dirección definida, construimos el sistema de componentes que soporta esa arquitectura. La implementación en código la lleva un compañero interno del mismo estudio.",
+      ca: "Dissenyat a Figma, vam provar diverses propostes de pàgina completa fins a trobar la direcció correcta, pensant primer en com es navegaria i s'organitzaria el contingut, no només en l'estil visual. Amb la direcció definida, vam construir el sistema de components que suporta aquesta arquitectura. La implementació en codi la porta un company intern del mateix estudi.",
     },
     result: {
-      en: "A visual system ready for production, currently in implementation phase. Working with the developer in the same studio means faster adjustments and a final result closer to the original design.",
-      es: "Un sistema visual listo para producción, actualmente en fase de implementación. Trabajar con el desarrollador en el mismo estudio significa ajustes más rápidos y un resultado final más fiel al diseño original.",
-      ca: "Un sistema visual llest per a producció, actualment en fase d'implementació. Treballar amb el desenvolupador al mateix estudi significa ajustos més ràpids i un resultat final més fidel al disseny original.",
+      en: "The system organises the portal into clearly differentiated page types without fragmenting the experience — each type is instantly recognisable, yet they all share the same visual base. Designing it alongside another designer meant agreeing on every decision along the way, something far more valuable for teams where design isn't a one-person job.",
+      es: "El sistema organiza el portal en tipos de página claramente diferenciados sin fragmentar la experiencia — cada tipo se reconoce al instante, pero todos comparten la misma base visual. Diseñarlo junto a otra diseñadora nos obligó a ponernos de acuerdo en cada decisión, algo que aporta mucho más valor en equipos donde el diseño no depende de una sola persona.",
+      ca: "El sistema organitza el portal en tipus de pàgina clarament diferenciats sense fragmentar l'experiència — cada tipus es reconeix a l'instant, però tots comparteixen la mateixa base visual. Dissenyar-lo al costat d'una altra dissenyadora ens va obligar a posar-nos d'acord en cada decisió, cosa que aporta molt més valor en equips on el disseny no depèn d'una sola persona.",
     },
     description: {
       en: "Tourism web design for Jaén — full UI system designed in Figma as a duo, currently in production with the internal dev team.",
@@ -609,23 +611,58 @@ export const projects: Project[] = [
       { labelKey: "client", value: "Turismo de Jaén" },
       { labelKey: "year", value: "2026" },
       { labelKey: "duration", value: { en: "2 – 3 months", es: "2 – 3 meses", ca: "2 – 3 mesos" } },
-      { labelKey: "status", value: status.inProduction },
       { labelKey: "role", value: { en: "Web design · UX · Figma", es: "Diseño web · UX · Figma", ca: "Disseny web · UX · Figma" } },
       { labelKey: "stack", value: "Figma" },
       { labelKey: "team", value: { en: "Design + in-house development", es: "Diseño + Desarrollo interno", ca: "Disseny + desenvolupament intern" } },
     ],
+    screensFrame: "desktop",
+    desktopWalkthrough: [
+      {
+        src: "/mockups/jaen/01-portada.jpg",
+        alt: { es: "Portada del portal con foto de paisaje de olivos, buscador con IA y tarjetas de lugares imprescindibles.", en: "Homepage of the portal with an olive-grove landscape photo, an AI-powered search bar and must-see place cards.", ca: "Portada del portal amb foto de paisatge d'oliveres, cercador amb IA i targetes de llocs imprescindibles." },
+        title: { es: "01 · La portada", en: "01 · The homepage", ca: "01 · La portada" },
+        caption: { es: "La portada tenía que orientar y seducir a la vez: un buscador con IA arriba, imprescindibles y rutas destacadas debajo, sin forzar al visitante a decidir antes de tiempo.", en: "The homepage had to orient and seduce at once — an AI-powered search bar up top, must-sees and featured routes below — without forcing the visitor to decide too soon.", ca: "La portada havia d'orientar i seduir alhora: un cercador amb IA a dalt, imprescindibles i rutes destacades a sota, sense forçar el visitant a decidir abans d'hora." },
+      },
+      {
+        src: "/mockups/jaen/02-navegacion.jpg",
+        alt: { es: "Menú de navegación con el desplegable \"Inspírate\" abierto, mostrando dos columnas de enlaces y una tarjeta destacada.", en: "Navigation menu with the \"Get inspired\" dropdown open, showing two columns of links and a featured card.", ca: "Menú de navegació amb el desplegable \"Inspira't\" obert, mostrant dues columnes d'enllaços i una targeta destacada." },
+        title: { es: "02 · La navegación", en: "02 · The navigation", ca: "02 · La navegació" },
+        caption: { es: "El menú \"Inspírate\" agrupa contenido de naturaleza muy distinta — imprescindibles, rutas, planes, agenda — bajo una sola pestaña, sin que se note la costura entre categorías.", en: "The \"Get inspired\" menu groups very different kinds of content — must-sees, routes, plans, events — under a single tab, without the seams between categories showing.", ca: "El menú \"Inspira't\" agrupa contingut de naturalesa molt diferent — imprescindibles, rutes, plans, agenda — sota una sola pestanya, sense que se'n notin les costures entre categories." },
+      },
+      {
+        src: "/mockups/jaen/03-listado.jpg",
+        alt: { es: "Página de listado \"Lugares de interés\" con filtros por facetas a la izquierda y una cuadrícula de resultados con foto.", en: "\"Places of interest\" listing page with faceted filters on the left and a photo results grid.", ca: "Pàgina de llistat \"Llocs d'interès\" amb filtres per facetes a l'esquerra i una graella de resultats amb foto." },
+        title: { es: "03 · El listado", en: "03 · The listing", ca: "03 · El llistat" },
+        caption: { es: "Tipo de lugar, localidad, otras facetas: los filtros se combinan entre sí, para no obligar al visitante a mirar entre cientos de fichas una por una.", en: "Place type, town, other facets: filters combine with each other, so the visitor never has to scroll through hundreds of entries one by one.", ca: "Tipus de lloc, localitat, altres facetes: els filtres es combinen entre ells, perquè el visitant no hagi de mirar centenars de fitxes una per una." },
+      },
+      {
+        src: "/mockups/jaen/04-planificador.jpg",
+        alt: { es: "Planificador de itinerario con una lista de experiencias a la izquierda y los días del viaje a la derecha, con una tarjeta a medio arrastrar.", en: "Itinerary planner with a list of experiences on the left and trip days on the right, with a card mid-drag.", ca: "Planificador d'itinerari amb una llista d'experiències a l'esquerra i els dies del viatge a la dreta, amb una targeta a mig arrossegar." },
+        title: { es: "04 · El planificador", en: "04 · The planner", ca: "04 · El planificador" },
+        caption: { es: "Arrastra una experiencia desde el listado y cae en el día que elijas. El itinerario se va construyendo visita a visita, sin formularios de por medio.", en: "Drag an experience from the list and drop it on the day you choose. The itinerary builds up visit by visit, with no forms in the way.", ca: "Arrossega una experiència des del llistat i deixa-la caure al dia que triïs. L'itinerari es va construint visita a visita, sense formularis pel mig." },
+      },
+      {
+        src: "/mockups/jaen/05-ruta.jpg",
+        alt: { es: "Página de la ruta \"Vía Verde del Aceite\" con mapa del recorrido, ficha técnica y galería de fotos.", en: "\"Vía Verde del Aceite\" route page with a route map, technical sheet and photo gallery.", ca: "Pàgina de la ruta \"Via Verda de l'Oli\" amb mapa del recorregut, fitxa tècnica i galeria de fotos." },
+        title: { es: "05 · La ruta", en: "05 · The route", ca: "05 · La ruta" },
+        caption: { es: "Cada ruta lleva su propio mapa, perfil de altura y ficha técnica — y termina listando los municipios por los que pasa, con el mismo componente de tarjeta que usa el resto del portal.", en: "Every route carries its own map, elevation profile and technical sheet — and closes by listing the towns it passes through, using the same card component the rest of the portal relies on.", ca: "Cada ruta porta el seu propi mapa, perfil d'altura i fitxa tècnica — i acaba llistant els municipis pels quals passa, amb el mateix component de targeta que fa servir la resta del portal." },
+      },
+      {
+        src: "/mockups/jaen/06-ficha.jpg",
+        alt: { es: "Ficha del alojamiento \"VUT La Casita Morada\" con galería de fotos y panel lateral de información de contacto y servicios.", en: "\"VUT La Casita Morada\" lodging profile with a photo gallery and a side panel of contact info and services.", ca: "Fitxa de l'allotjament \"VUT La Casita Morada\" amb galeria de fotos i panell lateral d'informació de contacte i serveis." },
+        title: { es: "06 · La ficha", en: "06 · The listing page", ca: "06 · La fitxa" },
+        caption: { es: "La ficha de un alojamiento no es solo fotos y precio: incluye sellos de calidad, servicios accesibles y qué hay cerca, todo en el mismo panel lateral.", en: "A lodging's profile isn't just photos and price: it includes quality seals, accessibility info and what's nearby, all in the same side panel.", ca: "La fitxa d'un allotjament no és només fotos i preu: inclou segells de qualitat, serveis accessibles i què hi ha a prop, tot al mateix panell lateral." },
+      },
+      {
+        src: "/mockups/jaen/07-microsite.jpg",
+        alt: { es: "Microsite temático \"Castillos y Batallas del Reino de Jaén\" con su propio logo, navegación y hero de imagen.", en: "\"Castles and Battles of the Kingdom of Jaén\" themed microsite with its own logo, navigation and image hero.", ca: "Microsite temàtic \"Castells i Batalles del Regne de Jaén\" amb el seu propi logo, navegació i hero d'imatge." },
+        title: { es: "07 · El microsite", en: "07 · The microsite", ca: "07 · El microsite" },
+        caption: { es: "Algunas campañas — como \"Castillos y Batallas\"— necesitan su propio espacio: logo, navegación y portada propios, pero construidos con las mismas piezas del sistema.", en: "Some campaigns — like \"Castles and Battles\" — need their own space: their own logo, navigation and homepage, but built from the same system pieces.", ca: "Algunes campanyes — com \"Castells i Batalles\" — necessiten el seu propi espai: logo, navegació i portada propis, però construïts amb les mateixes peces del sistema." },
+      },
+    ],
     page: {
       challengeHeading: { en: "Two challenges in one", es: "Dos retos en uno", ca: "Dos reptes en un" },
       challengeCards: [
-        {
-          badge: { en: "The client's challenge", es: "Reto del cliente", ca: "El repte del client" },
-          heading: { en: "Modernising a benchmark portal", es: "Modernizar un portal de referencia", ca: "Modernitzar un portal de referència" },
-          body: {
-            en: "Redesign Jaén's tourism portal — one of Spain's most heritage-rich destinations — and make the design match the content: hundreds of pages, crossing categories and a huge amount of useful information that couldn't get lost along the way.",
-            es: "Rediseñar el portal de turismo de Jaén — uno de los destinos con más patrimonio de España — y hacer que el diseño estuviese a la altura del contenido: cientos de páginas, categorías cruzadas y una cantidad enorme de información útil que no podía perderse por el camino.",
-            ca: "Redissenyar el portal de turisme de Jaén — una de les destinacions amb més patrimoni d'Espanya — i fer que el disseny estigués a l'altura del contingut: centenars de pàgines, categories creuades i una quantitat enorme d'informació útil que no es podia perdre pel camí.",
-          },
-        },
         {
           badge: { en: "The designer's challenge", es: "Reto del diseñador", ca: "El repte del dissenyador" },
           heading: { en: "Appealing, functional and full of personality", es: "Atractivo, funcional y con personalidad", ca: "Atractiu, funcional i amb personalitat" },
