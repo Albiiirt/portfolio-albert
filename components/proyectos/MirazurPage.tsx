@@ -109,6 +109,20 @@ export default function MirazurPage() {
           paddingRight: "clamp(1.5rem, 5vw, 5rem)",
           paddingBottom: "clamp(3.5rem, 6vh, 5rem)",
         }}>
+          {/* Video background */}
+          <video
+            autoPlay muted loop playsInline
+            poster="/covers/cover-mirazur.webp"
+            style={{
+              position: "absolute", inset: 0,
+              width: "100%", height: "100%",
+              objectFit: "cover", objectPosition: "center",
+              opacity: 0.52,
+            }}
+          >
+            <source src="/covers/mirazur.mp4" type="video/mp4" />
+          </video>
+
           <div style={{
             position: "absolute", inset: 0,
             background: "radial-gradient(ellipse 70% 60% at 75% 35%, rgba(122,173,58,0.3) 0%, transparent 70%)",
@@ -116,7 +130,7 @@ export default function MirazurPage() {
           }} />
           <div style={{
             position: "absolute", inset: 0,
-            background: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.7) 100%)",
+            background: "linear-gradient(to bottom, rgba(21,34,10,0.78) 0%, rgba(29,46,15,0.4) 30%, rgba(29,46,15,0.4) 68%, rgba(15,26,7,0.88) 100%)",
             pointerEvents: "none",
           }} />
 

@@ -748,6 +748,8 @@ export const projects: Project[] = [
     tags: ["Figma", "Claude Design", "Web Design"],
     gradient: "linear-gradient(135deg, #1a2a0d 0%, #3d5c1e 60%, #7aad3a 100%)",
     accentColor: "#7aad3a",
+    video: "/covers/mirazur.mp4",
+    cover: "/covers/cover-mirazur.webp",
     heroTagline: {
       en: "recipe portal and experience page",
       es: "portal de recetas y página de experiencia",
