@@ -396,6 +396,7 @@ export const projects: Project[] = [
     gradient: "linear-gradient(135deg, #1a0a0f 0%, #4a1528 60%, #8c3a5a 100%)",
     accentColor: "#8c3a5a",
     cover: "/covers/cover-madrid.webp",
+    video: "/covers/madrid.mp4",
     heroTagline: {
       en: "design, development and UX for Madrid's wine routes",
       es: "diseño, desarrollo y experiencia de usuario de las rutas del vino de Madrid",

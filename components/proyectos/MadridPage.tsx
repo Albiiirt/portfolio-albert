@@ -12,7 +12,6 @@ import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
 import { t } from "@/data/translations";
-import Image from "next/image";
 
 const ACCENT = "#8c3a5a";
 const project = projects.find((p) => p.id === "madrid")!;
@@ -109,14 +108,17 @@ export default function MadridPage() {
           paddingRight: "clamp(1.5rem, 5vw, 5rem)",
           paddingBottom: "clamp(3.5rem, 6vh, 5rem)",
         }}>
-          <Image
-            src="/covers/cover-madrid.webp"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            style={{ objectFit: "cover", objectPosition: "center", pointerEvents: "none" }}
-          />
+          <video
+            autoPlay muted loop playsInline
+            style={{
+              position: "absolute", inset: 0,
+              width: "100%", height: "100%",
+              objectFit: "cover", objectPosition: "center",
+              pointerEvents: "none",
+            }}
+          >
+            <source src="/covers/madrid.mp4" type="video/mp4" />
+          </video>
           <div style={{
             position: "absolute", inset: 0,
             background: "linear-gradient(to right, #000 0%, #000 25%, rgba(0,0,0,0.88) 45%, rgba(0,0,0,0.35) 68%, transparent 100%)",
