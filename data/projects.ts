@@ -366,9 +366,107 @@ export const projects: Project[] = [
       },
     ],
   },
-  {
-    id: "madrid",
+    id: "xunta-galicia",
     num: "02",
+    title: { en: "Galiciana Thesaurus", es: "Galiciana Thesaurus", ca: "Galiciana Thesaurus" },
+    category: { en: "Custom Product", es: "Producto a medida", ca: "Producte a mida" },
+    year: "2026",
+    problem: {
+      en: "A specific client within the Xunta de Galicia needed a highly custom tool for a specific task in their day-to-day work. The challenge wasn't starting from an already-defined design, but truly understanding how that client works day to day in order to design something genuinely intuitive, functional and personalized.",
+      es: "Un cliente concreto dentro de la Xunta de Galicia necesitaba una herramienta muy a medida para una tarea específica de su día a día. El reto no era partir de un diseño ya definido, sino entender a fondo cómo trabaja ese cliente en su día a día para poder diseñar algo realmente intuitivo, funcional y personalizado.",
+      ca: "Un client concret dins la Xunta de Galicia necessitava una eina molt a mida per a una tasca específica del seu dia a dia. El repte no era partir d'un disseny ja definit, sinó entendre a fons com treballa aquest client en el seu dia a dia per poder dissenyar alguna cosa realment intuïtiva, funcional i personalitzada.",
+    },
+    process: {
+      en: "We started from a reference prototype GNOSS sent us, but the approach was a bit ambiguous and didn't make the process or the final product very clear — it helped us see a few specific features, but not much more. From there, the work focused on understanding the client's real task and designing the product from scratch, with a couple of check-in meetings with GNOSS along the way to validate progress.",
+      es: "Partimos de un prototipo de referencia que nos envió GNOSS, pero el planteamiento era un poco ambiguo y no dejaba muy claro ni el proceso ni el producto final — nos sirvió para ver algunas funcionalidades concretas, pero poco más. A partir de ahí, el trabajo se centró en entender la tarea real del cliente y diseñar el producto desde cero, con un par de reuniones de seguimiento con GNOSS a lo largo del proceso para ir validando el avance.",
+      ca: "Vam partir d'un prototip de referència que ens va enviar GNOSS, però el plantejament era una mica ambigu i no deixava gaire clar ni el procés ni el producte final — ens va servir per veure algunes funcionalitats concretes, però poc més. A partir d'aquí, la feina es va centrar a entendre la tasca real del client i dissenyar el producte des de zero, amb un parell de reunions de seguiment amb GNOSS al llarg del procés per anar validant l'avanç.",
+    },
+    result: {
+      en: "The client gave it the green light: the product meets what they needed and does its job. The people using it day to day find it intuitive and easy to use.",
+      es: "El cliente dio el visto bueno: el producto cumple con lo que necesitaba y hace su función. Las personas que lo usan en su día a día lo encuentran intuitivo y sencillo de manejar.",
+      ca: "El client va donar el vistiplau: el producte compleix el que necessitava i fa la seva funció. Les persones que l'utilitzen en el seu dia a dia el troben intuïtiu i senzill de fer servir.",
+    },
+    description: {
+      en: "Custom product for a Xunta de Galicia client, through GNOSS — design centered on understanding their real day-to-day task, still in progress.",
+      es: "Producto a medida para un cliente de la Xunta de Galicia, a través de GNOSS — diseño centrado en entender su tarea real del día a día, todavía en curso.",
+      ca: "Producte a mida per a un client de la Xunta de Galicia, a través de GNOSS — disseny centrat a entendre la seva tasca real del dia a dia, encara en curs.",
+    },
+    tags: ["UX Research", "Product Design", "Figma"],
+    gradient: "linear-gradient(135deg, #001515 0%, #0d3d3d 60%, #2a8c8c 100%)",
+    accentColor: "#2a8c8c",
+    cover: "/covers/cover-xunta.svg",
+    heroTagline: {
+      en: "a custom product designed around a real day-to-day task",
+      es: "un producto a medida diseñado a partir de una tarea real del día a día",
+      ca: "un producte a mida dissenyat a partir d'una tasca real del dia a dia",
+    },
+    meta: [
+      { labelKey: "client", value: "Xunta de Galicia" },
+      { labelKey: "year", value: "2026" },
+      { labelKey: "status", value: status.inProgress },
+      { labelKey: "role", value: { en: "Product design · UX research", es: "Diseño de producto · Investigación UX", ca: "Disseny de producte · Recerca UX" } },
+      { labelKey: "stack", value: "Figma" },
+      { labelKey: "studio", value: "GNOSS" },
+    ],
+    page: {
+      workHeading: {
+        en: "Starting from a reference, ending up somewhere else",
+        es: "Partir de una referencia, acabar en otro sitio",
+        ca: "Partir d'una referència, acabar en un altre lloc",
+      },
+      workCards: [
+        {
+          label: { en: "Understanding the task", es: "Entender la tarea", ca: "Entendre la tasca" },
+          desc: {
+            en: "The starting point was understanding what this specific client does day to day, before drawing anything.",
+            es: "El punto de partida fue entender qué hace este cliente concreto en su día a día, antes de dibujar nada.",
+            ca: "El punt de partida va ser entendre què fa aquest client concret en el seu dia a dia, abans de dibuixar res.",
+          },
+        },
+        {
+          label: { en: "A reference, not a base", es: "Una referencia, no una base", ca: "Una referència, no una base" },
+          desc: {
+            en: "GNOSS sent us a reference prototype early on. It was useful to see a few specific features, but the final design took a different direction.",
+            es: "GNOSS nos envió un prototipo de referencia al principio. Sirvió para ver algunas funcionalidades concretas, pero el diseño final tomó una dirección distinta.",
+            ca: "GNOSS ens va enviar un prototip de referència al principi. Va servir per veure algunes funcionalitats concretes, però el disseny final va prendre una direcció diferent.",
+          },
+        },
+        {
+          label: { en: "Follow-up with GNOSS", es: "Seguimiento con GNOSS", ca: "Seguiment amb GNOSS" },
+          desc: {
+            en: "A couple of check-in meetings with GNOSS during the process helped validate the direction as the design moved forward.",
+            es: "Un par de reuniones de seguimiento con GNOSS durante el proceso ayudaron a validar la dirección a medida que el diseño avanzaba.",
+            ca: "Un parell de reunions de seguiment amb GNOSS durant el procés van ajudar a validar la direcció a mesura que el disseny avançava.",
+          },
+        },
+      ],
+      resultHeading: {
+        en: "Approved by the client, validated by its users",
+        es: "Aprobado por el cliente, validado por sus usuarios",
+        ca: "Aprovat pel client, validat pels seus usuaris",
+      },
+      learningsHeading: {
+        en: "What I'm learning",
+        es: "Lo que estoy aprendiendo",
+        ca: "El que estic aprenent",
+      },
+      learningsBadge: { en: "In progress", es: "En progreso", ca: "En curs" },
+      learningsItems: [
+        {
+          en: "Working through an intermediary studio (GNOSS) instead of talking directly to the end client taught me to ask the right questions to pull real requirements out of an ambiguous brief, instead of taking the first reference at face value.",
+          es: "Trabajar a través de un estudio intermediario (GNOSS) en vez de hablar directamente con el cliente final me enseñó a hacer las preguntas correctas para sacar información real de un brief ambiguo, en vez de dar por buena la primera referencia que llega.",
+          ca: "Treballar a través d'un estudi intermediari (GNOSS) en comptes de parlar directament amb el client final em va ensenyar a fer les preguntes correctes per treure informació real d'un brief ambigu, en comptes de donar per bona la primera referència que arriba.",
+        },
+        {
+          en: "Seeing that the people using the product find it intuitive — without ever talking to them directly — confirmed that designing from the real task, not a generic prototype, is what actually makes the difference.",
+          es: "Ver que las personas que usan el producto lo encuentran intuitivo, sin haber hablado con ellas directamente, confirma que diseñar desde la tarea real — y no desde un prototipo genérico — es lo que de verdad marca la diferencia.",
+          ca: "Veure que les persones que fan servir el producte el troben intuïtiu, sense haver-hi parlat directament, confirma que dissenyar des de la tasca real — i no des d'un prototip genèric — és el que realment marca la diferència.",
+        },
+      ],
+    },
+  },
+    id: "madrid",
+    num: "03",
     title: { en: "Enoturismo Madrid", es: "Enoturismo Madrid", ca: "Enoturisme Madrid" },
     category: { en: "Web Design", es: "Diseño Web", ca: "Disseny Web" },
     year: "2026",
@@ -462,9 +560,8 @@ export const projects: Project[] = [
       ],
     },
   },
-  {
     id: "castellera",
-    num: "03",
+    num: "04",
     title: { en: "Colla Castellera del Baix Montseny", es: "Colla Castellera del Baix Montseny", ca: "Colla Castellera del Baix Montseny" },
     category: { en: "Web Design & Dev", es: "Diseño y desarrollo web", ca: "Disseny i desenvolupament web" },
     year: "2026",
@@ -573,9 +670,8 @@ export const projects: Project[] = [
       ],
     },
   },
-  {
     id: "turisme-jaen",
-    num: "04",
+    num: "05",
     title: { en: "Turisme Jaén", es: "Turisme Jaén", ca: "Turisme Jaén" },
     category: { en: "Web Design", es: "Diseño Web", ca: "Disseny Web" },
     year: "2026",
@@ -720,9 +816,8 @@ export const projects: Project[] = [
       ],
     },
   },
-  {
     id: "mirazur",
-    num: "05",
+    num: "06",
     title: { en: "Mirazur", es: "Mirazur", ca: "Mirazur" },
     category: { en: "Web Design", es: "Diseño Web", ca: "Disseny Web" },
     year: "2025–2026",
@@ -823,9 +918,8 @@ export const projects: Project[] = [
       ],
     },
   },
-  {
     id: "gnoss-ai",
-    num: "06",
+    num: "07",
     title: { en: "GNOSS AI Platform", es: "GNOSS AI Platform", ca: "GNOSS AI Platform" },
     category: { en: "Design System", es: "Sistema de Diseño", ca: "Sistema de Disseny" },
     year: "2026",
@@ -923,9 +1017,8 @@ export const projects: Project[] = [
       ],
     },
   },
-  {
     id: "la-rioja-turismo",
-    num: "07",
+    num: "08",
     title: { en: "La Rioja Turismo", es: "La Rioja Turismo", ca: "La Rioja Turisme" },
     category: { en: "Web Design", es: "Diseño Web", ca: "Disseny Web" },
     year: "2026",
@@ -1000,106 +1093,6 @@ export const projects: Project[] = [
         suffix: { en: " — is a direct descendant of this one.", es: " — es directamente heredero de este.", ca: " — és hereu directe d'aquest." },
         href: "/proyectos/turisme-jaen",
       },
-    },
-  },
-  {
-    id: "xunta-galicia",
-    num: "08",
-    title: { en: "Galiciana Thesaurus", es: "Galiciana Thesaurus", ca: "Galiciana Thesaurus" },
-    category: { en: "Custom Product", es: "Producto a medida", ca: "Producte a mida" },
-    year: "2026",
-    problem: {
-      en: "A specific client within the Xunta de Galicia needed a highly custom tool for a specific task in their day-to-day work. The challenge wasn't starting from an already-defined design, but truly understanding how that client works day to day in order to design something genuinely intuitive, functional and personalized.",
-      es: "Un cliente concreto dentro de la Xunta de Galicia necesitaba una herramienta muy a medida para una tarea específica de su día a día. El reto no era partir de un diseño ya definido, sino entender a fondo cómo trabaja ese cliente en su día a día para poder diseñar algo realmente intuitivo, funcional y personalizado.",
-      ca: "Un client concret dins la Xunta de Galicia necessitava una eina molt a mida per a una tasca específica del seu dia a dia. El repte no era partir d'un disseny ja definit, sinó entendre a fons com treballa aquest client en el seu dia a dia per poder dissenyar alguna cosa realment intuïtiva, funcional i personalitzada.",
-    },
-    process: {
-      en: "We started from a reference prototype GNOSS sent us, but the approach was a bit ambiguous and didn't make the process or the final product very clear — it helped us see a few specific features, but not much more. From there, the work focused on understanding the client's real task and designing the product from scratch, with a couple of check-in meetings with GNOSS along the way to validate progress.",
-      es: "Partimos de un prototipo de referencia que nos envió GNOSS, pero el planteamiento era un poco ambiguo y no dejaba muy claro ni el proceso ni el producto final — nos sirvió para ver algunas funcionalidades concretas, pero poco más. A partir de ahí, el trabajo se centró en entender la tarea real del cliente y diseñar el producto desde cero, con un par de reuniones de seguimiento con GNOSS a lo largo del proceso para ir validando el avance.",
-      ca: "Vam partir d'un prototip de referència que ens va enviar GNOSS, però el plantejament era una mica ambigu i no deixava gaire clar ni el procés ni el producte final — ens va servir per veure algunes funcionalitats concretes, però poc més. A partir d'aquí, la feina es va centrar a entendre la tasca real del client i dissenyar el producte des de zero, amb un parell de reunions de seguiment amb GNOSS al llarg del procés per anar validant l'avanç.",
-    },
-    result: {
-      en: "The client gave it the green light: the product meets what they needed and does its job. The people using it day to day find it intuitive and easy to use.",
-      es: "El cliente dio el visto bueno: el producto cumple con lo que necesitaba y hace su función. Las personas que lo usan en su día a día lo encuentran intuitivo y sencillo de manejar.",
-      ca: "El client va donar el vistiplau: el producte compleix el que necessitava i fa la seva funció. Les persones que l'utilitzen en el seu dia a dia el troben intuïtiu i senzill de fer servir.",
-    },
-    description: {
-      en: "Custom product for a Xunta de Galicia client, through GNOSS — design centered on understanding their real day-to-day task, still in progress.",
-      es: "Producto a medida para un cliente de la Xunta de Galicia, a través de GNOSS — diseño centrado en entender su tarea real del día a día, todavía en curso.",
-      ca: "Producte a mida per a un client de la Xunta de Galicia, a través de GNOSS — disseny centrat a entendre la seva tasca real del dia a dia, encara en curs.",
-    },
-    tags: ["UX Research", "Product Design", "Figma"],
-    gradient: "linear-gradient(135deg, #001515 0%, #0d3d3d 60%, #2a8c8c 100%)",
-    accentColor: "#2a8c8c",
-    cover: "/covers/cover-xunta.svg",
-    heroTagline: {
-      en: "a custom product designed around a real day-to-day task",
-      es: "un producto a medida diseñado a partir de una tarea real del día a día",
-      ca: "un producte a mida dissenyat a partir d'una tasca real del dia a dia",
-    },
-    meta: [
-      { labelKey: "client", value: "Xunta de Galicia" },
-      { labelKey: "year", value: "2026" },
-      { labelKey: "status", value: status.inProgress },
-      { labelKey: "role", value: { en: "Product design · UX research", es: "Diseño de producto · Investigación UX", ca: "Disseny de producte · Recerca UX" } },
-      { labelKey: "stack", value: "Figma" },
-      { labelKey: "studio", value: "GNOSS" },
-    ],
-    page: {
-      workHeading: {
-        en: "Starting from a reference, ending up somewhere else",
-        es: "Partir de una referencia, acabar en otro sitio",
-        ca: "Partir d'una referència, acabar en un altre lloc",
-      },
-      workCards: [
-        {
-          label: { en: "Understanding the task", es: "Entender la tarea", ca: "Entendre la tasca" },
-          desc: {
-            en: "The starting point was understanding what this specific client does day to day, before drawing anything.",
-            es: "El punto de partida fue entender qué hace este cliente concreto en su día a día, antes de dibujar nada.",
-            ca: "El punt de partida va ser entendre què fa aquest client concret en el seu dia a dia, abans de dibuixar res.",
-          },
-        },
-        {
-          label: { en: "A reference, not a base", es: "Una referencia, no una base", ca: "Una referència, no una base" },
-          desc: {
-            en: "GNOSS sent us a reference prototype early on. It was useful to see a few specific features, but the final design took a different direction.",
-            es: "GNOSS nos envió un prototipo de referencia al principio. Sirvió para ver algunas funcionalidades concretas, pero el diseño final tomó una dirección distinta.",
-            ca: "GNOSS ens va enviar un prototip de referència al principi. Va servir per veure algunes funcionalitats concretes, però el disseny final va prendre una direcció diferent.",
-          },
-        },
-        {
-          label: { en: "Follow-up with GNOSS", es: "Seguimiento con GNOSS", ca: "Seguiment amb GNOSS" },
-          desc: {
-            en: "A couple of check-in meetings with GNOSS during the process helped validate the direction as the design moved forward.",
-            es: "Un par de reuniones de seguimiento con GNOSS durante el proceso ayudaron a validar la dirección a medida que el diseño avanzaba.",
-            ca: "Un parell de reunions de seguiment amb GNOSS durant el procés van ajudar a validar la direcció a mesura que el disseny avançava.",
-          },
-        },
-      ],
-      resultHeading: {
-        en: "Approved by the client, validated by its users",
-        es: "Aprobado por el cliente, validado por sus usuarios",
-        ca: "Aprovat pel client, validat pels seus usuaris",
-      },
-      learningsHeading: {
-        en: "What I'm learning",
-        es: "Lo que estoy aprendiendo",
-        ca: "El que estic aprenent",
-      },
-      learningsBadge: { en: "In progress", es: "En progreso", ca: "En curs" },
-      learningsItems: [
-        {
-          en: "Working through an intermediary studio (GNOSS) instead of talking directly to the end client taught me to ask the right questions to pull real requirements out of an ambiguous brief, instead of taking the first reference at face value.",
-          es: "Trabajar a través de un estudio intermediario (GNOSS) en vez de hablar directamente con el cliente final me enseñó a hacer las preguntas correctas para sacar información real de un brief ambiguo, en vez de dar por buena la primera referencia que llega.",
-          ca: "Treballar a través d'un estudi intermediari (GNOSS) en comptes de parlar directament amb el client final em va ensenyar a fer les preguntes correctes per treure informació real d'un brief ambigu, en comptes de donar per bona la primera referència que arriba.",
-        },
-        {
-          en: "Seeing that the people using the product find it intuitive — without ever talking to them directly — confirmed that designing from the real task, not a generic prototype, is what actually makes the difference.",
-          es: "Ver que las personas que usan el producto lo encuentran intuitivo, sin haber hablado con ellas directamente, confirma que diseñar desde la tarea real — y no desde un prototipo genérico — es lo que de verdad marca la diferencia.",
-          ca: "Veure que les persones que fan servir el producte el troben intuïtiu, sense haver-hi parlat directament, confirma que dissenyar des de la tasca real — i no des d'un prototip genèric — és el que realment marca la diferència.",
-        },
-      ],
     },
   },
 ];
