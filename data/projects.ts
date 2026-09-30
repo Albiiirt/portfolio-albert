@@ -295,6 +295,7 @@ export const projects: Project[] = [
           ca: "El projecte segueix en curs, però capítol a capítol ja es nota: cada llibre incorpora ara els recursos que en paper quedaven fora, una lectura ampliada que el format imprès mai va poder oferir.",
         },
         tags: ["Claude Design", "Claude Code", "E-commerce"],
+        video: "/videos/bullipedia-walkthrough.mp4",
         meta: [
           { labelKey: "role", value: { en: "Design & development", es: "Diseño y desarrollo", ca: "Disseny i desenvolupament" } },
           { labelKey: "stack", value: "Claude Design · Claude Code" },

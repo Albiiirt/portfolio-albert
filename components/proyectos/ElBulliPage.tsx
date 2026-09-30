@@ -13,6 +13,7 @@ import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import ProjectScreensShowcase from "@/components/proyectos/ProjectScreensShowcase";
 import ProjectDesktopWalkthrough from "@/components/proyectos/ProjectDesktopWalkthrough";
+import ProjectWalkthroughVideo from "@/components/proyectos/ProjectWalkthroughVideo";
 import { EASE } from "@/lib/animations";
 import { useLang, type Lang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
@@ -549,6 +550,10 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
                 </div>
               </div>
             </section>
+
+            {activeSubProject.video && (
+              <ProjectWalkthroughVideo project={project} videoSrc={activeSubProject.video} sectionLabel={t[lang].projectPage.sectionLabels.videoWalkthrough} />
+            )}
 
             {activeSubProject.screensFrame === "desktop" ? (
               <ProjectDesktopWalkthrough project={project} steps={activeSubProject.desktopWalkthrough ?? []} />

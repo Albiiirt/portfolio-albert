@@ -156,6 +156,7 @@ export const t = {
         process: "The process",
         structure: "The structure",
         screens: "The screens",
+        videoWalkthrough: "Video walkthrough",
       },
       metaLabels: {
         client: "Client",
@@ -340,6 +341,7 @@ export const t = {
         process: "El proceso",
         structure: "La estructura",
         screens: "Las pantallas",
+        videoWalkthrough: "Recorrido en vídeo",
       },
       metaLabels: {
         client: "Cliente",
@@ -524,6 +526,7 @@ export const t = {
         process: "El procés",
         structure: "L'estructura",
         screens: "Les pantalles",
+        videoWalkthrough: "Recorregut en vídeo",
       },
       metaLabels: {
         client: "Client",
