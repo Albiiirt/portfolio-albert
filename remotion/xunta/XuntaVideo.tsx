@@ -8,16 +8,20 @@ const { fontFamily } = loadFont();
 // @30fps == ~267ms).
 const OVERLAP = 8;
 
+// Brief chapter cards around a long, mostly-interface middle section — per
+// Albert's note (2026-09-28): the video should read as real navigation
+// through the prototype, not a narrated slideshow with a short UI clip in
+// the middle. "work" is ~79% of the runtime.
 const SCENES: { key: string; dur: number; Comp: React.ComponentType }[] = [
-  { key: "identity", dur: 120, Comp: IdentityScene }, // 1. Identidad
-  { key: "challenge", dur: 180, Comp: ChallengeScene }, // 2. El reto
-  { key: "work", dur: 510, Comp: WorkScene }, // 3. El trabajo
-  { key: "result", dur: 150, Comp: ResultScene }, // 4. El resultado
-  { key: "learning", dur: 180, Comp: LearningScene }, // 5. El aprendizaje
-  { key: "closing", dur: 120, Comp: ClosingScene }, // 6. Cierre
+  { key: "identity", dur: 55, Comp: IdentityScene }, // 1. Identidad
+  { key: "challenge", dur: 45, Comp: ChallengeScene }, // 2. El reto
+  { key: "work", dur: 980, Comp: WorkScene }, // 3. El trabajo (interfaz real)
+  { key: "result", dur: 45, Comp: ResultScene }, // 4. El resultado
+  { key: "learning", dur: 60, Comp: LearningScene }, // 5. El aprendizaje
+  { key: "closing", dur: 55, Comp: ClosingScene }, // 6. Cierre
 ];
 
-export const TOTAL_DURATION = SCENES.reduce((sum, s) => sum + s.dur, 0); // 1260 @ 30fps == 42s
+export const TOTAL_DURATION = SCENES.reduce((sum, s) => sum + s.dur, 0); // 1240 @ 30fps == ~41.3s
 
 function CrossfadeLayer({ dur, fadeIn, fadeOut, children }: { dur: number; fadeIn: boolean; fadeOut: boolean; children: React.ReactNode }) {
   const frame = useCurrentFrame();

@@ -10,6 +10,7 @@ const PATHS: Record<string, string> = {
   task_alt: "M22 5.18 10.59 16.6l-4.24-4.25 1.41-1.41 2.83 2.83 10-10L22 5.18zM12 20a8 8 0 1 1 5.29-14l1.45-1.45A9.96 9.96 0 0 0 12 2 10 10 0 1 0 22 12h-2a8 8 0 0 1-8 8z",
   description: "M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z",
   call_merge: "M17 20.41 18.41 19 15 15.59V13h2.5l-4-4-4 4H12v2.59L8.59 19 10 20.41 13 17.4v3.6h2v-3.6l2 3.01z",
+  arrow_back: "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20z",
 };
 
 export function Icon({ name, size = 18, color = "currentColor" }: { name: keyof typeof PATHS; size?: number; color?: string }) {

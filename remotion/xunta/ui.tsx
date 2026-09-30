@@ -172,50 +172,56 @@ function CaretBlink({ show }: { show: boolean }) {
 }
 
 // ── FacetSidebar (static/dimmed, per spec) ───────────────────────────────
-export function FacetSidebar() {
-  const facets: { label: string; items: { name: string; n: number; active?: boolean }[] }[] = [
-    {
-      label: "Estado de unificación",
-      items: [
-        { name: "En revisión", n: 2, active: true },
-        { name: "Pendiente de revisar", n: 6 },
-        { name: "Revisado", n: 5 },
-      ],
-    },
-    {
-      label: "Tamaño de la propuesta",
-      items: [
-        { name: "Par (2 documentos)", n: 5 },
-        { name: "Grupo (3 o más)", n: 2 },
-      ],
-    },
+// `activeEstado` drives which "Estado de unificación" facet row is
+// highlighted — the video clicks between them to show real facet filtering,
+// so this isn't just decorative/dimmed the way a static list would be.
+export function FacetSidebar({ activeEstado = "revision", flashing }: { activeEstado?: string; flashing?: boolean }) {
+  const estadoItems = [
+    { key: "revision", name: "En revisión", n: 2 },
+    { key: "pendiente", name: "Pendiente de revisar", n: 6 },
+    { key: "revisado", name: "Revisado", n: 5 },
   ];
   return (
-    <div style={{ width: 240, flexShrink: 0, fontFamily: GNOSS.font, opacity: 0.55 }}>
+    <div style={{ width: 240, flexShrink: 0, fontFamily: GNOSS.font }}>
       <p style={{ margin: "0 0 8px", fontWeight: 700, fontSize: 14, color: GNOSS.texto }}>Filtrar por</p>
-      {facets.map((f) => (
-        <div key={f.label} style={{ borderBottom: `1px solid ${GNOSS.grisBorde}`, padding: "12px 0" }}>
-          <p style={{ margin: "0 0 10px", fontSize: 13, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.02em", color: GNOSS.texto }}>{f.label}</p>
-          {f.items.map((it) => (
+      <div style={{ borderBottom: `1px solid ${GNOSS.grisBorde}`, padding: "12px 0" }}>
+        <p style={{ margin: "0 0 10px", fontSize: 13, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.02em", color: GNOSS.texto }}>Estado de unificación</p>
+        {estadoItems.map((it) => {
+          const active = it.key === activeEstado;
+          return (
             <div
-              key={it.name}
+              key={it.key}
               style={{
                 display: "flex",
                 justifyContent: "space-between",
                 padding: "6px 8px",
                 borderRadius: 6,
                 fontSize: 13.5,
-                color: it.active ? GNOSS.primario : GNOSS.textoMedio,
-                fontWeight: it.active ? 600 : 400,
-                background: it.active ? GNOSS.primarioHighlight : "transparent",
+                color: active ? GNOSS.primario : GNOSS.textoMedio,
+                fontWeight: active ? 600 : 400,
+                background: active ? GNOSS.primarioHighlight : "transparent",
+                transform: flashing && active ? "scale(0.97)" : "scale(1)",
+                boxShadow: flashing && active ? `0 0 0 4px ${GNOSS.primarioHighlight}` : "none",
               }}
             >
               <span>{it.name}</span>
-              <span style={{ color: it.active ? GNOSS.primario : GNOSS.textoClaro, fontSize: 12 }}>({it.n})</span>
+              <span style={{ color: active ? GNOSS.primario : GNOSS.textoClaro, fontSize: 12 }}>({it.n})</span>
             </div>
-          ))}
-        </div>
-      ))}
+          );
+        })}
+      </div>
+      <div style={{ borderBottom: `1px solid ${GNOSS.grisBorde}`, padding: "12px 0", opacity: 0.6 }}>
+        <p style={{ margin: "0 0 10px", fontSize: 13, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.02em", color: GNOSS.texto }}>Tamaño de la propuesta</p>
+        {[
+          { name: "Par (2 documentos)", n: 5 },
+          { name: "Grupo (3 o más)", n: 2 },
+        ].map((it) => (
+          <div key={it.name} style={{ display: "flex", justifyContent: "space-between", padding: "6px 8px", fontSize: 13.5, color: GNOSS.textoMedio }}>
+            <span>{it.name}</span>
+            <span style={{ color: GNOSS.textoClaro, fontSize: 12 }}>({it.n})</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -383,32 +389,24 @@ export function KanbanCard({
 }
 
 // ── EsquemaToggle ─────────────────────────────────────────────────────────
-export function EsquemaToggle() {
+export function EsquemaToggle({ active = "marc", flashing }: { active?: "marc" | "isaar"; flashing?: "marc" | "isaar" | null }) {
+  const btn = (key: "marc" | "isaar", label: string, tag: string, first: boolean): CSSProperties => ({
+    padding: "8px 16px",
+    border: 0,
+    borderLeft: first ? "none" : `1px solid ${GNOSS.grisBorde}`,
+    background: active === key ? GNOSS.primario : GNOSS.blanco,
+    color: active === key ? GNOSS.blanco : GNOSS.textoMedio,
+    fontSize: 13,
+    fontWeight: 600,
+    transform: flashing === key ? "scale(0.96)" : "scale(1)",
+    boxShadow: flashing === key ? `0 0 0 4px ${GNOSS.primarioHighlight}` : "none",
+  });
   return (
     <div style={{ display: "inline-flex", border: `1px solid ${GNOSS.grisBorde}`, borderRadius: 8, overflow: "hidden", fontFamily: GNOSS.font }}>
-      <button
-        style={{
-          padding: "8px 16px",
-          border: 0,
-          background: GNOSS.primario,
-          color: GNOSS.blanco,
-          fontSize: 13,
-          fontWeight: 600,
-        }}
-      >
+      <button style={btn("marc", "Vista bibliotecaria", "MARC", true)}>
         Vista bibliotecaria <span style={{ opacity: 0.75, fontSize: 11.5, fontWeight: 400 }}>MARC</span>
       </button>
-      <button
-        style={{
-          padding: "8px 16px",
-          border: 0,
-          borderLeft: `1px solid ${GNOSS.grisBorde}`,
-          background: GNOSS.blanco,
-          color: GNOSS.textoMedio,
-          fontSize: 13,
-          fontWeight: 600,
-        }}
-      >
+      <button style={btn("isaar", "Vista archivística", "ISAAR", false)}>
         Vista archivística <span style={{ opacity: 0.75, fontSize: 11.5, fontWeight: 400 }}>ISAAR</span>
       </button>
     </div>
@@ -445,27 +443,42 @@ export function FooterActions({ acceptActive }: { acceptActive?: boolean }) {
 // ── ComparativeTable ──────────────────────────────────────────────────────
 export type NameClass = "principal" | "4xx" | "7xx";
 
+const ROWS_MARC: { campo: string; codigo: string; etiqueta: string }[] = [
+  { campo: "idControl", codigo: "001", etiqueta: "Número de control" },
+  { campo: "nombreAutorizado", codigo: "100", etiqueta: "Encabezamiento — Nombre de persona" },
+  { campo: "formasVariantes", codigo: "400", etiqueta: "Forma variante del nombre" },
+  { campo: "fechasAsociadas", codigo: "046", etiqueta: "Fechas asociadas" },
+  { campo: "fuenteCatalogacion", codigo: "040", etiqueta: "Fuente de catalogación" },
+  { campo: "notaBiografica", codigo: "678", etiqueta: "Nota biográfica" },
+];
+
+// Real ISAAR (archival) schema from the prototype: same fields, different
+// order/labels, no MARC field codes.
+const ROWS_ISAAR: { campo: string; codigo: string; etiqueta: string }[] = [
+  { campo: "nombreAutorizado", codigo: "", etiqueta: "Forma autorizada del nombre" },
+  { campo: "formasVariantes", codigo: "", etiqueta: "Formas paralelas / variantes" },
+  { campo: "fechasAsociadas", codigo: "", etiqueta: "Fechas de existencia" },
+  { campo: "notaBiografica", codigo: "", etiqueta: "Historia / nota biográfica" },
+  { campo: "fuenteCatalogacion", codigo: "", etiqueta: "Fuente" },
+  { campo: "idControl", codigo: "", etiqueta: "Identificador" },
+];
+
 export function ComparativeTable({
   docs,
   selection,
   nameClass,
   activeCell,
   activePill,
+  esquema = "marc",
 }: {
   docs: { id: string; nombre: string; idControl: string; formasVariantes: string[]; fechasAsociadas: string; fuenteCatalogacion: string; notaBiografica: string }[];
   selection: Record<string, string>;
   nameClass: Record<string, NameClass>;
   activeCell?: { campo: string; doc: string } | null;
   activePill?: { doc: string; tipo: NameClass } | null;
+  esquema?: "marc" | "isaar";
 }) {
-  const rows: { campo: string; codigo: string; etiqueta: string }[] = [
-    { campo: "idControl", codigo: "001", etiqueta: "Número de control" },
-    { campo: "nombreAutorizado", codigo: "100", etiqueta: "Encabezamiento — Nombre de persona" },
-    { campo: "formasVariantes", codigo: "400", etiqueta: "Forma variante del nombre" },
-    { campo: "fechasAsociadas", codigo: "046", etiqueta: "Fechas asociadas" },
-    { campo: "fuenteCatalogacion", codigo: "040", etiqueta: "Fuente de catalogación" },
-    { campo: "notaBiografica", codigo: "678", etiqueta: "Nota biográfica" },
-  ];
+  const rows = esquema === "isaar" ? ROWS_ISAAR : ROWS_MARC;
 
   const valueFor = (doc: (typeof docs)[number], campo: string): string => {
     const v = (doc as Record<string, unknown>)[campo === "nombreAutorizado" ? "nombre" : campo];
@@ -506,7 +519,9 @@ export function ComparativeTable({
                   }}
                 >
                   {f.etiqueta}
-                  <span style={{ display: "block", fontWeight: 400, color: GNOSS.textoClaro, fontSize: 11.5, fontFamily: "monospace", marginTop: 4 }}>{f.codigo}</span>
+                  {f.codigo && (
+                    <span style={{ display: "block", fontWeight: 400, color: GNOSS.textoClaro, fontSize: 11.5, fontFamily: "monospace", marginTop: 4 }}>{f.codigo}</span>
+                  )}
                 </td>
                 {docs.map((d) => {
                   const value = valueFor(d, f.campo);
