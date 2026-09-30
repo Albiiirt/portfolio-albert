@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import NextProjectCard from "@/components/proyectos/NextProjectCard";
+import ProjectWalkthroughVideo from "@/components/proyectos/ProjectWalkthroughVideo";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import CustomCursor from "@/components/CustomCursor";
@@ -79,7 +80,7 @@ function SvgWorkflow() {
       })}
 
       <text x={totalW / 2} y={116} textAnchor="middle"
-        fill="var(--text-subtle)" fontSize={12} fontFamily="var(--font-sans)" fontStyle="italic" letterSpacing={0.3}>
+        fill="var(--text-subtle)" fontSize={12} fontFamily="var(--font-sans)" letterSpacing={0.3}>
         De una base generada por IA a un producto terminado
       </text>
     </svg>
@@ -104,8 +105,8 @@ export default function MadridPage() {
           flexDirection: "column",
           background: "linear-gradient(135deg, #1a0a0f 0%, #4a1528 60%, #8c3a5a 100%)",
           paddingTop: "clamp(5.5rem, 9vh, 8rem)",
-          paddingLeft: "clamp(1.5rem, 5vw, 5rem)",
-          paddingRight: "clamp(1.5rem, 5vw, 5rem)",
+          paddingLeft: "var(--space-section-x)",
+          paddingRight: "var(--space-section-x)",
           paddingBottom: "clamp(3.5rem, 6vh, 5rem)",
         }}>
           <video
@@ -132,7 +133,7 @@ export default function MadridPage() {
 
           {/* Back link */}
           <motion.div
-            style={{ position: "fixed", top: "1.25rem", left: "clamp(1.5rem, 5vw, 5rem)", zIndex: 49 }}
+            style={{ position: "fixed", top: "1.25rem", left: "var(--space-section-x)", zIndex: 49 }}
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: EASE }}
@@ -176,8 +177,7 @@ export default function MadridPage() {
                 <span style={{
                   display: "block",
                   fontSize: "clamp(1.1rem, 2vw, 1.7rem)",
-                  fontFamily: "var(--font-serif), 'Playfair Display', serif",
-                  fontStyle: "italic", fontWeight: 400,
+                  fontWeight: 800,
                   lineHeight: 1.25, color: "rgba(255,255,255,0.6)",
                   marginTop: "0.5rem",
                 }}>
@@ -187,7 +187,7 @@ export default function MadridPage() {
               <motion.div
                 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.34 }}
-                style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "clamp(1.5rem, 3vh, 2.5rem)" }}
+                style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "var(--space-gap-sm)" }}
               >
                 {chips.map((chip) => (
                   <span key={chip} className="tag">{chip}</span>
@@ -226,12 +226,12 @@ export default function MadridPage() {
         </section>
 
         {/* ── Overview ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
-            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
+            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
               <FadeInView>
                 <p className="section-label" style={{ marginBottom: "1.5rem" }}>{t[lang].projectPage.sectionLabels.project}</p>
-                <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
+                <p style={{ fontSize: "var(--text-body)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
                   {project.problem[lang]}
                 </p>
               </FadeInView>
@@ -258,15 +258,21 @@ export default function MadridPage() {
           </div>
         </section>
 
+        <ProjectWalkthroughVideo
+          project={project}
+          videoSrc="/videos/madrid-enoturismo.mp4"
+          sectionLabel={t[lang].projectPage.sectionLabels.screens}
+        />
+
         {/* ── El punto de partida ── */}
-        <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.startingPoint}</p>
             </FadeInView>
-            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
+            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "center" }}>
               <FadeInView>
-                <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
+                <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
                   {page.startingPointHeading![lang]}
                 </h2>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
@@ -283,11 +289,11 @@ export default function MadridPage() {
         </section>
 
         {/* ── El trabajo ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.work}</p>
-              <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "clamp(2.5rem, 4vh, 4rem)" }}>
+              <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "clamp(2.5rem, 4vh, 4rem)" }}>
                 {page.workHeading![lang]}
               </h2>
             </FadeInView>
@@ -316,8 +322,8 @@ export default function MadridPage() {
         </section>
 
         {/* ── El resultado ── */}
-        <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-          <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
+        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+          <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
@@ -328,11 +334,11 @@ export default function MadridPage() {
         </section>
 
         {/* ── Aprendizajes ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-          <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
+        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+          <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>
-              <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.75rem" }}>
+              <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.75rem" }}>
                 {t[lang].projectPage.learningsHeading}
               </h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
