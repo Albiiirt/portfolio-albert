@@ -164,25 +164,6 @@ html { scroll-behavior: auto; background: var(--bg); }
   .proj-grid-3 { grid-template-columns: 1fr 1fr !important; }
   .proj-next-grid { grid-template-columns: 1fr 1fr !important; }
 
-  /* Xunta hero: video panel drops below the text as a stacked "glass" card
-     instead of a fading side panel — the 14% left mask only reads as a
-     dissolve when it overlaps the text column, so it's removed here too. */
-  .xunta-hero-row { flex-direction: column !important; align-items: stretch !important; }
-  .xunta-hero-video-panel {
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-top: clamp(1.5rem, 3vh, 2.5rem) !important;
-    align-self: auto !important;
-    aspect-ratio: 16 / 9;
-    border: 1.5px solid rgba(255,255,255,0.16) !important;
-    box-shadow: 0 1px 0 rgba(255,255,255,0.14) inset, 0 6px 28px var(--glass-shadow) !important;
-    border-radius: 1.25rem !important;
-  }
-  .xunta-hero-video-panel video {
-    mask-image: none !important;
-    -webkit-mask-image: none !important;
-  }
-
   /* Projects listing */
   .projects-grid { grid-template-columns: 1fr !important; }
 

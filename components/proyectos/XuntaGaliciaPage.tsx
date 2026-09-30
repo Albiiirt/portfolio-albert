@@ -42,7 +42,7 @@ export default function XuntaGaliciaPage() {
           paddingBottom: "clamp(3.5rem, 6vh, 5rem)",
         }}>
           <div style={{
-            position: "absolute", inset: 0, zIndex: 0,
+            position: "absolute", inset: 0,
             background: "radial-gradient(ellipse 70% 60% at 75% 35%, rgba(42,140,140,0.3) 0%, transparent 70%)",
             pointerEvents: "none",
           }} />
@@ -73,10 +73,10 @@ export default function XuntaGaliciaPage() {
           </motion.div>
 
           <div
-            className="site-content xunta-hero-row"
-            style={{ flex: 1, display: "flex", flexDirection: "row", alignItems: "flex-end" }}
+            className="site-content"
+            style={{ position: "relative", zIndex: 1, flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}
           >
-            <div style={{ position: "relative", zIndex: 3, maxWidth: "clamp(280px, 42%, 480px)" }}>
+            <div style={{ maxWidth: "clamp(320px, 58%, 640px)" }}>
               <motion.p
                 className="section-label"
                 style={{ marginBottom: "1rem", color: ACCENT }}
@@ -113,49 +113,10 @@ export default function XuntaGaliciaPage() {
                 ))}
               </motion.div>
             </div>
-
-            {/* Video panel — second, independent hero instance (the one lower on
-                the page inside XuntaUnificadorVideo stays untouched). Fades into
-                the hero background at its left edge instead of a hard-edged
-                frame, since the video already opens on the same teal gradient. */}
-            <motion.div
-              className="xunta-hero-video-panel"
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, ease: EASE, delay: 0.24 }}
-              style={{
-                position: "relative",
-                zIndex: 1,
-                width: "56%",
-                alignSelf: "stretch",
-                marginLeft: "clamp(-1.5rem, -4vw, -3rem)",
-                borderRadius: "0.75rem",
-                overflow: "hidden",
-              }}
-            >
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                poster={project.cover}
-                aria-hidden="true"
-                style={{
-                  display: "block",
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "center",
-                  maskImage: "linear-gradient(to right, transparent 0%, black 14%)",
-                  WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 14%)",
-                }}
-              >
-                <source src="/videos/xunta-unificador.mp4" type="video/mp4" />
-              </video>
-            </motion.div>
           </div>
 
           <div style={{
-            position: "absolute", inset: 0, zIndex: 2,
+            position: "absolute", inset: 0,
             background: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.7) 100%)",
             pointerEvents: "none",
           }} />
