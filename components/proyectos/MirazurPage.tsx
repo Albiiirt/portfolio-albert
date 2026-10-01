@@ -100,6 +100,69 @@ function SvgRecipeFlow() {
   );
 }
 
+// ── SVG: anatomía de la landing de experiencia ──────────────────────────────
+function SvgLandingAnatomy() {
+  const blocks = [
+    { n: "01", title: "Hero",        sub: "el entorno, el Mediterráneo" },
+    { n: "02", title: "Platos",      sub: "la filosofía de Mauro Colagreco" },
+    { n: "03", title: "Formulario",  sub: "solicitud del cupón", accent: true },
+  ];
+  const BOX_W = 220, BOX_H = 68, GAP = 24;
+  const totalH = blocks.length * BOX_H + (blocks.length - 1) * GAP + 16;
+
+  return (
+    <svg viewBox={`0 0 244 ${totalH}`} fill="none" style={{ width: "100%", maxWidth: 244, height: "auto" }} aria-hidden>
+      <defs>
+        <marker id="arr-v" markerWidth={7} markerHeight={7} refX={3} refY={6} orient="auto">
+          <path d="M0.5,0 L6,0 L3,7 z" fill="var(--border-mid)" />
+        </marker>
+        <marker id="arr-va" markerWidth={7} markerHeight={7} refX={3} refY={6} orient="auto">
+          <path d="M0.5,0 L6,0 L3,7 z" fill={ACCENT} />
+        </marker>
+      </defs>
+
+      {blocks.map((b, i) => {
+        const y = 8 + i * (BOX_H + GAP);
+        const isLast = i === blocks.length - 1;
+        return (
+          <g key={i}>
+            <rect x={12} y={y} width={BOX_W} height={BOX_H} rx={10}
+              fill="var(--bg-alt)"
+              stroke={b.accent ? ACCENT : "var(--border-mid)"}
+              strokeWidth={b.accent ? 1.5 : 1} />
+            {b.accent && (
+              <rect x={14} y={y + 10} width={3} height={BOX_H - 20} rx={1.5} fill={ACCENT} />
+            )}
+            <text x={12 + (b.accent ? 26 : 18)} y={y + 28}
+              fill={b.accent ? ACCENT : "var(--text-muted)"}
+              fontSize={12} fontWeight={b.accent ? 700 : 500} fontFamily="var(--font-sans)">
+              {b.title}
+            </text>
+            <text x={12 + (b.accent ? 26 : 18)} y={y + 46}
+              fill="var(--text-subtle)" fontSize={9} fontFamily="var(--font-sans)">
+              {b.sub}
+            </text>
+            <text x={12 + BOX_W - 12} y={y + 20}
+              textAnchor="end" fill={b.accent ? ACCENT : "var(--border-mid)"}
+              fontSize={8} fontWeight={700} fontFamily="var(--font-sans)" letterSpacing={0.5}>
+              {b.n}
+            </text>
+            {!isLast && (
+              <line
+                x1={12 + BOX_W / 2} y1={y + BOX_H + 3}
+                x2={12 + BOX_W / 2} y2={y + BOX_H + GAP - 4}
+                stroke={blocks[i + 1].accent ? ACCENT : "var(--border-mid)"}
+                strokeWidth={1.5}
+                markerEnd={blocks[i + 1].accent ? "url(#arr-va)" : "url(#arr-v)"}
+              />
+            )}
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
 // ── Page ────────────────────────────────────────────────────────────────────
 export default function MirazurPage({ initialTab }: { initialTab?: string } = {}) {
   const { lang } = useLang();
@@ -357,7 +420,7 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
                     <p className="section-label" style={{ marginBottom: "0.5rem", color: ACCENT }}>{page!.project2Label![lang]}</p>
                     <p className="section-label" style={{ marginBottom: "1.75rem" }}>{page!.project2SectionLabel![lang]}</p>
                   </FadeInView>
-                  <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
+                  <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "center" }}>
                     <FadeInView>
                       <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
                         {page!.project2Heading![lang]}
@@ -370,22 +433,8 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
                       </p>
                     </FadeInView>
                     <FadeInView delay={0.1}>
-                      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                        {page!.project2Cards!.map(({ label, desc }, i) => (
-                          <div key={i} style={{
-                            padding: "1.25rem 1.5rem",
-                            borderRadius: "0.75rem",
-                            border: "1px solid var(--border-mid)",
-                            background: "var(--bg-alt)",
-                          }}>
-                            <p style={{ fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: ACCENT, marginBottom: "0.5rem" }}>
-                              {label[lang]}
-                            </p>
-                            <p style={{ fontSize: "0.9rem", lineHeight: 1.65, color: "var(--text-muted)", margin: 0 }}>
-                              {desc[lang]}
-                            </p>
-                          </div>
-                        ))}
+                      <div style={{ display: "flex", justifyContent: "center" }}>
+                        <SvgLandingAnatomy />
                       </div>
                     </FadeInView>
                   </div>
