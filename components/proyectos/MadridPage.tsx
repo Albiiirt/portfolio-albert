@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import NextProjectCard from "@/components/proyectos/NextProjectCard";
-import ProjectWalkthroughVideo from "@/components/proyectos/ProjectWalkthroughVideo";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import CustomCursor from "@/components/CustomCursor";
@@ -257,12 +256,6 @@ export default function MadridPage() {
             </div>
           </div>
         </section>
-
-        <ProjectWalkthroughVideo
-          project={project}
-          videoSrc="/videos/madrid-enoturismo.mp4"
-          sectionLabel={t[lang].projectPage.sectionLabels.screens}
-        />
 
         {/* ── El punto de partida ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>

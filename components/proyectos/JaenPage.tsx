@@ -9,8 +9,6 @@ import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
-import ProjectScreensShowcase from "@/components/proyectos/ProjectScreensShowcase";
-import ProjectDesktopWalkthrough from "@/components/proyectos/ProjectDesktopWalkthrough";
 import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
@@ -386,16 +384,6 @@ export default function JaenPage() {
             </div>
           </div>
         </section>
-
-        {project.screensFrame === "desktop" ? (
-          <ProjectDesktopWalkthrough
-            project={project}
-            steps={project.desktopWalkthrough ?? []}
-            hideCaptions={project.desktopWalkthroughHideCaptions}
-          />
-        ) : (
-          <ProjectScreensShowcase project={project} />
-        )}
 
         {/* ── El doble reto ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>

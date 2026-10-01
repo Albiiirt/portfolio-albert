@@ -43,20 +43,29 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
         width: "100%",
       }}
     >
-      {/* Cover image */}
-      {project.cover && (
+      {/* Cover: video when available, static image otherwise */}
+      {(project.video || project.cover) && (
         <motion.div
           animate={{ scale: hovered ? 1.04 : 1 }}
           transition={{ duration: 0.55, ease: EASE }}
           style={{ position: "absolute", inset: 0 }}
         >
-          <Image
-            src={project.cover}
-            alt=""
-            fill
-            sizes="(max-width: 640px) 100vw, 50vw"
-            style={{ objectFit: "cover", objectPosition: "center" }}
-          />
+          {project.video ? (
+            <video
+              autoPlay muted loop playsInline
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+            >
+              <source src={project.video} type="video/mp4" />
+            </video>
+          ) : (
+            <Image
+              src={project.cover!}
+              alt=""
+              fill
+              sizes="(max-width: 640px) 100vw, 50vw"
+              style={{ objectFit: "cover", objectPosition: "center" }}
+            />
+          )}
         </motion.div>
       )}
 

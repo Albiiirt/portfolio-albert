@@ -8,7 +8,6 @@ import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
-import ProjectScreensShowcase from "@/components/proyectos/ProjectScreensShowcase";
 import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
@@ -211,8 +210,6 @@ export default function GnossPage() {
             </div>
           </div>
         </section>
-
-        <ProjectScreensShowcase project={project} />
 
         {/* ── El reto ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>

@@ -51,3 +51,11 @@ D.O.Ca. Rioja). Albert decidió (1 de octubre de 2026) quedarse con la foto
 estática por ahora en vez de ese vídeo. `la-rioja-turismo` usa
 `cover-rioja.webp` como imagen de fondo del hero (mismo patrón que
 `turisme-jaen`) y no tiene campo `video`.
+
+Foto actualizada el 1 de octubre de 2026 (decisión de `diseñador`): puente de
+Logroño de noche, con la torre de la Concatedral de Santa María de la Redonda
+al fondo.
+
+- [Página de Pixabay](https://pixabay.com/photos/logro%C3%B1o-bridge-landscape-night-351209/)
+- Autor: Witizia
+- Licencia: [Pixabay Content License](https://pixabay.com/service/license-summary/) — uso comercial libre, sin atribución obligatoria.
