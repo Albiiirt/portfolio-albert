@@ -5,13 +5,11 @@ import { useEffect, useRef, useState } from "react";
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
-  const [enabled, setEnabled] = useState(false);
-
-  useEffect(() => {
-    // Touch devices have no real mouse — mount nothing so no stray dot/ring
-    // is left sitting on screen from a synthesized touch-to-mouse event.
-    setEnabled(window.matchMedia("(pointer: fine)").matches);
-  }, []);
+  // Touch devices have no real mouse — mount nothing so no stray dot/ring is
+  // left sitting on screen from a synthesized touch-to-mouse event.
+  const [enabled] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches
+  );
 
   useEffect(() => {
     if (!enabled) return;

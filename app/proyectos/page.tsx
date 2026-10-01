@@ -14,6 +14,13 @@ import { t } from "@/data/translations";
 import { projects } from "@/data/projects";
 import { EASE } from "@/lib/animations";
 
+const PINNED_PROJECT_IDS = ["elbulli", "xunta-galicia", "madrid", "mirazur", "la-rioja-turismo"];
+const orderedProjects = [...projects].sort((a, b) => {
+  const aIndex = PINNED_PROJECT_IDS.indexOf(a.id);
+  const bIndex = PINNED_PROJECT_IDS.indexOf(b.id);
+  return (aIndex === -1 ? Infinity : aIndex) - (bIndex === -1 ? Infinity : bIndex);
+});
+
 function ProjectCard({ project }: { project: (typeof projects)[0] }) {
   const { lang } = useLang();
   const tx = t[lang].work;
@@ -164,7 +171,7 @@ export default function ProyectosPage() {
 
         <main style={{
           minHeight: "100svh",
-          padding: "clamp(6rem, 12vh, 9rem) clamp(1.5rem, 5vw, 5rem) clamp(4rem, 8vh, 6rem)",
+          padding: "clamp(6rem, 12vh, 9rem) var(--space-section-x) clamp(4rem, 8vh, 6rem)",
           background: "var(--bg)",
         }}>
           <div className="site-content">
@@ -182,8 +189,7 @@ export default function ProyectosPage() {
                 }}>
                   <h1 style={{
                     fontSize: "var(--text-display)",
-                    fontFamily: "var(--font-serif), 'Playfair Display', serif",
-                    fontStyle: "italic", fontWeight: 400,
+                    fontWeight: 800,
                     lineHeight: 1.05, color: "var(--text)", margin: 0,
                   }}>
                     {heading[lang]}
@@ -204,7 +210,7 @@ export default function ProyectosPage() {
               gridTemplateColumns: "repeat(2, 1fr)",
               gap: "clamp(0.75rem, 1.2vw, 1.25rem)",
             }}>
-              {projects.map((project, i) => (
+              {orderedProjects.map((project, i) => (
                 <FadeInView
                   key={project.id}
                   delay={i * 0.06}

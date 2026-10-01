@@ -2,9 +2,17 @@
 
 @theme {
   --font-sans: var(--font-space), "Space Grotesk", sans-serif;
-  --text-hero: clamp(2.5rem, 6.5vw, 7rem);
+  --text-hero: clamp(2.5rem, 6vw, 6.5rem);
   --text-display: clamp(2rem, 5.5vw, 6.5rem);
+  --text-section: clamp(1.75rem, 3.6vw, 3.25rem);
   --text-label: 0.67rem;
+  --text-heading: clamp(1.6rem, 3vw, 2.6rem);
+  --text-body: clamp(1rem, 1.5vw, 1.2rem);
+
+  --space-section-x: clamp(1.5rem, 5vw, 5rem);
+  --space-section-y: clamp(4rem, 8vh, 7rem);
+  --space-gap-lg: clamp(3rem, 6vw, 7rem);
+  --space-gap-sm: clamp(1.5rem, 3vh, 2.5rem);
 }
 
 /* ── Theme variables ── */
@@ -40,6 +48,9 @@
   --btn-ghost-bg-hover:   rgba(255,255,255,0.72);
   --btn-ghost-border:     rgba(255,255,255,0.85);
   --btn-ghost-text:       rgba(26,23,20,0.6);
+  --btn-invert-bg:       #1a1714;
+  --btn-invert-bg-hover: #2e2822;
+  --btn-invert-text:     #f5f2ee;
 
   /* Tags */
   --tag-bg:     rgba(26,23,20,0.07);
@@ -92,6 +103,9 @@
   --btn-ghost-bg-hover:   rgba(255,255,255,0.12);
   --btn-ghost-border:     rgba(255,255,255,0.14);
   --btn-ghost-text:       rgba(240,237,232,0.6);
+  --btn-invert-bg:       #f0ede8;
+  --btn-invert-bg-hover: #ffffff;
+  --btn-invert-text:     #0a0a0a;
 
   /* Tags dark */
   --tag-bg:     rgba(240,237,232,0.08);
@@ -186,10 +200,6 @@ html { scroll-behavior: auto; background: var(--bg); }
   .work-section { height: auto !important; }
   .work-sticky  { position: static !important; height: auto !important; overflow: visible !important; }
 
-  /* About services: 1 col */
-  .about-services { grid-template-columns: 1fr !important; }
-  .about-service-item { border-left: none !important; border-top: 1px solid var(--border) !important; }
-
   /* Testimonials: 1.15 cards */
   .testimonial-card { flex: 0 0 calc(100% - 2rem) !important; }
   .testimonials-header { flex-direction: column !important; align-items: flex-start !important; gap: 0.75rem !important; }
@@ -232,6 +242,7 @@ html.custom-cursor-active body,
 html.custom-cursor-active .nav-link,
 html.custom-cursor-active .btn-primary,
 html.custom-cursor-active .btn-ghost,
+html.custom-cursor-active .btn-invert,
 html.custom-cursor-active .project-row,
 html.custom-cursor-active .cursor-hidden {
   cursor: none;
@@ -245,18 +256,11 @@ html.custom-cursor-active .cursor-hidden {
 
 /* ── Typography ── */
 .hero-heading {
-  font-size: clamp(3rem, 8vw, 9rem);
-  font-weight: 700;
-  line-height: 0.9;
-  letter-spacing: -0.04em;
+  font-size: var(--text-hero);
+  font-weight: 600;
+  line-height: 0.94;
+  letter-spacing: -0.02em;
   color: var(--text);
-}
-
-.hero-heading-serif {
-  font-family: var(--font-serif), "Playfair Display", serif;
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: 0;
 }
 
 .display-heading {
@@ -465,6 +469,32 @@ html.custom-cursor-active .cursor-hidden {
   color: var(--text);
 }
 
+.btn-invert {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.8rem;
+  border-radius: 100px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  color: var(--btn-invert-text);
+  background: var(--btn-invert-bg);
+  border: 1px solid transparent;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+  transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+}
+.btn-invert:hover {
+  transform: translateY(-2px);
+  background: var(--btn-invert-bg-hover);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.22);
+}
+.btn-invert:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
 /* ── Tag ── */
 .tag {
   display: inline-flex;
@@ -542,80 +572,111 @@ html.custom-cursor-active .cursor-hidden {
   100% { transform: translateY(6px); }
 }
 
-/* ── Project desktop walkthrough (browser-chrome frame) ── */
-.browser-chrome-bar {
-  height: 40px;
+/* ── Project desktop walkthrough (full-bleed straight strip) ── */
+
+.walkthrough-strip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(4rem, 10vh, 8rem);
 }
 @media (max-width: 900px) {
-  .browser-chrome-bar { height: 34px; }
-}
-@media (max-width: 640px) {
-  .browser-chrome-bar { height: 28px; }
+  .walkthrough-strip {
+    gap: clamp(2.5rem, 6vh, 4rem);
+  }
 }
 
-/* Desktop walkthrough: ≥900px shows the overlapping collage stage,
-   <900px keeps the original stacked list untouched. */
-.walkthrough-stage { display: block; }
-.walkthrough-list { display: none; }
+.walkthrough-screen {
+  width: 100%;
+  max-width: min(100vw, 1600px);
+  padding-inline: clamp(1rem, 4vw, 3rem);
+}
 @media (max-width: 900px) {
-  .walkthrough-stage { display: none !important; }
-  .walkthrough-list { display: flex !important; }
+  .walkthrough-screen {
+    padding-inline: clamp(1rem, 5vw, 1.5rem);
+  }
 }
 
-.collage-frame {
-  cursor: pointer;
-}
-.collage-frame:focus-visible {
-  outline: 2px solid rgba(255,255,255,0.9);
-  outline-offset: 4px;
-  border-radius: 16px;
+.walkthrough-screen-media {
+  position: relative;
 }
 
-/* Expand affordance — appears on the same hover/focus moment that used to
-   also reveal a caption pill (removed: only the lift/shadow hover effect
-   plus this icon remain now). Sits inside the content panel, not the
-   frame's outer edge, so it never spills outside the card. */
-.collage-expand-icon {
+/* ── Synthetic cursor: dot + ring at rest, ripple once it "clicks" ── */
+
+.walkthrough-cursor {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+}
+.walkthrough-cursor-ring,
+.walkthrough-cursor-dot,
+.walkthrough-cursor-ripple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.walkthrough-cursor-ring {
+  width: 32px;
+  height: 32px;
+  background: var(--cursor-ring-bg-hover);
+  border: 1px solid var(--cursor-ring-border-hover);
+}
+.walkthrough-cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--cursor-dot);
+}
+.walkthrough-cursor-ripple {
+  border: 1px solid var(--cursor-ring-border-hover);
+}
+
+/* Video-step indicator pill — reuses .walkthrough-scroll-hint-pill's visual
+   style, just repositioned to the top-left corner of the media. */
+.walkthrough-video-pill {
   position: absolute;
   top: 12px;
+  left: 12px;
+  z-index: 2;
+  margin-bottom: 0;
+}
+
+/* Small corner pill that opens the interactive/full-page lightbox — the
+   only clickable affordance on a screen now that the whole card is no
+   longer a trigger. */
+.walkthrough-lightbox-trigger {
+  position: absolute;
   right: 12px;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  display: flex;
+  bottom: 12px;
+  z-index: 2;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  background: rgba(10,14,20,0.55);
+  background: rgba(10, 14, 20, 0.65);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  border: 1px solid rgba(255,255,255,0.14);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.18s ease-out;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 100px;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.18s ease-out, border-color 0.18s ease-out;
 }
 @media (hover: hover) and (pointer: fine) {
-  .collage-frame:hover .collage-expand-icon { opacity: 1; }
+  .walkthrough-lightbox-trigger:hover {
+    background: rgba(10, 14, 20, 0.85);
+    border-color: rgba(255, 255, 255, 0.28);
+  }
 }
-.collage-frame:focus-visible .collage-expand-icon { opacity: 1; }
-
-.collage-legend {
-  margin-top: 1.75rem;
-  text-align: center;
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.5);
-}
-
-/* ── Walkthrough lightbox (desktop shared-element modal + mobile sheet) ── */
-
-.mobile-frame-trigger {
-  cursor: pointer;
-  border-radius: 16px;
-}
-.mobile-frame-trigger:focus-visible {
+.walkthrough-lightbox-trigger:focus-visible {
   outline: 2px solid rgba(255,255,255,0.9);
-  outline-offset: 4px;
-  border-radius: 16px;
+  outline-offset: 2px;
 }
+
+/* ── Walkthrough lightbox (simple centered fade-in modal) ── */
 
 .walkthrough-backdrop {
   position: fixed;
@@ -646,9 +707,9 @@ html.custom-cursor-active .cursor-hidden {
   }
 }
 
-/* The actual "browser window" — carries the shared layoutId on desktop, so
-   border-radius/shadow live here (framer-motion corrects their scale
-   distortion automatically only on the element that owns the layout id). */
+/* The lightbox's "window" — plain div now (no shared layoutId morph left to
+   own), just the dark bordered/rounded panel the badge, close button and
+   content sit inside. */
 .walkthrough-frame {
   position: relative;
   width: 100%;
@@ -676,6 +737,45 @@ html.custom-cursor-active .cursor-hidden {
   background: #fff;
 }
 
+/* Full-page screenshot case (fullSrc, no htmlSrc): the content panel itself
+   scrolls instead of cropping the page to the viewport. */
+.walkthrough-frame-content--scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* "There's more below" indicator — pinned to the bottom of the scroll panel
+   (an absolutely-positioned descendant of an overflow:auto ancestor stays
+   fixed to that ancestor's box, not the scrolled content, so this reads as
+   a fixed overlay while the screenshot scrolls underneath it). Purely
+   informational: aria-hidden, and toggled from JS based on scroll position. */
+.walkthrough-scroll-hint {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 72px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(20, 22, 28, 0) 0%, rgba(20, 22, 28, 0.35) 100%);
+  transition: opacity 0.2s ease-out;
+}
+.walkthrough-scroll-hint-pill {
+  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(10, 14, 20, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 100px;
+  padding: 0.4rem 1rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+}
 .walkthrough-badge {
   position: absolute;
   top: -14px;
@@ -704,7 +804,13 @@ html.custom-cursor-active .cursor-hidden {
   }
 }
 
+/* Floats top-right of `.walkthrough-frame` directly now that there's no
+   chrome bar underneath it to sit inside of. */
 .walkthrough-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
   width: 28px;
   height: 28px;
   border-radius: 50%;
@@ -721,22 +827,6 @@ html.custom-cursor-active .cursor-hidden {
 .walkthrough-close-btn:focus-visible {
   outline: 2px solid rgba(255,255,255,0.9);
   outline-offset: 2px;
-}
-
-/* Mobile sheet — full-screen native sheet, chrome bar reused as-is. */
-.walkthrough-sheet {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100dvh;
-  z-index: 300;
-  display: flex;
-  flex-direction: column;
-  background: rgba(20,22,28,0.98);
-  outline: none;
-}
-.walkthrough-sheet .walkthrough-frame-content {
-  flex: 1;
 }
 
 /* ── Reduce motion ── */

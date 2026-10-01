@@ -1,24 +1,37 @@
 "use client";
 
+import type { KeyboardEvent } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import NextProjectCard from "@/components/proyectos/NextProjectCard";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
-import ProjectScreensShowcase from "@/components/proyectos/ProjectScreensShowcase";
 import { EASE } from "@/lib/animations";
-import { useLang } from "@/lib/LanguageContext";
+import { useLang, type Lang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
 import { t } from "@/data/translations";
 
 const ACCENT = "#7aad3a";
 const project = projects.find((p) => p.id === "mirazur")!;
-const page = project.page!;
+const subProjects = project.subProjects!;
+const DEFAULT_SUB_ID = "cupon";
 
 const chips = ["Figma", "Claude Design", "Web Design"];
+
+const tabsAriaLabel: Record<Lang, string> = {
+  en: "Mirazur — projects",
+  es: "Mirazur — proyectos",
+  ca: "Mirazur — projectes",
+};
+
+function resolveSubId(id?: string): string {
+  return subProjects.some((s) => s.id === id) ? (id as string) : DEFAULT_SUB_ID;
+}
 
 // ── SVG: flujo del portal de recetas ────────────────────────────────────────
 function SvgRecipeFlow() {
@@ -80,7 +93,7 @@ function SvgRecipeFlow() {
       })}
 
       <text x={230} y={102} textAnchor="middle"
-        fill="var(--text-subtle)" fontSize={9} fontFamily="var(--font-sans)" fontStyle="italic" letterSpacing={0.3}>
+        fill="var(--text-subtle)" fontSize={9} fontFamily="var(--font-sans)" letterSpacing={0.3}>
         Acceso a recetas exclusivas de restaurantes de alta cocina
       </text>
     </svg>
@@ -88,15 +101,37 @@ function SvgRecipeFlow() {
 }
 
 // ── Page ────────────────────────────────────────────────────────────────────
-export default function MirazurPage() {
+export default function MirazurPage({ initialTab }: { initialTab?: string } = {}) {
   const { lang } = useLang();
+  const router = useRouter();
+  const [activeId, setActiveId] = useState(() => resolveSubId(initialTab));
+  const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
+  const activeSubProject = subProjects.find((s) => s.id === activeId) ?? subProjects[0];
+  const page = activeSubProject.page;
+
+  const selectTab = (id: string) => {
+    if (id === activeId) return;
+    setActiveId(id);
+    router.replace(`/proyectos/mirazur?p=${id}`, { scroll: false });
+  };
+
+  const handleTabKeyDown = (e: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    e.preventDefault();
+    const dir = e.key === "ArrowRight" ? 1 : -1;
+    const next = subProjects[(index + dir + subProjects.length) % subProjects.length];
+    selectTab(next.id);
+    tabRefs.current[next.id]?.focus();
+  };
+
   return (
     <SmoothScroll>
       <CustomCursor />
       <Navigation />
       <main>
 
-        {/* ── Hero ── */}
+        {/* ── Hero (shared, client-level — doesn't re-animate on tab switch) ── */}
         <section style={{
           position: "relative",
           overflow: "hidden",
@@ -105,8 +140,8 @@ export default function MirazurPage() {
           flexDirection: "column",
           background: "linear-gradient(135deg, #1a2a0d 0%, #3d5c1e 60%, #7aad3a 100%)",
           paddingTop: "clamp(5.5rem, 9vh, 8rem)",
-          paddingLeft: "clamp(1.5rem, 5vw, 5rem)",
-          paddingRight: "clamp(1.5rem, 5vw, 5rem)",
+          paddingLeft: "var(--space-section-x)",
+          paddingRight: "var(--space-section-x)",
           paddingBottom: "clamp(3.5rem, 6vh, 5rem)",
         }}>
           {/* Video background */}
@@ -136,7 +171,7 @@ export default function MirazurPage() {
 
           {/* Back link */}
           <motion.div
-            style={{ position: "fixed", top: "1.25rem", left: "clamp(1.5rem, 5vw, 5rem)", zIndex: 49 }}
+            style={{ position: "fixed", top: "1.25rem", left: "var(--space-section-x)", zIndex: 49 }}
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: EASE }}
@@ -180,8 +215,7 @@ export default function MirazurPage() {
                 <span style={{
                   display: "block",
                   fontSize: "clamp(1.1rem, 2vw, 1.7rem)",
-                  fontFamily: "var(--font-serif), 'Playfair Display', serif",
-                  fontStyle: "italic", fontWeight: 400,
+                  fontWeight: 800,
                   lineHeight: 1.25, color: "rgba(255,255,255,0.6)",
                   marginTop: "0.5rem",
                 }}>
@@ -191,7 +225,7 @@ export default function MirazurPage() {
               <motion.div
                 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.34 }}
-                style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "clamp(1.5rem, 3vh, 2.5rem)" }}
+                style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "var(--space-gap-sm)" }}
               >
                 {chips.map((chip) => (
                   <span key={chip} className="tag">{chip}</span>
@@ -201,13 +235,13 @@ export default function MirazurPage() {
           </div>
         </section>
 
-        {/* ── Overview ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+        {/* ── Intro compartida (cliente) — no se re-anima al cambiar de pestaña ── */}
+        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
-            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
+            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
               <FadeInView>
                 <p className="section-label" style={{ marginBottom: "1.5rem" }}>{t[lang].projectPage.sectionLabels.project}</p>
-                <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)" }}>
+                <p style={{ fontSize: "var(--text-body)", lineHeight: 1.75, color: "var(--text-muted)" }}>
                   {project.problem[lang]}
                 </p>
               </FadeInView>
@@ -234,81 +268,136 @@ export default function MirazurPage() {
           </div>
         </section>
 
-        <ProjectScreensShowcase project={project} />
-
-        {/* ── Proyecto 1: Portal de recetas ── */}
-        <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+        {/* ── Control de pestañas ── */}
+        <section style={{ background: "var(--bg)", padding: "clamp(2.5rem, 5vh, 3.5rem) var(--space-section-x) 0" }}>
           <div className="site-content">
-            <FadeInView>
-              <p className="section-label" style={{ marginBottom: "0.5rem", color: ACCENT }}>{page.project1Label![lang]}</p>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{page.project1SectionLabel![lang]}</p>
-            </FadeInView>
-            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
-              <FadeInView>
-                <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
-                  {page.project1Heading![lang]}
-                </h2>
-                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                  {page.project1Body![0][lang]}
-                </p>
-                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                  {page.project1Body![1][lang]}
-                </p>
-              </FadeInView>
-              <FadeInView delay={0.12}>
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <SvgRecipeFlow />
-                </div>
-              </FadeInView>
+            <div role="tablist" aria-label={tabsAriaLabel[lang]} style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem" }}>
+              {subProjects.map((sp, i) => {
+                const selected = sp.id === activeId;
+                return (
+                  <button
+                    key={sp.id}
+                    ref={(el) => { tabRefs.current[sp.id] = el; }}
+                    type="button"
+                    role="tab"
+                    id={`tab-${sp.id}`}
+                    aria-selected={selected}
+                    aria-controls={`panel-${sp.id}`}
+                    tabIndex={selected ? 0 : -1}
+                    onClick={() => selectTab(sp.id)}
+                    onKeyDown={(e) => handleTabKeyDown(e, i)}
+                    style={{
+                      all: "unset",
+                      cursor: "pointer",
+                      padding: "0.6rem 1.4rem",
+                      borderRadius: "100px",
+                      fontSize: "0.8rem",
+                      fontWeight: 600,
+                      letterSpacing: "0.02em",
+                      border: `1px solid ${selected ? ACCENT : "var(--border-mid)"}`,
+                      background: selected ? ACCENT : "transparent",
+                      color: selected ? "#fff" : "var(--text-muted)",
+                      transition: "background 0.2s, color 0.2s, border-color 0.2s",
+                    }}
+                  >
+                    {sp.tabLabel[lang]}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* ── Proyecto 2: Página de experiencia ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-          <div className="site-content">
-            <FadeInView>
-              <p className="section-label" style={{ marginBottom: "0.5rem", color: ACCENT }}>{page.project2Label![lang]}</p>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{page.project2SectionLabel![lang]}</p>
-            </FadeInView>
-            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
-              <FadeInView>
-                <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
-                  {page.project2Heading![lang]}
-                </h2>
-                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                  {page.project2Body![0][lang]}
-                </p>
-                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                  {page.project2Body![1][lang]}
-                </p>
-              </FadeInView>
-              <FadeInView delay={0.1}>
-                <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                  {page.project2Cards!.map(({ label, desc }, i) => (
-                    <div key={i} style={{
-                      padding: "1.25rem 1.5rem",
-                      borderRadius: "0.75rem",
-                      border: "1px solid var(--border-mid)",
-                      background: "var(--bg)",
-                    }}>
-                      <p style={{ fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: ACCENT, marginBottom: "0.5rem" }}>
-                        {label[lang]}
+        {/* ── Cuerpo de ficha — parametrizado por la pestaña activa ── */}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={activeSubProject.id}
+            id={`panel-${activeSubProject.id}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${activeSubProject.id}`}
+            tabIndex={0}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: EASE }}
+          >
+            {activeSubProject.id === "recetas" && (
+              <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+                <div className="site-content">
+                  <FadeInView>
+                    <p className="section-label" style={{ marginBottom: "0.5rem", color: ACCENT }}>{page!.project1Label![lang]}</p>
+                    <p className="section-label" style={{ marginBottom: "1.75rem" }}>{page!.project1SectionLabel![lang]}</p>
+                  </FadeInView>
+                  <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "center" }}>
+                    <FadeInView>
+                      <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
+                        {page!.project1Heading![lang]}
+                      </h2>
+                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
+                        {page!.project1Body![0][lang]}
                       </p>
-                      <p style={{ fontSize: "0.9rem", lineHeight: 1.65, color: "var(--text-muted)", margin: 0 }}>
-                        {desc[lang]}
+                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                        {page!.project1Body![1][lang]}
                       </p>
-                    </div>
-                  ))}
+                    </FadeInView>
+                    <FadeInView delay={0.12}>
+                      <div style={{ display: "flex", justifyContent: "center" }}>
+                        <SvgRecipeFlow />
+                      </div>
+                    </FadeInView>
+                  </div>
                 </div>
-              </FadeInView>
-            </div>
-          </div>
-        </section>
+              </section>
+            )}
 
-        {/* ── El enfoque / El resultado ── */}
-        <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-          <div className="site-content" style={{ maxWidth: 720, display: "flex", flexDirection: "column", gap: "clamp(2.5rem, 5vh, 3.5rem)" }}>
+            {activeSubProject.id === "cupon" && (
+              <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+                <div className="site-content">
+                  <FadeInView>
+                    <p className="section-label" style={{ marginBottom: "0.5rem", color: ACCENT }}>{page!.project2Label![lang]}</p>
+                    <p className="section-label" style={{ marginBottom: "1.75rem" }}>{page!.project2SectionLabel![lang]}</p>
+                  </FadeInView>
+                  <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
+                    <FadeInView>
+                      <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
+                        {page!.project2Heading![lang]}
+                      </h2>
+                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
+                        {page!.project2Body![0][lang]}
+                      </p>
+                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                        {page!.project2Body![1][lang]}
+                      </p>
+                    </FadeInView>
+                    <FadeInView delay={0.1}>
+                      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                        {page!.project2Cards!.map(({ label, desc }, i) => (
+                          <div key={i} style={{
+                            padding: "1.25rem 1.5rem",
+                            borderRadius: "0.75rem",
+                            border: "1px solid var(--border-mid)",
+                            background: "var(--bg-alt)",
+                          }}>
+                            <p style={{ fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: ACCENT, marginBottom: "0.5rem" }}>
+                              {label[lang]}
+                            </p>
+                            <p style={{ fontSize: "0.9rem", lineHeight: 1.65, color: "var(--text-muted)", margin: 0 }}>
+                              {desc[lang]}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </FadeInView>
+                  </div>
+                </div>
+              </section>
+            )}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* ── El enfoque / El resultado (compartido — sintetiza los dos proyectos) ── */}
+        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+          <div className="site-content" style={{ maxWidth: 720, margin: 0, display: "flex", flexDirection: "column", gap: "clamp(2.5rem, 5vh, 3.5rem)" }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.approach}</p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
@@ -324,16 +413,16 @@ export default function MirazurPage() {
           </div>
         </section>
 
-        {/* ── Aprendizajes ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-          <div className="site-content" style={{ maxWidth: 720 }}>
+        {/* ── Aprendizajes (compartido) ── */}
+        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+          <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>
-              <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.75rem" }}>
+              <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.75rem" }}>
                 {t[lang].projectPage.learningsHeading}
               </h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-                {page.learningsItems!.map((text, i) => (
+                {project.page!.learningsItems!.map((text, i) => (
                   <div key={i} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
                     <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: ACCENT, paddingTop: "0.2rem" }}>{String(i + 1).padStart(2, "0")}</span>
                     <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>{text[lang]}</p>

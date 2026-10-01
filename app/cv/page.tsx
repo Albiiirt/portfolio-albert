@@ -59,7 +59,7 @@ export default function CvPage() {
                 <span style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", fontWeight: 700, letterSpacing: "-0.04em", color: "var(--text)" }}>
                   Albert
                 </span>
-                <span style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", fontFamily: "var(--font-serif), 'Playfair Display', serif", fontStyle: "italic", fontWeight: 400, color: "var(--text-muted)", letterSpacing: "-0.01em" }}>
+                <span style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", fontWeight: 800, color: "var(--text-muted)", letterSpacing: "-0.01em" }}>
                   Canadés
                 </span>
               </h1>
@@ -86,7 +86,7 @@ export default function CvPage() {
           {/* ── Bio ── */}
           <FadeInView>
             <p style={{
-              fontSize: "clamp(1rem, 1.5vw, 1.2rem)",
+              fontSize: "var(--text-body)",
               lineHeight: 1.7,
               color: "var(--text-muted)",
               maxWidth: "720px",
@@ -151,9 +151,9 @@ export default function CvPage() {
                   <p className="section-label" style={{ marginBottom: "1rem" }}>{tx.skillsLabel}</p>
                   <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.45rem" }}>
                     {skills.map((s) => (
-                      <li key={s} style={{ fontSize: "0.82rem", color: "var(--text-muted)", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                      <li key={s.text} style={{ fontSize: "0.82rem", color: "var(--text-muted)", display: "flex", alignItems: "center", gap: "0.5rem" }}>
                         <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "var(--text-subtle)", flexShrink: 0 }} />
-                        {s}
+                        {s.text}
                       </li>
                     ))}
                   </ul>
@@ -191,7 +191,7 @@ export default function CvPage() {
                           <h2 style={{ fontSize: "1rem", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--text)", margin: 0 }}>
                             {job.company}
                           </h2>
-                          <span style={{ fontSize: "0.75rem", fontStyle: "italic", color: "var(--text-subtle)", flexShrink: 0 }}>
+                          <span style={{ fontSize: "0.75rem", color: "var(--text-subtle)", flexShrink: 0 }}>
                             {job.period}
                           </span>
                         </div>
@@ -225,7 +225,7 @@ export default function CvPage() {
                           <h2 style={{ fontSize: "1rem", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--text)", margin: 0 }}>
                             {ed.degree}
                           </h2>
-                          <span style={{ fontSize: "0.75rem", fontStyle: "italic", color: "var(--text-subtle)", flexShrink: 0 }}>
+                          <span style={{ fontSize: "0.75rem", color: "var(--text-subtle)", flexShrink: 0 }}>
                             {ed.period}
                           </span>
                         </div>

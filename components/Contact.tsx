@@ -29,7 +29,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      style={{ background: "var(--bg-alt)", padding: "clamp(5rem, 10vh, 9rem) clamp(1.5rem, 5vw, 5rem)", position: "relative" }}
+      style={{ background: "var(--bg-alt)", padding: "clamp(5rem, 10vh, 9rem) var(--space-section-x)", position: "relative" }}
     >
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 70%, var(--border) 0%, transparent 70%)", pointerEvents: "none" }} />
 
@@ -57,9 +57,7 @@ export default function Contact() {
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   style={{
                     display: "block",
-                    fontFamily: "var(--font-serif), 'Playfair Display', serif",
-                    fontStyle: "italic",
-                    fontWeight: 400,
+                    fontWeight: 800,
                     color: "var(--text-muted)",
                   }}
                 >
@@ -81,17 +79,11 @@ export default function Contact() {
                 </svg>
                 {tx.cta}
               </a>
-              <a href="https://www.linkedin.com/in/albertcanadas/" target="_blank" rel="noopener noreferrer" className="btn-ghost">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-                {tx.linkedin}
-              </a>
             </div>
           </FadeInView>
 
           <FadeInView delay={0.2}>
-            <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", fontStyle: "italic", marginBottom: "clamp(2rem, 4vw, 3.5rem)", letterSpacing: "0.01em" }}>
+            <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginBottom: "clamp(2rem, 4vw, 3.5rem)", letterSpacing: "0.01em" }}>
               {tx.ps}
             </p>
             <div>

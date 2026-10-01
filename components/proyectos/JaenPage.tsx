@@ -234,7 +234,7 @@ function SvgModular() {
         );
       })}
       <text x={225} y={112} textAnchor="middle"
-        fill="var(--text-subtle)" fontSize={9} fontFamily="var(--font-sans)" fontStyle="italic" letterSpacing={0.3}>
+        fill="var(--text-subtle)" fontSize={9} fontFamily="var(--font-sans)" letterSpacing={0.3}>
         Mismo componente · tres contextos distintos
       </text>
     </svg>
@@ -259,8 +259,8 @@ export default function JaenPage() {
           flexDirection: "column",
           background: "#2d1b00",
           paddingTop: "clamp(5.5rem, 9vh, 8rem)",
-          paddingLeft: "clamp(1.5rem, 5vw, 5rem)",
-          paddingRight: "clamp(1.5rem, 5vw, 5rem)",
+          paddingLeft: "var(--space-section-x)",
+          paddingRight: "var(--space-section-x)",
           paddingBottom: "clamp(3.5rem, 6vh, 5rem)",
         }}>
           {/* Background photo */}
@@ -287,7 +287,7 @@ export default function JaenPage() {
 
           {/* Back link — fixed at nav height */}
           <motion.div
-            style={{ position: "fixed", top: "1.25rem", left: "clamp(1.5rem, 5vw, 5rem)", zIndex: 49 }}
+            style={{ position: "fixed", top: "1.25rem", left: "var(--space-section-x)", zIndex: 49 }}
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: EASE }}
@@ -332,8 +332,7 @@ export default function JaenPage() {
                 <span style={{
                   display: "block",
                   fontSize: "clamp(1.1rem, 2vw, 1.7rem)",
-                  fontFamily: "var(--font-serif), 'Playfair Display', serif",
-                  fontStyle: "italic", fontWeight: 400,
+                  fontWeight: 800,
                   lineHeight: 1.25, color: "rgba(255,255,255,0.6)",
                   marginTop: "0.5rem",
                 }}>
@@ -344,7 +343,7 @@ export default function JaenPage() {
               <motion.div
                 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.34 }}
-                style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "clamp(1.5rem, 3vh, 2.5rem)" }}
+                style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "var(--space-gap-sm)" }}
               >
                 {chips.map((chip) => (
                   <span key={chip} className="tag">{chip}</span>
@@ -355,12 +354,12 @@ export default function JaenPage() {
         </section>
 
         {/* ── Overview ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
-            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
+            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
               <FadeInView>
                 <p className="section-label" style={{ marginBottom: "1.5rem" }}>{t[lang].projectPage.sectionLabels.project}</p>
-                <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
+                <p style={{ fontSize: "var(--text-body)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
                   {project.problem[lang]}
                 </p>
               </FadeInView>
@@ -389,17 +388,21 @@ export default function JaenPage() {
         </section>
 
         {project.screensFrame === "desktop" ? (
-          <ProjectDesktopWalkthrough project={project} steps={project.desktopWalkthrough ?? []} />
+          <ProjectDesktopWalkthrough
+            project={project}
+            steps={project.desktopWalkthrough ?? []}
+            hideCaptions={project.desktopWalkthroughHideCaptions}
+          />
         ) : (
           <ProjectScreensShowcase project={project} />
         )}
 
         {/* ── El doble reto ── */}
-        <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.challenge}</p>
-              <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "clamp(2.5rem, 4vh, 4rem)" }}>
+              <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "clamp(2.5rem, 4vh, 4rem)" }}>
                 {page.challengeHeading![lang]}
               </h2>
             </FadeInView>
@@ -409,7 +412,7 @@ export default function JaenPage() {
               style={
                 page.challengeCards!.length > 1
                   ? { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(1.5rem, 3vw, 3rem)" }
-                  : { display: "flex", justifyContent: "center" }
+                  : { display: "flex", justifyContent: "flex-start" }
               }
             >
               {page.challengeCards!.map((card, i) => (
@@ -438,14 +441,14 @@ export default function JaenPage() {
         </section>
 
         {/* ── Tipos de página ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.structure}</p>
             </FadeInView>
-            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
+            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "center" }}>
               <FadeInView>
-                <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
+                <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
                   {page.structureHeading![lang]}
                 </h2>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
@@ -465,19 +468,19 @@ export default function JaenPage() {
         </section>
 
         {/* ── El proceso ── */}
-        <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.process}</p>
             </FadeInView>
-            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
+            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "center" }}>
               <FadeInView delay={0.1}>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <SvgModular />
                 </div>
               </FadeInView>
               <FadeInView>
-                <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
+                <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
                   {page.processHeading![lang]}
                 </h2>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
@@ -489,8 +492,8 @@ export default function JaenPage() {
         </section>
 
         {/* ── El resultado ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-          <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
+        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+          <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
@@ -501,11 +504,11 @@ export default function JaenPage() {
         </section>
 
         {/* ── Aprendizajes ── */}
-        <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-          <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
+        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+          <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>
-              <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.75rem" }}>
+              <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.75rem" }}>
                 {t[lang].projectPage.learningsHeading}
               </h2>
 

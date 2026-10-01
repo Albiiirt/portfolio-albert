@@ -27,7 +27,6 @@ function TestimonialCard({ quote, name, role, org, lang }: { quote: Quote; name:
     }}>
       {/* Quote mark */}
       <span style={{
-        fontFamily: "var(--font-serif), 'Playfair Display', serif",
         fontSize: "4rem", lineHeight: 1,
         color: "var(--border-mid)",
         userSelect: "none",
@@ -44,7 +43,6 @@ function TestimonialCard({ quote, name, role, org, lang }: { quote: Quote; name:
           fontSize: "clamp(0.9rem, 1.2vw, 1rem)",
           lineHeight: 1.8,
           color: "var(--text-muted)",
-          fontStyle: "italic",
         }}>
           {displayed}
         </p>
@@ -135,7 +133,7 @@ export default function Testimonials() {
       id="testimonials"
       style={{
         background: "var(--bg-alt)",
-        padding: "clamp(5rem, 10vh, 8rem) clamp(1.5rem, 5vw, 5rem)",
+        padding: "clamp(5rem, 10vh, 8rem) var(--space-section-x)",
       }}
     >
       <div className="site-content">
@@ -152,8 +150,7 @@ export default function Testimonials() {
               <h2 style={{
                 margin: 0,
                 fontSize: "clamp(1.8rem, 4vw, 3.2rem)",
-                fontFamily: "var(--font-serif), 'Playfair Display', serif",
-                fontStyle: "italic", fontWeight: 400,
+                fontWeight: 800,
                 color: "var(--text)", lineHeight: 1.1,
               }}>
                 Lo que dicen

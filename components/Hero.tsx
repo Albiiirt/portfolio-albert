@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { useLang } from "@/lib/LanguageContext";
 import { t } from "@/data/translations";
 import { EASE } from "@/lib/animations";
@@ -31,8 +32,8 @@ export default function Hero() {
         gap: "clamp(3rem, 6vw, 8rem)",
         paddingTop: "clamp(4rem, 7vh, 6rem)",
         paddingBottom: "clamp(3rem, 6vh, 5rem)",
-        paddingLeft: "clamp(1.5rem, 5vw, 5rem)",
-        paddingRight: "clamp(1.5rem, 5vw, 5rem)",
+        paddingLeft: "var(--space-section-x)",
+        paddingRight: "var(--space-section-x)",
       }}>
 
         {/* Left: text */}
@@ -68,10 +69,10 @@ export default function Hero() {
             <span style={{ color: "var(--text)", fontSize: "clamp(1.8rem, 4vw, 5rem)", fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.03em", minWidth: 0, maxWidth: "100%", overflowWrap: "break-word" }}>
               {`${tx.line1} ${tx.line2}`}
             </span>
-            <span className="text-gradient" style={{ fontSize: "clamp(2.4rem, 8vw, 9.5rem)", fontFamily: "var(--font-serif), 'Playfair Display', serif", fontStyle: "italic", fontWeight: 400, letterSpacing: "0em", lineHeight: 0.92, minWidth: 0, maxWidth: "100%", overflowWrap: "break-word" }}>
+            <span className="hero-heading text-gradient" style={{ minWidth: 0, maxWidth: "100%", overflowWrap: "break-word" }}>
               {tx.line3}
             </span>
-            <span style={{ color: "var(--text)", fontSize: "clamp(2.4rem, 8vw, 9.5rem)", fontFamily: "var(--font-serif), 'Playfair Display', serif", fontStyle: "italic", fontWeight: 400, letterSpacing: "0em", lineHeight: 0.92, minWidth: 0, maxWidth: "100%", overflowWrap: "break-word" }}>
+            <span className="hero-heading" style={{ minWidth: 0, maxWidth: "100%", overflowWrap: "break-word" }}>
               {tx.line4}
             </span>
           </motion.h1>
@@ -81,8 +82,11 @@ export default function Hero() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: EASE, delay: 0.34 }}
-            style={{ marginTop: "clamp(0.75rem, 2vh, 1.5rem)" }}
+            style={{ marginTop: "clamp(0.75rem, 2vh, 1.5rem)", display: "flex", gap: "0.75rem", flexWrap: "wrap" }}
           >
+            <Link href="/proyectos" className="btn-invert">
+              {tx.viewWork}
+            </Link>
             <a
               href="#contact"
               className="btn-primary"

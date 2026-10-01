@@ -1,6 +1,6 @@
 import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
 import { EASE, ENO, SITE } from "./tokens";
-import { BODEGAS, RUTAS, getBodega, getBodegasDeRuta, getRuta } from "./data";
+import { RUTAS, getBodega, getBodegasDeRuta, getRuta } from "./data";
 import {
   BodegaCard,
   BrowserFrame,

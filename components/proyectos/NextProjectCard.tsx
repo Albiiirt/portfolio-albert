@@ -14,7 +14,7 @@ export default function NextProjectCard({ ids }: { ids: [string, string, string]
   if (!list.length) return null;
 
   return (
-    <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+    <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
       <div className="site-content">
         <FadeInView>
           <p className="section-label" style={{ margin: "0 0 1.75rem" }}>{tx.relatedProjects}</p>

@@ -137,7 +137,7 @@ function SvgBottleneck() {
 
       {/* Caption */}
       <text x={280} y={150} textAnchor="middle"
-        fill="var(--text-subtle)" fontSize={9} fontFamily="var(--font-sans)" fontStyle="italic" letterSpacing={0.3}>
+        fill="var(--text-subtle)" fontSize={9} fontFamily="var(--font-sans)" letterSpacing={0.3}>
         3 pasos de fricción que dependían de intervención técnica
       </text>
     </svg>
@@ -308,8 +308,12 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
   };
 
   // Screens showcase reads from the client project shape — merge in the
-  // active sub-project's own screens/cover/video, falling back to nothing
-  // when the sub-project doesn't have any yet (e.g. Marketplace).
+  // active sub-project's own screens/cover/video. Only rendered when the
+  // sub-project actually has a `screens` list of its own (see hasScreens
+  // below); otherwise it's skipped entirely rather than falling back to
+  // the sub-project's `cover` image (e.g. Archivo, which has a cover for
+  // the hero but no screens of its own yet).
+  const hasScreens = !!activeSubProject.screens?.length;
   const screensProject = {
     ...project,
     screens: activeSubProject.screens,
@@ -331,8 +335,8 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
           display: "flex",
           flexDirection: "column",
           paddingTop: "clamp(5.5rem, 9vh, 8rem)",
-          paddingLeft: "clamp(1.5rem, 5vw, 5rem)",
-          paddingRight: "clamp(1.5rem, 5vw, 5rem)",
+          paddingLeft: "var(--space-section-x)",
+          paddingRight: "var(--space-section-x)",
           paddingBottom: "clamp(3.5rem, 6vh, 5rem)",
         }}>
           {/* Cover image — full background */}
@@ -361,7 +365,7 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
 
           {/* Back link — fixed at nav height */}
           <motion.div
-            style={{ position: "fixed", top: "1.25rem", left: "clamp(1.5rem, 5vw, 5rem)", zIndex: 49 }}
+            style={{ position: "fixed", top: "1.25rem", left: "var(--space-section-x)", zIndex: 49 }}
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: EASE }}
@@ -407,8 +411,7 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
                 <span style={{
                   display: "block",
                   fontSize: "clamp(1.1rem, 2vw, 1.7rem)",
-                  fontFamily: "var(--font-serif), 'Playfair Display', serif",
-                  fontStyle: "italic", fontWeight: 400,
+                  fontWeight: 800,
                   lineHeight: 1.25, color: "rgba(255,255,255,0.6)",
                   marginTop: "0.5rem",
                 }}>
@@ -419,7 +422,7 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
               <motion.div
                 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.34 }}
-                style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "clamp(1.5rem, 3vh, 2.5rem)" }}
+                style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "var(--space-gap-sm)" }}
               >
                 {project.tags.map((tag) => (
                   <span key={tag} className="tag">{tag}</span>
@@ -430,12 +433,12 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
         </section>
 
         {/* ── Intro compartida (cliente) — no se re-anima al cambiar de pestaña ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
-            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
+            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
               <FadeInView>
                 <p className="section-label" style={{ marginBottom: "1.5rem" }}>{t[lang].projectPage.sectionLabels.project}</p>
-                <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
+                <p style={{ fontSize: "var(--text-body)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
                   {project.problem[lang]}
                 </p>
               </FadeInView>
@@ -464,7 +467,7 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
         </section>
 
         {/* ── Control de pestañas ── */}
-        <section style={{ background: "var(--bg)", padding: "clamp(2.5rem, 5vh, 3.5rem) clamp(1.5rem, 5vw, 5rem) 0" }}>
+        <section style={{ background: "var(--bg)", padding: "clamp(2.5rem, 5vh, 3.5rem) var(--space-section-x) 0" }}>
           <div className="site-content">
             <div role="tablist" aria-label={tabsAriaLabel[lang]} style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem" }}>
               {subProjects.map((sp, i) => {
@@ -517,14 +520,14 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
             transition={{ duration: 0.2, ease: EASE }}
           >
             {/* ── Overview del sub-proyecto ── */}
-            <section style={{ background: "var(--bg)", padding: "clamp(2.5rem, 5vh, 3.5rem) clamp(1.5rem, 5vw, 5rem) clamp(4rem, 8vh, 7rem)" }}>
+            <section style={{ background: "var(--bg)", padding: "clamp(2.5rem, 5vh, 3.5rem) var(--space-section-x) var(--space-section-y)" }}>
               <div className="site-content">
-                <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
+                <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
                   <div>
                     <p className="section-label" style={{ marginBottom: "1.5rem", color: ACCENT }}>
                       {activeSubProject.num} · {activeSubProject.category[lang]} · {activeSubProject.year}
                     </p>
-                    <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
+                    <p style={{ fontSize: "var(--text-body)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
                       {activeSubProject.problem[lang]}
                     </p>
                   </div>
@@ -556,19 +559,23 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
             )}
 
             {activeSubProject.screensFrame === "desktop" ? (
-              <ProjectDesktopWalkthrough project={project} steps={activeSubProject.desktopWalkthrough ?? []} />
-            ) : (
+              <ProjectDesktopWalkthrough
+                project={project}
+                steps={activeSubProject.desktopWalkthrough ?? []}
+                hideCaptions={activeSubProject.desktopWalkthroughHideCaptions}
+              />
+            ) : hasScreens ? (
               <ProjectScreensShowcase project={screensProject} />
-            )}
+            ) : null}
 
             {/* ── El reto (solo si el sub-proyecto tiene contenido propio) ── */}
             {hasChallenge && (
-              <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+              <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
                 <div className="site-content">
                   <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.challenge}</p>
-                  <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
+                  <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "center" }}>
                     <div>
-                      <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
+                      <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
                         {page!.challengeHeading![lang]}
                       </h2>
                       <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
@@ -587,20 +594,20 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
             )}
 
             {/* ── La solución / El proceso (siempre, con la ilustración solo si hay sistema propio) ── */}
-            <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-              <div className="site-content" style={hasSystem ? undefined : { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
+            <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+              <div className="site-content" style={hasSystem ? undefined : { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
                 {hasSystem ? (
                   <>
                     <p className="section-label" style={{ marginBottom: page?.solutionHeading ? "1.75rem" : "1.5rem" }}>
                       {t[lang].projectPage.sectionLabels.solution}
                     </p>
-                    <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
+                    <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "center" }}>
                       <div style={{ display: "flex", justifyContent: "center" }}>
                         <SvgLayers />
                       </div>
                       <div>
                         {page?.solutionHeading && (
-                          <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
+                          <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
                             {page.solutionHeading[lang]}
                           </h2>
                         )}
@@ -625,12 +632,12 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
 
             {/* ── El sistema de bloques (solo archivo) ── */}
             {hasSystem && (
-              <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+              <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
                 <div className="site-content">
                   <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.system}</p>
-                  <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
+                  <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "center" }}>
                     <div>
-                      <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
+                      <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
                         {page!.systemHeading![lang]}
                       </h2>
                       <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
@@ -649,8 +656,8 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
             )}
 
             {/* ── El resultado (siempre) ── */}
-            <section style={{ background: hasSystem ? "var(--bg)" : "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-              <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
+            <section style={{ background: hasSystem ? "var(--bg)" : "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+              <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
                 <div>
                   <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
                   <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
@@ -662,8 +669,8 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
 
             {/* ── Aprendizajes (solo si el sub-proyecto tiene contenido propio) ── */}
             {hasLearnings && (
-              <section style={{ background: hasSystem ? "var(--bg-alt)" : "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-                <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
+              <section style={{ background: hasSystem ? "var(--bg-alt)" : "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+                <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
                   <div>
                     <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.75rem" }}>
                       <p className="section-label" style={{ margin: 0 }}>{t[lang].projectPage.sectionLabels.learnings}</p>
@@ -681,7 +688,7 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
                     </div>
 
                     {page!.learningsHeading && (
-                      <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.75rem" }}>
+                      <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.75rem" }}>
                         {page!.learningsHeading[lang]}
                       </h2>
                     )}
@@ -696,7 +703,7 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
                     </div>
 
                     {page!.learningsFootnote && (
-                      <p style={{ fontSize: "0.82rem", color: "var(--text-subtle)", fontStyle: "italic", marginTop: "2.5rem", borderTop: "1px solid var(--border)", paddingTop: "1.5rem" }}>
+                      <p style={{ fontSize: "0.82rem", color: "var(--text-subtle)", marginTop: "2.5rem", borderTop: "1px solid var(--border)", paddingTop: "1.5rem" }}>
                         {page!.learningsFootnote[lang]}
                       </p>
                     )}

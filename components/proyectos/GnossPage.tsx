@@ -18,7 +18,7 @@ const ACCENT = "#c4a35a";
 const project = projects.find((p) => p.id === "gnoss-ai")!;
 const page = project.page!;
 
-const chips = ["Figma", "Design System", "Web Design"];
+const chips = ["Figma", "Design System", "Infographics", "Client Collaboration"];
 
 // ── SVG: sistema heredado ────────────────────────────────────────────────────
 function SvgSystem() {
@@ -73,7 +73,7 @@ function SvgSystem() {
       <text x={(START_X * 2 + cols * CW + (cols - 1) * GAP_X) / 2}
         y={START_Y * 2 + rows * CH + (rows - 1) * GAP_Y + 16}
         textAnchor="middle" fill="var(--text-subtle)"
-        fontSize={9} fontFamily="var(--font-sans)" fontStyle="italic" letterSpacing={0.3}>
+        fontSize={9} fontFamily="var(--font-sans)" letterSpacing={0.3}>
         Sistema existente · páginas nuevas integradas
       </text>
     </svg>
@@ -98,8 +98,8 @@ export default function GnossPage() {
           flexDirection: "column",
           background: "linear-gradient(135deg, #1a2a0a 0%, #2d5c1a 50%, #c4a35a 100%)",
           paddingTop: "clamp(5.5rem, 9vh, 8rem)",
-          paddingLeft: "clamp(1.5rem, 5vw, 5rem)",
-          paddingRight: "clamp(1.5rem, 5vw, 5rem)",
+          paddingLeft: "var(--space-section-x)",
+          paddingRight: "var(--space-section-x)",
           paddingBottom: "clamp(3.5rem, 6vh, 5rem)",
         }}>
           <div style={{
@@ -115,7 +115,7 @@ export default function GnossPage() {
 
           {/* Back link */}
           <motion.div
-            style={{ position: "fixed", top: "1.25rem", left: "clamp(1.5rem, 5vw, 5rem)", zIndex: 49 }}
+            style={{ position: "fixed", top: "1.25rem", left: "var(--space-section-x)", zIndex: 49 }}
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: EASE }}
@@ -159,8 +159,7 @@ export default function GnossPage() {
                 <span style={{
                   display: "block",
                   fontSize: "clamp(1.1rem, 2vw, 1.7rem)",
-                  fontFamily: "var(--font-serif), 'Playfair Display', serif",
-                  fontStyle: "italic", fontWeight: 400,
+                  fontWeight: 800,
                   lineHeight: 1.25, color: "rgba(255,255,255,0.6)",
                   marginTop: "0.5rem",
                 }}>
@@ -170,7 +169,7 @@ export default function GnossPage() {
               <motion.div
                 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.34 }}
-                style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "clamp(1.5rem, 3vh, 2.5rem)" }}
+                style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "var(--space-gap-sm)" }}
               >
                 {chips.map((chip) => (
                   <span key={chip} className="tag">{chip}</span>
@@ -181,12 +180,12 @@ export default function GnossPage() {
         </section>
 
         {/* ── Overview ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
-            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "start" }}>
+            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
               <FadeInView>
                 <p className="section-label" style={{ marginBottom: "1.5rem" }}>{t[lang].projectPage.sectionLabels.project}</p>
-                <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", lineHeight: 1.75, color: "var(--text-muted)" }}>
+                <p style={{ fontSize: "var(--text-body)", lineHeight: 1.75, color: "var(--text-muted)" }}>
                   {project.problem[lang]}
                 </p>
               </FadeInView>
@@ -216,14 +215,14 @@ export default function GnossPage() {
         <ProjectScreensShowcase project={project} />
 
         {/* ── El reto ── */}
-        <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.challenge}</p>
             </FadeInView>
-            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(3rem, 6vw, 7rem)", alignItems: "center" }}>
+            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "center" }}>
               <FadeInView>
-                <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.5rem" }}>
+                <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
                   {page.challengeHeading![lang]}
                 </h2>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
@@ -243,7 +242,7 @@ export default function GnossPage() {
         </section>
 
         {/* ── El trabajo ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
+        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1rem" }}>{t[lang].projectPage.sectionLabels.work}</p>
@@ -279,8 +278,8 @@ export default function GnossPage() {
         </section>
 
         {/* ── El resultado ── */}
-        <section style={{ background: "var(--bg)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-          <div className="site-content" style={{ maxWidth: 720 }}>
+        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+          <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
@@ -291,11 +290,11 @@ export default function GnossPage() {
         </section>
 
         {/* ── Aprendizajes ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)" }}>
-          <div className="site-content" style={{ maxWidth: 720 }}>
+        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+          <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>
-              <h2 className="display-heading" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "1.75rem" }}>
+              <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.75rem" }}>
                 {t[lang].projectPage.learningsHeading}
               </h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>

@@ -72,7 +72,7 @@ export default function ProjectScreensShowcase({ project }: { project: Project }
       ref={sectionRef}
       style={{
         background: project.gradient,
-        padding: "clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 5rem)",
+        padding: "var(--space-section-y) var(--space-section-x)",
       }}
     >
       <div className="site-content" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -198,7 +198,6 @@ export default function ProjectScreensShowcase({ project }: { project: Project }
           <p
             style={{
               marginTop: "1.5rem",
-              fontStyle: "italic",
               fontSize: "0.82rem",
               color: "rgba(255,255,255,0.5)",
               textAlign: "center",

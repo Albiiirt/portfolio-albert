@@ -9,7 +9,7 @@ import { projects } from "@/data/projects";
 import { EASE } from "@/lib/animations";
 import Image from "next/image";
 
-const FEATURED_IDS = ["elbulli", "xunta-galicia", "madrid", "castellera", "turisme-jaen"];
+const FEATURED_IDS = ["elbulli", "xunta-galicia", "madrid", "mirazur", "la-rioja-turismo"];
 const featured = FEATURED_IDS.map((id) => projects.find((p) => p.id === id)!).filter(Boolean);
 
 const cardVariants = {
@@ -110,29 +110,45 @@ export default function WorkSection() {
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
-        padding: "clamp(5rem, 9vh, 7rem) clamp(1.5rem, 5vw, 5rem) clamp(2.5rem, 5vh, 4.5rem)",
+        padding: "clamp(5rem, 9vh, 7rem) var(--space-section-x) clamp(2.5rem, 5vh, 4.5rem)",
       }}>
-        <div className="site-content" style={{ display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}>
+        <div
+          className="site-content work-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 2fr",
+            gridTemplateRows: "minmax(0, 1fr)",
+            gap: "clamp(2rem, 4vw, 5rem)",
+            flex: 1,
+            minHeight: 0,
+          }}
+        >
 
-          {/* Heading */}
-          <div style={{ marginBottom: "clamp(2rem, 4vh, 3.5rem)", flexShrink: 0 }}>
-            <p className="section-label" style={{ marginBottom: "0.65rem" }}>{tx.label}</p>
-            <h2 style={{ margin: 0, lineHeight: 1.05 }}>
-              <span style={{ display: "block", fontSize: "var(--text-display)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--text)" }}>
-                {tx.heading}
-              </span>
-              <span style={{ display: "block", fontSize: "var(--text-display)", fontFamily: "var(--font-serif), 'Playfair Display', serif", fontStyle: "italic", fontWeight: 400, color: "var(--text-muted)" }}>
-                {tx.headingItalic}
-              </span>
-            </h2>
-          </div>
+            {/* Left: heading + list — stretched to the full row height so the
+                card on the right (which stretches to match) starts flush
+                with the section heading, not below it. The nav keeps its
+                natural compact spacing and the "view all" link is pinned to
+                the bottom with marginTop:auto, so the leftover height
+                becomes one clean gap instead of a mismatched column. The nav
+                can shrink and scroll internally (minHeight:0 +
+                overflowY:auto) so on short viewports it never pushes the
+                button below the visible area. */}
+            <div className="work-list-col" style={{ display: "flex", flexDirection: "column", alignSelf: "stretch", minHeight: 0 }}>
 
-          {/* Grid: list + card */}
-          <div className="work-grid" style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "clamp(2rem, 4vw, 5rem)", flex: 1, minHeight: 0 }}>
+              {/* Heading */}
+              <div style={{ marginBottom: "clamp(2rem, 4vh, 3.5rem)", flexShrink: 0 }}>
+                <p className="section-label" style={{ marginBottom: "0.65rem" }}>{tx.label}</p>
+                <h2 style={{ margin: 0, lineHeight: 1.05 }}>
+                  <span style={{ display: "block", fontSize: "var(--text-section)", fontWeight: 600, letterSpacing: "-0.03em", color: "var(--text)" }}>
+                    {tx.heading}
+                  </span>
+                  <span style={{ display: "block", fontSize: "var(--text-section)", fontWeight: 500, color: "var(--text-muted)" }}>
+                    {tx.headingItalic}
+                  </span>
+                </h2>
+              </div>
 
-            {/* Left: list */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "clamp(1rem, 2vh, 1.5rem)", alignSelf: "start" }}>
-              <nav style={{ display: "flex", flexDirection: "column" }}>
+              <nav className="work-nav" style={{ display: "flex", flexDirection: "column", minHeight: 0, overflowY: "auto" }}>
                 {featured.map((p, i) => (
                   <div key={p.id}>
                     <button
@@ -150,7 +166,7 @@ export default function WorkSection() {
                         color: i === active ? "var(--text)" : "var(--text-subtle)",
                         transition: "color 0.35s", flexShrink: 0,
                       }}>
-                        {p.num}
+                        {String(i + 1).padStart(2, "0")}
                       </span>
                       <span style={{
                         fontSize: "clamp(0.88rem, 1.1vw, 1rem)",
@@ -185,16 +201,17 @@ export default function WorkSection() {
                 ))}
               </nav>
 
-              {/* Ver todos */}
-              <div style={{ paddingTop: "0.75rem" }}>
-                <Link href="/proyectos" className="btn-ghost">
+              {/* Ver todos — pinned to the bottom of the (now stretched) column,
+                  never dependent on how much space the nav above takes up */}
+              <div style={{ marginTop: "auto", flexShrink: 0, paddingTop: "0.75rem" }}>
+                <Link href="/proyectos" className="btn-invert">
                   {tx.viewAll} →
                 </Link>
               </div>
             </div>
 
             {/* Right: card column — desktop only */}
-            <div className="work-card-wrap" style={{ position: "relative", height: "100%", minHeight: 0, maxHeight: "min(74vh, 740px)" }}>
+            <div className="work-card-wrap" style={{ position: "relative", alignSelf: "stretch", height: "100%", minHeight: 0 }}>
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
                   key={active}
@@ -262,7 +279,6 @@ export default function WorkSection() {
               </AnimatePresence>
             </div>
 
-          </div>
         </div>
       </div>
     </section>

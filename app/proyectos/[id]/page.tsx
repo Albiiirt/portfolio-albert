@@ -7,6 +7,7 @@ import GnossPage from "@/components/proyectos/GnossPage";
 import MadridPage from "@/components/proyectos/MadridPage";
 import CastelleraPage from "@/components/proyectos/CastelleraPage";
 import LaRiojaPage from "@/components/proyectos/LaRiojaPage";
+import XuntaGaliciaPage from "@/components/proyectos/XuntaGaliciaPage";
 import { projects } from "@/data/projects";
 
 type PageComponent = () => React.JSX.Element;
@@ -19,15 +20,16 @@ const pages: Record<string, PageComponent> = {
   madrid: MadridPage,
   castellera: CastelleraPage,
   "la-rioja-turismo": LaRiojaPage,
+  "xunta-galicia": XuntaGaliciaPage,
 };
 
 export function generateStaticParams() {
   return Object.keys(pages).map((id) => ({ id }));
 }
 
-// elBulli is the only project rendered with tabbed sub-projects today —
-// resolves the ?p= query param to a valid sub-project id, defaulting to
-// "archivo" when the param is missing or doesn't match one.
+// elBulli and Mirazur are rendered with tabbed sub-projects — resolves the
+// ?p= query param to a valid sub-project id, defaulting to the first
+// sub-project when the param is missing or doesn't match one.
 function resolveSubProjectId(project: (typeof projects)[number], raw?: string): string | undefined {
   if (!project.subProjects?.length) return undefined;
   const valid = project.subProjects.some((s) => s.id === raw);

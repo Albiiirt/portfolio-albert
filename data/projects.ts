@@ -42,6 +42,21 @@ export type DesktopWalkthroughStep = {
   // Optional: when absent, the frame renders as a static screenshot with no
   // click affordance (no trigger, no expand icon, no "interactive" badge).
   htmlSrc?: string;
+  // Full-page screenshot (same 1568px width as `src`, but the real, full
+  // page height) shown scrollable in the lightbox when there's no `htmlSrc`.
+  // `src` (the cropped thumbnail) still renders as-is in the resting card.
+  fullSrc?: string;
+  // Optional: point on this step's screenshot where the synthetic cursor
+  // animates to on scroll-into-view, simulating a click, e.g. { x: 63, y: 92 }
+  // for a search bar near the bottom-right of the frame. Percentages are
+  // relative to the image's own width/height (0–100). Omitted for steps
+  // where no single point reads as "the" action.
+  cursorTarget?: { x: number; y: number };
+  // Real, looping product-interaction video shown in place of the static
+  // screenshot when present (same dimensions/scroll-transform as the image).
+  // Not used by any step yet — no real footage exists — but the field and
+  // its rendering are wired up for when it does.
+  videoSrc?: string;
 };
 
 // Shared status values, sourced from data/translations.ts so the same
@@ -112,6 +127,10 @@ export type SubProject = {
   // (requires `desktopWalkthrough` below). Undefined behaves as "mobile".
   screensFrame?: "mobile" | "desktop";
   desktopWalkthrough?: DesktopWalkthroughStep[];
+  // Hides the title/caption text next to each frame in the <900px (and
+  // >7-step fallback) stacked list, leaving just the centered screenshot.
+  // Default false — only set where diseñador specified it (Turisme Jaén).
+  desktopWalkthroughHideCaptions?: boolean;
   heroTagline?: LocalizedText;
   meta?: MetaItem[]; // own to this sub-project, not inherited from the client
   page?: ProjectPageContent;
@@ -135,6 +154,8 @@ export type Project = {
   screens?: ProjectScreen[];
   screensFrame?: "mobile" | "desktop";
   desktopWalkthrough?: DesktopWalkthroughStep[];
+  // See SubProject — same flag, same behavior, for top-level projects.
+  desktopWalkthroughHideCaptions?: boolean;
   heroTagline?: LocalizedText;
   meta?: MetaItem[];
   page?: ProjectPageContent;
@@ -317,6 +338,7 @@ export const projects: Project[] = [
               es: "Los libros comprados en papel se desbloquean aquí con un código, o se compran directamente en digital.",
               ca: "Els llibres comprats en paper es desbloquegen aquí amb un codi, o es compren directament en digital.",
             },
+            cursorTarget: { x: 36, y: 45 },
           },
           {
             src: "/mockups/bullipedia/02-libro.jpg",
@@ -700,7 +722,7 @@ export const projects: Project[] = [
       es: "Diseño web de turismo para Jaén — sistema UI completo diseñado en Figma a dos, actualmente en producción con el equipo de desarrollo interno.",
       ca: "Disseny web de turisme per a Jaén — sistema UI complet dissenyat a Figma a dos, actualment en producció amb l'equip de desenvolupament intern.",
     },
-    tags: ["Figma", "Framer", "Web Design", "Tourism"],
+    tags: ["Figma", "Web Design", "Tourism"],
     gradient: "linear-gradient(135deg, #2d1b00 0%, #6b3a1f 60%, #c4813a 100%)",
     accentColor: "#c4813a",
     cover: "/covers/cover-jaen.webp",
@@ -718,45 +740,55 @@ export const projects: Project[] = [
       { labelKey: "team", value: { en: "Design + in-house development", es: "Diseño + Desarrollo interno", ca: "Disseny + desenvolupament intern" } },
     ],
     screensFrame: "desktop",
+    desktopWalkthroughHideCaptions: true,
     desktopWalkthrough: [
       {
         src: "/mockups/jaen/01-portada.jpg",
+        fullSrc: "/mockups/jaen/full/01-portada-full.jpg",
         alt: { es: "Portada del portal con foto de paisaje de olivos, buscador con IA y tarjetas de lugares imprescindibles.", en: "Homepage of the portal with an olive-grove landscape photo, an AI-powered search bar and must-see place cards.", ca: "Portada del portal amb foto de paisatge d'oliveres, cercador amb IA i targetes de llocs imprescindibles." },
         title: { es: "01 · La portada", en: "01 · The homepage", ca: "01 · La portada" },
         caption: { es: "La portada tenía que orientar y seducir a la vez: un buscador con IA arriba, imprescindibles y rutas destacadas debajo, sin forzar al visitante a decidir antes de tiempo.", en: "The homepage had to orient and seduce at once — an AI-powered search bar up top, must-sees and featured routes below — without forcing the visitor to decide too soon.", ca: "La portada havia d'orientar i seduir alhora: un cercador amb IA a dalt, imprescindibles i rutes destacades a sota, sense forçar el visitant a decidir abans d'hora." },
+        cursorTarget: { x: 63, y: 92 },
       },
       {
         src: "/mockups/jaen/02-navegacion.jpg",
+        fullSrc: "/mockups/jaen/full/02-navegacion-full.jpg",
         alt: { es: "Menú de navegación con el desplegable \"Inspírate\" abierto, mostrando dos columnas de enlaces y una tarjeta destacada.", en: "Navigation menu with the \"Get inspired\" dropdown open, showing two columns of links and a featured card.", ca: "Menú de navegació amb el desplegable \"Inspira't\" obert, mostrant dues columnes d'enllaços i una targeta destacada." },
         title: { es: "02 · La navegación", en: "02 · The navigation", ca: "02 · La navegació" },
         caption: { es: "El menú \"Inspírate\" agrupa contenido de naturaleza muy distinta — imprescindibles, rutas, planes, agenda — bajo una sola pestaña, sin que se note la costura entre categorías.", en: "The \"Get inspired\" menu groups very different kinds of content — must-sees, routes, plans, events — under a single tab, without the seams between categories showing.", ca: "El menú \"Inspira't\" agrupa contingut de naturalesa molt diferent — imprescindibles, rutes, plans, agenda — sota una sola pestanya, sense que se'n notin les costures entre categories." },
       },
       {
         src: "/mockups/jaen/03-listado.jpg",
+        fullSrc: "/mockups/jaen/full/03-listado-full.jpg",
         alt: { es: "Página de listado \"Lugares de interés\" con filtros por facetas a la izquierda y una cuadrícula de resultados con foto.", en: "\"Places of interest\" listing page with faceted filters on the left and a photo results grid.", ca: "Pàgina de llistat \"Llocs d'interès\" amb filtres per facetes a l'esquerra i una graella de resultats amb foto." },
         title: { es: "03 · El listado", en: "03 · The listing", ca: "03 · El llistat" },
         caption: { es: "Tipo de lugar, localidad, otras facetas: los filtros se combinan entre sí, para no obligar al visitante a mirar entre cientos de fichas una por una.", en: "Place type, town, other facets: filters combine with each other, so the visitor never has to scroll through hundreds of entries one by one.", ca: "Tipus de lloc, localitat, altres facetes: els filtres es combinen entre ells, perquè el visitant no hagi de mirar centenars de fitxes una per una." },
+        cursorTarget: { x: 19, y: 35 },
       },
       {
         src: "/mockups/jaen/04-planificador.jpg",
+        fullSrc: "/mockups/jaen/full/04-planificador-full.jpg",
         alt: { es: "Planificador de itinerario con una lista de experiencias a la izquierda y los días del viaje a la derecha, con una tarjeta a medio arrastrar.", en: "Itinerary planner with a list of experiences on the left and trip days on the right, with a card mid-drag.", ca: "Planificador d'itinerari amb una llista d'experiències a l'esquerra i els dies del viatge a la dreta, amb una targeta a mig arrossegar." },
         title: { es: "04 · El planificador", en: "04 · The planner", ca: "04 · El planificador" },
         caption: { es: "Arrastra una experiencia desde el listado y cae en el día que elijas. El itinerario se va construyendo visita a visita, sin formularios de por medio.", en: "Drag an experience from the list and drop it on the day you choose. The itinerary builds up visit by visit, with no forms in the way.", ca: "Arrossega una experiència des del llistat i deixa-la caure al dia que triïs. L'itinerari es va construint visita a visita, sense formularis pel mig." },
       },
       {
         src: "/mockups/jaen/05-ruta.jpg",
+        fullSrc: "/mockups/jaen/full/05-ruta-full.jpg",
         alt: { es: "Página de la ruta \"Vía Verde del Aceite\" con mapa del recorrido, ficha técnica y galería de fotos.", en: "\"Vía Verde del Aceite\" route page with a route map, technical sheet and photo gallery.", ca: "Pàgina de la ruta \"Via Verda de l'Oli\" amb mapa del recorregut, fitxa tècnica i galeria de fotos." },
         title: { es: "05 · La ruta", en: "05 · The route", ca: "05 · La ruta" },
         caption: { es: "Cada ruta lleva su propio mapa, perfil de altura y ficha técnica — y termina listando los municipios por los que pasa, con el mismo componente de tarjeta que usa el resto del portal.", en: "Every route carries its own map, elevation profile and technical sheet — and closes by listing the towns it passes through, using the same card component the rest of the portal relies on.", ca: "Cada ruta porta el seu propi mapa, perfil d'altura i fitxa tècnica — i acaba llistant els municipis pels quals passa, amb el mateix component de targeta que fa servir la resta del portal." },
       },
       {
         src: "/mockups/jaen/06-ficha.jpg",
+        fullSrc: "/mockups/jaen/full/06-ficha-full.jpg",
         alt: { es: "Ficha del alojamiento \"VUT La Casita Morada\" con galería de fotos y panel lateral de información de contacto y servicios.", en: "\"VUT La Casita Morada\" lodging profile with a photo gallery and a side panel of contact info and services.", ca: "Fitxa de l'allotjament \"VUT La Casita Morada\" amb galeria de fotos i panell lateral d'informació de contacte i serveis." },
         title: { es: "06 · La ficha", en: "06 · The listing page", ca: "06 · La fitxa" },
         caption: { es: "La ficha de un alojamiento no es solo fotos y precio: incluye sellos de calidad, servicios accesibles y qué hay cerca, todo en el mismo panel lateral.", en: "A lodging's profile isn't just photos and price: it includes quality seals, accessibility info and what's nearby, all in the same side panel.", ca: "La fitxa d'un allotjament no és només fotos i preu: inclou segells de qualitat, serveis accessibles i què hi ha a prop, tot al mateix panell lateral." },
       },
       {
         src: "/mockups/jaen/07-microsite.jpg",
+        fullSrc: "/mockups/jaen/full/07-microsite-full.jpg",
         alt: { es: "Microsite temático \"Castillos y Batallas del Reino de Jaén\" con su propio logo, navegación y hero de imagen.", en: "\"Castles and Battles of the Kingdom of Jaén\" themed microsite with its own logo, navigation and image hero.", ca: "Microsite temàtic \"Castells i Batalles del Regne de Jaén\" amb el seu propi logo, navegació i hero d'imatge." },
         title: { es: "07 · El microsite", en: "07 · The microsite", ca: "07 · El microsite" },
         caption: { es: "Algunas campañas — como \"Castillos y Batallas\"— necesitan su propio espacio: logo, navegación y portada propios, pero construidos con las mismas piezas del sistema.", en: "Some campaigns — like \"Castles and Battles\" — need their own space: their own logo, navigation and homepage, but built from the same system pieces.", ca: "Algunes campanyes — com \"Castells i Batalles\" — necessiten el seu propi espai: logo, navegació i portada propis, però construïts amb les mateixes peces del sistema." },
@@ -833,19 +865,19 @@ export const projects: Project[] = [
       ca: "Com portes un restaurant de tres estrelles Michelin al món digital — no com a fulletó, sinó com a experiència?",
     },
     process: {
-      en: "Designed the main pages of a recipe portal in Figma — listing, individual recipe, access flow and restaurant profile. For the experience page, I used Claude Design as a build partner: I took it from Figma to a working page myself, without needing a developer for that deliverable.",
-      es: "Diseñé las páginas principales de un portal de recetas en Figma — listado, ficha, flujo de acceso y perfil del restaurante. Para la página de experiencia usé Claude Design como compañero de construcción: pasé del diseño en Figma a una página funcionando yo mismo, sin necesitar a un desarrollador para ese entregable.",
-      ca: "Vaig dissenyar les pàgines principals d'un portal de receptes a Figma — llistat, fitxa, flux d'accés i perfil del restaurant. Per a la pàgina d'experiència vaig fer servir Claude Design com a company de construcció: vaig passar del disseny a Figma a una pàgina funcionant jo mateix, sense necessitar un desenvolupador per a aquest lliurable.",
+      en: "Designed the main pages of a recipe portal in Figma — listing, individual recipe, access flow and restaurant profile. For the promotional landing, I used Claude Design as a build partner: I took it from Figma to a working page myself, without needing a developer for that deliverable.",
+      es: "Diseñé las páginas principales de un portal de recetas en Figma — listado, ficha, flujo de acceso y perfil del restaurante. Para la landing promocional usé Claude Design como compañero de construcción: pasé del diseño en Figma a una página funcionando yo mismo, sin necesitar a un desarrollador para ese entregable.",
+      ca: "Vaig dissenyar les pàgines principals d'un portal de receptes a Figma — llistat, fitxa, flux d'accés i perfil del restaurant. Per a la landing promocional vaig fer servir Claude Design com a company de construcció: vaig passar del disseny a Figma a una pàgina funcionant jo mateix, sense necessitar un desenvolupador per a aquest lliurable.",
     },
     result: {
-      en: "Two complementary design proposals — one transactional, one narrative — showing how a restaurant like Mirazur can extend its experience beyond the table, and how AI let me take one of them all the way to a working page on my own.",
-      es: "Dos propuestas de diseño complementarias — una transaccional, una narrativa — que muestran cómo un restaurante como Mirazur puede extender su experiencia más allá de la mesa, y cómo la IA me permitió llevar una de ellas hasta una página funcionando yo solo.",
-      ca: "Dues propostes de disseny complementàries — una transaccional, una narrativa — que mostren com un restaurant com el Mirazur pot estendre la seva experiència més enllà de la taula, i com la IA em va permetre portar-ne una fins a una pàgina funcionant jo sol.",
+      en: "Two complementary design proposals — one transactional, one promotional — showing how a restaurant like Mirazur can extend its experience beyond the table, and how AI let me take one of them all the way to a working page on my own.",
+      es: "Dos propuestas de diseño complementarias — una transaccional, una promocional — que muestran cómo un restaurante como Mirazur puede extender su experiencia más allá de la mesa, y cómo la IA me permitió llevar una de ellas hasta una página funcionando yo solo.",
+      ca: "Dues propostes de disseny complementàries — una transaccional, una promocional — que mostren com un restaurant com el Mirazur pot estendre la seva experiència més enllà de la taula, i com la IA em va permetre portar-ne una fins a una pàgina funcionant jo sol.",
     },
     description: {
-      en: "Two real projects with Mirazur — both picked up mid-process and completed: a recipe portal finished in Figma, and an experience page built with Claude Design.",
-      es: "Dos proyectos reales con Mirazur — los dos retomados a medias y terminados: un portal de recetas acabado en Figma, y una página de experiencia construida con Claude Design.",
-      ca: "Dos projectes reals amb el Mirazur — tots dos repesos a mitges i acabats: un portal de receptes acabat a Figma, i una pàgina d'experiència construïda amb Claude Design.",
+      en: "Two real projects with Mirazur — both picked up mid-process and completed: a recipe portal finished in Figma, and a promotional landing built with Claude Design.",
+      es: "Dos proyectos reales con Mirazur — los dos retomados a medias y terminados: un portal de recetas acabado en Figma, y una landing promocional construida con Claude Design.",
+      ca: "Dos projectes reals amb el Mirazur — tots dos repesos a mitges i acabats: un portal de receptes acabat a Figma, i una landing promocional construïda amb Claude Design.",
     },
     tags: ["Figma", "Claude Design", "Web Design"],
     gradient: "linear-gradient(135deg, #1a2a0d 0%, #3d5c1e 60%, #7aad3a 100%)",
@@ -853,63 +885,14 @@ export const projects: Project[] = [
     video: "/covers/mirazur.mp4",
     cover: "/covers/cover-mirazur.webp",
     heroTagline: {
-      en: "recipe portal and experience page",
-      es: "portal de recetas y página de experiencia",
-      ca: "portal de receptes i pàgina d'experiència",
+      en: "recipe portal and promotional landing",
+      es: "portal de recetas y landing promocional",
+      ca: "portal de receptes i landing promocional",
     },
     meta: [
       { labelKey: "client", value: "Mirazur" },
-      { label: { en: "Project 01", es: "Proyecto 01", ca: "Projecte 01" }, value: { en: "2025 · Recipe portal", es: "2025 · Portal de recetas", ca: "2025 · Portal de receptes" } },
-      { label: { en: "Project 02", es: "Proyecto 02", ca: "Projecte 02" }, value: { en: "2026 · Experience page", es: "2026 · Página de experiencia", ca: "2026 · Pàgina d'experiència" } },
-      { labelKey: "status", value: { en: "Design completed", es: "Diseño completado", ca: "Disseny completat" } },
-      { labelKey: "role", value: { en: "Web design · UX", es: "Diseño web · UX", ca: "Disseny web · UX" } },
-      { labelKey: "stack", value: "Figma · Claude Design" },
     ],
     page: {
-      project1Label: { en: "Project 01", es: "Proyecto 01", ca: "Projecte 01" },
-      project1SectionLabel: { en: "Recipe portal", es: "Portal de recetas", ca: "Portal de receptes" },
-      project1Heading: { en: "Fine dining, made accessible", es: "Alta cocina accesible", ca: "Alta cuina accessible" },
-      project1Body: [
-        {
-          en: "The project arrived half-finished. The idea was clear — a portal where users pay to access the restaurant's recipes, a model that takes fine dining beyond the table — but the design was incomplete.",
-          es: "El proyecto llegó a medias. La idea era clara — un portal donde los usuarios pagan para acceder a las recetas del restaurante, un modelo que lleva la alta cocina más allá de la mesa — pero el diseño estaba incompleto.",
-          ca: "El projecte va arribar a mig fer. La idea era clara — un portal on els usuaris paguen per accedir a les receptes del restaurant, un model que porta l'alta cuina més enllà de la taula — però el disseny estava incomplet.",
-        },
-        {
-          en: "I picked it back up and finished it in Figma: the recipe listing, the individual recipe page, the access flow and the restaurant profile.",
-          es: "Lo retomé y lo terminé en Figma: el listado de recetas, la ficha individual, el flujo de acceso y el perfil del restaurante.",
-          ca: "El vaig reprendre i el vaig acabar a Figma: el llistat de receptes, la fitxa individual, el flux d'accés i el perfil del restaurant.",
-        },
-      ],
-      project2Label: { en: "Project 02", es: "Proyecto 02", ca: "Projecte 02" },
-      project2SectionLabel: { en: "Experience page", es: "Página de experiencia", ca: "Pàgina d'experiència" },
-      project2Heading: { en: "Designing an experience before you live it", es: "Diseñar una experiencia antes de vivirla", ca: "Dissenyar una experiència abans de viure-la" },
-      project2Body: [
-        {
-          en: "This one also arrived half-finished. I chose to complete it with Claude Design for a specific reason: the design system was already built, and using it as a base gave me speed without sacrificing visual coherence.",
-          es: "Este también llegó a medias. Elegí terminarlo con Claude Design por una razón concreta: el sistema de diseño ya estaba construido, y usarlo como base me daba velocidad sin sacrificar coherencia visual.",
-          ca: "Aquest també va arribar a mig fer. Vaig triar acabar-lo amb Claude Design per una raó concreta: el sistema de disseny ja estava construït, i fer-lo servir com a base em donava velocitat sense sacrificar coherència visual.",
-        },
-        {
-          en: "The result is a narrative page — not a menu, not a corporate website — that explains what it means to eat at Mirazur before you've been: the setting, the dishes, the philosophy, the sequence of the menu.",
-          es: "El resultado es una página narrativa — no una carta ni una web corporativa — que explica qué significa comer en el Mirazur antes de haber ido: el entorno, los platos, la filosofía, la secuencia del menú.",
-          ca: "El resultat és una pàgina narrativa — ni una carta ni una web corporativa — que explica què significa menjar al Mirazur abans d'haver-hi anat: l'entorn, els plats, la filosofia, la seqüència del menú.",
-        },
-      ],
-      project2Cards: [
-        {
-          label: { en: "The setting", es: "El entorno", ca: "L'entorn" },
-          desc: { en: "The garden and its location in Menton, on the edge of the Mediterranean.", es: "El jardín y la ubicación en Menton, al borde del Mediterráneo.", ca: "El jardí i la ubicació a Menton, a la vora del Mediterrani." },
-        },
-        {
-          label: { en: "The dishes", es: "Los platos", ca: "Els plats" },
-          desc: { en: "Seasonal ingredients, Mauro Colagreco's philosophy.", es: "Los ingredientes de temporada, la filosofía de Mauro Colagreco.", ca: "Els ingredients de temporada, la filosofia de Mauro Colagreco." },
-        },
-        {
-          label: { en: "The experience", es: "La experiencia", ca: "L'experiència" },
-          desc: { en: "What the sequence of a tasting menu at the restaurant is like.", es: "Cómo es la secuencia de un menú degustación en el restaurante.", ca: "Com és la seqüència d'un menú degustació al restaurant." },
-        },
-      ],
       learningsItems: [
         {
           en: "Picking up a half-finished project forces you to understand before you touch anything. You have to read what's already there first — the decisions, the logic, the tone — so you can continue it without the seams showing.",
@@ -917,12 +900,123 @@ export const projects: Project[] = [
           ca: "Represendre un projecte a mig fer obliga a entendre abans de tocar. Primer cal llegir el que ja hi ha — les decisions, la lògica, el to — per poder continuar-lo sense que se'n noti la costura.",
         },
         {
-          en: "I built the experience page with Claude Design. What would have taken days in Figma took hours — without losing control over the design decisions.",
-          es: "La página de experiencia la construí con Claude Design. Lo que en Figma habría tardado días, tomó horas — sin perder el control sobre las decisiones de diseño.",
-          ca: "La pàgina d'experiència la vaig construir amb Claude Design. El que a Figma hauria trigat dies, va prendre hores — sense perdre el control sobre les decisions de disseny.",
+          en: "I built the promotional landing with Claude Design. What would have taken days in Figma took hours — without losing control over the design decisions.",
+          es: "La landing promocional la construí con Claude Design. Lo que en Figma habría tardado días, tomó horas — sin perder el control sobre las decisiones de diseño.",
+          ca: "La landing promocional la vaig construir amb Claude Design. El que a Figma hauria trigat dies, va prendre hores — sense perdre el control sobre les decisions de disseny.",
         },
       ],
     },
+    // Two sub-projects shown as tabs on the same client page — the coupon
+    // landing is the default/first one (see MirazurPage's DEFAULT_SUB_ID).
+    // Mirrors the elBulli SubProject convention: client-level fields (hero,
+    // shared intro problem/meta, closing "enfoque/resultado" and
+    // "aprendizajes" sections) stay on the parent Project above; only the
+    // content specific to each sub-project (heading, body copy, its own
+    // illustration/cards) lives here.
+    subProjects: [
+      {
+        id: "cupon",
+        tabLabel: { en: "Promotional landing", es: "Landing promocional", ca: "Landing promocional" },
+        num: "01",
+        category: { en: "Web Design", es: "Diseño Web", ca: "Disseny Web" },
+        year: "2026",
+        problem: {
+          en: "This one also arrived half-finished. I chose to complete it with Claude Design for a specific reason: the design system was already built, and using it as a base gave me speed without sacrificing visual coherence.",
+          es: "Este también llegó a medias. Elegí terminarlo con Claude Design por una razón concreta: el sistema de diseño ya estaba construido, y usarlo como base me daba velocidad sin sacrificar coherencia visual.",
+          ca: "Aquest també va arribar a mig fer. Vaig triar acabar-lo amb Claude Design per una raó concreta: el sistema de disseny ja estava construït, i fer-lo servir com a base em donava velocitat sense sacrificar coherència visual.",
+        },
+        process: {
+          en: "The result is a promotional landing: it tells a bit about the experience — the setting, the dishes, the philosophy — and includes a form to request the coupon for the promotion.",
+          es: "El resultado es una landing promocional: cuenta un poco la experiencia — el entorno, los platos, la filosofía — e incluye un formulario para solicitar el cupón de la promoción.",
+          ca: "El resultat és una landing promocional: explica una mica l'experiència — l'entorn, els plats, la filosofia — i inclou un formulari per sol·licitar el cupó de la promoció.",
+        },
+        result: {
+          en: "Two complementary design proposals — one transactional, one promotional — showing how a restaurant like Mirazur can extend its experience beyond the table, and how AI let me take one of them all the way to a working page on my own.",
+          es: "Dos propuestas de diseño complementarias — una transaccional, una promocional — que muestran cómo un restaurante como Mirazur puede extender su experiencia más allá de la mesa, y cómo la IA me permitió llevar una de ellas hasta una página funcionando yo solo.",
+          ca: "Dues propostes de disseny complementàries — una transaccional, una promocional — que mostren com un restaurant com el Mirazur pot estendre la seva experiència més enllà de la taula, i com la IA em va permetre portar-ne una fins a una pàgina funcionant jo sol.",
+        },
+        tags: ["Claude Design"],
+        meta: [
+          { labelKey: "status", value: { en: "Design completed", es: "Diseño completado", ca: "Disseny completat" } },
+          { labelKey: "stack", value: "Claude Design" },
+        ],
+        page: {
+          project2Label: { en: "Project 02", es: "Proyecto 02", ca: "Projecte 02" },
+          project2SectionLabel: { en: "Promotional landing", es: "Landing promocional", ca: "Landing promocional" },
+          project2Heading: { en: "A landing to claim a promotion", es: "Una landing para canjear una promoción", ca: "Una landing per bescanviar una promoció" },
+          project2Body: [
+            {
+              en: "This one also arrived half-finished. I chose to complete it with Claude Design for a specific reason: the design system was already built, and using it as a base gave me speed without sacrificing visual coherence.",
+              es: "Este también llegó a medias. Elegí terminarlo con Claude Design por una razón concreta: el sistema de diseño ya estaba construido, y usarlo como base me daba velocidad sin sacrificar coherencia visual.",
+              ca: "Aquest també va arribar a mig fer. Vaig triar acabar-lo amb Claude Design per una raó concreta: el sistema de disseny ja estava construït, i fer-lo servir com a base em donava velocitat sense sacrificar coherència visual.",
+            },
+            {
+              en: "The result is a promotional landing: it tells a bit about the experience — the setting, the dishes, the philosophy — and includes a form to request the coupon for the promotion.",
+              es: "El resultado es una landing promocional: cuenta un poco la experiencia — el entorno, los platos, la filosofía — e incluye un formulario para solicitar el cupón de la promoción.",
+              ca: "El resultat és una landing promocional: explica una mica l'experiència — l'entorn, els plats, la filosofia — i inclou un formulari per sol·licitar el cupó de la promoció.",
+            },
+          ],
+          project2Cards: [
+            {
+              label: { en: "The setting", es: "El entorno", ca: "L'entorn" },
+              desc: { en: "The garden and its location in Menton, on the edge of the Mediterranean.", es: "El jardín y la ubicación en Menton, al borde del Mediterráneo.", ca: "El jardí i la ubicació a Menton, a la vora del Mediterrani." },
+            },
+            {
+              label: { en: "The dishes", es: "Los platos", ca: "Els plats" },
+              desc: { en: "Seasonal ingredients, Mauro Colagreco's philosophy.", es: "Los ingredientes de temporada, la filosofía de Mauro Colagreco.", ca: "Els ingredients de temporada, la filosofia de Mauro Colagreco." },
+            },
+            {
+              label: { en: "The coupon", es: "El cupón", ca: "El cupó" },
+              desc: { en: "A form to request the coupon for the promotion.", es: "Un formulario para solicitar el cupón de la promoción.", ca: "Un formulari per sol·licitar el cupó de la promoció." },
+            },
+          ],
+        },
+      },
+      {
+        id: "recetas",
+        tabLabel: { en: "Recipe portal", es: "Portal de recetas", ca: "Portal de receptes" },
+        num: "02",
+        category: { en: "Web Design", es: "Diseño Web", ca: "Disseny Web" },
+        year: "2025",
+        problem: {
+          en: "The project arrived half-finished. The idea was clear — a portal where users pay to access the restaurant's recipes, a model that takes fine dining beyond the table — but the design was incomplete.",
+          es: "El proyecto llegó a medias. La idea era clara — un portal donde los usuarios pagan para acceder a las recetas del restaurante, un modelo que lleva la alta cocina más allá de la mesa — pero el diseño estaba incompleto.",
+          ca: "El projecte va arribar a mig fer. La idea era clara — un portal on els usuaris paguen per accedir a les receptes del restaurant, un model que porta l'alta cuina més enllà de la taula — però el disseny estava incomplet.",
+        },
+        process: {
+          en: "I picked it back up and finished it in Figma: the recipe listing, the individual recipe page, the access flow and the restaurant profile.",
+          es: "Lo retomé y lo terminé en Figma: el listado de recetas, la ficha individual, el flujo de acceso y el perfil del restaurante.",
+          ca: "El vaig reprendre i el vaig acabar a Figma: el llistat de receptes, la fitxa individual, el flux d'accés i el perfil del restaurant.",
+        },
+        result: {
+          en: "Two complementary design proposals — one transactional, one promotional — showing how a restaurant like Mirazur can extend its experience beyond the table, and how AI let me take one of them all the way to a working page on my own.",
+          es: "Dos propuestas de diseño complementarias — una transaccional, una promocional — que muestran cómo un restaurante como Mirazur puede extender su experiencia más allá de la mesa, y cómo la IA me permitió llevar una de ellas hasta una página funcionando yo solo.",
+          ca: "Dues propostes de disseny complementàries — una transaccional, una promocional — que mostren com un restaurant com el Mirazur pot estendre la seva experiència més enllà de la taula, i com la IA em va permetre portar-ne una fins a una pàgina funcionant jo sol.",
+        },
+        tags: ["Figma"],
+        meta: [
+          { labelKey: "status", value: { en: "Design completed", es: "Diseño completado", ca: "Disseny completat" } },
+          { labelKey: "stack", value: "Figma" },
+        ],
+        page: {
+          project1Label: { en: "Project 01", es: "Proyecto 01", ca: "Projecte 01" },
+          project1SectionLabel: { en: "Recipe portal", es: "Portal de recetas", ca: "Portal de receptes" },
+          project1Heading: { en: "Fine dining, made accessible", es: "Alta cocina accesible", ca: "Alta cuina accessible" },
+          project1Body: [
+            {
+              en: "The project arrived half-finished. The idea was clear — a portal where users pay to access the restaurant's recipes, a model that takes fine dining beyond the table — but the design was incomplete.",
+              es: "El proyecto llegó a medias. La idea era clara — un portal donde los usuarios pagan para acceder a las recetas del restaurante, un modelo que lleva la alta cocina más allá de la mesa — pero el diseño estaba incompleto.",
+              ca: "El projecte va arribar a mig fer. La idea era clara — un portal on els usuaris paguen per accedir a les receptes del restaurant, un model que porta l'alta cuina més enllà de la taula — però el disseny estava incomplet.",
+            },
+            {
+              en: "I picked it back up and finished it in Figma: the recipe listing, the individual recipe page, the access flow and the restaurant profile.",
+              es: "Lo retomé y lo terminé en Figma: el listado de recetas, la ficha individual, el flujo de acceso y el perfil del restaurante.",
+              ca: "El vaig reprendre i el vaig acabar a Figma: el llistat de receptes, la fitxa individual, el flux d'accés i el perfil del restaurant.",
+            },
+          ],
+        },
+      },
+    ],
   },
   {
     id: "gnoss-ai",
@@ -931,26 +1025,26 @@ export const projects: Project[] = [
     category: { en: "Design System", es: "Sistema de Diseño", ca: "Sistema de Disseny" },
     year: "2026",
     problem: {
-      en: "Entering an existing design system built by others — and expanding it without breaking its internal logic or visual coherence.",
-      es: "Entrar en un sistema de diseño existente construido por otros — y ampliarlo sin romper su lógica interna ni su coherencia visual.",
-      ca: "Entrar en un sistema de disseny existent construït per altres — i ampliar-lo sense trencar la seva lògica interna ni la seva coherència visual.",
+      en: "Entering an existing design system built by others, and expanding it without breaking its internal logic or visual coherence — not just on web pages, but also section covers, infographics and the occasional presentation.",
+      es: "Entrar en un sistema de diseño ya existente, construido por otros, y ampliarlo sin romper su lógica interna ni su coherencia visual — no solo en páginas web, también en portadas de sección, infografías y alguna presentación.",
+      ca: "Entrar en un sistema de disseny ja existent, construït per altres, i ampliar-lo sense trencar la seva lògica interna ni la seva coherència visual — no només en pàgines web, també en portades de secció, infografies i alguna presentació.",
     },
     process: {
-      en: "Maintained existing pages and designed new ones within the established system — deciding which patterns to reuse and which to create, so the platform could keep growing without fragmenting or losing consistency.",
-      es: "Mantuve páginas existentes y diseñé otras nuevas dentro del sistema establecido — decidiendo qué patrones reutilizar y cuáles crear, para que la plataforma pudiera seguir creciendo sin fragmentarse ni perder consistencia.",
-      ca: "Vaig mantenir pàgines existents i en vaig dissenyar de noves dins del sistema establert — decidint quins patrons reutilitzar i quins crear, perquè la plataforma pogués seguir creixent sense fragmentar-se ni perdre consistència.",
+      en: "Maintained existing pages, designed new ones and produced one-off pieces (covers, infographics, presentations) within the established system. The work was very back-and-forth: resolving comments directly in Figma and exchanging emails with GNOSS's team, much like being one more person inside their own team.",
+      es: "Mantuve páginas existentes, diseñé otras nuevas y creé piezas puntuales (portadas, infografías, presentaciones) dentro del sistema establecido. El trabajo fue muy de ida y vuelta: resolvía comentarios directamente en Figma e intercambiaba correos con el equipo de GNOSS, como una persona más dentro de su propio equipo.",
+      ca: "Vaig mantenir pàgines existents, en vaig dissenyar de noves i vaig crear peces puntuals (portades, infografies, presentacions) dins del sistema establert. La feina va ser molt d'anada i tornada: resolia comentaris directament a Figma i intercanviava correus amb l'equip de GNOSS, com una persona més dins del seu propi equip.",
     },
     result: {
-      en: "A coherent web at scale — new pages that feel part of the same system, maintaining visual and structural consistency across hundreds of pages.",
-      es: "Una web coherente a escala — nuevas páginas que parecen parte del mismo sistema, manteniendo consistencia visual y estructural a lo largo de cientos de páginas.",
-      ca: "Una web coherent a escala — noves pàgines que semblen part del mateix sistema, mantenint consistència visual i estructural al llarg de centenars de pàgines.",
+      en: "A coherent web at scale — new pages and graphic pieces that feel part of the same system, maintaining visual and structural consistency across hundreds of pages, the result of an ongoing collaboration with GNOSS's team.",
+      es: "Una web coherente a escala — nuevas páginas y piezas gráficas que parecen parte del mismo sistema, manteniendo consistencia visual y estructural a lo largo de cientos de páginas, fruto de una colaboración continua con el equipo de GNOSS.",
+      ca: "Una web coherent a escala — noves pàgines i peces gràfiques que semblen part del mateix sistema, mantenint consistència visual i estructural al llarg de centenars de pàgines, fruit d'una col·laboració contínua amb l'equip de GNOSS.",
     },
     description: {
-      en: "Design system maintenance and expansion for GNOSS — integrating new pages into a large, established visual system without breaking the whole.",
-      es: "Mantenimiento y expansión del sistema de diseño de GNOSS — integrando nuevas páginas en un sistema visual amplio y ya establecido sin romper el conjunto.",
-      ca: "Manteniment i expansió del sistema de disseny de GNOSS — integrant noves pàgines en un sistema visual ampli i ja establert sense trencar el conjunt.",
+      en: "Web design, infographics and presentations for GNOSS — maintaining and expanding their design system in direct collaboration with their team.",
+      es: "Diseño web, infografías y presentaciones para GNOSS — manteniendo y ampliando su sistema de diseño en colaboración directa con su equipo.",
+      ca: "Disseny web, infografies i presentacions per a GNOSS — mantenint i ampliant el seu sistema de disseny en col·laboració directa amb el seu equip.",
     },
-    tags: ["Figma", "Design System", "Web Design"],
+    tags: ["Figma", "Design System", "Infographics", "Client Collaboration"],
     gradient: "linear-gradient(135deg, #1a2a0a 0%, #2d5c1a 50%, #c4a35a 100%)",
     accentColor: "#c4a35a",
     cover: "/covers/cover-gnoss.svg",
@@ -963,7 +1057,7 @@ export const projects: Project[] = [
       { labelKey: "client", value: "GNOSS" },
       { labelKey: "year", value: "2026" },
       { labelKey: "status", value: status.completed },
-      { labelKey: "role", value: { en: "Web design · UI maintenance", es: "Diseño web · Mantenimiento UI", ca: "Disseny web · Manteniment UI" } },
+      { labelKey: "role", value: { en: "Web & content design · Client collaboration", es: "Diseño web y de contenido · Colaboración con cliente", ca: "Disseny web i de contingut · Col·laboració amb client" } },
       { labelKey: "stack", value: "Figma" },
     ],
     page: {
@@ -986,27 +1080,27 @@ export const projects: Project[] = [
       ],
       workCards: [
         {
-          label: { en: "Maintenance", es: "Mantenimiento", ca: "Manteniment" },
+          label: { en: "Beyond web pages", es: "Más allá de la web", ca: "Més enllà de la web" },
           desc: {
-            en: "Updating existing pages — content tweaks, component reviews, consistency fixes across the whole site.",
-            es: "Actualización de páginas existentes — ajustes de contenido, revisiones de componentes, correcciones de consistencia a lo largo de toda la web.",
-            ca: "Actualització de pàgines existents — ajustos de contingut, revisions de components, correccions de consistència al llarg de tota la web.",
+            en: "Besides web pages, I designed section covers, infographics and the occasional presentation — always within the same visual language as the system.",
+            es: "Además de páginas web, diseñé portadas de sección, infografías y alguna presentación — siempre dentro de la misma línea visual del sistema.",
+            ca: "A més de pàgines web, vaig dissenyar portades de secció, infografies i alguna presentació — sempre dins de la mateixa línia visual del sistema.",
           },
         },
         {
-          label: { en: "New pages", es: "Nuevas páginas", ca: "Pàgines noves" },
+          label: { en: "Maintenance & new pages", es: "Mantenimiento y páginas nuevas", ca: "Manteniment i pàgines noves" },
           desc: {
-            en: "Creating brand-new pages following the established design system: same visual grammar, same components, same tone.",
-            es: "Creación de páginas inéditas siguiendo el design system establecido: misma gramática visual, mismos componentes, mismo tono.",
-            ca: "Creació de pàgines inèdites seguint el sistema de disseny establert: mateixa gramàtica visual, mateixos components, mateix to.",
+            en: "Updated existing pages and created brand-new ones following the established system, keeping things coherent across a website with hundreds of pages.",
+            es: "Actualicé páginas existentes y creé otras nuevas siguiendo el sistema establecido, cuidando la coherencia en una web con cientos de páginas.",
+            ca: "Vaig actualitzar pàgines existents i en vaig crear de noves seguint el sistema establert, tenint cura de la coherència en una web amb centenars de pàgines.",
           },
         },
         {
-          label: { en: "Scale", es: "Escala", ca: "Escala" },
+          label: { en: "Working with GNOSS", es: "Colaboración con GNOSS", ca: "Col·laboració amb GNOSS" },
           desc: {
-            en: "Since it's a large website, the work required attention to detail and the ability to keep things coherent across many different contexts at once.",
-            es: "Al tratarse de una web grande, el trabajo requería atención al detalle y capacidad para mantener la coherencia en muchos contextos distintos de forma simultánea.",
-            ca: "Com que és una web gran, la feina requeria atenció al detall i capacitat per mantenir la coherència en molts contextos diferents de manera simultània.",
+            en: "Constant back-and-forth with GNOSS's team — resolving comments in Figma and exchanging emails, much like being one more person inside their team.",
+            es: "Trabajo constante con el equipo de GNOSS — resolviendo comentarios en Figma e intercambiando correos, como una persona más dentro de su equipo.",
+            ca: "Treball constant amb l'equip de GNOSS — resolent comentaris a Figma i intercanviant correus, com una persona més dins del seu equip.",
           },
         },
       ],
@@ -1020,6 +1114,11 @@ export const projects: Project[] = [
           en: "Scale reveals consistency problems that go unnoticed in small projects. On a large website, any small inconsistency gets amplified and ends up visible.",
           es: "La escala revela los problemas de consistencia que en proyectos pequeños pasan desapercibidos. En una web grande, cualquier pequeña inconsistencia se amplifica y acaba siendo visible.",
           ca: "L'escala revela els problemes de consistència que en projectes petits passen desapercebuts. En una web gran, qualsevol petita inconsistència s'amplifica i acaba sent visible.",
+        },
+        {
+          en: "Working directly with GNOSS's team — resolving comments in Figma and over email — felt a lot like being part of an outside team: I learned to explain design decisions and negotiate changes with people who didn't share my day-to-day context.",
+          es: "Trabajar directamente con el equipo de GNOSS — resolviendo comentarios en Figma y por correo — se pareció mucho a formar parte de un equipo externo: aprendí a explicar decisiones de diseño y a negociar cambios con gente que no compartía mi contexto del día a día.",
+          ca: "Treballar directament amb l'equip de GNOSS — resolent comentaris a Figma i per correu — es va assemblar molt a formar part d'un equip extern: vaig aprendre a explicar decisions de disseny i a negociar canvis amb gent que no compartia el meu context del dia a dia.",
         },
       ],
     },
@@ -1036,9 +1135,9 @@ export const projects: Project[] = [
       ca: "Un portal de turisme que havia d'estar a l'altura d'una destinació amb personalitat pròpia — ja en marxa quan m'hi vaig incorporar.",
     },
     process: {
-      en: "Designed specific pages in Figma within the visual system already established by the studio. Delivered to production for Framer implementation.",
-      es: "Diseñé páginas concretas en Figma dentro del sistema visual ya establecido por el estudio. Entregado a producción para implementación en Framer.",
-      ca: "Vaig dissenyar pàgines concretes a Figma dins del sistema visual ja establert per l'estudi. Entregat a producció per a implementació a Framer.",
+      en: "Designed specific pages in Figma within the visual system already established by the studio. Delivered to development for implementation.",
+      es: "Diseñé páginas concretas en Figma dentro del sistema visual ya establecido por el estudio. Se mandó a desarrollo para su implementación.",
+      ca: "Vaig dissenyar pàgines concretes a Figma dins del sistema visual ja establert per l'estudi. Es va enviar a desenvolupament per a la seva implementació.",
     },
     result: {
       en: "The project that led Turismo de Jaén to contact the studio — a direct follow-on from this work.",
@@ -1046,11 +1145,11 @@ export const projects: Project[] = [
       ca: "El projecte que va portar a Turisme de Jaén a contactar amb l'estudi — un encàrrec que va néixer directament d'aquest.",
     },
     description: {
-      en: "Web design for La Rioja's tourism portal — page design in Figma within an existing visual system, implemented in Framer. The project that generated Turisme Jaén.",
-      es: "Diseño web para el portal de turismo de La Rioja — páginas en Figma dentro de un sistema visual existente, implementado en Framer. El proyecto que generó Turisme Jaén.",
-      ca: "Disseny web per al portal de turisme de La Rioja — pàgines a Figma dins d'un sistema visual existent, implementat a Framer. El projecte que va generar Turisme Jaén.",
+      en: "Web design for La Rioja's tourism portal — page design in Figma within an existing visual system, sent to development. The project that generated Turisme Jaén.",
+      es: "Diseño web para el portal de turismo de La Rioja — páginas en Figma dentro de un sistema visual existente, enviado a desarrollo. El proyecto que generó Turisme Jaén.",
+      ca: "Disseny web per al portal de turisme de La Rioja — pàgines a Figma dins d'un sistema visual existent, enviat a desenvolupament. El projecte que va generar Turisme Jaén.",
     },
-    tags: ["Figma", "Framer", "Web Design", "Tourism"],
+    tags: ["Figma", "Web Design", "Tourism"],
     gradient: "linear-gradient(135deg, #1a0010 0%, #5c1a3a 60%, #b5386e 100%)",
     accentColor: "#b5386e",
     cover: "/covers/cover-rioja.webp",
@@ -1064,7 +1163,7 @@ export const projects: Project[] = [
       { labelKey: "year", value: "2026" },
       { labelKey: "status", value: status.completed },
       { labelKey: "role", value: { en: "Web design · Figma", es: "Diseño web · Figma", ca: "Disseny web · Figma" } },
-      { labelKey: "stack", value: "Figma · Framer" },
+      { labelKey: "stack", value: "Figma" },
       { labelKey: "studio", value: "Dosgrapas" },
     ],
     page: {
@@ -1087,11 +1186,11 @@ export const projects: Project[] = [
           },
         },
         {
-          label: { en: "Figma → Framer", es: "Figma → Framer", ca: "Figma → Framer" },
+          label: { en: "Figma → Development", es: "Figma → Desarrollo", ca: "Figma → Desenvolupament" },
           desc: {
-            en: "The design was delivered in Figma and implemented in Framer by the studio's production team.",
-            es: "El diseño se entregó en Figma y fue implementado en Framer por el equipo de producción del estudio.",
-            ca: "El disseny es va lliurar a Figma i es va implementar a Framer per l'equip de producció de l'estudi.",
+            en: "The design was delivered in Figma and sent to development by the studio's production team.",
+            es: "El diseño se entregó en Figma y se mandó a desarrollo por el equipo de producción del estudio.",
+            ca: "El disseny es va lliurar a Figma i es va enviar a desenvolupament per l'equip de producció de l'estudi.",
           },
         },
       ],

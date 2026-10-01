@@ -60,7 +60,7 @@ const items: TimelineItem[] = [
   {
     year: "2025 –",
     title: { en: "Master in Marketing & Digital Communication", es: "Máster en Marketing y Comunicación Digital", ca: "Màster en Màrqueting i Comunicació Digital" },
-    place: "En curs",
+    place: "NETT Digital School",
     tags: ["Google Ads", "Meta Ads", "Figma", "WordPress"],
     type: "education",
     current: true,
@@ -130,13 +130,13 @@ export default function Timeline() {
     <section id="timeline" style={{ background: "var(--bg)", padding: "clamp(5rem, 10vh, 9rem) 0" }}>
 
       {/* Heading */}
-      <div style={{ paddingLeft: "clamp(1.5rem, 5vw, 5rem)", paddingRight: "clamp(1.5rem, 5vw, 5rem)", marginBottom: "clamp(3rem, 5vw, 4.5rem)" }}>
+      <div style={{ paddingLeft: "var(--space-section-x)", paddingRight: "var(--space-section-x)", marginBottom: "clamp(3rem, 5vw, 4.5rem)" }}>
         <div className="site-content">
           <FadeInView>
             <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t.label}</p>
-            <h2 className="display-heading" style={{ maxWidth: "600px" }}>
-              <span style={{ display: "block" }}>{headingA}</span>
-              <span style={{ display: "block", fontFamily: "var(--font-serif), 'Playfair Display', serif", fontStyle: "italic", fontWeight: 400, color: "var(--text-muted)" }}>
+            <h2 className="display-heading" style={{ fontSize: "var(--text-section)", maxWidth: "600px" }}>
+              <span style={{ display: "block", fontWeight: 600 }}>{headingA}</span>
+              <span style={{ display: "block", fontWeight: 500, color: "var(--text-muted)" }}>
                 {headingB}
               </span>
             </h2>
@@ -152,7 +152,7 @@ export default function Timeline() {
           display: "none",
           alignItems: "center",
           gap: "0.4rem",
-          paddingLeft: "clamp(1.5rem, 5vw, 5rem)",
+          paddingLeft: "var(--space-section-x)",
           marginBottom: "0.75rem",
           color: "var(--text-subtle)",
           fontSize: "0.68rem",
@@ -169,8 +169,8 @@ export default function Timeline() {
           ref={scrollRef}
           style={{
             overflowX: "auto",
-            paddingLeft: "clamp(1.5rem, 5vw, 5rem)",
-            paddingRight: "clamp(1.5rem, 5vw, 5rem)",
+            paddingLeft: "var(--space-section-x)",
+            paddingRight: "var(--space-section-x)",
             scrollbarWidth: "none",
           }}
         >
@@ -451,7 +451,7 @@ export default function Timeline() {
 
             {/* No description fallback */}
             {!active.description && !active.tags && (
-              <p style={{ fontSize: "0.82rem", color: "var(--text-subtle)", fontStyle: "italic" }}>—</p>
+              <p style={{ fontSize: "0.82rem", color: "var(--text-subtle)" }}>—</p>
             )}
           </motion.div>
         )}
