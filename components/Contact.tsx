@@ -88,14 +88,29 @@ export default function Contact() {
             </p>
             <div>
               <div className="divider" style={{ marginBottom: "1.75rem" }} />
-              <a
-                href={`mailto:${tx.email}`}
-                style={{ fontSize: "clamp(0.82rem, 1.4vw, 0.95rem)", color: "var(--text-subtle)", letterSpacing: "0.06em", textDecoration: "none", fontWeight: 500, transition: "color 0.28s" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text)")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-subtle)")}
-              >
-                {tx.email}
-              </a>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: "0.6rem" }}>
+                <a
+                  href={`mailto:${tx.email}`}
+                  style={{ fontSize: "clamp(0.82rem, 1.4vw, 0.95rem)", color: "var(--text-subtle)", letterSpacing: "0.06em", textDecoration: "none", fontWeight: 500, transition: "color 0.28s" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-subtle)")}
+                >
+                  {tx.email}
+                </a>
+                <span style={{ fontSize: "clamp(0.82rem, 1.4vw, 0.95rem)", color: "var(--text-subtle)" }} aria-hidden="true">
+                  ·
+                </span>
+                <a
+                  href="https://www.linkedin.com/in/albertcanadas/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ fontSize: "clamp(0.82rem, 1.4vw, 0.95rem)", color: "var(--text-subtle)", letterSpacing: "0.06em", textDecoration: "none", fontWeight: 500, transition: "color 0.28s" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-subtle)")}
+                >
+                  LinkedIn
+                </a>
+              </div>
             </div>
           </FadeInView>
 
