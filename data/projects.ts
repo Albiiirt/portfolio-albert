@@ -521,117 +521,6 @@ export const projects: Project[] = [
     },
   },
   {
-    id: "castellera",
-    num: "04",
-    title: { en: "Colla Castellera del Baix Montseny", es: "Colla Castellera del Baix Montseny", ca: "Colla Castellera del Baix Montseny" },
-    category: { en: "Web Design & Dev", es: "Diseño y desarrollo web", ca: "Disseny i desenvolupament web" },
-    year: "2026",
-    problem: {
-      en: "A castellers association needed more than a nice-looking website: they needed to update content themselves without touching code, and contact forms that actually reached their corporate emails. A product and operations problem, not just a design one.",
-      es: "Una colla castellera necesitaba mucho más que una web bonita: necesitaban poder actualizar el contenido ellos mismos sin tocar código, y formularios de contacto que llegaran de verdad a sus correos corporativos. Un problema de producto y de operativa, no solo de diseño.",
-      ca: "Una colla castellera necessitava molt més que una web bonica: necessitaven poder actualitzar el contingut ells mateixos sense tocar codi, i formularis de contacte que arribessin de veritat als seus correus corporatius. Un problema de producte i d'operativa, no només de disseny.",
-    },
-    process: {
-      en: "Designed and developed the website with Claude Code, set up a Notion CMS for content management, wired contact forms to corporate emails, and deployed the site from GitHub to the contracted server and domain.",
-      es: "Diseñé y desarrollé la web con Claude Code, configuré un CMS con Notion para gestionar el contenido, conecté los formularios a los correos corporativos y desplegué el site desde GitHub al servidor y dominio contratados.",
-      ca: "Vaig dissenyar i desenvolupar la web amb Claude Code, vaig configurar un CMS amb Notion per gestionar el contingut, vaig connectar els formularis als correus corporatius i vaig desplegar el site des de GitHub al servidor i domini contractats.",
-    },
-    result: {
-      en: "A fully operational website with a simple content management system, working contact forms, and a complete deployment pipeline.",
-      es: "Una web completamente operativa con un sistema de gestión de contenido simple, formularios funcionales y un pipeline de despliegue completo.",
-      ca: "Una web completament operativa amb un sistema de gestió de contingut simple, formularis funcionals i un pipeline de desplegament complet.",
-    },
-    description: {
-      en: "Personal project — website design, development, CMS setup with Notion, and full deployment for a castellers association.",
-      es: "Proyecto personal — diseño, desarrollo, CMS con Notion y despliegue completo para una colla castellera.",
-      ca: "Projecte personal — disseny, desenvolupament, CMS amb Notion i desplegament complet per a una colla castellera.",
-    },
-    tags: ["Claude Code", "Notion", "Web Design"],
-    gradient: "linear-gradient(135deg, #1a0808 0%, #3d1010 60%, #7a2020 100%)",
-    accentColor: "#b84040",
-    video: "/covers/tritoners.mp4",
-    heroTagline: {
-      en: "design, development and launch of their website",
-      es: "diseño, desarrollo y puesta en marcha de su web",
-      ca: "disseny, desenvolupament i posada en marxa del seu web",
-    },
-    meta: [
-      { labelKey: "project", value: { en: "Personal · Self-directed", es: "Personal · Autónomo", ca: "Personal · Autònom" } },
-      { labelKey: "client", value: "Colla Castellera del Baix Montseny" },
-      { labelKey: "year", value: "2026" },
-      { labelKey: "role", value: { en: "Design · Development · Deployment · CMS", es: "Diseño · Desarrollo · Despliegue · CMS", ca: "Disseny · Desenvolupament · Desplegament · CMS" } },
-      { labelKey: "stack", value: "Claude Code · Next.js · Notion · GitHub" },
-      { labelKey: "web", value: "ccbaixmontseny.cat", href: "https://ccbaixmontseny.cat/" },
-    ],
-    page: {
-      heroEyebrow: { en: "Personal project", es: "Proyecto personal", ca: "Projecte personal" },
-      workHeading: {
-        en: "From zero to a live website",
-        es: "De cero a web en producción",
-        ca: "De zero a web en producció",
-      },
-      workCards: [
-        {
-          label: { en: "Design and development", es: "Diseño y desarrollo", ca: "Disseny i desenvolupament" },
-          desc: {
-            en: "I designed and built the entire website with Claude Code, with composition and design adjustments throughout the process.",
-            es: "Diseñé y desarrollé la web completa con Claude Code, con ajustes de composición y diseño a lo largo del proceso.",
-            ca: "Vaig dissenyar i desenvolupar la web completa amb Claude Code, amb ajustos de composició i disseny al llarg del procés.",
-          },
-        },
-        {
-          label: { en: "Contact forms", es: "Formularios de contacto", ca: "Formularis de contacte" },
-          desc: {
-            en: "I set up the forms so responses would land directly in the association's corporate inboxes.",
-            es: "Configuré los formularios para que las respuestas llegaran directamente a los correos corporativos de la colla.",
-            ca: "Vaig configurar els formularis perquè les respostes arribessin directament als correus corporatius de la colla.",
-          },
-        },
-        {
-          label: { en: "CMS with Notion", es: "CMS con Notion", ca: "CMS amb Notion" },
-          desc: {
-            en: "I connected Notion as a content management system so the team could update text and information without touching code.",
-            es: "Conecté Notion como sistema de gestión de contenido para que el equipo pudiera actualizar textos e información sin tocar código.",
-            ca: "Vaig connectar Notion com a sistema de gestió de contingut perquè l'equip pogués actualitzar textos i informació sense tocar codi.",
-          },
-        },
-        {
-          label: { en: "Deployment", es: "Despliegue", ca: "Desplegament" },
-          desc: {
-            en: "I linked the GitHub repository to the contracted server and domain to get the site running with an automatic pipeline.",
-            es: "Enlacé el repositorio de GitHub con el servidor y dominio contratados para dejar la web operativa con un pipeline automático.",
-            ca: "Vaig enllaçar el repositori de GitHub amb el servidor i domini contractats per deixar la web operativa amb un pipeline automàtic.",
-          },
-        },
-        {
-          label: { en: "Presence on Google", es: "Presencia en Google", ca: "Presència a Google" },
-          desc: {
-            en: "I set up the Google Business profile so searching for the association shows the Maps card with the website, address and up-to-date contact details.",
-            es: "Configuré la ficha de Google Business para que al buscar la colla aparezca la tarjeta de Maps con la web, la dirección y los datos de contacto actualizados.",
-            ca: "Vaig configurar la fitxa de Google Business perquè en cercar la colla aparegui la targeta de Maps amb la web, l'adreça i les dades de contacte actualitzades.",
-          },
-        },
-      ],
-      learningsItems: [
-        {
-          en: "Carrying a project from start to finish on my own — design, development, configuration and deployment — forced me to understand every layer of the process, not just the design one.",
-          es: "Llevar un proyecto de principio a fin de forma autónoma — diseño, desarrollo, configuración y despliegue — me obligó a entender todas las capas del proceso, no solo la de diseño.",
-          ca: "Portar un projecte de principi a fi de forma autònoma — disseny, desenvolupament, configuració i desplegament — em va obligar a entendre totes les capes del procés, no només la de disseny.",
-        },
-        {
-          en: "Connecting Notion as a CMS was a simple, effective solution for a non-technical team. Sometimes the best tool is the one the client already knows.",
-          es: "Conectar Notion como CMS fue una solución simple y efectiva para un equipo no técnico. A veces la mejor herramienta es la que ya conoce el cliente.",
-          ca: "Connectar Notion com a CMS va ser una solució simple i efectiva per a un equip no tècnic. A vegades la millor eina és la que ja coneix el client.",
-        },
-        {
-          en: "Real deployment — server, domain, GitHub pipeline — is a part of the work that usually falls outside the design role. Handling it on my own broadened my view of the whole process a lot.",
-          es: "El despliegue real — servidor, dominio, pipeline de GitHub — es una parte del trabajo que habitualmente queda fuera del rol de diseño. Resolverlo de forma autónoma amplió mucho mi visión del proceso completo.",
-          ca: "El desplegament real — servidor, domini, pipeline de GitHub — és una part de la feina que habitualment queda fora del rol de disseny. Resoldre-ho de forma autònoma va ampliar molt la meva visió del procés complet.",
-        },
-      ],
-    },
-  },
-  {
     id: "turisme-jaen",
     num: "05",
     title: { en: "Turisme Jaén", es: "Turisme Jaén", ca: "Turisme Jaén" },
@@ -1071,6 +960,117 @@ export const projects: Project[] = [
         suffix: { en: " — is a direct descendant of this one.", es: " — es directamente heredero de este.", ca: " — és hereu directe d'aquest." },
         href: "/proyectos/turisme-jaen",
       },
+    },
+  },
+  {
+    id: "castellera",
+    num: "04",
+    title: { en: "Colla Castellera del Baix Montseny", es: "Colla Castellera del Baix Montseny", ca: "Colla Castellera del Baix Montseny" },
+    category: { en: "Web Design & Dev", es: "Diseño y desarrollo web", ca: "Disseny i desenvolupament web" },
+    year: "2026",
+    problem: {
+      en: "A castellers association needed more than a nice-looking website: they needed to update content themselves without touching code, and contact forms that actually reached their corporate emails. A product and operations problem, not just a design one.",
+      es: "Una colla castellera necesitaba mucho más que una web bonita: necesitaban poder actualizar el contenido ellos mismos sin tocar código, y formularios de contacto que llegaran de verdad a sus correos corporativos. Un problema de producto y de operativa, no solo de diseño.",
+      ca: "Una colla castellera necessitava molt més que una web bonica: necessitaven poder actualitzar el contingut ells mateixos sense tocar codi, i formularis de contacte que arribessin de veritat als seus correus corporatius. Un problema de producte i d'operativa, no només de disseny.",
+    },
+    process: {
+      en: "Designed and developed the website with Claude Code, set up a Notion CMS for content management, wired contact forms to corporate emails, and deployed the site from GitHub to the contracted server and domain.",
+      es: "Diseñé y desarrollé la web con Claude Code, configuré un CMS con Notion para gestionar el contenido, conecté los formularios a los correos corporativos y desplegué el site desde GitHub al servidor y dominio contratados.",
+      ca: "Vaig dissenyar i desenvolupar la web amb Claude Code, vaig configurar un CMS amb Notion per gestionar el contingut, vaig connectar els formularis als correus corporatius i vaig desplegar el site des de GitHub al servidor i domini contractats.",
+    },
+    result: {
+      en: "A fully operational website with a simple content management system, working contact forms, and a complete deployment pipeline.",
+      es: "Una web completamente operativa con un sistema de gestión de contenido simple, formularios funcionales y un pipeline de despliegue completo.",
+      ca: "Una web completament operativa amb un sistema de gestió de contingut simple, formularis funcionals i un pipeline de desplegament complet.",
+    },
+    description: {
+      en: "Personal project — website design, development, CMS setup with Notion, and full deployment for a castellers association.",
+      es: "Proyecto personal — diseño, desarrollo, CMS con Notion y despliegue completo para una colla castellera.",
+      ca: "Projecte personal — disseny, desenvolupament, CMS amb Notion i desplegament complet per a una colla castellera.",
+    },
+    tags: ["Claude Code", "Notion", "Web Design"],
+    gradient: "linear-gradient(135deg, #1a0808 0%, #3d1010 60%, #7a2020 100%)",
+    accentColor: "#b84040",
+    video: "/covers/tritoners.mp4",
+    heroTagline: {
+      en: "design, development and launch of their website",
+      es: "diseño, desarrollo y puesta en marcha de su web",
+      ca: "disseny, desenvolupament i posada en marxa del seu web",
+    },
+    meta: [
+      { labelKey: "project", value: { en: "Personal · Self-directed", es: "Personal · Autónomo", ca: "Personal · Autònom" } },
+      { labelKey: "client", value: "Colla Castellera del Baix Montseny" },
+      { labelKey: "year", value: "2026" },
+      { labelKey: "role", value: { en: "Design · Development · Deployment · CMS", es: "Diseño · Desarrollo · Despliegue · CMS", ca: "Disseny · Desenvolupament · Desplegament · CMS" } },
+      { labelKey: "stack", value: "Claude Code · Next.js · Notion · GitHub" },
+      { labelKey: "web", value: "ccbaixmontseny.cat", href: "https://ccbaixmontseny.cat/" },
+    ],
+    page: {
+      heroEyebrow: { en: "Personal project", es: "Proyecto personal", ca: "Projecte personal" },
+      workHeading: {
+        en: "From zero to a live website",
+        es: "De cero a web en producción",
+        ca: "De zero a web en producció",
+      },
+      workCards: [
+        {
+          label: { en: "Design and development", es: "Diseño y desarrollo", ca: "Disseny i desenvolupament" },
+          desc: {
+            en: "I designed and built the entire website with Claude Code, with composition and design adjustments throughout the process.",
+            es: "Diseñé y desarrollé la web completa con Claude Code, con ajustes de composición y diseño a lo largo del proceso.",
+            ca: "Vaig dissenyar i desenvolupar la web completa amb Claude Code, amb ajustos de composició i disseny al llarg del procés.",
+          },
+        },
+        {
+          label: { en: "Contact forms", es: "Formularios de contacto", ca: "Formularis de contacte" },
+          desc: {
+            en: "I set up the forms so responses would land directly in the association's corporate inboxes.",
+            es: "Configuré los formularios para que las respuestas llegaran directamente a los correos corporativos de la colla.",
+            ca: "Vaig configurar els formularis perquè les respostes arribessin directament als correus corporatius de la colla.",
+          },
+        },
+        {
+          label: { en: "CMS with Notion", es: "CMS con Notion", ca: "CMS amb Notion" },
+          desc: {
+            en: "I connected Notion as a content management system so the team could update text and information without touching code.",
+            es: "Conecté Notion como sistema de gestión de contenido para que el equipo pudiera actualizar textos e información sin tocar código.",
+            ca: "Vaig connectar Notion com a sistema de gestió de contingut perquè l'equip pogués actualitzar textos i informació sense tocar codi.",
+          },
+        },
+        {
+          label: { en: "Deployment", es: "Despliegue", ca: "Desplegament" },
+          desc: {
+            en: "I linked the GitHub repository to the contracted server and domain to get the site running with an automatic pipeline.",
+            es: "Enlacé el repositorio de GitHub con el servidor y dominio contratados para dejar la web operativa con un pipeline automático.",
+            ca: "Vaig enllaçar el repositori de GitHub amb el servidor i domini contractats per deixar la web operativa amb un pipeline automàtic.",
+          },
+        },
+        {
+          label: { en: "Presence on Google", es: "Presencia en Google", ca: "Presència a Google" },
+          desc: {
+            en: "I set up the Google Business profile so searching for the association shows the Maps card with the website, address and up-to-date contact details.",
+            es: "Configuré la ficha de Google Business para que al buscar la colla aparezca la tarjeta de Maps con la web, la dirección y los datos de contacto actualizados.",
+            ca: "Vaig configurar la fitxa de Google Business perquè en cercar la colla aparegui la targeta de Maps amb la web, l'adreça i les dades de contacte actualitzades.",
+          },
+        },
+      ],
+      learningsItems: [
+        {
+          en: "Carrying a project from start to finish on my own — design, development, configuration and deployment — forced me to understand every layer of the process, not just the design one.",
+          es: "Llevar un proyecto de principio a fin de forma autónoma — diseño, desarrollo, configuración y despliegue — me obligó a entender todas las capas del proceso, no solo la de diseño.",
+          ca: "Portar un projecte de principi a fi de forma autònoma — disseny, desenvolupament, configuració i desplegament — em va obligar a entendre totes les capes del procés, no només la de disseny.",
+        },
+        {
+          en: "Connecting Notion as a CMS was a simple, effective solution for a non-technical team. Sometimes the best tool is the one the client already knows.",
+          es: "Conectar Notion como CMS fue una solución simple y efectiva para un equipo no técnico. A veces la mejor herramienta es la que ya conoce el cliente.",
+          ca: "Connectar Notion com a CMS va ser una solució simple i efectiva per a un equip no tècnic. A vegades la millor eina és la que ja coneix el client.",
+        },
+        {
+          en: "Real deployment — server, domain, GitHub pipeline — is a part of the work that usually falls outside the design role. Handling it on my own broadened my view of the whole process a lot.",
+          es: "El despliegue real — servidor, dominio, pipeline de GitHub — es una parte del trabajo que habitualmente queda fuera del rol de diseño. Resolverlo de forma autónoma amplió mucho mi visión del proceso completo.",
+          ca: "El desplegament real — servidor, domini, pipeline de GitHub — és una part de la feina que habitualment queda fora del rol de disseny. Resoldre-ho de forma autònoma va ampliar molt la meva visió del procés complet.",
+        },
+      ],
     },
   },
 ];
