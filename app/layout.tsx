@@ -3,6 +3,7 @@ import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import Grain from "@/components/Grain";
+import { InlineScript } from "@/components/InlineScript";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space",
@@ -98,14 +99,16 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="es" className={spaceGrotesk.variable} suppressHydrationWarning>
       <head>
         {/* Anti-flash: set theme before first paint */}
-        <script dangerouslySetInnerHTML={{ __html: `
+        <InlineScript
+          html={`
           try {
             var t = localStorage.getItem('theme');
             if (t !== 'light') document.documentElement.dataset.theme = 'dark';
           } catch(e) {
             document.documentElement.dataset.theme = 'dark';
           }
-        `}} />
+        `}
+        />
         {/* Schema.org structured data */}
         <script
           type="application/ld+json"

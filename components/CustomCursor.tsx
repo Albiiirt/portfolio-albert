@@ -7,9 +7,15 @@ export default function CustomCursor() {
   const ringRef = useRef<HTMLDivElement>(null);
   // Touch devices have no real mouse — mount nothing so no stray dot/ring is
   // left sitting on screen from a synthesized touch-to-mouse event.
-  const [enabled] = useState(
-    () => typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches
-  );
+  // Starts false on both server and client (matching initial render, like
+  // Navigation's theme sync) and is only read from `window` after mount, to
+  // avoid a hydration mismatch.
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setEnabled(window.matchMedia("(pointer: fine)").matches);
+  }, []);
 
   useEffect(() => {
     if (!enabled) return;
