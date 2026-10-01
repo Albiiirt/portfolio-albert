@@ -1,6 +1,6 @@
 # Fuentes de vídeo de stock
 
-Los vídeos de portada de Mirazur, Madrid y La Rioja se han montado a partir de
+Los vídeos de portada de Mirazur y Madrid se han montado a partir de
 clips de Pexels, cosidos con `ffmpeg` (`xfade`, ~225ms) para mantener la misma
 gramática visual que las transiciones Remotion del resto del sitio. Se
 descargaron bajo la [licencia de Pexels](https://www.pexels.com/license/), que
@@ -43,21 +43,11 @@ queda con su cover estático `cover-jaen.webp` (sin cambios) y sin campo
 `video`. Pendiente: encargar o localizar metraje genuino si se quiere vídeo de
 portada para este proyecto.
 
-## La Rioja Turismo — `public/covers/rioja.mp4` (nuevo)
+## La Rioja Turismo — sin vídeo
 
-2 cortes, misma bodega Ysios desde dos ángulos distintos (efecto de "dar
-vueltas" alrededor del edificio).
-
-- [Aerial view of Ysios winery in La Rioja](https://www.pexels.com/video/aerial-view-of-ysios-winery-in-la-rioja-36491437/)
-- [Aerial view of modern winery in Rioja Spain](https://www.pexels.com/video/aerial-view-of-modern-winery-in-rioja-spain-36491440/)
-
-**Matiz geográfico a revisar con Albert:** la bodega Ysios (Santiago
-Calatrava) está en Laguardia, dentro de la D.O.Ca. Rioja, pero
-administrativamente en Álava (País Vasco), no en la comunidad autónoma de La
-Rioja que cubre este proyecto turístico. Es un edificio real y muy reconocible
-del "paisaje Rioja" en sentido amplio (así se vende en turismo enológico), pero
-no es estrictamente territorio de La Rioja. Se ha usado por ser, con
-diferencia, el mejor metraje real disponible con licencia libre — no se
-encontró nada equivalente en Logroño, Haro u otro municipio dentro de la
-provincia. Si Albert prefiere no usarlo por ese matiz, avisar para buscar
-alternativa o quitar el vídeo de portada de este proyecto.
+Se probó un montaje con la bodega Ysios (Santiago Calatrava, Laguardia —
+administrativamente Álava, no La Rioja, aunque dentro del paisaje de la
+D.O.Ca. Rioja). Albert decidió (1 de octubre de 2026) quedarse con la foto
+estática por ahora en vez de ese vídeo. `la-rioja-turismo` usa
+`cover-rioja.webp` como imagen de fondo del hero (mismo patrón que
+`turisme-jaen`) y no tiene campo `video`.

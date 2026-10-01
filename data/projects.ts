@@ -1054,7 +1054,6 @@ export const projects: Project[] = [
     gradient: "linear-gradient(135deg, #1a0010 0%, #5c1a3a 60%, #b5386e 100%)",
     accentColor: "#b5386e",
     cover: "/covers/cover-rioja.webp",
-    video: "/covers/rioja.mp4",
     heroTagline: {
       en: "page design for La Rioja's tourism portal",
       es: "diseño de páginas para el portal turístico de La Rioja",
