@@ -104,20 +104,16 @@ export default async function Page({
     ...(project.cover ? { image: `${SITE_URL}${project.cover}` } : {}),
   };
 
-  // elBulli and Mirazur render with tabbed sub-projects; every other
-  // project page takes no props, so it keeps using the generic
-  // PageComponent map.
+  // elBulli renders with tabbed sub-projects; every other project page
+  // takes no props, so it keeps using the generic PageComponent map.
+  // (Mirazur's own tabs are pending a matching update to MirazurPage.tsx —
+  // not re-enabled here until that lands.)
   let body: React.JSX.Element;
-  if (project?.subProjects?.length && (id === "elbulli" || id === "mirazur")) {
+  if (project?.subProjects?.length && id === "elbulli") {
     const sp = await searchParams;
     const raw = typeof sp.p === "string" ? sp.p : undefined;
     const initialTab = resolveSubProjectId(project, raw);
-    body =
-      id === "elbulli" ? (
-        <ElBulliPage initialTab={initialTab} />
-      ) : (
-        <MirazurPage initialTab={initialTab} />
-      );
+    body = <ElBulliPage initialTab={initialTab} />;
   } else {
     body = <ProjectPage />;
   }

@@ -41,9 +41,25 @@ export default function LaRiojaPage() {
           paddingRight: "clamp(1.5rem, 5vw, 5rem)",
           paddingBottom: "clamp(3.5rem, 6vh, 5rem)",
         }}>
+          <video
+            autoPlay muted loop playsInline
+            style={{
+              position: "absolute", inset: 0,
+              width: "100%", height: "100%",
+              objectFit: "cover", objectPosition: "center",
+              pointerEvents: "none",
+            }}
+          >
+            <source src="/covers/rioja.mp4" type="video/mp4" />
+          </video>
           <div style={{
             position: "absolute", inset: 0,
             background: "radial-gradient(ellipse 70% 60% at 75% 35%, rgba(181,56,110,0.3) 0%, transparent 70%)",
+            pointerEvents: "none",
+          }} />
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(to right, #000 0%, #000 20%, rgba(0,0,0,0.82) 42%, rgba(0,0,0,0.3) 68%, transparent 100%)",
             pointerEvents: "none",
           }} />
           <div style={{

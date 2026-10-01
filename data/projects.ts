@@ -367,6 +367,7 @@ export const projects: Project[] = [
       },
     ],
   },
+  {
     id: "xunta-galicia",
     num: "02",
     title: { en: "Galiciana Thesaurus", es: "Galiciana Thesaurus", ca: "Galiciana Thesaurus" },
@@ -466,6 +467,7 @@ export const projects: Project[] = [
       ],
     },
   },
+  {
     id: "madrid",
     num: "03",
     title: { en: "Enoturismo Madrid", es: "Enoturismo Madrid", ca: "Enoturisme Madrid" },
@@ -561,6 +563,7 @@ export const projects: Project[] = [
       ],
     },
   },
+  {
     id: "castellera",
     num: "04",
     title: { en: "Colla Castellera del Baix Montseny", es: "Colla Castellera del Baix Montseny", ca: "Colla Castellera del Baix Montseny" },
@@ -671,6 +674,7 @@ export const projects: Project[] = [
       ],
     },
   },
+  {
     id: "turisme-jaen",
     num: "05",
     title: { en: "Turisme Jaén", es: "Turisme Jaén", ca: "Turisme Jaén" },
@@ -817,6 +821,7 @@ export const projects: Project[] = [
       ],
     },
   },
+  {
     id: "mirazur",
     num: "06",
     title: { en: "Mirazur", es: "Mirazur", ca: "Mirazur" },
@@ -919,6 +924,7 @@ export const projects: Project[] = [
       ],
     },
   },
+  {
     id: "gnoss-ai",
     num: "07",
     title: { en: "GNOSS AI Platform", es: "GNOSS AI Platform", ca: "GNOSS AI Platform" },
@@ -1018,6 +1024,7 @@ export const projects: Project[] = [
       ],
     },
   },
+  {
     id: "la-rioja-turismo",
     num: "08",
     title: { en: "La Rioja Turismo", es: "La Rioja Turismo", ca: "La Rioja Turisme" },
@@ -1046,6 +1053,8 @@ export const projects: Project[] = [
     tags: ["Figma", "Framer", "Web Design", "Tourism"],
     gradient: "linear-gradient(135deg, #1a0010 0%, #5c1a3a 60%, #b5386e 100%)",
     accentColor: "#b5386e",
+    cover: "/covers/cover-rioja.webp",
+    video: "/covers/rioja.mp4",
     heroTagline: {
       en: "page design for La Rioja's tourism portal",
       es: "diseño de páginas para el portal turístico de La Rioja",
