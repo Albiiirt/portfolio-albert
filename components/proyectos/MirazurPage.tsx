@@ -444,21 +444,23 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
           </motion.div>
         </AnimatePresence>
 
-        {/* ── El enfoque / El resultado (compartido — sintetiza los dos proyectos) ── */}
+        {/* ── El enfoque / El resultado (parametrizado por la pestaña activa) ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content" style={{ maxWidth: 720, margin: 0, display: "flex", flexDirection: "column", gap: "clamp(2.5rem, 5vh, 3.5rem)" }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.approach}</p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                {project.process[lang]}
+                {activeSubProject.process[lang]}
               </p>
             </FadeInView>
-            <FadeInView delay={0.05}>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
-              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                {project.result[lang]}
-              </p>
-            </FadeInView>
+            {activeSubProject.result[lang] && (
+              <FadeInView delay={0.05}>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
+                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                  {activeSubProject.result[lang]}
+                </p>
+              </FadeInView>
+            )}
           </div>
         </section>
 

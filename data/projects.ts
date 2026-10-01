@@ -629,19 +629,24 @@ export const projects: Project[] = [
     category: { en: "Web Design", es: "Diseño Web", ca: "Disseny Web" },
     year: "2025–2026",
     problem: {
-      en: "Mirazur, Mauro Colagreco's three-Michelin-star restaurant in Menton, came to Dosgrapas as two separate projects, both picked up mid-process. On the recipe portal I designed what was missing in Figma — the listing, the individual recipe, the access flow and the restaurant profile — one of my first projects at the studio. On the experience landing I worked directly with the client through several rounds of revision: I optimized the images, proposed which fields the form needed to meet legal data-collection requirements, and used Claude Design to build the page myself, without going through a developer.",
-      es: "Mirazur, el restaurante de tres estrellas Michelin de Mauro Colagreco en Menton, llegó a Dosgrapas como dos proyectos independientes, los dos retomados a medias. En el portal de recetas diseñé en Figma lo que faltaba — listado, ficha, flujo de acceso y perfil del restaurante —, uno de mis primeros proyectos en el estudio. En la landing de la experiencia trabajé directamente con el cliente en varias rondas de revisión: optimicé las imágenes, propuse qué campos debía llevar el formulario para cumplir los requisitos legales de captación de datos, y usé Claude Design para construir la página yo mismo, sin pasar por un desarrollador.",
-      ca: "El Mirazur, el restaurant de tres estrelles Michelin de Mauro Colagreco a Menton, va arribar a Dosgrapas com dos projectes independents, tots dos represos a mitges. Al portal de receptes vaig dissenyar el que faltava a Figma — el llistat, la fitxa, el flux d'accés i el perfil del restaurant —, un dels meus primers projectes a l'estudi. A la landing de l'experiència vaig treballar directament amb el client en diverses rondes de revisió: vaig optimitzar les imatges, vaig proposar quins camps havia de portar el formulari per complir els requisits legals de captació de dades, i vaig fer servir Claude Design per construir la pàgina jo mateix, sense passar per un desenvolupador.",
+      en: "Mirazur, Mauro Colagreco's three-Michelin-star restaurant in Menton, gave Dosgrapas two independent projects — both picked up mid-process.",
+      es: "Mirazur, el restaurante de tres estrellas Michelin de Mauro Colagreco en Menton, le encargó a Dosgrapas dos proyectos independientes — los dos retomados a medias.",
+      ca: "El Mirazur, el restaurant de tres estrelles Michelin de Mauro Colagreco a Menton, va encarregar a Dosgrapas dos projectes independents — tots dos represos a mitges.",
     },
+    // The client-level process/result fields below never render on screen —
+    // MirazurPage's "El enfoque/El resultado" section reads each active
+    // sub-project's own process/result instead (see subProjects below), so
+    // each tab tells its own story. These two stay populated with neutral
+    // copy only because TypeScript still requires them on every Project.
     process: {
-      en: "On the recipe portal, I picked the Figma design back up and closed it out — one of my first projects at Dosgrapas. On the experience landing, I worked directly with the client through several rounds of revision, optimized the images, proposed the form fields needed to make the data collection legally compliant, and used Claude Design to take it from design to a working page myself, without needing a developer for that deliverable.",
-      es: "En el portal de recetas retomé el diseño en Figma y lo cerré — uno de mis primeros proyectos en Dosgrapas. En la landing de la experiencia trabajé directamente con el cliente en varias rondas de revisión, optimicé las imágenes, propuse los campos del formulario para que la captación de datos fuera legal, y usé Claude Design para pasar del diseño a una página funcionando yo mismo, sin necesitar a un desarrollador para ese entregable.",
-      ca: "Al portal de receptes vaig reprendre el disseny a Figma i el vaig tancar — un dels meus primers projectes a Dosgrapas. A la landing de l'experiència vaig treballar directament amb el client en diverses rondes de revisió, vaig optimitzar les imatges, vaig proposar els camps del formulari perquè la captació de dades fos legal, i vaig fer servir Claude Design per passar del disseny a una pàgina funcionant jo mateix, sense necessitar un desenvolupador per a aquest lliurable.",
+      en: "Two projects, two different approaches for the same client.",
+      es: "Dos proyectos, dos enfoques distintos para el mismo cliente.",
+      ca: "Dos projectes, dos enfocaments diferents per al mateix client.",
     },
     result: {
-      en: "Two finished projects for the same client: a recipe portal that helped me sharpen the basics right as I joined Dosgrapas, and a landing that distills the Mirazur experience, which I designed and built on my own, end to end, with Claude Design.",
-      es: "Dos proyectos terminados para el mismo cliente: un portal de recetas que me sirvió para afinar oficio nada más empezar en Dosgrapas, y una landing que resume la experiencia de Mirazur y que diseñé y construí yo solo, de principio a fin, con Claude Design.",
-      ca: "Dos projectes acabats per al mateix client: un portal de receptes que em va servir per polir l'ofici just en començar a Dosgrapas, i una landing que resumeix l'experiència del Mirazur, que vaig dissenyar i construir jo sol, de cap a cap, amb Claude Design.",
+      en: "One project wrapped up to show, the other on hold — each documented in its own tab.",
+      es: "Un proyecto cerrado para enseñar, otro en pausa — cada uno documentado en su propia pestaña.",
+      ca: "Un projecte tancat per ensenyar, l'altre en pausa — cadascun documentat a la seva pròpia pestanya.",
     },
     description: {
       en: "Two real projects with Mirazur — both picked up mid-process: a recipe portal in Figma, and a landing that distills the restaurant's experience, designed and built with Claude Design.",
@@ -673,19 +678,21 @@ export const projects: Project[] = [
           ca: "Represendre un projecte a mig fer obliga a entendre abans de tocar. Primer cal llegir el que ja hi ha — les decisions, la lògica, el to — per poder continuar-lo sense que se'n noti la costura.",
         },
         {
-          en: "On the landing, I used Claude Design to build it myself — what would have taken days in Figma took hours, without losing control over the design decisions. And I didn't just build what was asked for: I proposed which fields the form needed so the data collection would be legally compliant.",
-          es: "En la landing usé Claude Design para construirla yo mismo — lo que en Figma habría tardado días, tomó horas, sin perder el control sobre las decisiones de diseño. Y no me limité a maquetar lo que pedían: propuse qué campos debía llevar el formulario para que la recogida de datos fuera legal.",
-          ca: "A la landing vaig fer servir Claude Design per construir-la jo mateix — el que a Figma hauria trigat dies, va prendre hores, sense perdre el control sobre les decisions de disseny. I no em vaig limitar a maquetar el que demanaven: vaig proposar quins camps havia de portar el formulari perquè la recollida de dades fos legal.",
+          en: "The two projects taught me a different side of the same craft: one through revisions with a real client, the other through practice and repetition. Both count, even though only one got finished.",
+          es: "Los dos proyectos me enseñaron una cara distinta del mismo oficio: uno a base de revisiones con un cliente real, el otro a base de práctica y repetición. Los dos cuentan, aunque solo uno llegara a cerrarse.",
+          ca: "Els dos projectes em van ensenyar una cara diferent del mateix ofici: un a base de revisions amb un client real, l'altre a base de pràctica i repetició. Tots dos compten, encara que només un arribés a tancar-se.",
         },
       ],
     },
     // Two sub-projects shown as tabs on the same client page — the coupon
     // landing is the default/first one (see MirazurPage's DEFAULT_SUB_ID).
     // Mirrors the elBulli SubProject convention: client-level fields (hero,
-    // shared intro problem/meta, closing "enfoque/resultado" and
-    // "aprendizajes" sections) stay on the parent Project above; only the
-    // content specific to each sub-project (heading, body copy, its own
-    // illustration/cards) lives here.
+    // shared intro problem/meta, "aprendizajes" section) stay on the parent
+    // Project above. The closing "enfoque/resultado" section instead reads
+    // each sub-project's own process/result (MirazurPage uses
+    // activeSubProject.process/result, not the parent's), so each tab tells
+    // its own story there. The parent's process/result fields are unused on
+    // screen and only exist to satisfy TypeScript.
     subProjects: [
       {
         id: "cupon",
@@ -694,20 +701,22 @@ export const projects: Project[] = [
         category: { en: "Web Design", es: "Diseño Web", ca: "Disseny Web" },
         year: "2026",
         problem: {
-          en: "This one came as a direct client brief: design the landing exactly as requested, through several rounds of revision until we landed on the final result. Beyond the visual design, I optimized the images, proposed which fields the form needed to meet legal data-collection requirements, and built the page myself with Claude Design.",
-          es: "Este proyecto me llegó como encargo directo del cliente: diseñar la landing según lo que pedían, con varias rondas de revisión hasta cerrar el resultado. Además de maquetar el diseño, optimicé las imágenes, propuse qué campos debía llevar el formulario para que la captación de datos cumpliera los requisitos legales, y construí la página yo mismo con Claude Design.",
-          ca: "Aquest projecte em va arribar com un encàrrec directe del client: dissenyar la landing tal com demanaven, amb diverses rondes de revisió fins a tancar el resultat. A més de maquetar el disseny, vaig optimitzar les imatges, vaig proposar quins camps havia de portar el formulari perquè la captació de dades complís els requisits legals, i vaig construir la pàgina jo mateix amb Claude Design.",
+          en: "This project was about taking the Mirazur experience beyond the table, not closing a transaction. It also arrived half-finished.",
+          es: "Este proyecto consistió en llevar la experiencia de Mirazur más allá de la mesa, no en cerrar una transacción. También llegó a medias.",
+          ca: "Aquest projecte va consistir a portar l'experiència del Mirazur més enllà de la taula, no a tancar una transacció. També va arribar a mig fer.",
         },
         process: {
-          en: "The result is a landing that distills the Mirazur experience in a single scroll — the setting, the dishes, the philosophy — closing with a form designed to ask for only the data it actually needs, legally and without friction.",
-          es: "El resultado es una landing que resume la experiencia de Mirazur en un único scroll — el entorno, los platos, la filosofía — y que cierra con un formulario pensado para pedir solo los datos necesarios, de forma legal y sin fricción.",
-          ca: "El resultat és una landing que resumeix l'experiència del Mirazur en un únic scroll — l'entorn, els plats, la filosofia — i que tanca amb un formulari pensat per demanar només les dades necessàries, de manera legal i sense fricció.",
+          en: "I built the page myself with Claude Design, working through several rounds of direct revision with the client, and proposed which fields the form needed to make the data collection legally compliant.",
+          es: "Construí la página yo mismo con Claude Design, trabajando en varias rondas de revisión directas con el cliente, y propuse qué campos debía llevar el formulario para que la captación de datos fuera legal.",
+          ca: "Vaig construir la pàgina jo mateix amb Claude Design, treballant en diverses rondes de revisió directes amb el client, i vaig proposar quins camps havia de portar el formulari perquè la captació de dades fos legal.",
         },
-        result: {
-          en: "Two complementary design proposals — one transactional, one promotional — showing how a restaurant like Mirazur can extend its experience beyond the table, and how AI let me take one of them all the way to a working page on my own.",
-          es: "Dos propuestas de diseño complementarias — una transaccional, una promocional — que muestran cómo un restaurante como Mirazur puede extender su experiencia más allá de la mesa, y cómo la IA me permitió llevar una de ellas hasta una página funcionando yo solo.",
-          ca: "Dues propostes de disseny complementàries — una transaccional, una promocional — que mostren com un restaurant com el Mirazur pot estendre la seva experiència més enllà de la taula, i com la IA em va permetre portar-ne una fins a una pàgina funcionant jo sol.",
-        },
+        // Intentionally empty: Albert asked for the "El resultado" sub-section
+        // to not render at all on the "cupón" tab (MirazurPage hides that
+        // block when activeSubProject.result[lang] is falsy). Kept as an
+        // empty LocalizedText rather than making the field optional, so the
+        // shared SubProject type (also used by ElBulliPage, which always
+        // renders activeSubProject.result) doesn't need to change.
+        result: { en: "", es: "", ca: "" },
         tags: ["Claude Design"],
         meta: [
           { labelKey: "status", value: { en: "Design completed", es: "Diseño completado", ca: "Disseny completat" } },
@@ -719,14 +728,14 @@ export const projects: Project[] = [
           project2Heading: { en: "A landing that distills an experience", es: "Una landing que resume una experiencia", ca: "Una landing que resumeix una experiència" },
           project2Body: [
             {
-              en: "This one came as a direct client brief: design the landing exactly as requested, through several rounds of revision until we landed on the final result. Beyond the visual design, I optimized the images, proposed which fields the form needed to meet legal data-collection requirements, and built the page myself with Claude Design.",
-              es: "Este proyecto me llegó como encargo directo del cliente: diseñar la landing según lo que pedían, con varias rondas de revisión hasta cerrar el resultado. Además de maquetar el diseño, optimicé las imágenes, propuse qué campos debía llevar el formulario para que la captación de datos cumpliera los requisitos legales, y construí la página yo mismo con Claude Design.",
-              ca: "Aquest projecte em va arribar com un encàrrec directe del client: dissenyar la landing tal com demanaven, amb diverses rondes de revisió fins a tancar el resultat. A més de maquetar el disseny, vaig optimitzar les imatges, vaig proposar quins camps havia de portar el formulari perquè la captació de dades complís els requisits legals, i vaig construir la pàgina jo mateix amb Claude Design.",
+              en: "This project was about taking the Mirazur experience beyond the table, not closing a transaction. It also arrived half-finished.",
+              es: "Este proyecto consistió en llevar la experiencia de Mirazur más allá de la mesa, no en cerrar una transacción. También llegó a medias.",
+              ca: "Aquest projecte va consistir a portar l'experiència del Mirazur més enllà de la taula, no a tancar una transacció. També va arribar a mig fer.",
             },
             {
-              en: "The result is a landing that distills the Mirazur experience in a single scroll — the setting, the dishes, the philosophy — closing with a form designed to ask for only the data it actually needs, legally and without friction.",
-              es: "El resultado es una landing que resume la experiencia de Mirazur en un único scroll — el entorno, los platos, la filosofía — y que cierra con un formulario pensado para pedir solo los datos necesarios, de forma legal y sin fricción.",
-              ca: "El resultat és una landing que resumeix l'experiència del Mirazur en un únic scroll — l'entorn, els plats, la filosofia — i que tanca amb un formulari pensat per demanar només les dades necessàries, de manera legal i sense fricció.",
+              en: "The landing distills the Mirazur experience in a single scroll — the setting, the dishes, the philosophy — with a simple form at the end.",
+              es: "La landing resume la experiencia de Mirazur en un único scroll — el entorno, los platos, la filosofía — con un formulario sencillo al final.",
+              ca: "La landing resumeix l'experiència del Mirazur en un únic scroll — l'entorn, els plats, la filosofia — amb un formulari senzill al final.",
             },
           ],
         },
@@ -743,18 +752,18 @@ export const projects: Project[] = [
           ca: "El projecte va arribar a mig fer. La idea era clara — un portal on els usuaris paguen per accedir a les receptes del restaurant, un model que porta l'alta cuina més enllà de la taula — però el disseny estava incomplet.",
         },
         process: {
-          en: "It was one of my first projects at Dosgrapas, and I used it to sharpen the basics too: I picked the Figma design back up and finished it — the recipe listing, the individual recipe page, the access flow and the restaurant profile.",
-          es: "Fue uno de mis primeros proyectos en Dosgrapas, y lo usé también para afinar oficio: retomé el diseño en Figma y lo terminé — el listado de recetas, la ficha individual, el flujo de acceso y el perfil del restaurante.",
-          ca: "Va ser un dels meus primers projectes a Dosgrapas, i el vaig fer servir també per polir l'ofici: vaig reprendre el disseny a Figma i el vaig acabar — el llistat de receptes, la fitxa individual, el flux d'accés i el perfil del restaurant.",
+          en: "The focus here was sharpening the craft in Figma — learning to fine-tune and personalize the design, more than closing the project out.",
+          es: "Aquí el foco fue aprender a afinar el oficio en Figma — ajustar y personalizar bien el diseño, más que cerrar el proyecto.",
+          ca: "Aquí el focus va ser polir l'ofici a Figma — ajustar i personalitzar bé el disseny, més que tancar el projecte.",
         },
         result: {
-          en: "Two complementary design proposals — one transactional, one promotional — showing how a restaurant like Mirazur can extend its experience beyond the table, and how AI let me take one of them all the way to a working page on my own.",
-          es: "Dos propuestas de diseño complementarias — una transaccional, una promocional — que muestran cómo un restaurante como Mirazur puede extender su experiencia más allá de la mesa, y cómo la IA me permitió llevar una de ellas hasta una página funcionando yo solo.",
-          ca: "Dues propostes de disseny complementàries — una transaccional, una promocional — que mostren com un restaurant com el Mirazur pot estendre la seva experiència més enllà de la taula, i com la IA em va permetre portar-ne una fins a una pàgina funcionant jo sol.",
+          en: "A real learning exercise, not a closed project — the groundwork for what came next at Dosgrapas.",
+          es: "Un ejercicio de aprendizaje real, no un proyecto cerrado — la base para los que vendrían después en Dosgrapas.",
+          ca: "Un exercici d'aprenentatge real, no un projecte tancat — la base per als que vindrien després a Dosgrapas.",
         },
         tags: ["Figma"],
         meta: [
-          { labelKey: "status", value: { en: "Design completed", es: "Diseño completado", ca: "Disseny completat" } },
+          { labelKey: "status", value: { en: "On hold", es: "En pausa", ca: "En pausa" } },
           { labelKey: "stack", value: "Figma" },
         ],
         page: {
@@ -768,9 +777,9 @@ export const projects: Project[] = [
               ca: "El projecte va arribar a mig fer. La idea era clara — un portal on els usuaris paguen per accedir a les receptes del restaurant, un model que porta l'alta cuina més enllà de la taula — però el disseny estava incomplet.",
             },
             {
-              en: "It was one of my first projects at Dosgrapas, and I used it to sharpen the basics too: I picked the Figma design back up and finished it — the recipe listing, the individual recipe page, the access flow and the restaurant profile.",
-              es: "Fue uno de mis primeros proyectos en Dosgrapas, y lo usé también para afinar oficio: retomé el diseño en Figma y lo terminé — el listado de recetas, la ficha individual, el flujo de acceso y el perfil del restaurante.",
-              ca: "Va ser un dels meus primers projectes a Dosgrapas, i el vaig fer servir també per polir l'ofici: vaig reprendre el disseny a Figma i el vaig acabar — el llistat de receptes, la fitxa individual, el flux d'accés i el perfil del restaurant.",
+              en: "I picked the Figma design back up and moved forward on the recipe listing, the individual recipe page, the access flow and the restaurant profile.",
+              es: "Retomé el diseño en Figma y avancé el listado de recetas, la ficha individual, el flujo de acceso y el perfil del restaurante.",
+              ca: "Vaig reprendre el disseny a Figma i vaig avançar el llistat de receptes, la fitxa individual, el flux d'accés i el perfil del restaurant.",
             },
           ],
         },
