@@ -670,29 +670,16 @@ export const projects: Project[] = [
       { labelKey: "role", value: { en: "Figma design (portal) + design & build with Claude Design (landing)", es: "Diseño en Figma (portal) + diseño y construcción con Claude Design (landing)", ca: "Disseny a Figma (portal) + disseny i construcció amb Claude Design (landing)" } },
       { labelKey: "duration", value: { en: "Ad hoc work, on demand", es: "Encargos puntuales, bajo demanda", ca: "Encàrrecs puntuals, sota demanda" } },
     ],
-    page: {
-      learningsItems: [
-        {
-          en: "Picking up a half-finished project forces you to understand before you touch anything. You have to read what's already there first — the decisions, the logic, the tone — so you can continue it without the seams showing.",
-          es: "Retomar un proyecto a medias obliga a entender antes de tocar. Primero hay que leer lo que ya está — las decisiones, la lógica, el tono — para poder continuarlo sin que se note la costura.",
-          ca: "Represendre un projecte a mig fer obliga a entendre abans de tocar. Primer cal llegir el que ja hi ha — les decisions, la lògica, el to — per poder continuar-lo sense que se'n noti la costura.",
-        },
-        {
-          en: "The two projects taught me a different side of the same craft: one through revisions with a real client, the other through practice and repetition. Both count, even though only one got finished.",
-          es: "Los dos proyectos me enseñaron una cara distinta del mismo oficio: uno a base de revisiones con un cliente real, el otro a base de práctica y repetición. Los dos cuentan, aunque solo uno llegara a cerrarse.",
-          ca: "Els dos projectes em van ensenyar una cara diferent del mateix ofici: un a base de revisions amb un client real, l'altre a base de pràctica i repetició. Tots dos compten, encara que només un arribés a tancar-se.",
-        },
-      ],
-    },
     // Two sub-projects shown as tabs on the same client page — the coupon
     // landing is the default/first one (see MirazurPage's DEFAULT_SUB_ID).
     // Mirrors the elBulli SubProject convention: client-level fields (hero,
-    // shared intro problem/meta, "aprendizajes" section) stay on the parent
-    // Project above. The closing "enfoque/resultado" section instead reads
-    // each sub-project's own process/result (MirazurPage uses
-    // activeSubProject.process/result, not the parent's), so each tab tells
-    // its own story there. The parent's process/result fields are unused on
-    // screen and only exist to satisfy TypeScript.
+    // shared intro problem/meta) stay on the parent Project above. Both the
+    // closing "enfoque/resultado" section and "aprendizajes" instead read
+    // each sub-project's own content (MirazurPage uses
+    // activeSubProject.process/result and activeSubProject.page?.learningsItems,
+    // not the parent's), so each tab tells its own story there. The parent's
+    // process/result fields are unused on screen and only exist to satisfy
+    // TypeScript.
     subProjects: [
       {
         id: "cupon",
@@ -738,6 +725,13 @@ export const projects: Project[] = [
               ca: "La landing resumeix l'experiència del Mirazur en un únic scroll — l'entorn, els plats, la filosofia — amb un formulari senzill al final.",
             },
           ],
+          learningsItems: [
+            {
+              en: "Building the landing myself with AI changed how I experienced the revision rounds: every change the client asked for, I could apply right away, without waiting on anyone. That also changes how you negotiate a design detail.",
+              es: "Construir la landing yo mismo con IA cambió cómo viví las revisiones: cada cambio que pedía el cliente lo podía aplicar al momento, sin esperar a nadie. Eso también cambia cómo se negocia un detalle de diseño.",
+              ca: "Construir la landing jo mateix amb IA va canviar com vaig viure les revisions: cada canvi que demanava el client el podia aplicar a l'instant, sense esperar ningú. Això també canvia com es negocia un detall de disseny.",
+            },
+          ],
         },
       },
       {
@@ -756,11 +750,11 @@ export const projects: Project[] = [
           es: "Aquí el foco fue aprender a afinar el oficio en Figma — ajustar y personalizar bien el diseño, más que cerrar el proyecto.",
           ca: "Aquí el focus va ser polir l'ofici a Figma — ajustar i personalitzar bé el disseny, més que tancar el projecte.",
         },
-        result: {
-          en: "A real learning exercise, not a closed project — the groundwork for what came next at Dosgrapas.",
-          es: "Un ejercicio de aprendizaje real, no un proyecto cerrado — la base para los que vendrían después en Dosgrapas.",
-          ca: "Un exercici d'aprenentatge real, no un projecte tancat — la base per als que vindrien després a Dosgrapas.",
-        },
+        // Intentionally empty, same treatment as "cupón" below: Albert asked
+        // for "El resultado" to not render on this tab either (both Mirazur
+        // tabs now only show "El enfoque"). MirazurPage hides the whole
+        // block when activeSubProject.result[lang] is falsy.
+        result: { en: "", es: "", ca: "" },
         tags: ["Figma"],
         meta: [
           { labelKey: "status", value: { en: "On hold", es: "En pausa", ca: "En pausa" } },
@@ -780,6 +774,13 @@ export const projects: Project[] = [
               en: "I picked the Figma design back up and moved forward on the recipe listing, the individual recipe page, the access flow and the restaurant profile.",
               es: "Retomé el diseño en Figma y avancé el listado de recetas, la ficha individual, el flujo de acceso y el perfil del restaurante.",
               ca: "Vaig reprendre el disseny a Figma i vaig avançar el llistat de receptes, la fitxa individual, el flux d'accés i el perfil del restaurant.",
+            },
+          ],
+          learningsItems: [
+            {
+              en: "Picking this one up mid-process forced me to understand before touching anything — reading the decisions already baked into the Figma file before changing a thing. And I learned something else: a project that stays on hold still teaches you something.",
+              es: "Retomar este proyecto a medias me obligó a entender antes de tocar — leer las decisiones que ya estaban en el archivo de Figma antes de cambiar nada. Y aprendí algo más: un proyecto que se queda en pausa también enseña.",
+              ca: "Represendre aquest projecte a mig fer em va obligar a entendre abans de tocar — llegir les decisions que ja hi havia a l'arxiu de Figma abans de canviar res. I vaig aprendre una altra cosa: un projecte que es queda en pausa també ensenya.",
             },
           ],
         },
