@@ -331,9 +331,9 @@ export const projects: Project[] = [
     category: { en: "Custom Product", es: "Producto a medida", ca: "Producte a mida" },
     year: "2026",
     problem: {
-      en: "A specific client within the Xunta de Galicia needed a highly custom tool for a specific task in their day-to-day work. The challenge wasn't starting from an already-defined design, but truly understanding how that client works day to day in order to design something genuinely intuitive, functional and personalized.",
-      es: "Un cliente concreto dentro de la Xunta de Galicia necesitaba una herramienta muy a medida para una tarea específica de su día a día. El reto no era partir de un diseño ya definido, sino entender a fondo cómo trabaja ese cliente en su día a día para poder diseñar algo realmente intuitivo, funcional y personalizado.",
-      ca: "Un client concret dins la Xunta de Galicia necessitava una eina molt a mida per a una tasca específica del seu dia a dia. El repte no era partir d'un disseny ja definit, sinó entendre a fons com treballa aquest client en el seu dia a dia per poder dissenyar alguna cosa realment intuïtiva, funcional i personalitzada.",
+      en: "A specific client within the Xunta de Galicia manages a database with a large number of files, a significant share of them duplicated. They needed a tool that would use an algorithm to suggest which files correspond to each other, so the person only had to review and confirm each match — with the option to edit it or create an entry manually when the algorithm gets it wrong. The challenge wasn't starting from an already-defined design, but truly understanding that review flow in order to design something genuinely intuitive, functional and personalized.",
+      es: "Un cliente concreto dentro de la Xunta de Galicia gestiona una base de datos con muchos archivos, una parte significativa de ellos duplicados. Necesitaban una herramienta que, mediante un algoritmo, sugiriera qué archivos corresponden entre sí, para que la persona solo tuviera que revisar y confirmar cada coincidencia — con la opción de editarla o crear una entrada manualmente cuando el algoritmo no acierta. El reto no era partir de un diseño ya definido, sino entender a fondo ese flujo de revisión para diseñar algo realmente intuitivo, funcional y personalizado.",
+      ca: "Un client concret dins la Xunta de Galicia gestiona una base de dades amb molts arxius, una part significativa d'ells duplicats. Necessitaven una eina que, mitjançant un algorisme, suggerís quins arxius es corresponen entre ells, perquè la persona només hagués de revisar i confirmar cada coincidència — amb l'opció d'editar-la o crear una entrada manualment quan l'algorisme no l'encerta. El repte no era partir d'un disseny ja definit, sinó entendre a fons aquest flux de revisió per poder dissenyar alguna cosa realment intuïtiva, funcional i personalitzada.",
     },
     process: {
       en: "We started from a reference prototype GNOSS sent us, but the approach was a bit ambiguous and didn't make the process or the final product very clear — it helped us see a few specific features, but not much more. From there, the work focused on understanding the client's real task and designing the product from scratch, with a couple of check-in meetings with GNOSS along the way to validate progress.",
@@ -396,6 +396,14 @@ export const projects: Project[] = [
             en: "A couple of check-in meetings with GNOSS during the process helped validate the direction as the design moved forward.",
             es: "Un par de reuniones de seguimiento con GNOSS durante el proceso ayudaron a validar la dirección a medida que el diseño avanzaba.",
             ca: "Un parell de reunions de seguiment amb GNOSS durant el procés van ajudar a validar la direcció a mesura que el disseny avançava.",
+          },
+        },
+        {
+          label: { en: "Reviewing, not searching from scratch", es: "Revisar, no buscar desde cero", ca: "Revisar, no buscar des de zero" },
+          desc: {
+            en: "The tool suggests matches automatically; the person only confirms, corrects, or creates an entry by hand when the algorithm gets it wrong. The design is built around that review, not a manual search.",
+            es: "La herramienta propone las coincidencias automáticamente; la persona solo confirma, corrige o crea una entrada a mano cuando el algoritmo no acierta. El diseño está pensado alrededor de esa revisión, no de una búsqueda manual.",
+            ca: "L'eina proposa les coincidències automàticament; la persona només confirma, corregeix o crea una entrada a mà quan l'algorisme no l'encerta. El disseny està pensat al voltant d'aquesta revisió, no d'una cerca manual.",
           },
         },
       ],
