@@ -246,9 +246,9 @@ export const projects: Project[] = [
               ca: "L'arxiu de la Fundació elBulli no s'atura. Algunes pàgines van arribar amb el disseny ja definit — la meva feina va ser portar-les a codi, responsive i llestes per a producció. D'altres les estic dissenyant directament, a mesura que el projecte avança.",
             },
             {
-              en: "The challenge isn't just designing or just implementing. It's doing both with coherence, inside a visual system that has to work in production and keep growing.",
-              es: "El reto no es solo diseñar o solo implementar. Es hacer las dos cosas con coherencia, dentro de un sistema visual que tiene que funcionar en producción y seguir creciendo.",
-              ca: "El repte no és només dissenyar o només implementar. És fer les dues coses amb coherència, dins d'un sistema visual que ha de funcionar en producció i seguir creixent.",
+              en: "Designing and coding the archive at the same time means every new block — a dish entry, a timeline — has to work visually from day one, and keep working once the editorial team uses it without me around.",
+              es: "Diseñar y programar el archivo a la vez significa que cada bloque nuevo —una ficha de plato, una cronología— tiene que funcionar visualmente desde el primer día, y seguir funcionando cuando el equipo editorial lo use sin mí delante.",
+              ca: "Dissenyar i programar l'arxiu alhora significa que cada bloc nou —una fitxa de plat, una cronologia— ha de funcionar visualment des del primer dia, i seguir funcionant quan l'equip editorial l'utilitzi sense mi al davant.",
             },
           ],
           solutionHeading: {
@@ -341,9 +341,9 @@ export const projects: Project[] = [
       ca: "Vam partir d'un prototip de referència que ens va enviar GNOSS, però el plantejament era una mica ambigu i no deixava gaire clar ni el procés ni el producte final — ens va servir per veure algunes funcionalitats concretes, però poc més. A partir d'aquí, la feina es va centrar a entendre la tasca real del client i dissenyar el producte des de zero, amb un parell de reunions de seguiment amb GNOSS al llarg del procés per anar validant l'avanç.",
     },
     result: {
-      en: "The client gave it the green light: the product meets what they needed and does its job. The people using it day to day find it intuitive and easy to use.",
-      es: "El cliente dio el visto bueno: el producto cumple con lo que necesitaba y hace su función. Las personas que lo usan en su día a día lo encuentran intuitivo y sencillo de manejar.",
-      ca: "El client va donar el vistiplau: el producte compleix el que necessitava i fa la seva funció. Les persones que l'utilitzen en el seu dia a dia el troben intuïtiu i senzill de fer servir.",
+      en: "The client approved the product with no further rounds of revision after delivery. Based on feedback that came back through GNOSS, the team using it day to day finds it intuitive — though we haven't spoken with them directly.",
+      es: "El cliente aprobó el producto sin rondas adicionales de revisión tras la entrega. Según el feedback que llegó de vuelta a través de GNOSS, el equipo que lo usa a diario lo encuentra intuitivo — aunque no hemos hablado con ellos en persona.",
+      ca: "El client va aprovar el producte sense rondes addicionals de revisió després del lliurament. Segons el feedback que va arribar a través de GNOSS, l'equip que l'utilitza a diari el troba intuïtiu — encara que no hem parlat amb ells en persona.",
     },
     description: {
       en: "Custom product for a Xunta de Galicia client, through GNOSS — design centered on understanding their real day-to-day task, still in progress.",
@@ -441,9 +441,9 @@ export const projects: Project[] = [
       ca: "El punt de partida va ser una base generada amb IA — suficient com a pàgina única, però no pensada per créixer. La vaig passar a Next.js i, a partir d'aquí, vaig dissenyar i construir jo sol la resta de pàgines del site amb Claude Code: cellers, rutes i experiències, prenent cada decisió de disseny i experiència d'usuari directament en codi — mapes de les rutes, navegació fluida, una experiència pensada per explorar-se, no només per mostrar-se. El contingut viu a Strapi, un gestor de contingut (CMS) que separa la informació del codi: cada celler, ruta o experiència és una fitxa que l'equip pot crear, editar o publicar pel seu compte, sense tocar codi, i que el web mostra automàticament amb el mateix disseny.",
     },
     result: {
-      en: "A premium web experience, designed and built end to end, that positions Madrid's wine routes as a top-tier cultural destination — with a structure built to turn visits into bookings.",
-      es: "Una experiencia web premium, diseñada y construida de principio a fin, que posiciona las rutas del vino de Madrid como destino cultural de primer nivel — con una estructura pensada para convertir visitas en reservas.",
-      ca: "Una experiència web premium, dissenyada i construïda de principi a fi, que posiciona les rutes del vi de Madrid com a destinació cultural de primer nivell — amb una estructura pensada per convertir visites en reserves.",
+      en: "A site built single-handedly from start to finish — from migrating the initial base to every winery, route and experience page — with a Strapi CMS that lets the tourism team publish new content without technical help, and a navigation built to take visitors from route to booking.",
+      es: "Una web construida por una sola persona de principio a fin —desde la migración de la base inicial hasta cada página de bodegas, rutas y experiencias—, con un CMS en Strapi que permite al equipo de turismo publicar contenido nuevo sin ayuda técnica, y una navegación pensada para llevar al visitante de la ruta a la reserva.",
+      ca: "Un web construït per una sola persona de principi a fi —des de la migració de la base inicial fins a cada pàgina de cellers, rutes i experiències—, amb un CMS a Strapi que permet a l'equip de turisme publicar contingut nou sense ajuda tècnica, i una navegació pensada per portar el visitant de la ruta a la reserva.",
     },
     description: {
       en: "Full project, solo — migrated an AI-generated HTML base to Next.js and designed and built every page of Madrid's wine tourism site with Claude Code.",
@@ -615,9 +615,9 @@ export const projects: Project[] = [
           ca: "Tenir el sistema de components construït va ser el que va fer que les revisions fossin absorbibles. Sense ell, cada canvi hauria suposat refer pàgines senceres. I sempre hi ha revisions.",
         },
         {
-          en: "Working with a large volume of different pages forced me to think about design more systematically. It's not just about each page looking good on its own, but about all of them together forming a coherent site. That changes how you make every decision.",
-          es: "Trabajar con un volumen grande de páginas distintas me obligó a pensar el diseño de forma más sistemática. No se trata solo de que cada página quede bien por separado, sino de que todas juntas formen un sitio coherente. Eso cambia cómo tomas cada decisión.",
-          ca: "Treballar amb un volum gran de pàgines diferents em va obligar a pensar el disseny de manera més sistemàtica. No es tracta només que cada pàgina quedi bé per separat, sinó que totes juntes formin un lloc coherent. Això canvia com prens cada decisió.",
+          en: "With hundreds of pages at stake, every decision stopped being 'does this page look good?' and became 'does this rule hold up across the other fifteen variants I haven't seen yet?'.",
+          es: "Con cientos de páginas en juego, cada decisión dejó de ser '¿esta página queda bien?' y pasó a ser '¿esta regla aguanta en las otras quince variantes que todavía no he visto?'.",
+          ca: "Amb centenars de pàgines en joc, cada decisió va deixar de ser '¿aquesta pàgina queda bé?' i va passar a ser '¿aquesta regla aguanta en les altres quinze variants que encara no he vist?'.",
         },
       ],
     },
@@ -1066,9 +1066,9 @@ export const projects: Project[] = [
       ],
       learningsItems: [
         {
-          en: "Carrying a project from start to finish on my own — design, development, configuration and deployment — forced me to understand every layer of the process, not just the design one.",
-          es: "Llevar un proyecto de principio a fin de forma autónoma — diseño, desarrollo, configuración y despliegue — me obligó a entender todas las capas del proceso, no solo la de diseño.",
-          ca: "Portar un projecte de principi a fi de forma autònoma — disseny, desenvolupament, configuració i desplegament — em va obligar a entendre totes les capes del procés, no només la de disseny.",
+          en: "I did the design, code, CMS, forms and deployment myself: when something broke, there was no one else to ask, so I ended up truly understanding every layer, not just the one my title covered.",
+          es: "Diseño, código, CMS, formularios y despliegue los hice todos yo: cuando algo no funcionaba no había nadie más a quien preguntar, así que terminé entendiendo de verdad cada capa, no solo la que me tocaba por título.",
+          ca: "Disseny, codi, CMS, formularis i desplegament els vaig fer tots jo: quan alguna cosa no funcionava no hi havia ningú més a qui preguntar, així que vaig acabar entenent de veritat cada capa, no només la que em tocava pel títol.",
         },
         {
           en: "Connecting Notion as a CMS was a simple, effective solution for a non-technical team. Sometimes the best tool is the one the client already knows.",
