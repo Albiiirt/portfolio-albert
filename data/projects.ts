@@ -671,6 +671,9 @@ export const projects: Project[] = [
       es: "portal de recetas y landing de experiencia",
       ca: "portal de receptes i landing d'experiència",
     },
+    page: {
+      heroCta: { en: "View live demo", es: "Ver demo en vivo", ca: "Veure demo en directe" },
+    },
     meta: [
       { labelKey: "client", value: "Mirazur" },
       { labelKey: "year", value: "2025–2026" },
