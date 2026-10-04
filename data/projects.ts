@@ -368,6 +368,7 @@ export const projects: Project[] = [
       { labelKey: "studio", value: "GNOSS" },
     ],
     page: {
+      heroCta: { en: "View live demo", es: "Ver demo en vivo", ca: "Veure demo en directe" },
       workHeading: {
         en: "Starting from a reference, ending up somewhere else",
         es: "Partir de una referencia, acabar en otro sitio",
