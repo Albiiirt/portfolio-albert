@@ -37,6 +37,7 @@ export const t = {
       availability: "Open to opportunities",
       toolsLabel: "Tools & Technologies",
       intro: "I design and build digital products end to end — from idea to production.",
+      viewCv: "View full CV",
       skills: [
         { text: "Figma-to-code via MCP", desc: "Bridges Figma and code directly via MCP, cutting the handoff gap between design files and real components.", featured: true },
         { text: "AI-assisted Product Design (Claude Code)", desc: "I use Claude Code to go beyond prototyping — extending what I can design and ship alone.", featured: true },
@@ -232,6 +233,7 @@ export const t = {
       availability: "Abierto a oportunidades",
       toolsLabel: "Herramientas y tecnologías",
       intro: "Diseño y construyo productos digitales de principio a fin — de la idea a producción.",
+      viewCv: "Ver el CV completo",
       skills: [
         { text: "Figma-to-code vía MCP", desc: "Conecto Figma con el código directamente vía MCP, reduciendo la pérdida de información entre diseño y desarrollo.", featured: true },
         { text: "Diseño de producto asistido por IA (Claude Code)", desc: "Uso Claude Code para ir más allá de prototipar — amplía lo que puedo diseñar y entregar yo solo.", featured: true },
@@ -427,6 +429,7 @@ export const t = {
       availability: "Obert a oportunitats",
       toolsLabel: "Eines i tecnologies",
       intro: "Dissenyo i construeixo productes digitals de principi a fi — de la idea a producció.",
+      viewCv: "Veure el CV complet",
       skills: [
         { text: "Figma-to-code via MCP", desc: "Connecto Figma amb el codi directament via MCP, reduint la pèrdua d'informació entre disseny i desenvolupament.", featured: true },
         { text: "Disseny de producte assistit per IA (Claude Code)", desc: "Faig servir Claude Code per anar més enllà de prototipar — amplia el que puc dissenyar i lliurar jo sol.", featured: true },

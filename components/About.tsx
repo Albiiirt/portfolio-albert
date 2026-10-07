@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useLang } from "@/lib/LanguageContext";
 import { t } from "@/data/translations";
 import FadeInView from "@/components/FadeInView";
@@ -64,6 +65,11 @@ export default function About() {
               <p style={{ fontSize: "0.8rem", fontWeight: 500, lineHeight: 1.7, color: "var(--text-muted)", margin: 0, maxWidth: "34rem" }}>
                 {standardSkillsText}.
               </p>
+            </div>
+            <div style={{ marginTop: "2.25rem" }}>
+              <Link href="/cv" className="btn-invert">
+                {tx.viewCv} →
+              </Link>
             </div>
           </div>
         </FadeInView>
