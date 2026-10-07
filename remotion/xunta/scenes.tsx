@@ -172,8 +172,39 @@ const F = {
   trabajo2In: [853, 860] as [number, number],
 };
 
+// ── Camera (zoom) — exploratory per Albert's request (2026-10-03): three
+// brief push-ins so three small-but-meaningful clicks don't get lost in a
+// wide 16:9 shot — the MARC⇄ISAAR schema toggle, "Aceptar y unificar", and
+// the kanban card's arc. Not definitive; flip ZOOMS_ENABLED to compare
+// against the flat version. Scales+pans the same content node the cursor
+// lives in, so the pointer stays visually glued to what it's clicking.
+const ZOOMS_ENABLED = true;
+type CameraWindow = { inStart: number; inEnd: number; outStart: number; outEnd: number; scale: number; originX: number; originY: number };
+const CAMERA_WINDOWS: CameraWindow[] = [
+  // Esquema MARC ⇄ ISAAR toggle — both clicks land inside one held push-in.
+  { inStart: 380, inEnd: 393, outStart: 465, outEnd: 480, scale: 1.22, originX: 13, originY: 23.1 },
+  // Aceptar y unificar — the moment the match is actually confirmed.
+  { inStart: 520, inEnd: 533, outStart: 572, outEnd: 585, scale: 1.25, originX: 92.9, originY: 91 },
+  // Kanban card arcing from "En revisión" to "Revisado".
+  { inStart: 574, inEnd: 584, outStart: 617, outEnd: 630, scale: 1.25, originX: 39.5, originY: 20 },
+];
+function cameraAt(frame: number, windows: CameraWindow[]) {
+  if (!ZOOMS_ENABLED) return { scale: 1, originX: 50, originY: 50 };
+  for (const w of windows) {
+    if (frame >= w.inStart && frame <= w.outEnd) {
+      let s: number;
+      if (frame < w.inEnd) s = interpolate(frame, [w.inStart, w.inEnd], [1, w.scale], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
+      else if (frame < w.outStart) s = w.scale;
+      else s = interpolate(frame, [w.outStart, w.outEnd], [w.scale, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
+      return { scale: s, originX: w.originX, originY: w.originY };
+    }
+  }
+  return { scale: 1, originX: 50, originY: 50 };
+}
+
 export function WorkScene() {
   const frame = useCurrentFrame();
+  const camera = cameraAt(frame, CAMERA_WINDOWS);
 
   // ── Términos state ──
   const activeEstado = frame >= F.facetRevision ? "revision" : frame >= F.facetPendiente ? "pendiente" : "revision";
@@ -244,20 +275,32 @@ export function WorkScene() {
   // ── Scripted cursor — one continuous script across every screen (position
   // is always relative to the same BrowserFrame, so it keeps travelling
   // instead of snapping between screens). Hidden once the final hold starts.
+  // Every landing point below was measured pixel-for-pixel off rendered
+  // stills of this exact composition (not eyeballed), then converted from
+  // full-canvas pixels into the BrowserFrame content box's own coordinate
+  // space (x 141–1778, y 97–1040 of the 1920×1080 canvas) — the same space
+  // SimCursor's left/top percentages resolve against, since the cursor and
+  // every screen it clicks are both children of that one relatively
+  // positioned content div, offset from the canvas edge by the outer teal
+  // padding and the browser chrome bar. Mixing up the two spaces is exactly
+  // what made the first pass look "close but not on it". Targets: the facet
+  // row's highlight tint, the "Ver propuesta" link, the selected-cell green
+  // fill, the active MARC/ISAAR button, the 4XX pill's blue fill, the green
+  // accept button, the kanban card, and the "Volver al tablero" button.
   const hops: CursorHop[] = [
     { from: { x: 62, y: 12 }, to: { x: 62, y: 12 }, fromFrame: 0, toFrame: 15 },
-    { from: { x: 62, y: 12 }, to: { x: 16, y: 41 }, fromFrame: 15, toFrame: F.facetPendiente, click: true },
-    { from: { x: 16, y: 41 }, to: { x: 16, y: 33 }, fromFrame: F.facetPendiente + 25, toFrame: F.facetRevision, click: true },
-    { from: { x: 16, y: 33 }, to: { x: 62, y: 17 }, fromFrame: F.facetRevision + 15, toFrame: F.typeStart, click: false },
-    { from: { x: 62, y: 17 }, to: { x: 85, y: 25 }, fromFrame: F.typeStart + 45, toFrame: F.verPropuesta, click: true },
-    { from: { x: 85, y: 25 }, to: { x: 36, y: 47 }, fromFrame: F.fichaIn[1] + 8, toFrame: F.clickFechas, click: true },
-    { from: { x: 36, y: 47 }, to: { x: 36, y: 71 }, fromFrame: F.clickFechas + 20, toFrame: F.clickNota, click: true },
-    { from: { x: 36, y: 71 }, to: { x: 33, y: 24 }, fromFrame: F.clickNota + 15, toFrame: F.clickIsaar, click: true },
-    { from: { x: 33, y: 24 }, to: { x: 20, y: 24 }, fromFrame: F.clickIsaar + 22, toFrame: F.clickMarc, click: true },
-    { from: { x: 20, y: 24 }, to: { x: 66, y: 30 }, fromFrame: F.clickMarc + 15, toFrame: F.clickPill, click: true },
-    { from: { x: 66, y: 30 }, to: { x: 89, y: 92 }, fromFrame: F.clickPill + 20, toFrame: F.accept, click: true },
-    { from: { x: 89, y: 92 }, to: { x: 55, y: 46 }, fromFrame: F.trabajoIn[1] + 45, toFrame: F.clickCard2, click: true },
-    { from: { x: 55, y: 46 }, to: { x: 86, y: 18 }, fromFrame: F.ficha2In[1] + 20, toFrame: F.clickVolver, click: true },
+    { from: { x: 62, y: 12 }, to: { x: 9.25, y: 25.87 }, fromFrame: 15, toFrame: F.facetPendiente, click: true }, // "Pendiente de revisar" row
+    { from: { x: 9.25, y: 25.87 }, to: { x: 9.25, y: 22.8 }, fromFrame: F.facetPendiente + 25, toFrame: F.facetRevision, click: true }, // "En revisión" row
+    { from: { x: 9.25, y: 22.8 }, to: { x: 21.93, y: 16.86 }, fromFrame: F.facetRevision + 15, toFrame: F.typeStart, click: false }, // search input
+    { from: { x: 21.93, y: 16.86 }, to: { x: 93.52, y: 23.28 }, fromFrame: F.typeStart + 45, toFrame: F.verPropuesta, click: true }, // "Ver propuesta"
+    { from: { x: 93.52, y: 23.28 }, to: { x: 36.19, y: 56.31 }, fromFrame: F.fichaIn[1] + 8, toFrame: F.clickFechas, click: true }, // fechas cell
+    { from: { x: 36.19, y: 56.31 }, to: { x: 36.19, y: 67.97 }, fromFrame: F.clickFechas + 20, toFrame: F.clickNota, click: true }, // nota cell
+    { from: { x: 36.19, y: 67.97 }, to: { x: 18.48, y: 23.12 }, fromFrame: F.clickNota + 15, toFrame: F.clickIsaar, click: true }, // "Vista archivística ISAAR"
+    { from: { x: 18.48, y: 23.12 }, to: { x: 7.51, y: 23.12 }, fromFrame: F.clickIsaar + 22, toFrame: F.clickMarc, click: true }, // "Vista bibliotecaria MARC"
+    { from: { x: 7.51, y: 23.12 }, to: { x: 77.4, y: 45.23 }, fromFrame: F.clickMarc + 15, toFrame: F.clickPill, click: true }, // 4XX pill
+    { from: { x: 77.4, y: 45.23 }, to: { x: 92.85, y: 90.99 }, fromFrame: F.clickPill + 20, toFrame: F.accept, click: true }, // "Aceptar y unificar"
+    { from: { x: 92.85, y: 90.99 }, to: { x: 62.16, y: 39.77 }, fromFrame: F.trabajoIn[1] + 45, toFrame: F.clickCard2, click: true }, // Covarrubias card
+    { from: { x: 62.16, y: 39.77 }, to: { x: 93.43, y: 15.8 }, fromFrame: F.ficha2In[1] + 20, toFrame: F.clickVolver, click: true }, // "Volver al tablero"
   ];
 
   return (
@@ -273,7 +316,15 @@ export function WorkScene() {
                 : "unificador.xunta.gal/terminos"
           }
         >
-          <div style={{ position: "relative", width: "100%", height: "100%" }}>
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              height: "100%",
+              transform: `scale(${camera.scale})`,
+              transformOrigin: `${camera.originX}% ${camera.originY}%`,
+            }}
+          >
             {/* ── Términos ── */}
             {terminosVisible && (
               <div style={{ position: "absolute", inset: 0, opacity: terminosOpacity, transform: `translateY(${terminosY}px)`, display: "flex", flexDirection: "column" }}>

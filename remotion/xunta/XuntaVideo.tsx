@@ -1,6 +1,6 @@
 import { AbsoluteFill, Sequence, interpolate, useCurrentFrame } from "remotion";
 import { loadFont } from "@remotion/google-fonts/SpaceGrotesk";
-import { ChallengeScene, ClosingScene, IdentityScene, LearningScene, ResultScene, WorkScene } from "./scenes";
+import { WorkScene } from "./scenes";
 
 const { fontFamily } = loadFont();
 
@@ -8,18 +8,11 @@ const { fontFamily } = loadFont();
 // @30fps == ~267ms).
 const OVERLAP = 8;
 
-// Brief chapter cards around a long, mostly-interface middle section — per
-// Albert's note (2026-09-28): the video should read as real navigation
-// through the prototype, not a narrated slideshow with a short UI clip in
-// the middle. "work" is ~79% of the runtime.
-const SCENES: { key: string; dur: number; Comp: React.ComponentType }[] = [
-  { key: "identity", dur: 55, Comp: IdentityScene }, // 1. Identidad
-  { key: "challenge", dur: 45, Comp: ChallengeScene }, // 2. El reto
-  { key: "work", dur: 980, Comp: WorkScene }, // 3. El trabajo (interfaz real)
-  { key: "result", dur: 45, Comp: ResultScene }, // 4. El resultado
-  { key: "learning", dur: 60, Comp: LearningScene }, // 5. El aprendizaje
-  { key: "closing", dur: 55, Comp: ClosingScene }, // 6. Cierre
-];
+// Per Albert's note (2026-10-03): no text cards at all — not the chapter
+// cards (Identidad/El reto/El resultado/El aprendizaje/Cierre) that used to
+// bookend this, nor any other intertitle. Just the three real-interface
+// flows (Términos → Ficha → Trabajo), back to back, pure interface in use.
+const SCENES: { key: string; dur: number; Comp: React.ComponentType }[] = [{ key: "work", dur: 980, Comp: WorkScene }];
 
 export const TOTAL_DURATION = SCENES.reduce((sum, s) => sum + s.dur, 0); // 1240 @ 30fps == ~41.3s
 

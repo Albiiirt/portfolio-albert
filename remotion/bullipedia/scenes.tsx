@@ -1,18 +1,52 @@
-import { AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { BULLIPEDIA, EASE_BOOK_HOVER, EASE_BOOK_OPEN, EASE_SIDEBAR, TEXT } from "./tokens";
-import { BookCover, BookSidebar, fontStyle, PageHeader, SectionLabel, SubHeader, type SidebarSection } from "./ui";
+import { BookCover, BookSidebar, fontStyle, PageHeader, ResourceCard, SectionLabel, SubHeader, type SidebarSection } from "./ui";
 import { SimCursor, type CursorHop } from "../shared/Cursor";
 
 const PLAN_ORIGEN_COVER = "mockups/bullipedia-html/assets/portada_contra25_jpg_1_scaled_b6e15db3ee-4969fe.jpeg";
 
 const CURSOR_PROPS = { pointerFill: BULLIPEDIA.white, pointerStroke: BULLIPEDIA.navy, rippleColor: BULLIPEDIA.green };
 
+// ── Camera (zoom) — exploratory, same pattern as remotion/xunta/scenes.tsx
+// (Albert's request, 2026-10-03): a brief push-in on the one interaction
+// each scene is built around, so it doesn't get lost in a wide 16:9 shot.
+// Scales+pans the single content node the cursor itself lives in, so the
+// pointer stays glued to what it's clicking.
+const CAMERA_EASE = Easing.bezier(0.25, 0.46, 0.45, 0.94);
+type CameraWindow = { inStart: number; inEnd: number; outStart: number; outEnd: number; scale: number; originX: number; originY: number };
+function cameraAt(frame: number, windows: CameraWindow[]) {
+  for (const w of windows) {
+    if (frame >= w.inStart && frame <= w.outEnd) {
+      let s: number;
+      if (frame < w.inEnd) s = interpolate(frame, [w.inStart, w.inEnd], [1, w.scale], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: CAMERA_EASE });
+      else if (frame < w.outStart) s = w.scale;
+      else s = interpolate(frame, [w.outStart, w.outEnd], [w.scale, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: CAMERA_EASE });
+      return { scale: s, originX: w.originX, originY: w.originY };
+    }
+  }
+  return { scale: 1, originX: 50, originY: 50 };
+}
+
 // Shared "document" backdrop every screen sits in — white page, DIN Next,
 // ink body copy — matching public/mockups/bullipedia-html/*.html's <body>.
-function Page({ children }: { children: React.ReactNode }) {
+// `camera` scales+pans a single inner wrapper (header + content + cursor
+// together), same approach as Xunta's BrowserFrame content node.
+function Page({ children, camera }: { children: React.ReactNode; camera?: { scale: number; originX: number; originY: number } }) {
+  const c = camera ?? { scale: 1, originX: 50, originY: 50 };
   return (
-    <AbsoluteFill style={{ ...fontStyle, background: BULLIPEDIA.white, color: BULLIPEDIA.ink, flexDirection: "column" }}>
-      {children}
+    <AbsoluteFill style={{ ...fontStyle, background: BULLIPEDIA.white, color: BULLIPEDIA.ink }}>
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          transform: `scale(${c.scale})`,
+          transformOrigin: `${c.originX}% ${c.originY}%`,
+        }}
+      >
+        {children}
+      </div>
     </AbsoluteFill>
   );
 }
@@ -31,8 +65,11 @@ export function CatalogScene() {
     { from: { x: 32, y: 44 }, to: { x: 32, y: 44 }, fromFrame: 42, toFrame: 120, click: true },
   ];
 
+  // Push in on the "Plan Origen" cover for the hover-tilt + click.
+  const camera = cameraAt(frame, [{ inStart: 28, inEnd: 42, outStart: 128, outEnd: 144, scale: 1.18, originX: 32, originY: 44 }]);
+
   return (
-    <Page>
+    <Page camera={camera}>
       <PageHeader />
       <div style={{ flex: 1, overflow: "hidden" }}>
         <div style={{ maxWidth: 1000, margin: "0 auto", padding: "52px 40px 30px" }}>
@@ -78,14 +115,21 @@ export function BookPageScene() {
   const rowPress = frame >= 150 && frame <= 156 ? interpolate(frame, [150, 152, 156], [1, 0.985, 1], { extrapolateRight: "clamp" }) : 1;
   const rowHighlight = frame >= 140 && frame < 165;
 
+  // Target measured off a rendered still of this exact composition: the
+  // "El Cimiento de la Restauración Gastronómica" index row sits at
+  // (37.8%, 80.65%), not (30%, 62%) — the first pass landed on the
+  // "Índice del libro" heading above it, not the row itself.
   const hops: CursorHop[] = [
     { from: { x: 60, y: 14 }, to: { x: 60, y: 14 }, fromFrame: 0, toFrame: 45 },
-    { from: { x: 60, y: 14 }, to: { x: 30, y: 62 }, fromFrame: 45, toFrame: 135 },
-    { from: { x: 30, y: 62 }, to: { x: 30, y: 62 }, fromFrame: 135, toFrame: 150, click: true },
+    { from: { x: 60, y: 14 }, to: { x: 37.8, y: 80.65 }, fromFrame: 45, toFrame: 135 },
+    { from: { x: 37.8, y: 80.65 }, to: { x: 37.8, y: 80.65 }, fromFrame: 135, toFrame: 150, click: true },
   ];
 
+  // Push in on that index row for the click.
+  const camera = cameraAt(frame, [{ inStart: 130, inEnd: 142, outStart: 158, outEnd: 172, scale: 1.2, originX: 37.8, originY: 80.65 }]);
+
   return (
-    <Page>
+    <Page camera={camera}>
       <PageHeader />
       <div style={{ flex: 1, overflow: "hidden" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto", padding: "22px 32px 0" }}>
@@ -189,8 +233,11 @@ export function ChapterScene() {
     { from: { x: 14, y: 23 }, to: { x: 14, y: 23 }, fromFrame: 150, toFrame: 170, click: true },
   ];
 
+  // Push in on the expanded-sidebar subentry for the click.
+  const camera = cameraAt(frame, [{ inStart: 148, inEnd: 160, outStart: 178, outEnd: 194, scale: 1.3, originX: 16, originY: 23 }]);
+
   return (
-    <Page>
+    <Page camera={camera}>
       <PageHeader />
       <SubHeader backLabel="Volver al índice" title="Introducción al plan Origen" />
       <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
@@ -228,19 +275,38 @@ export function ChapterScene() {
   );
 }
 
-// ── 4. Artículo en lectura (540–780) — scroll continuo, progreso 15→34%,
-// sin cursor, últimos 20 frames quietos ────────────────────────────────────
+// Real "Recursos del capítulo" grid, lifted 1:1 from the end of
+// public/mockups/bullipedia-html/4-articulo-el-sapiens-de-la-rg.html's
+// <article> — the links and PDFs that ship alongside this chapter's text.
+// This is the part of the product the case study is actually about (every
+// book carries the resources that stayed out of the printed page), so the
+// scroll now continues far enough to reach it instead of stopping mid-text.
+const CHAPTER_RESOURCES: { kind: string; label: string }[] = [
+  { kind: "Enlace", label: "metodo-cimiento.example.com" },
+  { kind: "Enlace", label: "podcast-cimiento.example.com" },
+  { kind: "PDF", label: "Cimiento restauración gastronómica" },
+  { kind: "PDF", label: "Mapa SGO" },
+  { kind: "PDF", label: "Protocolo de sala" },
+  { kind: "PDF", label: "Indicadores del restaurante" },
+];
+
+// ── 4. Artículo en lectura (540–870) — scroll continuo hasta "Recursos del
+// capítulo", progreso 15→38%, cursor solo en el tramo final ──────────────
 export function ArticleScene() {
   const frame = useCurrentFrame();
 
-  const progress = interpolate(frame, [0, 240], [0.15, 0.34], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  // Local window ends at 220 (dur 240 minus the last 20 held frames) — the
-  // Sequence also renders 8 extra overlap frames past 240 for the crossfade
-  // out, which simply keep the same held position.
-  const scrollY = interpolate(frame, [8, 220], [0, 230], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const progress = interpolate(frame, [0, 330], [0.15, 0.38], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  // Scrolls past the article body and settles on "Recursos del capítulo"
+  // for the last ~70 frames (the Sequence also renders 8 extra overlap
+  // frames past 330 for the crossfade out, which keep this held position).
+  const scrollY = interpolate(frame, [8, 260], [0, 560], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.25, 0.46, 0.45, 0.94) });
+  const resourceHighlight = frame >= 285 && frame < 320 ? CHAPTER_RESOURCES[2].label : null; // "Cimiento restauración gastronómica" PDF
+
+  // Push in on the resources grid once the scroll settles there.
+  const camera = cameraAt(frame, [{ inStart: 262, inEnd: 278, outStart: 318, outEnd: 330, scale: 1.16, originX: 36, originY: 78 }]);
 
   return (
-    <Page>
+    <Page camera={camera}>
       <PageHeader />
       <SubHeader backLabel="Volver al capítulo" title="Capítulo 3 — El Cimiento de la restauración gastronómica" counter="Apartado 2 de 13" progress={progress} />
       <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
@@ -287,6 +353,15 @@ export function ArticleScene() {
               También es posible sintetizar cada uno de los métodos en una sola pregunta, que se puede responder de forma intuitiva, para hacer
               una primera aproximación al estudio aplicando esos diferentes prismas, de manera muy simplificada.
             </p>
+
+            <section style={{ marginTop: 48, paddingTop: 26, borderTop: `1px solid ${BULLIPEDIA.ruleStrong}` }}>
+              <h2 style={{ margin: "0 0 20px", fontSize: TEXT.h2, fontWeight: 700, color: BULLIPEDIA.navy }}>Recursos del capítulo</h2>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(210px, 1fr))", gap: 20 }}>
+                {CHAPTER_RESOURCES.map((r) => (
+                  <ResourceCard key={r.label} kind={r.kind} label={r.label} highlight={resourceHighlight === r.label} />
+                ))}
+              </div>
+            </section>
           </div>
         </div>
       </div>

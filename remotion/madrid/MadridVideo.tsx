@@ -1,28 +1,46 @@
 import { AbsoluteFill, Sequence, interpolate, useCurrentFrame } from "remotion";
 import { loadFont } from "@remotion/google-fonts/SpaceGrotesk";
-import { ChallengeScene, ClosingScene, IdentityScene, LearningScene, ResultScene, WorkScene } from "./scenes";
+import {
+  FlowA1EmptyScene,
+  FlowA2AutocompleteScene,
+  FlowA3ResultsScene,
+  FlowB1HomeScene,
+  FlowB2TerritoryScene,
+  FlowB3ZoneStatsScene,
+  FlowB4ZoneContentScene,
+  FlowC1UnfilteredScene,
+  FlowC2FilteredScene,
+  FlowC3BookingScene,
+} from "./scenes";
 
 const { fontFamily } = loadFont();
 
-// Crossfade window between consecutive scenes: 200–300ms per spec (8 frames
-// @30fps == ~267ms). Same value as remotion/xunta/XuntaVideo.tsx.
+// Crossfade window between consecutive scenes, same 8-frame/~267ms@30fps
+// window used by remotion/xunta/ and remotion/bullipedia/.
 const OVERLAP = 8;
 
-// Brief chapter cards around a long, mostly-interface middle section — same
-// shape as the Xunta case-study video: "work" (the recreated Enoturismo
-// Madrid interface, buscador → ruta → bodega → experiencia/reserva) is the
-// bulk of the runtime, framed by short identity/challenge/result/learning/
-// closing cards.
+// No text cards — three real-site flows, back to back, pure interface in
+// use. Second pass (2026-10-03): every shot now pairs with the real
+// before/after screenshot of the action it shows, so each cut lands on a
+// visible consequence (typed text + a live dropdown, a counter that
+// actually drops from 21 to 7) instead of a cursor dragging across nothing.
+//  A. El buscador global (campo vacío → autocompletar real → resultados)
+//  B. Descubrir una zona (home → territorio → ficha+cifras → bodegas/rutas reales)
+//  C. Filtrar bodegas y reservar (21 → filtro → 7 → ficha, reservar)
 const SCENES: { key: string; dur: number; Comp: React.ComponentType }[] = [
-  { key: "identity", dur: 55, Comp: IdentityScene }, // 1. Identidad
-  { key: "challenge", dur: 45, Comp: ChallengeScene }, // 2. El reto
-  { key: "work", dur: 980, Comp: WorkScene }, // 3. El trabajo (interfaz real)
-  { key: "result", dur: 45, Comp: ResultScene }, // 4. El resultado
-  { key: "learning", dur: 60, Comp: LearningScene }, // 5. El aprendizaje
-  { key: "closing", dur: 55, Comp: ClosingScene }, // 6. Cierre
+  { key: "flowA-1-empty", dur: 80, Comp: FlowA1EmptyScene },
+  { key: "flowA-2-autocomplete", dur: 120, Comp: FlowA2AutocompleteScene },
+  { key: "flowA-3-results", dur: 85, Comp: FlowA3ResultsScene },
+  { key: "flowB-1-home", dur: 80, Comp: FlowB1HomeScene },
+  { key: "flowB-2-territory", dur: 85, Comp: FlowB2TerritoryScene },
+  { key: "flowB-3-stats", dur: 85, Comp: FlowB3ZoneStatsScene },
+  { key: "flowB-4-content", dur: 70, Comp: FlowB4ZoneContentScene },
+  { key: "flowC-1-unfiltered", dur: 80, Comp: FlowC1UnfilteredScene },
+  { key: "flowC-2-filtered", dur: 90, Comp: FlowC2FilteredScene },
+  { key: "flowC-3-booking", dur: 90, Comp: FlowC3BookingScene },
 ];
 
-export const TOTAL_DURATION = SCENES.reduce((sum, s) => sum + s.dur, 0); // 1240 @ 30fps == ~41.3s
+export const TOTAL_DURATION = SCENES.reduce((sum, s) => sum + s.dur, 0); // 865 @ 30fps == ~28.8s
 
 function CrossfadeLayer({ dur, fadeIn, fadeOut, children }: { dur: number; fadeIn: boolean; fadeOut: boolean; children: React.ReactNode }) {
   const frame = useCurrentFrame();

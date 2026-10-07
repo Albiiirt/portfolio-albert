@@ -1,342 +1,337 @@
-import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
-import { EASE, ENO, SITE } from "./tokens";
-import { RUTAS, getBodega, getBodegasDeRuta, getRuta } from "./data";
-import {
-  BodegaCard,
-  BrowserFrame,
-  DateChip,
-  ExperienceCard,
-  MapDecorative,
-  NavBar,
-  ReserveButton,
-  RouteChip,
-  RouteResultCard,
-  SearchBar,
-  SectionHeading,
-} from "./ui";
-import { SimCursor, type CursorHop, useTypedText } from "./Cursor";
+import { AbsoluteFill, Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
+import { SITE } from "./tokens";
+import { SimCursor, type CursorHop } from "./Cursor";
 
-// ── Shared wine-dark backdrop (real hero gradient) ─────────────────────────
-function WineBackdrop() {
+// ── Enoturismo Madrid walkthrough — real screenshots of Albert's own live
+// site (enoturismo.comunidad.madrid), not a hand-built mockup. Second pass
+// (2026-10-03) after Albert's review of the first: that version showed only
+// a cursor dragging between two static bookend screenshots per flow with
+// nothing changing on screen in between — dead time. This pass uses 10 new
+// screenshots that each capture a real action's immediate visible
+// consequence (typed text + a live autocomplete dropdown, a result counter
+// that actually reads 7 instead of 21, a focus ring on the real control),
+// so every cut lands on something that visibly changed, not just a new
+// camera position. The fix that mattered most: a click's ripple now fires
+// the instant the cursor hop arrives (Xunta's pattern), not after a long
+// static rest once arrived (Bullipedia's hover-then-click pattern, which
+// only reads fine there because a 3D tilt is animating during that rest —
+// there's no such filler here, so the gap just felt dead).
+//
+// Every shot's frame is sized to ITS OWN screenshot's aspect ratio (some are
+// 1568×745, some 1568×721 — real production-site captures taken seconds
+// apart, not one fixed export size) so the image fills its card with zero
+// crop. A cursor hop's {x,y} is a literal percent of that screenshot's own
+// pixel grid, measured directly off the JPEGs.
+
+const CAMERA_EASE = Easing.bezier(0.25, 0.46, 0.45, 0.94);
+type CameraWindow = { inStart: number; inEnd: number; outStart: number; outEnd: number; scale: number; originX: number; originY: number };
+function cameraAt(frame: number, windows: CameraWindow[]) {
+  for (const w of windows) {
+    if (frame >= w.inStart && frame <= w.outEnd) {
+      let s: number;
+      if (frame < w.inEnd) s = interpolate(frame, [w.inStart, w.inEnd], [1, w.scale], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: CAMERA_EASE });
+      else if (frame < w.outStart) s = w.scale;
+      else s = interpolate(frame, [w.outStart, w.outEnd], [w.scale, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: CAMERA_EASE });
+      return { scale: s, originX: w.originX, originY: w.originY };
+    }
+  }
+  return { scale: 1, originX: 50, originY: 50 };
+}
+
+function TealBackdrop() {
   return (
     <AbsoluteFill style={{ background: SITE.gradient }}>
-      <AbsoluteFill
-        style={{
-          background: "radial-gradient(ellipse 70% 60% at 75% 35%, rgba(140,58,90,0.32) 0%, transparent 70%)",
-        }}
-      />
+      <AbsoluteFill style={{ background: "radial-gradient(ellipse 70% 60% at 75% 35%, rgba(140,58,90,0.3) 0%, transparent 70%)" }} />
     </AbsoluteFill>
   );
 }
 
-function fadeIn(frame: number, start: number, dur = 10) {
-  return interpolate(frame, [start, start + dur], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
-}
-function riseIn(frame: number, start: number, dur = 10, amount = 16) {
-  return interpolate(frame, [start, start + dur], [amount, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
-}
-
-// ── Brief "chapter card" — same role as remotion/xunta/scenes.tsx's own
-// ChapterCard: a short title + one line between beats, not a paragraph.
-function ChapterCard({
-  eyebrow,
-  title,
-  line,
-  titleSize = 44,
-}: {
-  eyebrow?: string;
-  title: string;
-  line?: string;
-  titleSize?: number;
-}) {
-  const frame = useCurrentFrame();
+// Same "real browser window" chrome as remotion/xunta/ui.tsx's BrowserFrame,
+// sized to each screenshot's own aspect ratio instead of a fixed 16:9 pane
+// or one shared constant — flowA/B shots are 1568×745, flowC's are
+// 1568×721, real captures taken on different passes.
+function ShotFrame({ url, shotW, shotH, children }: { url: string; shotW: number; shotH: number; children: React.ReactNode }) {
+  const width = 1640;
+  const height = (width * shotH) / shotW;
   return (
-    <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", padding: "0 220px" }}>
-      <WineBackdrop />
-      <div style={{ position: "relative", textAlign: "center" }}>
-        {eyebrow && (
-          <p
-            style={{
-              margin: "0 0 14px",
-              fontFamily: SITE.fontDisplay,
-              fontSize: 16,
-              fontWeight: 700,
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              color: SITE.accent,
-              opacity: fadeIn(frame, 2, 8),
-            }}
-          >
-            {eyebrow}
-          </p>
-        )}
-        <h2
+    <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
+      <TealBackdrop />
+      <div
+        style={{
+          position: "relative",
+          width,
+          height: height + 56,
+          borderRadius: 22,
+          border: "1.5px solid rgba(255,255,255,0.16)",
+          boxShadow: "0 1px 0 rgba(255,255,255,0.14) inset, 0 20px 60px rgba(0,0,0,0.5)",
+          background: "rgba(255,255,255,0.06)",
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div
           style={{
-            margin: 0,
-            fontFamily: SITE.fontDisplay,
-            fontSize: titleSize,
-            fontWeight: 800,
-            lineHeight: 1.15,
-            color: "#fff",
-            opacity: fadeIn(frame, 4, 10),
-            transform: `translateY(${riseIn(frame, 4, 10, 14)}px)`,
+            display: "flex",
+            alignItems: "center",
+            gap: 16,
+            padding: "14px 20px",
+            height: 56,
+            flexShrink: 0,
+            background: "rgba(10,6,8,0.55)",
+            borderBottom: "1px solid rgba(255,255,255,0.1)",
+            boxSizing: "border-box",
           }}
         >
-          {title}
-        </h2>
-        {line && (
-          <p
-            style={{
-              margin: "14px 0 0",
-              fontFamily: SITE.fontDisplay,
-              fontSize: 20,
-              fontWeight: 600,
-              color: "rgba(255,255,255,0.62)",
-              opacity: fadeIn(frame, 8, 10),
-            }}
-          >
-            {line}
-          </p>
-        )}
-      </div>
-    </AbsoluteFill>
-  );
-}
-
-// ── 1. Identidad ────────────────────────────────────────────────────────────
-export function IdentityScene() {
-  return <ChapterCard eyebrow="03 · Producto real, no prototipo" title="Enoturismo Madrid" line="Comunidad de Madrid · Rutas del vino · 2026" titleSize={56} />;
-}
-
-// ── 2. El reto ──────────────────────────────────────────────────────────────
-export function ChallengeScene() {
-  return <ChapterCard eyebrow="El reto" title="Bodegas, rutas y experiencias dispersas, en páginas que no ayudaban a reservar." titleSize={38} />;
-}
-
-// ── 3. El trabajo — Home → Ruta → Bodega → Experiencia/reserva ────────────
-//
-// Timeline (WorkScene-local frames, one continuous cursor script across all
-// four beats since it's a single BrowserFrame the whole time):
-//  0–245    Home: search "San Martín" typed, click ruta chip → filters the
-//           results list below for real.
-//  246–490  Ruta (San Martín de Valdeiglesias): 6-bodega grid, click a card.
-//  491–735  Bodega (Cerro Almenara): gallery/desc, click an experience card.
-//  736–980  Experiencia/reserva: click a date, click Reservar → confirmed,
-//           final hold.
-const RUTA_SLUG = "san-martin-de-valdeiglesias" as const;
-const BODEGA_ID = "cerro-almenara" as const;
-const EXPERIENCIA_ID = "cata-pisado" as const;
-
-const F = {
-  // Beat 1: Home
-  typeStart: 25,
-  chipClick: 118,
-  homeOut: [238, 245] as [number, number],
-  rutaIn: [246, 253] as [number, number],
-
-  // Beat 2: Detalle de ruta
-  bodegaClick: 420,
-  rutaOut: [483, 490] as [number, number],
-  bodegaIn: [491, 498] as [number, number],
-
-  // Beat 3: Detalle de bodega
-  expClick: 670,
-  bodegaOut: [728, 735] as [number, number],
-  expIn: [736, 743] as [number, number],
-
-  // Beat 4: Experiencia / reserva
-  dateClick: 810,
-  reserveClick: 880,
-};
-
-export function WorkScene() {
-  const frame = useCurrentFrame();
-
-  const ruta = getRuta(RUTA_SLUG);
-  const bodega = getBodega(BODEGA_ID);
-  const experiencia = bodega.experiencias.find((e) => e.id === EXPERIENCIA_ID)!;
-  const bodegasRuta = getBodegasDeRuta(RUTA_SLUG);
-
-  // ── Home state ──
-  const typed = useTypedText("San Martín", F.typeStart, 2.4);
-  const caretVisible = frame >= F.typeStart && frame < F.chipClick && frame % 24 < 12;
-  const rutaFiltered = frame >= F.chipClick;
-  const homeResults = rutaFiltered ? RUTAS.filter((r) => r.slug === RUTA_SLUG) : RUTAS;
-  const chipFlashing = frame - F.chipClick >= 0 && frame - F.chipClick < 10;
-
-  const homeOpacity = interpolate(frame, F.homeOut, [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
-  const homeY = interpolate(frame, F.homeOut, [0, -14], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
-  const homeVisible = frame < F.rutaIn[0];
-
-  // ── Ruta state ──
-  const rutaEnter = interpolate(frame, F.rutaIn, [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
-  const rutaExit = interpolate(frame, F.rutaOut, [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
-  const rutaOpacity = Math.min(rutaEnter, rutaExit);
-  const rutaY =
-    interpolate(frame, F.rutaIn, [14, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE }) +
-    interpolate(frame, F.rutaOut, [0, -14], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
-  const rutaVisible = frame >= F.rutaIn[0] && frame < F.bodegaIn[0];
-  const bodegaCardHighlight = frame >= F.bodegaClick && frame < F.bodegaOut[0];
-
-  // ── Bodega state ──
-  const bodegaEnter = interpolate(frame, F.bodegaIn, [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
-  const bodegaExit = interpolate(frame, F.bodegaOut, [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
-  const bodegaOpacity = Math.min(bodegaEnter, bodegaExit);
-  const bodegaY =
-    interpolate(frame, F.bodegaIn, [14, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE }) +
-    interpolate(frame, F.bodegaOut, [0, -14], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
-  const bodegaVisible = frame >= F.bodegaIn[0] && frame < F.expIn[0];
-  const expCardHighlight = frame >= F.expClick && frame < F.bodegaOut[0];
-
-  // ── Experiencia/reserva state ──
-  const expEnter = interpolate(frame, F.expIn, [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
-  const expOpacity = expEnter;
-  const expY = interpolate(frame, F.expIn, [14, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE });
-  const expVisible = frame >= F.expIn[0];
-  const dateSelected = frame >= F.dateClick;
-  const reservePressed = frame >= F.reserveClick && frame < F.reserveClick + 6;
-  const reserveConfirmed = frame >= F.reserveClick + 8;
-
-  // ── Scripted cursor — one continuous script across every screen. ──
-  const hops: CursorHop[] = [
-    { from: { x: 50, y: 21 }, to: { x: 50, y: 21 }, fromFrame: 0, toFrame: 15 },
-    { from: { x: 50, y: 21 }, to: { x: 58, y: 32 }, fromFrame: 15, toFrame: F.chipClick, click: true },
-    { from: { x: 58, y: 32 }, to: { x: 70, y: 46 }, fromFrame: F.chipClick + 20, toFrame: 200, click: false },
-    { from: { x: 70, y: 46 }, to: { x: 32, y: 40 }, fromFrame: F.rutaIn[1] + 10, toFrame: 340, click: false },
-    { from: { x: 32, y: 40 }, to: { x: 30, y: 44 }, fromFrame: 340, toFrame: F.bodegaClick, click: true },
-    { from: { x: 30, y: 44 }, to: { x: 36, y: 30 }, fromFrame: F.bodegaIn[1] + 10, toFrame: 580, click: false },
-    { from: { x: 36, y: 30 }, to: { x: 74, y: 72 }, fromFrame: 580, toFrame: F.expClick, click: true },
-    { from: { x: 74, y: 72 }, to: { x: 40, y: 56 }, fromFrame: F.expIn[1] + 15, toFrame: F.dateClick, click: true },
-    { from: { x: 40, y: 56 }, to: { x: 52, y: 79 }, fromFrame: F.dateClick + 20, toFrame: F.reserveClick, click: true },
-  ];
-
-  const url = homeVisible
-    ? "enoturismo.comunidad.madrid"
-    : rutaVisible
-      ? `enoturismo.comunidad.madrid/rutas/${RUTA_SLUG}`
-      : bodegaVisible
-        ? `enoturismo.comunidad.madrid/bodegas/${BODEGA_ID}`
-        : `enoturismo.comunidad.madrid/bodegas/${BODEGA_ID}/${EXPERIENCIA_ID}`;
-
-  return (
-    <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", padding: "38px 140px" }}>
-      <WineBackdrop />
-      <div style={{ position: "relative", width: "100%", height: "100%" }}>
-        <BrowserFrame url={url}>
-          <div style={{ position: "relative", width: "100%", height: "100%" }}>
-            {/* ── Beat 1: Home / buscador ── */}
-            {homeVisible && (
-              <div style={{ position: "absolute", inset: 0, opacity: homeOpacity, transform: `translateY(${homeY}px)`, display: "flex", flexDirection: "column" }}>
-                <NavBar />
-                <div style={{ padding: "26px 40px", flex: 1, minHeight: 0, display: "flex", flexDirection: "column", gap: 20 }}>
-                  <div>
-                    <SearchBar value={typed} caretVisible={caretVisible} />
-                    <div style={{ display: "flex", gap: 10, marginTop: 16 }}>
-                      {RUTAS.map((r) => (
-                        <RouteChip key={r.slug} ruta={r} active={rutaFiltered && r.slug === RUTA_SLUG} flashing={chipFlashing && r.slug === RUTA_SLUG} />
-                      ))}
-                    </div>
-                  </div>
-                  <div style={{ display: "flex", gap: 24, flex: 1, minHeight: 0 }}>
-                    <div style={{ flex: "0 0 38%" }}>
-                      <MapDecorative activeSlug={rutaFiltered ? RUTA_SLUG : null} rutas={RUTAS} />
-                    </div>
-                    <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 10, minWidth: 0 }}>
-                      {homeResults.map((r) => (
-                        <RouteResultCard key={r.slug} ruta={r} highlight={rutaFiltered && r.slug === RUTA_SLUG} />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* ── Beat 2: Detalle de ruta ── */}
-            {rutaVisible && (
-              <div style={{ position: "absolute", inset: 0, opacity: rutaOpacity, transform: `translateY(${rutaY}px)`, display: "flex", flexDirection: "column" }}>
-                <NavBar />
-                <div style={{ padding: "26px 40px", flex: 1, minHeight: 0, display: "flex", flexDirection: "column", gap: 22 }}>
-                  <SectionHeading backLink="Rutas" eyebrow={`${ruta.bodegasCount} bodegas · ${ruta.subtitulo}`} title={ruta.nombre} />
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
-                    {bodegasRuta.map((b) => (
-                      <BodegaCard key={b.id} bodega={b} highlight={bodegaCardHighlight && b.id === BODEGA_ID} />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* ── Beat 3: Detalle de bodega ── */}
-            {bodegaVisible && (
-              <div style={{ position: "absolute", inset: 0, opacity: bodegaOpacity, transform: `translateY(${bodegaY}px)`, display: "flex", flexDirection: "column" }}>
-                <NavBar />
-                <div style={{ padding: "26px 40px", flex: 1, minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column", gap: 20 }}>
-                  <SectionHeading backLink={ruta.nombre} eyebrow="Bodega" title={bodega.nombre} />
-                  <div style={{ display: "flex", gap: 20 }}>
-                    <div style={{ flex: "0 0 46%", height: 200, borderRadius: 14, background: bodega.swatch }} />
-                    <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8, justifyContent: "center" }}>
-                      <p style={{ margin: 0, fontSize: 14, lineHeight: 1.7, color: ENO.textoMedio, fontFamily: ENO.fontUI }}>{bodega.descripcion}</p>
-                    </div>
-                  </div>
-                  <div>
-                    <p style={{ margin: "0 0 12px", fontSize: 13, fontWeight: 700, letterSpacing: "0.04em", color: ENO.texto, fontFamily: ENO.fontUI }}>Experiencias en esta bodega</p>
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
-                      {bodega.experiencias.map((e) => (
-                        <ExperienceCard key={e.id} experiencia={e} highlight={expCardHighlight && e.id === EXPERIENCIA_ID} />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* ── Beat 4: Experiencia/reserva ── */}
-            {expVisible && (
-              <div style={{ position: "absolute", inset: 0, opacity: expOpacity, transform: `translateY(${expY}px)`, display: "flex", flexDirection: "column" }}>
-                <NavBar />
-                <div style={{ padding: "26px 40px", flex: 1, minHeight: 0, display: "flex", flexDirection: "column", gap: 24 }}>
-                  <SectionHeading backLink={bodega.nombre} eyebrow={`${experiencia.duracion} · ${experiencia.precio}`} title={experiencia.nombre} />
-                  <p style={{ margin: 0, maxWidth: 560, fontSize: 14, lineHeight: 1.7, color: ENO.textoMedio, fontFamily: ENO.fontUI }}>{experiencia.resumen}</p>
-                  <div>
-                    <p style={{ margin: "0 0 12px", fontSize: 13, fontWeight: 700, letterSpacing: "0.04em", color: ENO.texto, fontFamily: ENO.fontUI }}>Elige una fecha</p>
-                    <div style={{ display: "flex", gap: 10 }}>
-                      {["Vie 16", "Sáb 17", "Dom 18", "Vie 23", "Sáb 24"].map((label, i) => (
-                        <DateChip key={label} label={label} active={dateSelected && i === 1} />
-                      ))}
-                    </div>
-                  </div>
-                  <div style={{ marginTop: 6 }}>
-                    <ReserveButton confirmed={reserveConfirmed} pressed={reservePressed} />
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {frame < F.reserveClick + 20 && <SimCursor hops={hops} />}
+          <div style={{ display: "flex", gap: 8 }}>
+            <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#ef5f57" }} />
+            <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#f6bd3b" }} />
+            <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#62c655" }} />
           </div>
-        </BrowserFrame>
+          <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
+            <span style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", background: "rgba(255,255,255,0.08)", borderRadius: 100, padding: "6px 22px", fontFamily: SITE.fontDisplay }}>{url}</span>
+          </div>
+          <div style={{ width: 43 }} />
+        </div>
+        <div style={{ position: "relative", width, height, overflow: "hidden" }}>{children}</div>
       </div>
     </AbsoluteFill>
   );
 }
 
-// ── 4. El resultado ──────────────────────────────────────────────────────────
-export function ResultScene() {
-  return <ChapterCard eyebrow="El resultado" title="Una web pensada para convertir visitas en reservas." titleSize={38} />;
+// One screenshot + its scripted cursor, scaled+panned together by `camera`
+// so the pointer stays glued to whatever it's pointing at while the camera
+// moves.
+function Shot({
+  url,
+  src,
+  alt,
+  shotW,
+  shotH,
+  hops,
+  camera,
+}: {
+  url: string;
+  src: string;
+  alt: string;
+  shotW: number;
+  shotH: number;
+  hops?: CursorHop[];
+  camera: { scale: number; originX: number; originY: number };
+}) {
+  return (
+    <ShotFrame url={url} shotW={shotW} shotH={shotH}>
+      <div style={{ position: "relative", width: "100%", height: "100%", transform: `scale(${camera.scale})`, transformOrigin: `${camera.originX}% ${camera.originY}%` }}>
+        <Img src={staticFile(src)} alt={alt} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+        {hops && <SimCursor hops={hops} />}
+      </div>
+    </ShotFrame>
+  );
 }
 
-// ── 5. Lo que estoy aprendiendo ───────────────────────────────────────────
-export function LearningScene() {
+const WB = 1568; // flowA / flowB screenshots
+const HB = 745;
+const WC = 1568; // flowC screenshots
+const HC = 721;
+
+// ══ Flow A — el buscador global ("encuentra tu plan de enoturismo") ═══════
+// Campo vacío → clic → (corte: "cata" ya escrito, autocompletar real con 6
+// sugerencias) → clic en Buscar → (corte: "11 resultados para cata").
+
+export function FlowA1EmptyScene() {
+  const frame = useCurrentFrame();
+  // Click lands right where "cata" will appear in the next shot — same
+  // point the next shot's cursor rests at, so the cut reads as "typed here".
+  const hops: CursorHop[] = [
+    { from: { x: 60, y: 10 }, to: { x: 60, y: 10 }, fromFrame: 0, toFrame: 8 },
+    { from: { x: 60, y: 10 }, to: { x: 29.6, y: 30.5 }, fromFrame: 8, toFrame: 45, click: true },
+  ];
   return (
-    <ChapterCard
-      eyebrow="02 · Lo que estoy aprendiendo"
-      title="Migrar una base generada por IA a un sistema que el equipo puede mantener sin tocar código."
-      titleSize={34}
+    <Shot
+      url="enoturismo.comunidad.madrid/buscar"
+      src="screenshots/madrid-walkthrough/flowA-01-buscador-vacio.jpg"
+      alt="Buscador de Enoturismo Madrid, campo vacío"
+      shotW={WB}
+      shotH={HB}
+      hops={hops}
+      camera={{ scale: 1, originX: 50, originY: 50 }}
     />
   );
 }
 
-// ── 6. Cierre ────────────────────────────────────────────────────────────
-export function ClosingScene() {
-  return <ChapterCard title="Enoturismo Madrid" line="Comunidad de Madrid · Rutas del vino" titleSize={48} />;
+export function FlowA2AutocompleteScene() {
+  const frame = useCurrentFrame();
+  // Beat 1: push in on the live autocomplete dropdown (the feedback of
+  // typing "cata") while the cursor rests at the end of the typed text.
+  // Beat 2: ease back out, travel to "Buscar", click.
+  const camera = cameraAt(frame, [{ inStart: 8, inEnd: 26, outStart: 50, outEnd: 65, scale: 1.35, originX: 42, originY: 46 }]);
+  const hops: CursorHop[] = [
+    { from: { x: 29.6, y: 30.5 }, to: { x: 29.6, y: 30.5 }, fromFrame: 0, toFrame: 65 },
+    { from: { x: 29.6, y: 30.5 }, to: { x: 72.19, y: 30.54 }, fromFrame: 65, toFrame: 100, click: true },
+  ];
+  return (
+    <Shot
+      url="enoturismo.comunidad.madrid/buscar?q=cata"
+      src="screenshots/madrid-walkthrough/flowA-02-buscador-autocompletar-cata.jpg"
+      alt='Buscador con "cata" escrito y el desplegable de autocompletado con sugerencias reales'
+      shotW={WB}
+      shotH={HB}
+      hops={hops}
+      camera={camera}
+    />
+  );
+}
+
+export function FlowA3ResultsScene() {
+  const frame = useCurrentFrame();
+  const camera = cameraAt(frame, [{ inStart: 10, inEnd: 28, outStart: 57, outEnd: 77, scale: 1.3, originX: 14, originY: 52 }]);
+  return (
+    <Shot
+      url="enoturismo.comunidad.madrid/buscar?q=cata"
+      src="screenshots/madrid-walkthrough/flowA-03-buscador-resultados-11.jpg"
+      alt='Resultados de búsqueda: 11 resultados para "cata", agrupados por tipo'
+      shotW={WB}
+      shotH={HB}
+      camera={camera}
+    />
+  );
+}
+
+// ══ Flow B — descubrir una zona y lo que ofrece ═══════════════════════════
+// Home (hero, 4 zonas) → clic en San Martín de Valdeiglesias → (scroll real
+// a "Conoce el territorio": tarjeta + mapa) → clic en la zona → ficha con
+// "la zona en cifras" → scroll a bodegas reales y rutas de esa zona.
+
+export function FlowB1HomeScene() {
+  const frame = useCurrentFrame();
+  const hops: CursorHop[] = [
+    { from: { x: 45, y: 15 }, to: { x: 45, y: 15 }, fromFrame: 0, toFrame: 8 },
+    { from: { x: 45, y: 15 }, to: { x: 10.59, y: 71.01 }, fromFrame: 8, toFrame: 45, click: true },
+  ];
+  return (
+    <Shot
+      url="enoturismo.comunidad.madrid"
+      src="screenshots/madrid-walkthrough/flowB-01-home-hero-zonas.jpg"
+      alt="Home de Enoturismo Madrid, hero con selector de las 4 zonas vitivinícolas"
+      shotW={WB}
+      shotH={HB}
+      hops={hops}
+      camera={{ scale: 1, originX: 50, originY: 50 }}
+    />
+  );
+}
+
+export function FlowB2TerritoryScene() {
+  const frame = useCurrentFrame();
+  const camera = cameraAt(frame, [{ inStart: 28, inEnd: 42, outStart: 63, outEnd: 77, scale: 1.2, originX: 60.71, originY: 80.94 }]);
+  const hops: CursorHop[] = [
+    { from: { x: 50, y: 15 }, to: { x: 50, y: 15 }, fromFrame: 0, toFrame: 8 },
+    { from: { x: 50, y: 15 }, to: { x: 60.71, y: 80.94 }, fromFrame: 8, toFrame: 48, click: true },
+  ];
+  return (
+    <Shot
+      url="enoturismo.comunidad.madrid"
+      src="screenshots/madrid-walkthrough/flowB-02-mapa-zona-tarjeta.jpg"
+      alt='Sección "Conoce el territorio": tarjeta de San Martín de Valdeiglesias junto al mapa con la zona resaltada'
+      shotW={WB}
+      shotH={HB}
+      hops={hops}
+      camera={camera}
+    />
+  );
+}
+
+export function FlowB3ZoneStatsScene() {
+  const frame = useCurrentFrame();
+  const camera = cameraAt(frame, [{ inStart: 10, inEnd: 28, outStart: 57, outEnd: 77, scale: 1.4, originX: 78.3, originY: 90.3 }]);
+  return (
+    <Shot
+      url="enoturismo.comunidad.madrid/zonas/san-martin-de-valdeiglesias"
+      src="screenshots/madrid-walkthrough/flowB-03-zona-detalle-cifras.jpg"
+      alt='Ficha de San Martín de Valdeiglesias con el panel "La zona en cifras", 12 bodegas'
+      shotW={WB}
+      shotH={HB}
+      camera={camera}
+    />
+  );
+}
+
+export function FlowB4ZoneContentScene() {
+  // Pure glance/payoff: real wineries and routes the zone leads to, already
+  // large and legible at 1x — no zoom needed, per Albert's note not to zoom
+  // by default, only where it helps read something small.
+  return (
+    <Shot
+      url="enoturismo.comunidad.madrid/zonas/san-martin-de-valdeiglesias"
+      src="screenshots/madrid-walkthrough/flowB-04-zona-bodegas-rutas.jpg"
+      alt="Bodegas reales de la zona y el inicio de Rutas en la zona, en la misma ficha"
+      shotW={WB}
+      shotH={HB}
+      camera={{ scale: 1, originX: 50, originY: 50 }}
+    />
+  );
+}
+
+// ══ Flow C — filtrar bodegas y reservar ════════════════════════════════════
+// Directorio sin filtrar (21 bodegas) → clic en el filtro de zona →
+// (corte: filtro aplicado, 7 bodegas encontradas) → ficha de una bodega,
+// clic en "Reservar en la bodega".
+
+export function FlowC1UnfilteredScene() {
+  const frame = useCurrentFrame();
+  const hops: CursorHop[] = [
+    { from: { x: 75, y: 20 }, to: { x: 75, y: 20 }, fromFrame: 0, toFrame: 8 },
+    { from: { x: 75, y: 20 }, to: { x: 48.72, y: 37.73 }, fromFrame: 8, toFrame: 45, click: true },
+  ];
+  return (
+    <Shot
+      url="enoturismo.comunidad.madrid/bodegas"
+      src="screenshots/madrid-walkthrough/flowC-01-bodegas-sin-filtrar-21.jpg"
+      alt="Directorio de bodegas, 21 bodegas encontradas, sin filtrar"
+      shotW={WC}
+      shotH={HC}
+      hops={hops}
+      camera={{ scale: 1, originX: 50, originY: 50 }}
+    />
+  );
+}
+
+export function FlowC2FilteredScene() {
+  const frame = useCurrentFrame();
+  const camera = cameraAt(frame, [{ inStart: 10, inEnd: 28, outStart: 62, outEnd: 82, scale: 1.3, originX: 24, originY: 44 }]);
+  // Cursor stays resting on the zone field it just set — the real state the
+  // live site shows at this point — while the camera is what draws the eye
+  // down to the counter that actually changed, 21 → 7.
+  const hops: CursorHop[] = [{ from: { x: 48.8, y: 37.8 }, to: { x: 48.8, y: 37.8 }, fromFrame: 0, toFrame: 90 }];
+  return (
+    <Shot
+      url="enoturismo.comunidad.madrid/bodegas?zona=san-martin-de-valdeiglesias"
+      src="screenshots/madrid-walkthrough/flowC-02-bodegas-filtradas-7.jpg"
+      alt="Directorio de bodegas filtrado por Subzona San Martín de Valdeiglesias, 7 bodegas encontradas"
+      shotW={WC}
+      shotH={HC}
+      hops={hops}
+      camera={camera}
+    />
+  );
+}
+
+export function FlowC3BookingScene() {
+  const frame = useCurrentFrame();
+  const camera = cameraAt(frame, [{ inStart: 28, inEnd: 43, outStart: 63, outEnd: 78, scale: 1.25, originX: 79.69, originY: 46.12 }]);
+  const hops: CursorHop[] = [
+    { from: { x: 30, y: 25 }, to: { x: 30, y: 25 }, fromFrame: 0, toFrame: 8 },
+    { from: { x: 30, y: 25 }, to: { x: 79.69, y: 46.12 }, fromFrame: 8, toFrame: 48, click: true },
+  ];
+  return (
+    <Shot
+      url="enoturismo.comunidad.madrid/bodegas/bodega-cenicientos"
+      src="screenshots/madrid-walkthrough/flowC-03-bodega-ficha-reservar.jpg"
+      alt='Ficha de Bodega Cenicientos con el panel Reservar visita y el botón "Reservar en la bodega"'
+      shotW={WC}
+      shotH={HC}
+      hops={hops}
+      camera={camera}
+    />
+  );
 }

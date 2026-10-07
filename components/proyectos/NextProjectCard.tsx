@@ -51,7 +51,7 @@ export default function NextProjectCard({ ids }: { ids: [string, string, string]
                   {!project.video && project.cover && (
                     <Image
                       src={project.cover}
-                      alt=""
+                      alt={project.coverAlt?.[lang] ?? ""}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
                       style={{ objectFit: "cover", objectPosition: "center" }}

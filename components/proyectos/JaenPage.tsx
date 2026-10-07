@@ -264,7 +264,7 @@ export default function JaenPage() {
           {/* Background photo */}
           <Image
             src="/covers/cover-jaen.webp"
-            alt=""
+            alt={project.coverAlt?.[lang] ?? ""}
             fill
             priority
             sizes="100vw"

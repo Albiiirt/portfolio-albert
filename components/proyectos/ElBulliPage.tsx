@@ -342,7 +342,7 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
           {/* Cover image — full background */}
           <Image
             src="/covers/cover-elbulli.webp"
-            alt=""
+            alt={project.coverAlt?.[lang] ?? ""}
             fill
             priority
             sizes="100vw"

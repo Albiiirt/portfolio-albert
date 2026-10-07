@@ -6,7 +6,6 @@ import MirazurPage from "@/components/proyectos/MirazurPage";
 import GnossPage from "@/components/proyectos/GnossPage";
 import MadridPage from "@/components/proyectos/MadridPage";
 import CastelleraPage from "@/components/proyectos/CastelleraPage";
-import LaRiojaPage from "@/components/proyectos/LaRiojaPage";
 import XuntaGaliciaPage from "@/components/proyectos/XuntaGaliciaPage";
 import { projects } from "@/data/projects";
 
@@ -19,7 +18,6 @@ const pages: Record<string, PageComponent> = {
   "gnoss-ai": GnossPage,
   madrid: MadridPage,
   castellera: CastelleraPage,
-  "la-rioja-turismo": LaRiojaPage,
   "xunta-galicia": XuntaGaliciaPage,
 };
 

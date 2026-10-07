@@ -3,13 +3,13 @@
 import { useState, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
-import { useLang } from "@/lib/LanguageContext";
+import { useLang, type Lang } from "@/lib/LanguageContext";
 import { t } from "@/data/translations";
 import { projects } from "@/data/projects";
 import { EASE } from "@/lib/animations";
 import Image from "next/image";
 
-const FEATURED_IDS = ["elbulli", "xunta-galicia", "madrid", "mirazur", "la-rioja-turismo"];
+const FEATURED_IDS = ["elbulli", "xunta-galicia", "madrid", "mirazur"];
 const featured = FEATURED_IDS.map((id) => projects.find((p) => p.id === id)!).filter(Boolean);
 
 const cardVariants = {
@@ -18,7 +18,7 @@ const cardVariants = {
   exit: (dir: number) => ({ y: dir * -50, opacity: 0 }),
 };
 
-function AccordionCard({ p, lang, viewCase }: { p: typeof featured[0]; lang: string; viewCase: string }) {
+function AccordionCard({ p, lang, viewCase }: { p: typeof featured[0]; lang: Lang; viewCase: string }) {
   return (
     <Link href={`/proyectos/${p.id}`} className="cursor-hidden" style={{ display: "block", textDecoration: "none" }}>
       <div style={{
@@ -37,7 +37,7 @@ function AccordionCard({ p, lang, viewCase }: { p: typeof featured[0]; lang: str
           </video>
         )}
         {!p.video && p.cover && (
-          <Image src={p.cover} alt="" fill sizes="100vw"
+          <Image src={p.cover} alt={p.coverAlt?.[lang] ?? ""} fill sizes="100vw"
             style={{ objectFit: "cover", objectPosition: "center" }} />
         )}
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.78) 50%, rgba(0,0,0,0.15) 75%, transparent 100%)" }} />
@@ -241,7 +241,7 @@ export default function WorkSection() {
                       </video>
                     )}
                     {!project.video && project.cover && (
-                      <Image src={project.cover} alt="" fill
+                      <Image src={project.cover} alt={project.coverAlt?.[lang] ?? ""} fill
                         sizes="(max-width: 768px) 100vw, 66vw"
                         style={{ objectFit: "cover", objectPosition: "center" }} />
                     )}

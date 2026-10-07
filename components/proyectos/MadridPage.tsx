@@ -8,6 +8,7 @@ import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
+import MadridWalkthroughVideo from "@/components/proyectos/MadridWalkthroughVideo";
 import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
@@ -313,6 +314,8 @@ export default function MadridPage() {
             </div>
           </div>
         </section>
+
+        <MadridWalkthroughVideo project={project} />
 
         {/* ── El resultado ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>

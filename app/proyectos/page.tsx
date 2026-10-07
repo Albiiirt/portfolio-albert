@@ -14,7 +14,7 @@ import { t } from "@/data/translations";
 import { projects } from "@/data/projects";
 import { EASE } from "@/lib/animations";
 
-const PINNED_PROJECT_IDS = ["elbulli", "xunta-galicia", "madrid", "mirazur", "la-rioja-turismo"];
+const PINNED_PROJECT_IDS = ["elbulli", "xunta-galicia", "madrid", "mirazur"];
 const orderedProjects = [...projects].sort((a, b) => {
   const aIndex = PINNED_PROJECT_IDS.indexOf(a.id);
   const bIndex = PINNED_PROJECT_IDS.indexOf(b.id);
@@ -60,7 +60,7 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
           ) : (
             <Image
               src={project.cover!}
-              alt=""
+              alt={project.coverAlt?.[lang] ?? ""}
               fill
               sizes="(max-width: 640px) 100vw, 50vw"
               style={{ objectFit: "cover", objectPosition: "center" }}

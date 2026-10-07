@@ -149,6 +149,9 @@ export type Project = {
   gradient: string;
   accentColor: string;
   cover?: string;
+  // Alt text for `cover` — read by the card/listing/hero images that show
+  // it. Only filled in for projects that actually have a `cover` image.
+  coverAlt?: LocalizedText;
   video?: string;
   screens?: ProjectScreen[];
   screensFrame?: "mobile" | "desktop";
@@ -194,6 +197,11 @@ export const projects: Project[] = [
     gradient: "linear-gradient(135deg, #080e1a 0%, #0d1b2e 60%, #162a42 100%)",
     accentColor: "#4a8fcc",
     cover: "/covers/cover-elbulli.webp",
+    coverAlt: {
+      en: "White line illustration of a modern building with mountains in the background, on a dark blue backdrop — cover for the elBulli Foundation project.",
+      es: "Ilustración en blanco de un edificio moderno con montañas al fondo, sobre un fondo azul oscuro — portada del proyecto de la Fundació elBulli.",
+      ca: "Il·lustració en blanc d'un edifici modern amb muntanyes al fons, sobre un fons blau fosc — portada del projecte de la Fundació elBulli.",
+    },
     heroTagline: {
       en: "a custom digital environment for elBulli's legacy",
       es: "un entorno digital a medida para el legado de elBulli",
@@ -217,9 +225,9 @@ export const projects: Project[] = [
           ca: "L'arxiu de la Fundació elBulli és un monument digital viu a un dels restaurants més influents de la història, amb centenars de pàgines i contingut que no deixa de créixer. El repte de producte: donar a l'equip editorial la capacitat de publicar contingut nou sense dependre d'un desenvolupador cada vegada, sense trencar la consistència visual de l'arxiu.",
         },
         process: {
-          en: "We started in Figma, but the process quickly moved to being done entirely in Claude. I designed and maintained the design system, and made the call to model it as reusable content blocks in Strapi — dish entries, timelines, galleries, quotes — each with its own visual rules inherited from the system. That lets the editorial team combine blocks and publish without needing me for every new page. I also designed and coded specific pages of the archive myself.",
-          es: "Empezamos en Figma, pero el proceso pasó pronto a hacerse por completo en Claude. Diseñé y mantuve el sistema de diseño, y tomé la decisión de modelarlo como bloques de contenido reutilizables en Strapi — fichas de platos, cronologías, galerías, citas — cada uno con sus propias reglas visuales heredadas del sistema. Así el equipo editorial puede combinar bloques y publicar sin depender de mí para cada página nueva. Además diseñé y construí en código páginas concretas del archivo.",
-          ca: "Vam començar a Figma, però el procés va passar aviat a fer-se del tot a Claude. Vaig dissenyar i mantenir el sistema de disseny, i vaig prendre la decisió de modelar-lo com a blocs de contingut reutilitzables a Strapi — fitxes de plats, cronologies, galeries, cites — cadascun amb les seves pròpies regles visuals heretades del sistema. Així l'equip editorial pot combinar blocs i publicar sense dependre de mi per a cada pàgina nova. A més, vaig dissenyar i construir en codi pàgines concretes de l'arxiu.",
+          en: "We started in Figma, but the process quickly moved to being done entirely in Claude. I designed and maintained the design system (a set of reusable visual rules, so that any new page stays consistent with the rest), and made the call to model it as reusable content blocks in Strapi, a content manager (CMS) that keeps information separate from code — dish entries, timelines, galleries, quotes — each with its own visual rules inherited from the system. That lets the editorial team combine blocks and publish without needing me for every new page. I also designed and coded specific pages of the archive myself.",
+          es: "Empezamos en Figma, pero el proceso pasó pronto a hacerse por completo en Claude. Diseñé y mantuve el sistema de diseño (un conjunto de reglas visuales reutilizables, para que cualquier página nueva se vea coherente con el resto), y tomé la decisión de modelarlo como bloques de contenido reutilizables en Strapi, un gestor de contenido (CMS) que separa la información del código — fichas de platos, cronologías, galerías, citas — cada uno con sus propias reglas visuales heredadas del sistema. Así el equipo editorial puede combinar bloques y publicar sin depender de mí para cada página nueva. Además diseñé y construí en código páginas concretas del archivo.",
+          ca: "Vam començar a Figma, però el procés va passar aviat a fer-se del tot a Claude. Vaig dissenyar i mantenir el sistema de disseny (un conjunt de regles visuals reutilitzables, perquè qualsevol pàgina nova es vegi coherent amb la resta), i vaig prendre la decisió de modelar-lo com a blocs de contingut reutilitzables a Strapi, un gestor de contingut (CMS) que separa la informació del codi — fitxes de plats, cronologies, galeries, cites — cadascun amb les seves pròpies regles visuals heretades del sistema. Així l'equip editorial pot combinar blocs i publicar sense dependre de mi per a cada pàgina nova. A més, vaig dissenyar i construir en codi pàgines concretes de l'arxiu.",
         },
         result: {
           en: "A design and content system that doubles as a CMS: the archive grows with new pages without losing visual consistency, and the team edits and publishes on its own thanks to the Strapi structure.",
@@ -354,6 +362,11 @@ export const projects: Project[] = [
     gradient: "linear-gradient(135deg, #001515 0%, #0d3d3d 60%, #2a8c8c 100%)",
     accentColor: "#2a8c8c",
     cover: "/covers/cover-xunta.svg",
+    coverAlt: {
+      en: "Cover with the Xunta de Galicia logo in white on a teal gradient background.",
+      es: "Portada con el logotipo de la Xunta de Galicia en blanco sobre un fondo degradado verde azulado.",
+      ca: "Portada amb el logotip de la Xunta de Galicia en blanc sobre un fons degradat verd blavós.",
+    },
     heroTagline: {
       en: "a custom product designed around a real day-to-day task",
       es: "un producto a medida diseñado a partir de una tarea real del día a día",
@@ -463,6 +476,11 @@ export const projects: Project[] = [
     gradient: "linear-gradient(135deg, #1a0a0f 0%, #4a1528 60%, #8c3a5a 100%)",
     accentColor: "#8c3a5a",
     cover: "/covers/cover-madrid.webp",
+    coverAlt: {
+      en: "Sunlit clusters of dark grapes hanging from a vine — cover image for the Enoturismo Madrid project.",
+      es: "Racimos de uva tinta iluminados por el sol colgando de una vid — imagen de portada del proyecto Enoturismo Madrid.",
+      ca: "Raïms negres il·luminats pel sol penjant d'una vinya — imatge de portada del projecte Enoturisme Madrid.",
+    },
     video: "/covers/madrid.mp4",
     heroTagline: {
       en: "design, development and UX for Madrid's wine routes",
@@ -536,9 +554,9 @@ export const projects: Project[] = [
     category: { en: "Web Design", es: "Diseño Web", ca: "Disseny Web" },
     year: "2026",
     problem: {
-      en: "Jaén's tourism portal — one of Spain's most heritage-rich destinations — needed a full redesign that could handle hundreds of pages, crossing categories and massive content without losing clarity.",
-      es: "El portal de turismo de Jaén — uno de los destinos con más patrimonio de España — necesitaba un rediseño completo capaz de gestionar cientos de páginas, categorías cruzadas y contenido denso sin perder claridad.",
-      ca: "El portal de turisme de Jaén — una de les destinacions amb més patrimoni d'Espanya — necessitava un redisseny complet capaç de gestionar centenars de pàgines, categories creuades i contingut dens sense perdre claredat.",
+      en: "Jaén's tourism portal — one of Spain's most heritage-rich destinations — needed a full redesign that could handle hundreds of pages, crossing categories and massive content without losing clarity. The project came in after a brief collaboration on an already-mature tourism project in La Rioja — that's where the client saw how I worked, and the contact for Jaén grew out of it.",
+      es: "El portal de turismo de Jaén — uno de los destinos con más patrimonio de España — necesitaba un rediseño completo capaz de gestionar cientos de páginas, categorías cruzadas y contenido denso sin perder claridad. El encargo llegó después de una colaboración puntual en un proyecto turístico de La Rioja que ya estaba maduro cuando me incorporé — fue ahí donde el cliente vio cómo trabajaba, y de esa colaboración salió el contacto para Jaén.",
+      ca: "El portal de turisme de Jaén — una de les destinacions amb més patrimoni d'Espanya — necessitava un redisseny complet capaç de gestionar centenars de pàgines, categories creuades i contingut dens sense perdre claredat. L'encàrrec va arribar després d'una col·laboració puntual en un projecte turístic de La Rioja que ja estava madur quan m'hi vaig incorporar — va ser allà on el client va veure com treballava, i d'aquesta col·laboració en va sortir el contacte per a Jaén.",
     },
     process: {
       en: "Designed in Figma, we tried several full-page proposals, thinking first about how content would be navigated and organised, not just how it would look. Once that direction was set, we built the component system to support it. Code implementation is handled by an internal colleague from the same studio.",
@@ -559,6 +577,11 @@ export const projects: Project[] = [
     gradient: "linear-gradient(135deg, #2d1b00 0%, #6b3a1f 60%, #c4813a 100%)",
     accentColor: "#c4813a",
     cover: "/covers/cover-jaen.webp",
+    coverAlt: {
+      en: "Dusk view over Jaén's cathedral and old town, with mountains in the background.",
+      es: "Vista del atardecer sobre la catedral y el casco antiguo de Jaén, con las montañas al fondo.",
+      ca: "Vista del capvespre sobre la catedral i el nucli antic de Jaén, amb les muntanyes al fons.",
+    },
     heroTagline: {
       en: "redesign of the province's tourism portal",
       es: "rediseño del portal de turismo de la provincia",
@@ -567,6 +590,7 @@ export const projects: Project[] = [
     meta: [
       { labelKey: "client", value: "Turismo de Jaén" },
       { labelKey: "year", value: "2026" },
+      { labelKey: "status", value: status.inProduction },
       { labelKey: "duration", value: { en: "2 – 3 months", es: "2 – 3 meses", ca: "2 – 3 mesos" } },
       { labelKey: "role", value: { en: "Web design · UX · Figma", es: "Diseño web · UX · Figma", ca: "Disseny web · UX · Figma" } },
       { labelKey: "stack", value: "Figma" },
@@ -667,6 +691,11 @@ export const projects: Project[] = [
     accentColor: "#7aad3a",
     video: "/covers/mirazur.mp4",
     cover: "/covers/cover-mirazur.webp",
+    coverAlt: {
+      en: "Close-up of rosemary and thyme sprigs on a pale green surface — cover image for the Mirazur project.",
+      es: "Primer plano de ramas de romero y tomillo sobre una superficie verde clara — imagen de portada del proyecto Mirazur.",
+      ca: "Primer pla de branquetes de romaní i farigola sobre una superfície verda clara — imatge de portada del projecte Mirazur.",
+    },
     heroTagline: {
       en: "recipe portal and experience landing",
       es: "portal de recetas y landing de experiencia",
@@ -709,13 +738,11 @@ export const projects: Project[] = [
           es: "Construí la página yo mismo con Claude Design, trabajando en varias rondas de revisión directas con el cliente, y propuse qué campos debía llevar el formulario para que la captación de datos fuera legal.",
           ca: "Vaig construir la pàgina jo mateix amb Claude Design, treballant en diverses rondes de revisió directes amb el client, i vaig proposar quins camps havia de portar el formulari perquè la captació de dades fos legal.",
         },
-        // Intentionally empty: Albert asked for the "El resultado" sub-section
-        // to not render at all on the "cupón" tab (MirazurPage hides that
-        // block when activeSubProject.result[lang] is falsy). Kept as an
-        // empty LocalizedText rather than making the field optional, so the
-        // shared SubProject type (also used by ElBulliPage, which always
-        // renders activeSubProject.result) doesn't need to change.
-        result: { en: "", es: "", ca: "" },
+        result: {
+          en: "The design was validated by the client and is ready to move into development.",
+          es: "El diseño quedó validado por el cliente y listo para pasar a desarrollo.",
+          ca: "El disseny va quedar validat pel client i llest per passar a desenvolupament.",
+        },
         tags: ["Claude Design"],
         meta: [
           { labelKey: "status", value: { en: "Design completed", es: "Diseño completado", ca: "Disseny completat" } },
@@ -762,11 +789,11 @@ export const projects: Project[] = [
           es: "Aquí el foco fue aprender a afinar el oficio en Figma — ajustar y personalizar bien el diseño, más que cerrar el proyecto.",
           ca: "Aquí el focus va ser polir l'ofici a Figma — ajustar i personalitzar bé el disseny, més que tancar el projecte.",
         },
-        // Intentionally empty, same treatment as "cupón" below: Albert asked
-        // for "El resultado" to not render on this tab either (both Mirazur
-        // tabs now only show "El enfoque"). MirazurPage hides the whole
-        // block when activeSubProject.result[lang] is falsy.
-        result: { en: "", es: "", ca: "" },
+        result: {
+          en: "The project was put on hold by the client; what was designed up to that point is documented here.",
+          es: "El proyecto quedó en pausa por parte del cliente; lo diseñado hasta ese punto queda documentado aquí.",
+          ca: "El projecte va quedar en pausa per part del client; el que es va dissenyar fins a aquell punt queda documentat aquí.",
+        },
         tags: ["Figma"],
         meta: [
           { labelKey: "status", value: { en: "On hold", es: "En pausa", ca: "En pausa" } },
@@ -829,6 +856,11 @@ export const projects: Project[] = [
     gradient: "linear-gradient(135deg, #1a2a0a 0%, #2d5c1a 50%, #c4a35a 100%)",
     accentColor: "#c4a35a",
     cover: "/covers/cover-gnoss.svg",
+    coverAlt: {
+      en: "Cover with the GNOSS logo in white on a dark background.",
+      es: "Portada con el logotipo de GNOSS en blanco sobre un fondo oscuro.",
+      ca: "Portada amb el logotip de GNOSS en blanc sobre un fons fosc.",
+    },
     heroTagline: {
       en: "maintaining and expanding a web design system",
       es: "mantenimiento y expansión de un sistema de diseño web",
@@ -902,86 +934,6 @@ export const projects: Project[] = [
           ca: "Treballar directament amb l'equip de GNOSS — resolent comentaris a Figma i per correu — es va assemblar molt a formar part d'un equip extern: vaig aprendre a explicar decisions de disseny i a negociar canvis amb gent que no compartia el meu context del dia a dia.",
         },
       ],
-    },
-  },
-  {
-    id: "la-rioja-turismo",
-    num: "08",
-    title: { en: "La Rioja Turismo", es: "La Rioja Turismo", ca: "La Rioja Turisme" },
-    category: { en: "Web Design", es: "Diseño Web", ca: "Disseny Web" },
-    year: "2026",
-    problem: {
-      en: "A tourism portal that needed to match the identity of a destination with strong personality — already underway when I joined.",
-      es: "Un portal de turismo que tenía que estar a la altura de un destino con personalidad propia — ya en marcha cuando me incorporé.",
-      ca: "Un portal de turisme que havia d'estar a l'altura d'una destinació amb personalitat pròpia — ja en marxa quan m'hi vaig incorporar.",
-    },
-    process: {
-      en: "Designed specific pages in Figma within the visual system already established by the studio. Delivered to development for implementation.",
-      es: "Diseñé páginas concretas en Figma dentro del sistema visual ya establecido por el estudio. Se mandó a desarrollo para su implementación.",
-      ca: "Vaig dissenyar pàgines concretes a Figma dins del sistema visual ja establert per l'estudi. Es va enviar a desenvolupament per a la seva implementació.",
-    },
-    result: {
-      en: "The project that led Turismo de Jaén to contact the studio — a direct follow-on from this work.",
-      es: "El proyecto que llevó a Turismo de Jaén a contactar con el estudio — un encargo que nació directamente de este.",
-      ca: "El projecte que va portar a Turisme de Jaén a contactar amb l'estudi — un encàrrec que va néixer directament d'aquest.",
-    },
-    description: {
-      en: "Web design for La Rioja's tourism portal — page design in Figma within an existing visual system, sent to development. The project that generated Turisme Jaén.",
-      es: "Diseño web para el portal de turismo de La Rioja — páginas en Figma dentro de un sistema visual existente, enviado a desarrollo. El proyecto que generó Turisme Jaén.",
-      ca: "Disseny web per al portal de turisme de La Rioja — pàgines a Figma dins d'un sistema visual existent, enviat a desenvolupament. El projecte que va generar Turisme Jaén.",
-    },
-    tags: ["Figma", "Web Design", "Tourism"],
-    gradient: "linear-gradient(135deg, #1a0010 0%, #5c1a3a 60%, #b5386e 100%)",
-    accentColor: "#b5386e",
-    cover: "/covers/cover-rioja.webp",
-    heroTagline: {
-      en: "page design for La Rioja's tourism portal",
-      es: "diseño de páginas para el portal turístico de La Rioja",
-      ca: "disseny de pàgines per al portal turístic de La Rioja",
-    },
-    meta: [
-      { labelKey: "client", value: "La Rioja Turismo" },
-      { labelKey: "year", value: "2026" },
-      { labelKey: "status", value: status.completed },
-      { labelKey: "role", value: { en: "Web design · Figma", es: "Diseño web · Figma", ca: "Disseny web · Figma" } },
-      { labelKey: "stack", value: "Figma" },
-      { labelKey: "studio", value: "Dosgrapas" },
-    ],
-    page: {
-      workHeading: { en: "Joining a project already underway", es: "Entrar en un proyecto en marcha", ca: "Entrar en un projecte en marxa" },
-      workCards: [
-        {
-          label: { en: "Page design", es: "Diseño de páginas", ca: "Disseny de pàgines" },
-          desc: {
-            en: "I designed specific pages of the portal in Figma, within the visual system already established by the studio.",
-            es: "Diseñé páginas concretas del portal en Figma, dentro del sistema visual ya establecido por el estudio.",
-            ca: "Vaig dissenyar pàgines concretes del portal a Figma, dins del sistema visual ja establert per l'estudi.",
-          },
-        },
-        {
-          label: { en: "System coherence", es: "Coherencia de sistema", ca: "Coherència de sistema" },
-          desc: {
-            en: "Every new page had to fit the existing visual language — same components, same rhythm, same tone.",
-            es: "Cada página nueva tenía que encajar con el lenguaje visual existente — mismos componentes, mismo ritmo, mismo tono.",
-            ca: "Cada pàgina nova havia d'encaixar amb el llenguatge visual existent — mateixos components, mateix ritme, mateix to.",
-          },
-        },
-        {
-          label: { en: "Figma → Development", es: "Figma → Desarrollo", ca: "Figma → Desenvolupament" },
-          desc: {
-            en: "The design was delivered in Figma and sent to development by the studio's production team.",
-            es: "El diseño se entregó en Figma y se mandó a desarrollo por el equipo de producción del estudio.",
-            ca: "El disseny es va lliurar a Figma i es va enviar a desenvolupament per l'equip de producció de l'estudi.",
-          },
-        },
-      ],
-      resultHeading: { en: "The project that opened the door to Jaén", es: "El proyecto que abrió la puerta a Jaén", ca: "El projecte que va obrir la porta a Jaén" },
-      closingLink: {
-        prefix: { en: "The Jaén project — ", es: "El proyecto de Jaén — ", ca: "El projecte de Jaén — " },
-        linkText: { en: "which you can see here", es: "que puedes ver aquí", ca: "que pots veure aquí" },
-        suffix: { en: " — is a direct descendant of this one.", es: " — es directamente heredero de este.", ca: " — és hereu directe d'aquest." },
-        href: "/proyectos/turisme-jaen",
-      },
     },
   },
   {

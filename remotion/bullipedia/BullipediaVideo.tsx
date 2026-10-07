@@ -15,10 +15,10 @@ const SCENES: { key: string; dur: number; Comp: React.ComponentType }[] = [
   { key: "catalogo", dur: 150, Comp: CatalogScene },
   { key: "libro", dur: 180, Comp: BookPageScene },
   { key: "capitulo", dur: 210, Comp: ChapterScene },
-  { key: "articulo", dur: 240, Comp: ArticleScene },
+  { key: "articulo", dur: 330, Comp: ArticleScene }, // extended to scroll as far as "Recursos del capítulo"
 ];
 
-export const TOTAL_DURATION = SCENES.reduce((sum, s) => sum + s.dur, 0); // 780 @ 30fps == 26s
+export const TOTAL_DURATION = SCENES.reduce((sum, s) => sum + s.dur, 0); // 870 @ 30fps == 29s
 
 function CrossfadeLayer({ dur, fadeIn, fadeOut, children }: { dur: number; fadeIn: boolean; fadeOut: boolean; children: React.ReactNode }) {
   const frame = useCurrentFrame();

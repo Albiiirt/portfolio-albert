@@ -270,4 +270,29 @@ export function SectionLabel({ children, color = BULLIPEDIA.greenDark }: { child
   return <span style={{ fontSize: TEXT.eyebrow, fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color }}>{children}</span>;
 }
 
+// ── Resource card — the "Recursos del capítulo" grid (public/mockups/
+// bullipedia-html/4-articulo-el-sapiens-de-la-rg.html, end of <article>):
+// each chapter's original resources (links, PDFs — the budget spreadsheets/
+// images/videos the case study is about) sit right under the article text,
+// not on a separate screen. Static card, no hover state (not interactive
+// here), optionally highlighted while the camera lingers on it. ──
+export function ResourceCard({ kind, label, highlight }: { kind: string; label: string; highlight?: boolean }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 6,
+        padding: "14px 16px 16px",
+        border: `1px solid ${highlight ? BULLIPEDIA.navy : BULLIPEDIA.rule}`,
+        boxShadow: highlight ? "0 12px 28px rgba(0,0,0,.09)" : "none",
+        transform: highlight ? "translateY(-2px)" : "none",
+      }}
+    >
+      <span style={{ fontSize: TEXT.label, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: BULLIPEDIA.greenDark }}>{kind}</span>
+      <span style={{ fontFamily: FONT_FAMILY, fontSize: 15, lineHeight: 1.2, fontWeight: 600, color: BULLIPEDIA.navy }}>{label}</span>
+    </div>
+  );
+}
+
 export const fontStyle = { fontFamily: FONT_FAMILY } as const;
