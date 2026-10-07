@@ -533,21 +533,31 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
                   </div>
                   {activeSubProject.meta && (
                     <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-                      {activeSubProject.meta.map((item, i) => (
-                        <div key={i} style={{
-                          display: "grid", gridTemplateColumns: "120px 1fr",
-                          padding: "0.9rem 0",
-                          borderBottom: i < activeSubProject.meta!.length - 1 ? "1px solid var(--border)" : "none",
-                          gap: "1rem",
-                        }}>
-                          <span style={{ fontSize: "0.67rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text-subtle)" }}>
-                            {item.labelKey ? t[lang].projectPage.metaLabels[item.labelKey] : item.label![lang]}
-                          </span>
-                          <span style={{ fontSize: "0.88rem", color: "var(--text-muted)", fontWeight: 500 }}>
-                            {typeof item.value === "string" ? item.value : item.value[lang]}
-                          </span>
-                        </div>
-                      ))}
+                      {activeSubProject.meta.map((item, i) => {
+                        const label = item.labelKey ? t[lang].projectPage.metaLabels[item.labelKey] : item.label![lang];
+                        const value = typeof item.value === "string" ? item.value : item.value[lang];
+                        return (
+                          <div key={i} style={{
+                            display: "grid", gridTemplateColumns: "120px 1fr",
+                            padding: "0.9rem 0",
+                            borderBottom: i < activeSubProject.meta!.length - 1 ? "1px solid var(--border)" : "none",
+                            gap: "1rem",
+                          }}>
+                            <span style={{ fontSize: "0.67rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text-subtle)" }}>
+                              {label}
+                            </span>
+                            {item.href ? (
+                              <a href={item.href} target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.88rem", color: ACCENT, fontWeight: 600, textDecoration: "none", borderBottom: `1px solid ${ACCENT}55`, paddingBottom: "1px", width: "fit-content" }}>
+                                {value} ↗
+                              </a>
+                            ) : (
+                              <span style={{ fontSize: "0.88rem", color: "var(--text-muted)", fontWeight: 500 }}>
+                                {value}
+                              </span>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
