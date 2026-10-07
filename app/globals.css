@@ -222,6 +222,11 @@ html { scroll-behavior: auto; background: var(--bg); }
 
   /* Project page back link: smaller */
   .proj-back { font-size: 0.65rem !important; }
+
+  /* About: skill pills need a 44px min touch target on mobile — grow
+     vertical padding only here, keep desktop pill size as-is */
+  .skill-pill { padding: 0.6rem 0.78rem !important; }
+  .skill-list { row-gap: 0.85rem !important; }
 }
 
 body {
@@ -509,6 +514,36 @@ html.custom-cursor-active .cursor-hidden {
   font-weight: 600;
   letter-spacing: 0.05em;
   color: var(--tag-text);
+}
+
+/* ── Skill pill (About — expandable button) ──
+   Resets only font/cursor on the native <button> (never all: unset, which
+   would strip the global :focus-visible ring). border/background are reset
+   explicitly too, but by .tag / .tag-featured below — their class selectors
+   already outrank the UA <button> element style, so the native chrome never
+   shows regardless of which skill pill variant is used. */
+.skill-pill {
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+/* Featured skill variant — same size/padding/radius as .tag, inverted fill */
+.tag-featured {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.78rem;
+  background: var(--btn-invert-bg);
+  border: none;
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--btn-invert-text);
+  transition: background 0.2s;
+}
+.tag-featured:hover {
+  background: var(--btn-invert-bg-hover);
 }
 
 /* ── Cursor ── */

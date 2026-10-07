@@ -149,11 +149,24 @@ export default function CvPage() {
               <FadeInView delay={0.15}>
                 <div>
                   <p className="section-label" style={{ marginBottom: "1rem" }}>{tx.skillsLabel}</p>
-                  <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.45rem" }}>
+                  <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.7rem" }}>
                     {skills.map((s) => (
-                      <li key={s.text} style={{ fontSize: "0.82rem", color: "var(--text-muted)", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                        <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "var(--text-subtle)", flexShrink: 0 }} />
-                        {s.text}
+                      <li key={s.text} style={{ display: "flex", alignItems: "flex-start", gap: "0.5rem" }}>
+                        <span style={{ width: "4px", height: "4px", borderRadius: "50%", marginTop: "0.42em", background: s.featured ? "var(--text)" : "var(--text-subtle)", flexShrink: 0 }} />
+                        <div>
+                          <p style={{
+                            margin: 0,
+                            fontSize: "0.82rem",
+                            lineHeight: 1.4,
+                            color: s.featured ? "var(--text)" : "var(--text-muted)",
+                            fontWeight: s.featured ? 700 : 500,
+                          }}>
+                            {s.text}
+                          </p>
+                          <p style={{ margin: "0.2rem 0 0", fontSize: "0.72rem", lineHeight: 1.45, color: "var(--text-subtle)" }}>
+                            {s.desc}
+                          </p>
+                        </div>
                       </li>
                     ))}
                   </ul>
