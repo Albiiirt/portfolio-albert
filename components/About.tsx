@@ -34,7 +34,6 @@ export default function About() {
   const tx = t[lang].about;
   const [headingA, headingB] = tx.heading.split("\n");
   const [openSkill, setOpenSkill] = useState<number | null>(null);
-  const activeSkill = openSkill !== null ? tx.skills[openSkill] : null;
 
   return (
     <section
@@ -66,43 +65,82 @@ export default function About() {
             <p style={{ fontSize: "0.95rem", lineHeight: 1.6, color: "var(--text-muted)", marginTop: "1.5rem", maxWidth: "34rem" }}>
               {tx.intro}
             </p>
-            <ul className="skill-list" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", rowGap: "0.6rem", columnGap: "0.5rem", marginTop: "1.25rem", listStyle: "none", padding: 0 }}>
+            <ul className="skill-list" style={{ listStyle: "none", padding: 0, margin: "1.25rem 0 0" }}>
               {tx.skills.map((skill, i) => {
                 const isOpen = openSkill === i;
-                const isDimmed = openSkill !== null && !isOpen;
+                const descId = `skill-desc-${i}`;
+                // Data already lists the 4 featured skills first, then the
+                // 6 standard ones — the only extra gap is the boundary
+                // between those two groups, no new heading/copy needed.
+                const isGroupBoundary = skill.featured && !tx.skills[i + 1]?.featured;
                 return (
-                  <li key={skill.text} style={{ display: "flex", alignItems: "center" }}>
+                  <li
+                    key={skill.text}
+                    style={{
+                      borderBottom: "1px solid var(--border-mid)",
+                      paddingBottom: isGroupBoundary ? "1.8rem" : "0.9rem",
+                    }}
+                  >
                     <button
                       type="button"
-                      className={`skill-pill ${skill.featured ? "tag-featured" : "tag"}`}
+                      id={`skill-row-${i}`}
+                      className="skill-row"
                       onClick={() => setOpenSkill(isOpen ? null : i)}
                       aria-expanded={isOpen}
-                      aria-controls="skill-description"
-                      style={{ gap: "0.4rem", opacity: isDimmed ? 0.4 : 1, transition: "opacity 0.3s ease" }}
+                      aria-controls={descId}
                     >
-                      {skill.text}
-                      <SkillArrowIcon open={isOpen} />
+                      <span style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
+                        <span
+                          aria-hidden="true"
+                          style={{
+                            width: "4px",
+                            height: "4px",
+                            borderRadius: "50%",
+                            flexShrink: 0,
+                            background: skill.featured ? "var(--text)" : "var(--text-subtle)",
+                          }}
+                        />
+                        <span
+                          style={{
+                            fontSize: "0.85rem",
+                            fontWeight: skill.featured ? 700 : 500,
+                            color: skill.featured ? "var(--text)" : "var(--text-muted)",
+                          }}
+                        >
+                          {skill.text}
+                        </span>
+                      </span>
+                      <span className="skill-row-arrow">
+                        <SkillArrowIcon open={isOpen} />
+                      </span>
                     </button>
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          id={descId}
+                          style={{ overflow: "hidden" }}
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.32, ease: EASE }}
+                        >
+                          <p
+                            style={{
+                              fontSize: "0.8rem",
+                              lineHeight: 1.5,
+                              color: "var(--text-subtle)",
+                              margin: "0 0 0.5rem",
+                              paddingLeft: "calc(4px + 0.65rem)",
+                            }}
+                          >
+                            {skill.desc}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </li>
                 );
               })}
-              <AnimatePresence initial={false}>
-                {activeSkill && (
-                  <motion.li
-                    key="skill-description"
-                    id="skill-description"
-                    style={{ listStyle: "none", flexBasis: "100%", overflow: "hidden" }}
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.32, ease: EASE }}
-                  >
-                    <p style={{ fontSize: "0.78rem", lineHeight: 1.5, color: "var(--text-muted)", maxWidth: "36rem", margin: "0.6rem 0 0" }}>
-                      {activeSkill.desc}
-                    </p>
-                  </motion.li>
-                )}
-              </AnimatePresence>
             </ul>
           </FadeInView>
 
