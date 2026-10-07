@@ -872,6 +872,7 @@ export const projects: Project[] = [
       { labelKey: "status", value: status.completed },
       { labelKey: "role", value: { en: "Web & content design · Client collaboration", es: "Diseño web y de contenido · Colaboración con cliente", ca: "Disseny web i de contingut · Col·laboració amb client" } },
       { labelKey: "stack", value: "Figma" },
+      { labelKey: "web", value: "gnoss.com", href: "https://gnoss.com/" },
     ],
     page: {
       challengeHeading: {
@@ -966,6 +967,12 @@ export const projects: Project[] = [
     gradient: "linear-gradient(135deg, #1a0808 0%, #3d1010 60%, #7a2020 100%)",
     accentColor: "#b84040",
     video: "/covers/tritoners.mp4",
+    cover: "/covers/cover-castellera.webp",
+    coverAlt: {
+      en: "Members of the Colla Castellera del Baix Montseny, in blue shirts with red kerchiefs, gathered together with arms raised before building a human tower — temporary cover frame grabbed from the project video, pending a proper photo.",
+      es: "Miembros de la Colla Castellera del Baix Montseny, con camisa azul y pañuelo rojo, reunidos con los brazos en alto antes de levantar un castell — fotograma provisional sacado del vídeo del proyecto, a la espera de una foto definitiva.",
+      ca: "Membres de la Colla Castellera del Baix Montseny, amb camisa blava i mocador vermell, reunits amb els braços enlaire abans d'aixecar un castell — fotograma provisional tret del vídeo del projecte, a l'espera d'una foto definitiva.",
+    },
     heroTagline: {
       en: "design, development and launch of their website",
       es: "diseño, desarrollo y puesta en marcha de su web",
