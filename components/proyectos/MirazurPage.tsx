@@ -294,34 +294,6 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
                   <span key={chip} className="tag">{chip}</span>
                 ))}
               </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: EASE, delay: 0.48 }}
-                style={{ marginTop: "1.5rem" }}
-              >
-                <a
-                  href="https://mirazur-demo.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: "inline-flex", alignItems: "center", gap: "0.5rem",
-                    padding: "0.65rem 1.25rem",
-                    borderRadius: "100px",
-                    background: ACCENT,
-                    color: "#fff",
-                    fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.04em",
-                    textDecoration: "none",
-                    transition: "opacity 0.2s",
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.82")}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-                >
-                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                    <path d="M2 11L11 2M11 2H5M11 2v6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  {project.page!.heroCta![lang]}
-                </a>
-              </motion.div>
             </div>
           </div>
         </section>
