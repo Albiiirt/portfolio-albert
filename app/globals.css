@@ -156,6 +156,11 @@ html { scroll-behavior: auto; background: var(--bg); }
   .projects-grid { grid-template-columns: 1fr 1fr !important; }
 }
 
+/* About: featured skill cards — 2×2 on tablet/small desktop, 4-in-a-row above */
+@media (max-width: 1179px) and (min-width: 641px) {
+  .skill-cards { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
 /* ── Responsive ── */
 
 /* Tablet (≤900px) */
@@ -168,10 +173,6 @@ html { scroll-behavior: auto; background: var(--bg); }
   .work-grid { grid-template-columns: 1fr !important; }
   .work-card-wrap { display: none !important; }
   .work-accordion { display: block !important; }
-
-  /* About top row */
-  .about-top { flex-wrap: wrap !important; }
-  .about-orbit { display: none !important; }
 
   /* Project page content grids */
   .proj-grid-2 { grid-template-columns: 1fr !important; }
@@ -203,6 +204,9 @@ html { scroll-behavior: auto; background: var(--bg); }
   /* Testimonials: 1.15 cards */
   .testimonial-card { flex: 0 0 calc(100% - 2rem) !important; }
   .testimonials-header { flex-direction: column !important; align-items: flex-start !important; gap: 0.75rem !important; }
+
+  /* About: featured skill cards — 1 column instead of 2×2 */
+  .skill-cards { grid-template-columns: 1fr !important; }
 
   /* Navigation: hide text links, keep logo+controls */
   .nav-links { display: none !important; }
@@ -512,42 +516,22 @@ html.custom-cursor-active .cursor-hidden {
   color: var(--tag-text);
 }
 
-/* ── Skill row (About — expandable list row) ──
-   Resets only border/background/font/cursor on the native <button> (never
-   all: unset, which would strip the global :focus-visible ring). The hover/
-   focus fill bleeds slightly past the row's own padding via a negative
-   margin so it doesn't hug the text (same background token as .tag, --tag-bg,
-   just not pill-shaped). min-height keeps a 44px touch target at every
-   breakpoint, so no separate mobile override is needed. */
-.skill-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  gap: 1rem;
-  min-height: 2.75rem;
-  margin: 0 -0.6rem;
-  padding: 0 0.6rem;
-  border: none;
-  background: transparent;
-  border-radius: 0.5rem;
-  font: inherit;
-  cursor: pointer;
-  text-align: left;
-  transition: background 0.2s ease;
+/* ── Skill cards (About — featured skills, experimental) ──
+   Always-visible title + description, no interaction. Weight stays in line
+   with the site's editorial tone: hairline border (--border-mid), subtle
+   fill (--tag-bg, same token as .tag), no heavy card-kit shadow. Fixed 4
+   columns on desktop (≥1180px) so they land in a single row; 2×2 on
+   tablet (641–1179px) and 1 column on mobile below. */
+.skill-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
 }
-.skill-row:hover,
-.skill-row:focus-visible {
+.skill-card {
+  border: 1px solid var(--border-mid);
   background: var(--tag-bg);
-}
-.skill-row-arrow {
-  color: var(--text-subtle);
-  transition: color 0.2s ease;
-}
-.skill-row:hover .skill-row-arrow,
-.skill-row:focus-visible .skill-row-arrow,
-.skill-row[aria-expanded="true"] .skill-row-arrow {
-  color: var(--text);
+  border-radius: 0.75rem;
+  padding: 1rem 1.1rem;
 }
 
 /* Featured skill variant — same size/padding/radius as .tag, inverted fill */
