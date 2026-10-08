@@ -582,6 +582,135 @@ export const projects: Project[] = [
       es: "Vista del atardecer sobre la catedral y el casco antiguo de Jaén, con las montañas al fondo.",
       ca: "Vista del capvespre sobre la catedral i el nucli antic de Jaén, amb les muntanyes al fons.",
     },
+    // Provisional showcase: real Figma screen exports (full-page, variable
+    // height) while there's no linkable prototype yet. Ordered as a loose
+    // narrative — public pages first, the two back-office screens last,
+    // since they're a different voice (tourism-office staff tool, not the
+    // visitor-facing site). `jaen-landing-inspirate(-2).webp`'s filenames
+    // are a leftover from the client's export naming, not actual "Inspírate"
+    // landing pages — see each alt text for what they really show.
+    screens: [
+      {
+        src: "/screens/jaen/jaen-home.webp",
+        alt: {
+          en: "Tourism portal homepage, with must-sees, the events agenda and Jaén's featured routes.",
+          es: "Portada del portal de turismo, con imprescindibles, agenda de eventos y rutas destacadas de Jaén.",
+          ca: "Portada del portal de turisme, amb imprescindibles, agenda d'esdeveniments i rutes destacades de Jaén.",
+        },
+      },
+      {
+        src: "/screens/jaen/jaen-menu.webp",
+        alt: {
+          en: "The expanded \"Get inspired\" navigation menu, with trip ideas organised by theme.",
+          es: "Menú de navegación «Inspírate» desplegado, con ideas de viaje organizadas por temática.",
+          ca: "Menú de navegació «Inspira't» desplegat, amb idees de viatge organitzades per temàtica.",
+        },
+      },
+      {
+        src: "/screens/jaen/jaen-frame-3.webp",
+        alt: {
+          en: "Listing of places of interest, filterable by place type and town.",
+          es: "Listado de lugares de interés con filtros por tipo de lugar y localidad.",
+          ca: "Llistat de llocs d'interès amb filtres per tipus de lloc i localitat.",
+        },
+      },
+      {
+        src: "/screens/jaen/jaen-mapa.webp",
+        alt: {
+          en: "Interactive map view with filtered results and the listing in the side panel.",
+          es: "Vista de mapa interactivo con los resultados filtrados y el listado en el lateral.",
+          ca: "Vista de mapa interactiu amb els resultats filtrats i el llistat al lateral.",
+        },
+      },
+      {
+        src: "/screens/jaen/jaen-ruta.webp",
+        alt: {
+          en: "The \"Vía Verde del Aceite\" route page, with map, technical details and elevation profile.",
+          es: "Ficha de la ruta «Vía Verde del Aceite», con mapa, datos técnicos y perfil de altura.",
+          ca: "Fitxa de la ruta «Via Verda de l'Oli», amb mapa, dades tècniques i perfil d'alçada.",
+        },
+      },
+      {
+        src: "/screens/jaen/jaen-receta.webp",
+        alt: {
+          en: "A recipe page, with ingredients and preparation steps.",
+          es: "Ficha de receta gastronómica, con ingredientes y pasos de preparación.",
+          ca: "Fitxa de recepta gastronòmica, amb ingredients i passos de preparació.",
+        },
+      },
+      {
+        src: "/screens/jaen/jaen-alojamiento.webp",
+        alt: {
+          en: "An accommodation listing, with photo gallery, amenities and a map of nearby points of interest.",
+          es: "Ficha de alojamiento, con galería, servicios y mapa de puntos de interés cercanos.",
+          ca: "Fitxa d'allotjament, amb galeria, serveis i mapa de punts d'interès propers.",
+        },
+      },
+      {
+        src: "/screens/jaen/jaen-eventos.webp",
+        alt: {
+          en: "The events agenda, filterable by type, town and date.",
+          es: "Agenda de eventos filtrable por tipo, localidad y fecha.",
+          ca: "Agenda d'esdeveniments filtrable per tipus, localitat i data.",
+        },
+      },
+      {
+        src: "/screens/jaen/jaen-itinerario.webp",
+        alt: {
+          en: "The itinerary planner: drag experiences into each day of the trip.",
+          es: "Planificador de itinerarios: arrastra experiencias a cada día de tu viaje.",
+          ca: "Planificador d'itineraris: arrossega experiències a cada dia del viatge.",
+        },
+      },
+      {
+        src: "/screens/jaen/jaen-listado.webp",
+        alt: {
+          en: "A saved itinerary, day by day, with a map and the stops for each day.",
+          es: "Itinerario guardado, día a día, con mapa y paradas de cada jornada.",
+          ca: "Itinerari desat, dia a dia, amb mapa i parades de cada jornada.",
+        },
+      },
+      {
+        src: "/screens/jaen/jaen-frame-2.webp",
+        alt: {
+          en: "Search with autocomplete suggestions and access to the AI assistant.",
+          es: "Buscador con autocompletado y acceso al asistente de IA.",
+          ca: "Cercador amb autocompletat i accés a l'assistent d'IA.",
+        },
+      },
+      {
+        src: "/screens/jaen/jaen-home-microsite.webp",
+        alt: {
+          en: "The \"Castles and Battles of the Kingdom of Jaén\" themed microsite, with its own route, immersive content and agenda.",
+          es: "Microsite temático «Castillos y Batallas del Reino de Jaén», con ruta, contenido inmersivo y agenda propia.",
+          ca: "Microsite temàtic «Castells i Batalles del Regne de Jaén», amb ruta, contingut immersiu i agenda pròpia.",
+        },
+      },
+      {
+        src: "/screens/jaen/jaen-frame-1.webp",
+        alt: {
+          en: "Visitor registration form for tourism office staff.",
+          es: "Formulario de registro de visitantes para el personal de la oficina de turismo.",
+          ca: "Formulari de registre de visitants per al personal de l'oficina de turisme.",
+        },
+      },
+      {
+        src: "/screens/jaen/jaen-landing-inspirate.webp",
+        alt: {
+          en: "The tourism office's internal dashboard, with management modules and real-time alerts.",
+          es: "Panel interno de la oficina de turismo, con módulos de gestión y avisos en tiempo real.",
+          ca: "Panell intern de l'oficina de turisme, amb mòduls de gestió i avisos en temps real.",
+        },
+      },
+      {
+        src: "/screens/jaen/jaen-landing-inspirate-2.webp",
+        alt: {
+          en: "The same back-office's visitor analytics panel, with stats and visitor origins.",
+          es: "Panel de análisis de visitantes del mismo back-office, con estadísticas y procedencias.",
+          ca: "Panell d'anàlisi de visitants del mateix back-office, amb estadístiques i procedències.",
+        },
+      },
+    ],
     heroTagline: {
       en: "redesign of the province's tourism portal",
       es: "rediseño del portal de turismo de la provincia",
