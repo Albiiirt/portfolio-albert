@@ -300,7 +300,7 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
                 style={{ marginTop: "1.5rem" }}
               >
                 <a
-                  href="https://mirazur-demo.vercel.app"
+                  href="https://dosgrapas.com/files/mirazur/"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{

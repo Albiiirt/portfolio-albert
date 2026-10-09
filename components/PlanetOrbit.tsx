@@ -194,12 +194,10 @@ export default function PlanetOrbit() {
             </g>
           ))}
 
-          {/* ── Planet circle — profile photo ── */}
-          <image
-            href="/avatar.jpg"
-            x={CX - 144} y={CY - 144}
-            width="288" height="288"
-            preserveAspectRatio="xMidYMid slice"
+          {/* ── Planet circle — gradient placeholder (no profile photo for now) ── */}
+          <circle
+            cx={CX} cy={CY} r="144"
+            fill="url(#avatar-bg)"
             clipPath="url(#avatar-clip)"
           />
           {/* Planet rim */}
