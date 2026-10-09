@@ -3,12 +3,14 @@
 import { useState } from "react";
 import FadeInView from "@/components/FadeInView";
 import { useLang } from "@/lib/LanguageContext";
+import { t } from "@/data/translations";
 
 const LIMIT = 280;
 
 type Quote = string | { en: string; es: string; ca: string };
 
 function TestimonialCard({ quote, name, role, org, lang }: { quote: Quote; name: string; role: string; org: string; lang: "en" | "es" | "ca" }) {
+  const tx = t[lang].testimonials;
   const resolvedQuote = typeof quote === "string" ? quote : quote[lang];
   const [expanded, setExpanded] = useState(false);
   const needsTruncation = resolvedQuote.length > LIMIT;
@@ -64,7 +66,7 @@ function TestimonialCard({ quote, name, role, org, lang }: { quote: Quote; name:
             onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text)")}
             onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-subtle)")}
           >
-            {expanded ? "Leer menos ↑" : "Leer más ↓"}
+            {expanded ? tx.readLess : tx.readMore}
           </button>
         )}
       </div>
@@ -96,19 +98,31 @@ function TestimonialCard({ quote, name, role, org, lang }: { quote: Quote; name:
 
 const TESTIMONIALS = [
   {
-    quote: "Tuve la oportunidad de enseñar a Albert durante el máster de Experience Design en BAU, y fue un placer verlo crecer como diseñador. Albert destacó por su gran actitud y disposición para aprender, así como su capacidad para incorporar el feedback y aplicarlo en sus proyectos de manera efectiva. Durante el curso, demostró compromiso y curiosidad y confío en que sus skills serán una gran contribución para cualquier equipo de diseño.",
+    quote: {
+      en: "I had the opportunity to teach Albert during the Experience Design master's at BAU, and it was a pleasure watching him grow as a designer. Albert stood out for his great attitude and willingness to learn, as well as his ability to take in feedback and apply it effectively to his projects. Throughout the course he showed commitment and curiosity, and I'm confident his skills will be a great contribution to any design team.",
+      es: "Tuve la oportunidad de enseñar a Albert durante el máster de Experience Design en BAU, y fue un placer verlo crecer como diseñador. Albert destacó por su gran actitud y disposición para aprender, así como su capacidad para incorporar el feedback y aplicarlo en sus proyectos de manera efectiva. Durante el curso, demostró compromiso y curiosidad y confío en que sus skills serán una gran contribución para cualquier equipo de diseño.",
+      ca: "Vaig tenir l'oportunitat d'ensenyar l'Albert durant el màster d'Experience Design a BAU, i va ser un plaer veure'l créixer com a dissenyador. L'Albert va destacar per la seva gran actitud i disposició per aprendre, així com la seva capacitat per incorporar el feedback i aplicar-lo als seus projectes de manera efectiva. Durant el curs, va demostrar compromís i curiositat i confio que les seves habilitats seran una gran contribució per a qualsevol equip de disseny.",
+    },
     name: "Jorge Valencia",
     role: "Head of Experience Design",
     org: "Runroom",
   },
   {
-    quote: "Albert tiene un gran potencial para aportar en cualquier espacio, con una mente muy racional y muy ágil dispuesto a encontrar soluciones. Tuve la sensación de que encuentra siempre su manera de conseguir resolver el problema que tiene enfrente y de una forma muy independiente, siempre trayendo propuestas interesantes y que no llegas a pensar de primeras. Fue un placer tenerle como alumno y estoy seguro que sería un placer trabajar con él.",
+    quote: {
+      en: "Albert has great potential to contribute in any setting, with a very rational and agile mind ready to find solutions. I always had the sense that he finds his own way to solve the problem in front of him, very independently, and always bringing interesting proposals you wouldn't think of at first. It was a pleasure having him as a student, and I'm sure it would be a pleasure to work with him.",
+      es: "Albert tiene un gran potencial para aportar en cualquier espacio, con una mente muy racional y muy ágil dispuesto a encontrar soluciones. Tuve la sensación de que encuentra siempre su manera de conseguir resolver el problema que tiene enfrente y de una forma muy independiente, siempre trayendo propuestas interesantes y que no llegas a pensar de primeras. Fue un placer tenerle como alumno y estoy seguro que sería un placer trabajar con él.",
+      ca: "L'Albert té un gran potencial per aportar en qualsevol espai, amb una mentalitat molt racional i molt àgil disposada a trobar solucions. Vaig tenir la sensació que sempre troba la seva manera d'aconseguir resoldre el problema que té al davant i d'una forma molt independent, sempre aportant propostes interessants que no arribes a pensar d'entrada. Va ser un plaer tenir-lo com a alumne i estic segur que seria un plaer treballar amb ell.",
+    },
     name: "Jose E. Saura Oller",
     role: "AI & Product Innovation",
     org: "Atrio",
   },
   {
-    quote: "Fui profesora de Albert en el Máster de Experiencias Digitales y puedo decir que fue un gran alumno. Desde el principio, le apasionaba el diseño y el research. Siempre buscaba comprender todo a fondo. Albert es muy analítico y crítico. Es un compañero genial: colaborador, amable y siempre dispuesto a ayudar. Su entusiasmo por el diseño de producto es contagioso. Recomiendo a Albert para cualquier puesto de Product Designer. Tiene las habilidades, los conocimientos y la actitud. ¡Confío en que tendrá mucho éxito!",
+    quote: {
+      en: "I was Albert's teacher in the Digital Experiences Master's and I can say he was a great student. From the start, he was passionate about design and research, and always looked to understand everything in depth. Albert is very analytical and critical. He's a great teammate: collaborative, kind and always willing to help. His enthusiasm for product design is contagious. I recommend Albert for any Product Designer role. He has the skills, the knowledge and the attitude. I'm confident he'll be very successful!",
+      es: "Fui profesora de Albert en el Máster de Experiencias Digitales y puedo decir que fue un gran alumno. Desde el principio, le apasionaba el diseño y el research. Siempre buscaba comprender todo a fondo. Albert es muy analítico y crítico. Es un compañero genial: colaborador, amable y siempre dispuesto a ayudar. Su entusiasmo por el diseño de producto es contagioso. Recomiendo a Albert para cualquier puesto de Product Designer. Tiene las habilidades, los conocimientos y la actitud. ¡Confío en que tendrá mucho éxito!",
+      ca: "Vaig ser professora de l'Albert al Màster d'Experiències Digitals i puc dir que va ser un gran alumne. Des del principi, li apassionava el disseny i la recerca. Sempre buscava comprendre-ho tot a fons. L'Albert és molt analític i crític. És un company genial: col·laborador, amable i sempre disposat a ajudar. El seu entusiasme pel disseny de producte és contagiós. Recomano l'Albert per a qualsevol lloc de Product Designer. Té les habilitats, els coneixements i l'actitud. Confio que tindrà molt èxit!",
+    },
     name: "Sarah Romero",
     role: "Profesora · Digital Product Design",
     org: "BAU",
@@ -127,6 +141,7 @@ const TESTIMONIALS = [
 
 export default function Testimonials() {
   const { lang } = useLang();
+  const tx = t[lang].testimonials;
 
   return (
     <section
@@ -146,14 +161,14 @@ export default function Testimonials() {
             gap: "1rem", marginBottom: "clamp(3rem, 6vh, 5rem)",
           }}>
             <div>
-              <p className="section-label" style={{ marginBottom: "0.75rem" }}>Referidos</p>
+              <p className="section-label" style={{ marginBottom: "0.75rem" }}>{tx.label}</p>
               <h2 style={{
                 margin: 0,
                 fontSize: "clamp(1.8rem, 4vw, 3.2rem)",
                 fontWeight: 800,
                 color: "var(--text)", lineHeight: 1.1,
               }}>
-                Lo que dicen
+                {tx.heading}
               </h2>
             </div>
           </div>
