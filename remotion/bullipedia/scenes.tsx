@@ -57,16 +57,20 @@ export function CatalogScene() {
 
   const hoverProgress = interpolate(frame, [42, 60], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE_BOOK_HOVER });
   const rotateY = -40 * hoverProgress;
-  const clickBounce = frame >= 120 && frame <= 125 ? interpolate(frame, [120, 122, 125], [1, 0.96, 1], { extrapolateRight: "clamp" }) : 1;
+  // Click now lands 18 frames after the tilt settles (frame 60), not 60
+  // frames later — the tilt is the only filler this wait had, so once it's
+  // done the click should follow almost immediately (Madrid's lesson: no
+  // static rest once the only animation covering it has finished).
+  const clickBounce = frame >= 78 && frame <= 83 ? interpolate(frame, [78, 80, 83], [1, 0.96, 1], { extrapolateRight: "clamp" }) : 1;
 
   const hops: CursorHop[] = [
     { from: { x: 66, y: 90 }, to: { x: 66, y: 90 }, fromFrame: 0, toFrame: 18 },
     { from: { x: 66, y: 90 }, to: { x: 32, y: 44 }, fromFrame: 18, toFrame: 42 },
-    { from: { x: 32, y: 44 }, to: { x: 32, y: 44 }, fromFrame: 42, toFrame: 120, click: true },
+    { from: { x: 32, y: 44 }, to: { x: 32, y: 44 }, fromFrame: 42, toFrame: 78, click: true },
   ];
 
   // Push in on the "Plan Origen" cover for the hover-tilt + click.
-  const camera = cameraAt(frame, [{ inStart: 28, inEnd: 42, outStart: 128, outEnd: 144, scale: 1.18, originX: 32, originY: 44 }]);
+  const camera = cameraAt(frame, [{ inStart: 28, inEnd: 42, outStart: 86, outEnd: 102, scale: 1.18, originX: 32, originY: 44 }]);
 
   return (
     <Page camera={camera}>
@@ -112,21 +116,30 @@ export function BookPageScene() {
 
   const openProgress = interpolate(frame, [5, 38], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE_BOOK_OPEN });
   const rotateY = -30 * openProgress;
-  const rowPress = frame >= 150 && frame <= 156 ? interpolate(frame, [150, 152, 156], [1, 0.985, 1], { extrapolateRight: "clamp" }) : 1;
-  const rowHighlight = frame >= 140 && frame < 165;
+  const rowPress = frame >= 70 && frame <= 76 ? interpolate(frame, [70, 72, 76], [1, 0.985, 1], { extrapolateRight: "clamp" }) : 1;
+  const rowHighlight = frame >= 60 && frame < 90;
 
   // Target measured off a rendered still of this exact composition: the
   // "El Cimiento de la Restauración Gastronómica" index row sits at
   // (37.8%, 80.65%), not (30%, 62%) — the first pass landed on the
   // "Índice del libro" heading above it, not the row itself.
+  //
+  // Retimed (2026-10-10): the cursor used to drag from the title to the
+  // index row over 90 static frames (45→135) with nothing on screen
+  // reacting until a highlight almost at the click — the exact "cursor
+  // arrastrándose sin que pase nada" anti-pattern Madrid's pass fixed. The
+  // cursor now waits only until the book finishes opening (frame 38), then
+  // the travel hop carries `click: true` itself so the ripple fires the
+  // instant it lands — no separate static hold hop before the click.
   const hops: CursorHop[] = [
-    { from: { x: 60, y: 14 }, to: { x: 60, y: 14 }, fromFrame: 0, toFrame: 45 },
-    { from: { x: 60, y: 14 }, to: { x: 37.8, y: 80.65 }, fromFrame: 45, toFrame: 135 },
-    { from: { x: 37.8, y: 80.65 }, to: { x: 37.8, y: 80.65 }, fromFrame: 135, toFrame: 150, click: true },
+    { from: { x: 60, y: 14 }, to: { x: 60, y: 14 }, fromFrame: 0, toFrame: 38 },
+    { from: { x: 60, y: 14 }, to: { x: 37.8, y: 80.65 }, fromFrame: 38, toFrame: 70, click: true },
   ];
 
-  // Push in on that index row for the click.
-  const camera = cameraAt(frame, [{ inStart: 130, inEnd: 142, outStart: 158, outEnd: 172, scale: 1.2, originX: 37.8, originY: 80.65 }]);
+  // Push in on that index row starting the instant the book finishes
+  // opening (frame 38), so the camera's own motion fills what used to be
+  // dead travel time instead of sitting static until just before the click.
+  const camera = cameraAt(frame, [{ inStart: 38, inEnd: 70, outStart: 94, outEnd: 110, scale: 1.2, originX: 37.8, originY: 80.65 }]);
 
   return (
     <Page camera={camera}>
@@ -223,18 +236,25 @@ export function ChapterScene() {
   const frame = useCurrentFrame();
 
   const openProgress = interpolate(frame, [50, 69], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: EASE_SIDEBAR });
-  const rowPress = frame >= 170 && frame <= 176 ? interpolate(frame, [170, 172, 176], [1, 0.985, 1], { extrapolateRight: "clamp" }) : 1;
-  const rowHighlight = frame >= 155 && frame < 182 && openProgress > 0.9;
+  // Retimed (2026-10-10): the sidebar used to finish opening at frame 69
+  // but the click didn't land until 170 — a 101-frame static wait (a tiny
+  // 6%-of-height drift that read as a hold, then a flat pause before the
+  // click). The cursor now makes its final approach to the subentry right
+  // as the sidebar finishes opening, with `click: true` on that arrival hop
+  // so the ripple fires the instant it lands, not after an extra hold.
+  const rowPress = frame >= 90 && frame <= 96 ? interpolate(frame, [90, 92, 96], [1, 0.985, 1], { extrapolateRight: "clamp" }) : 1;
+  const rowHighlight = frame >= 75 && frame < 102 && openProgress > 0.9;
 
   const hops: CursorHop[] = [
     { from: { x: 4, y: 40 }, to: { x: 4, y: 40 }, fromFrame: 0, toFrame: 30 },
     { from: { x: 4, y: 40 }, to: { x: 14, y: 17 }, fromFrame: 30, toFrame: 50 },
-    { from: { x: 14, y: 17 }, to: { x: 14, y: 23 }, fromFrame: 69, toFrame: 150 },
-    { from: { x: 14, y: 23 }, to: { x: 14, y: 23 }, fromFrame: 150, toFrame: 170, click: true },
+    { from: { x: 14, y: 17 }, to: { x: 14, y: 23 }, fromFrame: 69, toFrame: 90, click: true },
   ];
 
-  // Push in on the expanded-sidebar subentry for the click.
-  const camera = cameraAt(frame, [{ inStart: 148, inEnd: 160, outStart: 178, outEnd: 194, scale: 1.3, originX: 16, originY: 23 }]);
+  // Push in on the subentry starting the instant the sidebar finishes
+  // opening (frame 69), so the camera move itself covers the short final
+  // approach instead of sitting static until just before the click.
+  const camera = cameraAt(frame, [{ inStart: 69, inEnd: 90, outStart: 110, outEnd: 126, scale: 1.3, originX: 16, originY: 23 }]);
 
   return (
     <Page camera={camera}>
