@@ -330,7 +330,7 @@ export const projects: Project[] = [
           { labelKey: "web", value: "bullipedia-demo.vercel.app", href: "https://bullipedia-demo.vercel.app/1-catalogo-libros.html" },
         ],
         page: {
-          heroCta: { en: "View live demo", es: "Ver demo en vivo", ca: "Veure demo en directe" },
+          heroCta: { en: "View live demo — Bullipedia", es: "Ver demo en vivo — Bullipedia", ca: "Veure demo en directe — Bullipedia" },
         },
       },
     ],
