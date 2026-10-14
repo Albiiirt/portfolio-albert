@@ -9,6 +9,8 @@ import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import MadridWalkthroughVideo from "@/components/proyectos/MadridWalkthroughVideo";
+import ProjectDeviceShowcase from "@/components/proyectos/ProjectDeviceShowcase";
+import ProjectMobileFlowStrip from "@/components/proyectos/ProjectMobileFlowStrip";
 import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
@@ -225,6 +227,8 @@ export default function MadridPage() {
           </div>
         </section>
 
+        <ProjectDeviceShowcase project={project} data={project.deviceShowcase} />
+
         {/* ── Overview ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
@@ -316,6 +320,8 @@ export default function MadridPage() {
         </section>
 
         <MadridWalkthroughVideo project={project} />
+
+        <ProjectMobileFlowStrip project={project} />
 
         {/* ── El resultado ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>

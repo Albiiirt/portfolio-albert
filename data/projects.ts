@@ -29,6 +29,53 @@ export type ProjectScreen =
   | string
   | { src: string; alt?: LocalizedText; video?: boolean };
 
+// Diseñador-specified composition for the desktop/tablet/mobile device
+// showcase shown between a project page's Hero and Overview (see
+// ProjectDeviceShowcase). `primary` only matters for the "float" style —
+// it names which of the three frames renders large/centered with an
+// accent-colored ring, while the other two become small satellites.
+export type DeviceShowcaseStyle = "cascade" | "diptych" | "triptych" | "float";
+export type DeviceShowcaseSlot = { src: string; alt: LocalizedText };
+export type DeviceShowcase = {
+  style: DeviceShowcaseStyle;
+  primary?: "desktop" | "tablet" | "mobile"; // only used when style is "float"
+  desktop: DeviceShowcaseSlot;
+  tablet: DeviceShowcaseSlot;
+  mobile: DeviceShowcaseSlot;
+  caption: LocalizedText;
+};
+
+// Madrid-only static row of 3 mobile screens (see ProjectMobileFlowStrip) —
+// deliberately not a variant of ProjectScreensShowcase (that component is a
+// carousel state machine with autoplay/drag/dots; forcing a static mode
+// inside it would complicate it for one project).
+export type MobileFlowStripScreen = { src: string; alt: LocalizedText; caption: LocalizedText };
+export type MobileFlowStrip = { screens: MobileFlowStripScreen[] }; // exactly 3
+
+// Palette + typeface specimen shown inside a project's own "system" section
+// (see ProjectDesignSystemSheet) — elBulli, Turisme Jaén, Gnoss AI only.
+export type DesignSystemSwatch = { hex: string; label: LocalizedText };
+export type DesignSystemTypography = { typeface: string; usage: LocalizedText };
+export type DesignSystemSheet = {
+  palette: DesignSystemSwatch[];
+  typography: DesignSystemTypography[]; // [] renders no typography row — never half-broken
+};
+
+// Real rendered component specimens (buttons, one card crop) shown inside
+// Turisme Jaén's "La estructura" section (see ProjectComponentsSheet) —
+// elBulli/Gnoss AI have no real components to sample from, and Mirazur is
+// excluded at Albert's request.
+export type ComponentButtonSpecimen = {
+  name: LocalizedText;
+  specLine: LocalizedText; // e.g. "44px · esquina viva · rojo corporativo"
+  render: { background: string; color: string; borderRadius: string; height: string; label: LocalizedText };
+};
+export type ComponentCardSpecimen = { src: string; alt: LocalizedText; name: LocalizedText; specLine: LocalizedText };
+export type ComponentsSheet = {
+  buttons: ComponentButtonSpecimen[]; // [] renders nothing — never half-broken
+  cardSpecimen?: ComponentCardSpecimen;
+};
+
 // A single step of the desktop screens walkthrough (browser-chrome frame,
 // one step per scroll block) — used instead of the mobile screens carousel
 // when a project's `screensFrame` is "desktop".
@@ -130,6 +177,10 @@ export type SubProject = {
   // >7-step fallback) stacked list, leaving just the centered screenshot.
   // Default false — only set where diseñador specified it (Turisme Jaén).
   desktopWalkthroughHideCaptions?: boolean;
+  // Same device showcase as Project below, but per sub-project — elBulli's
+  // and Mirazur's two tabs each need their own images, even though diseñador
+  // specified the same `style` for both tabs of a given client.
+  deviceShowcase?: DeviceShowcase;
   heroTagline?: LocalizedText;
   meta?: MetaItem[]; // own to this sub-project, not inherited from the client
   page?: ProjectPageContent;
@@ -158,6 +209,15 @@ export type Project = {
   desktopWalkthrough?: DesktopWalkthroughStep[];
   // See SubProject — same flag, same behavior, for top-level projects.
   desktopWalkthroughHideCaptions?: boolean;
+  // See DeviceShowcase above — undefined for clients with subProjects
+  // (elBulli, Mirazur), which set it per sub-project instead.
+  deviceShowcase?: DeviceShowcase;
+  // Madrid-only — see MobileFlowStrip above.
+  mobileFlowStrip?: MobileFlowStrip;
+  // elBulli, Turisme Jaén, Gnoss AI only — see DesignSystemSheet above.
+  designSystem?: DesignSystemSheet;
+  // Turisme Jaén only — see ComponentsSheet above.
+  componentsSheet?: ComponentsSheet;
   heroTagline?: LocalizedText;
   meta?: MetaItem[];
   page?: ProjectPageContent;
@@ -212,6 +272,20 @@ export const projects: Project[] = [
       { labelKey: "year", value: "2026" },
       { labelKey: "studio", value: "Dosgrapas" },
     ],
+    // Palette confirmed by diseñador; typeface pair confirmed live from
+    // bullipedia-demo.vercel.app's own computed styles (h1/h2/body).
+    designSystem: {
+      palette: [
+        { hex: "#080e1a", label: { es: "Fondo oscuro", en: "Dark background", ca: "Fons fosc" } },
+        { hex: "#0d1b2e", label: { es: "Fondo medio", en: "Mid background", ca: "Fons mitjà" } },
+        { hex: "#162a42", label: { es: "Fondo claro", en: "Light background", ca: "Fons clar" } },
+        { hex: "#4a8fcc", label: { es: "Acento", en: "Accent", ca: "Accent" } },
+      ],
+      typography: [
+        { typeface: "PP Neue Machina (Light)", usage: { es: "Titulares", en: "Headlines", ca: "Titulars" } },
+        { typeface: "Inter (Light)", usage: { es: "Texto e interfaz", en: "Body & interface", ca: "Text i interfície" } },
+      ],
+    },
     subProjects: [
       {
         id: "archivo",
@@ -236,6 +310,28 @@ export const projects: Project[] = [
         },
         tags: ["Figma", "Strapi", "Design System"],
         cover: "/covers/cover-elbulli.webp",
+        // Placeholder paths — no real desktop/tablet/mobile captures exist
+        // yet for the Archivo. See the final summary for what's pending.
+        deviceShowcase: {
+          style: "cascade",
+          desktop: {
+            src: "/projects/elbulli-archivo/device-desktop.png",
+            alt: { en: "Desktop view of the elBulli archive homepage.", es: "Vista de escritorio de la portada del archivo elBulli.", ca: "Vista d'escriptori de la portada de l'arxiu elBulli." },
+          },
+          tablet: {
+            src: "/projects/elbulli-archivo/device-tablet.png",
+            alt: { en: "Tablet view of an elBulli archive content page.", es: "Vista de tablet de una página de contenido del archivo elBulli.", ca: "Vista de tablet d'una pàgina de contingut de l'arxiu elBulli." },
+          },
+          mobile: {
+            src: "/projects/elbulli-archivo/device-mobile.png",
+            alt: { en: "Mobile view of the elBulli archive.", es: "Vista móvil del archivo elBulli.", ca: "Vista mòbil de l'arxiu elBulli." },
+          },
+          caption: {
+            en: "The archive, from the editor's desktop to a visitor's phone.",
+            es: "El archivo, desde el escritorio del editor hasta el móvil de quien lo visita.",
+            ca: "L'arxiu, des de l'escriptori de l'editor fins al mòbil de qui el visita.",
+          },
+        },
         meta: [
           { labelKey: "status", value: status.inProgress },
           { labelKey: "role", value: { en: "Web design · Code implementation · Next.js", es: "Diseño web · Implementación en código · Next.js", ca: "Disseny web · Implementació en codi · Next.js" } },
@@ -324,6 +420,28 @@ export const projects: Project[] = [
         },
         tags: ["Claude Design", "Claude Code", "E-commerce"],
         video: "/videos/bullipedia-walkthrough.mp4",
+        // Placeholder paths — no real desktop/tablet/mobile captures exist
+        // yet for Bullipedia. See the final summary for what's pending.
+        deviceShowcase: {
+          style: "cascade",
+          desktop: {
+            src: "/projects/elbulli-marketplace/device-desktop.png",
+            alt: { en: "Desktop view of the Bullipedia book catalogue.", es: "Vista de escritorio del catálogo de libros de Bullipedia.", ca: "Vista d'escriptori del catàleg de llibres de Bullipedia." },
+          },
+          tablet: {
+            src: "/projects/elbulli-marketplace/device-tablet.png",
+            alt: { en: "Tablet view of a Bullipedia book chapter.", es: "Vista de tablet de un capítulo de libro en Bullipedia.", ca: "Vista de tablet d'un capítol de llibre a Bullipedia." },
+          },
+          mobile: {
+            src: "/projects/elbulli-marketplace/device-mobile.png",
+            alt: { en: "Mobile view of Bullipedia.", es: "Vista móvil de Bullipedia.", ca: "Vista mòbil de Bullipedia." },
+          },
+          caption: {
+            en: "Bullipedia, read on any screen, with its resources alongside the text.",
+            es: "Bullipedia, leída en cualquier pantalla, con sus recursos junto al texto.",
+            ca: "Bullipedia, llegida en qualsevol pantalla, amb els seus recursos al costat del text.",
+          },
+        },
         meta: [
           { labelKey: "role", value: { en: "Design & development", es: "Diseño y desarrollo", ca: "Disseny i desenvolupament" } },
           { labelKey: "stack", value: "Claude Design · Claude Code" },
@@ -365,6 +483,28 @@ export const projects: Project[] = [
     tags: ["UX Research", "Product Design", "Figma"],
     gradient: "linear-gradient(135deg, #001515 0%, #0d3d3d 60%, #2a8c8c 100%)",
     accentColor: "#2a8c8c",
+    // Placeholder paths — no real desktop/tablet/mobile captures exist yet.
+    // See the final summary for what's pending.
+    deviceShowcase: {
+      style: "diptych",
+      desktop: {
+        src: "/projects/xunta-galicia/device-desktop.png",
+        alt: { en: "Desktop view of the Galiciana Thesaurus review tool.", es: "Vista de escritorio de la herramienta de revisión de Galiciana Thesaurus.", ca: "Vista d'escriptori de l'eina de revisió de Galiciana Thesaurus." },
+      },
+      tablet: {
+        src: "/projects/xunta-galicia/device-tablet.png",
+        alt: { en: "Tablet view of a suggested match in Galiciana Thesaurus.", es: "Vista de tablet de una coincidencia sugerida en Galiciana Thesaurus.", ca: "Vista de tablet d'una coincidència suggerida a Galiciana Thesaurus." },
+      },
+      mobile: {
+        src: "/projects/xunta-galicia/device-mobile.png",
+        alt: { en: "Mobile view of Galiciana Thesaurus.", es: "Vista móvil de Galiciana Thesaurus.", ca: "Vista mòbil de Galiciana Thesaurus." },
+      },
+      caption: {
+        en: "The review tool, from the team's desktop to a quick mobile check.",
+        es: "La herramienta de revisión, desde el escritorio del equipo hasta una comprobación rápida en el móvil.",
+        ca: "L'eina de revisió, des de l'escriptori de l'equip fins a una comprovació ràpida al mòbil.",
+      },
+    },
     cover: "/covers/cover-xunta.svg",
     coverAlt: {
       en: "Cover with the Xunta de Galicia logo in white on a teal gradient background.",
@@ -479,6 +619,49 @@ export const projects: Project[] = [
     tags: ["Next.js", "Claude Code", "Strapi", "Web Design"],
     gradient: "linear-gradient(135deg, #1a0a0f 0%, #4a1528 60%, #8c3a5a 100%)",
     accentColor: "#8c3a5a",
+    // Placeholder paths — no real desktop/tablet/mobile captures exist yet.
+    // See the final summary for what's pending.
+    deviceShowcase: {
+      style: "triptych",
+      desktop: {
+        src: "/projects/madrid/device-desktop.png",
+        alt: { en: "Desktop view of the Enoturismo Madrid homepage.", es: "Vista de escritorio de la portada de Enoturismo Madrid.", ca: "Vista d'escriptori de la portada d'Enoturisme Madrid." },
+      },
+      tablet: {
+        src: "/projects/madrid/device-tablet.png",
+        alt: { en: "Tablet view of a winery profile page.", es: "Vista de tablet de la ficha de una bodega.", ca: "Vista de tablet de la fitxa d'un celler." },
+      },
+      mobile: {
+        src: "/projects/madrid/device-mobile.png",
+        alt: { en: "Mobile view of a wine route page.", es: "Vista móvil de la ficha de una ruta de vino.", ca: "Vista mòbil de la fitxa d'una ruta de vi." },
+      },
+      caption: {
+        en: "One design, consistent across desktop, tablet and mobile.",
+        es: "Un mismo diseño, coherente en escritorio, tablet y móvil.",
+        ca: "Un mateix disseny, coherent en escriptori, tablet i mòbil.",
+      },
+    },
+    // Madrid-only — 3 static mobile screens (see ProjectMobileFlowStrip).
+    // Placeholder paths — no real captures exist yet, see final summary.
+    mobileFlowStrip: {
+      screens: [
+        {
+          src: "/projects/madrid/flow-1.png",
+          alt: { en: "Browsing the list of wine routes with the map filter open.", es: "Explorando el listado de rutas de vino con el filtro de mapa abierto.", ca: "Explorant el llistat de rutes de vi amb el filtre de mapa obert." },
+          caption: { en: "Explore routes", es: "Explora rutas", ca: "Explora rutes" },
+        },
+        {
+          src: "/projects/madrid/flow-2.png",
+          alt: { en: "A winery experience page with available time slots.", es: "Ficha de una experiencia en bodega con horarios disponibles.", ca: "Fitxa d'una experiència en celler amb horaris disponibles." },
+          caption: { en: "Pick an experience", es: "Elige experiencia", ca: "Tria experiència" },
+        },
+        {
+          src: "/projects/madrid/flow-3.png",
+          alt: { en: "Booking confirmation screen for a wine tasting.", es: "Pantalla de confirmación de reserva para una cata de vino.", ca: "Pantalla de confirmació de reserva per a un tast de vi." },
+          caption: { en: "Book instantly", es: "Reserva al momento", ca: "Reserva a l'instant" },
+        },
+      ],
+    },
     cover: "/covers/cover-madrid.webp",
     coverAlt: {
       en: "Sunlit clusters of dark grapes hanging from a vine — cover image for the Enoturismo Madrid project.",
@@ -580,6 +763,32 @@ export const projects: Project[] = [
     tags: ["Figma", "Web Design", "Tourism"],
     gradient: "linear-gradient(135deg, #2d1b00 0%, #6b3a1f 60%, #c4813a 100%)",
     accentColor: "#c4813a",
+    // Placeholder: reuses existing real screen exports (cropped visually by
+    // each frame's own aspect ratio via object-fit: cover) since this
+    // project already has real screenshots, unlike the others below that
+    // use a not-yet-existing path instead. None of these three were shot as
+    // true desktop/tablet/mobile comparisons of the same view — see the
+    // final summary for what Albert should swap in.
+    deviceShowcase: {
+      style: "cascade",
+      desktop: {
+        src: "/screens/jaen/jaen-mapa.webp",
+        alt: { en: "Desktop view of the interactive map with filtered results.", es: "Vista de escritorio del mapa interactivo con resultados filtrados.", ca: "Vista d'escriptori del mapa interactiu amb resultats filtrats." },
+      },
+      tablet: {
+        src: "/screens/jaen/jaen-home.webp",
+        alt: { en: "Tablet view of the tourism portal homepage.", es: "Vista de tablet de la portada del portal de turismo.", ca: "Vista de tablet de la portada del portal de turisme." },
+      },
+      mobile: {
+        src: "/screens/jaen/jaen-ruta.webp",
+        alt: { en: "Mobile view of the \"Vía Verde del Aceite\" route page.", es: "Vista móvil de la ficha de la ruta «Vía Verde del Aceite».", ca: "Vista mòbil de la fitxa de la ruta «Via Verda de l'Oli»." },
+      },
+      caption: {
+        en: "The same system, from the planning desktop to the route in your pocket.",
+        es: "El mismo sistema, desde el escritorio de planificación hasta la ruta en el bolsillo.",
+        ca: "El mateix sistema, des de l'escriptori de planificació fins a la ruta a la butxaca.",
+      },
+    },
     cover: "/covers/cover-jaen.webp",
     coverAlt: {
       en: "Dusk view over Jaén's cathedral and old town, with mountains in the background.",
@@ -729,6 +938,23 @@ export const projects: Project[] = [
       { labelKey: "stack", value: "Figma" },
       { labelKey: "team", value: { en: "Design + in-house development", es: "Diseño + Desarrollo interno", ca: "Disseny + desenvolupament intern" } },
     ],
+    designSystem: {
+      palette: [
+        { hex: "#2d1b00", label: { es: "Fondo oscuro", en: "Dark background", ca: "Fons fosc" } },
+        { hex: "#6b3a1f", label: { es: "Fondo medio", en: "Mid background", ca: "Fons mitjà" } },
+        { hex: "#c4813a", label: { es: "Acento", en: "Accent", ca: "Accent" } },
+      ],
+      // TODO: confirmar tipografías reales con Albert — no hay sitio público
+      // ni prototipo navegable del que leer getComputedStyle, solo exports
+      // estáticos en JPG/PNG (ver ~/Desktop/exports-jaen).
+      typography: [],
+    },
+    // Pending real button values (height/radius/color) and a new crop of
+    // jaen-alojamiento.webp for the card specimen — Albert still has to
+    // confirm both from Figma/the live captures. See the final summary.
+    componentsSheet: {
+      buttons: [],
+    },
     page: {
       challengeHeading: { en: "Two challenges in one", es: "Dos retos en uno", ca: "Dos reptes en un" },
       challengeCards: [
@@ -877,6 +1103,28 @@ export const projects: Project[] = [
           ca: "El disseny va quedar validat pel client i llest per passar a desenvolupament.",
         },
         tags: ["Claude Design"],
+        // Placeholder paths — no real desktop/tablet/mobile captures exist
+        // yet for the experience landing. See the final summary.
+        deviceShowcase: {
+          style: "diptych",
+          desktop: {
+            src: "/projects/mirazur-cupon/device-desktop.png",
+            alt: { en: "Desktop view of the Mirazur experience landing page.", es: "Vista de escritorio de la landing de experiencia de Mirazur.", ca: "Vista d'escriptori de la landing d'experiència del Mirazur." },
+          },
+          tablet: {
+            src: "/projects/mirazur-cupon/device-tablet.png",
+            alt: { en: "Tablet view of the landing's dish gallery.", es: "Vista de tablet de la galería de platos de la landing.", ca: "Vista de tablet de la galeria de plats de la landing." },
+          },
+          mobile: {
+            src: "/projects/mirazur-cupon/device-mobile.png",
+            alt: { en: "Mobile view of the landing's request form.", es: "Vista móvil del formulario de solicitud de la landing.", ca: "Vista mòbil del formulari de sol·licitud de la landing." },
+          },
+          caption: {
+            en: "The experience landing, from the full scroll to the form on a phone.",
+            es: "La landing de experiencia, desde el scroll completo hasta el formulario en el móvil.",
+            ca: "La landing d'experiència, des del scroll complet fins al formulari al mòbil.",
+          },
+        },
         meta: [
           { labelKey: "status", value: { en: "Design completed", es: "Diseño completado", ca: "Disseny completat" } },
           { labelKey: "stack", value: "Claude Design" },
@@ -928,6 +1176,28 @@ export const projects: Project[] = [
           ca: "El projecte va quedar en pausa per part del client; el que es va dissenyar fins a aquell punt queda documentat aquí.",
         },
         tags: ["Figma"],
+        // Placeholder paths — no real desktop/tablet/mobile captures exist
+        // yet for the recipe portal. See the final summary.
+        deviceShowcase: {
+          style: "diptych",
+          desktop: {
+            src: "/projects/mirazur-recetas/device-desktop.png",
+            alt: { en: "Desktop view of the recipe listing.", es: "Vista de escritorio del listado de recetas.", ca: "Vista d'escriptori del llistat de receptes." },
+          },
+          tablet: {
+            src: "/projects/mirazur-recetas/device-tablet.png",
+            alt: { en: "Tablet view of an individual recipe page.", es: "Vista de tablet de una ficha de receta individual.", ca: "Vista de tablet d'una fitxa de recepta individual." },
+          },
+          mobile: {
+            src: "/projects/mirazur-recetas/device-mobile.png",
+            alt: { en: "Mobile view of the recipe access flow.", es: "Vista móvil del flujo de acceso a recetas.", ca: "Vista mòbil del flux d'accés a receptes." },
+          },
+          caption: {
+            en: "The recipe portal, designed up to the point the project paused.",
+            es: "El portal de recetas, diseñado hasta el punto en que el proyecto se pausó.",
+            ca: "El portal de receptes, dissenyat fins al punt en què el projecte es va pausar.",
+          },
+        },
         meta: [
           { labelKey: "status", value: { en: "On hold", es: "En pausa", ca: "En pausa" } },
           { labelKey: "stack", value: "Figma" },
@@ -988,6 +1258,42 @@ export const projects: Project[] = [
     tags: ["Figma", "Design System", "Infographics", "Client Collaboration"],
     gradient: "linear-gradient(135deg, #1a2a0a 0%, #2d5c1a 50%, #c4a35a 100%)",
     accentColor: "#c4a35a",
+    // Placeholder paths — no real desktop/tablet/mobile captures exist yet.
+    // See the final summary for what's pending.
+    deviceShowcase: {
+      style: "float",
+      primary: "desktop",
+      desktop: {
+        src: "/projects/gnoss-ai/device-desktop.png",
+        alt: { en: "Desktop view of a GNOSS website page.", es: "Vista de escritorio de una página de la web de GNOSS.", ca: "Vista d'escriptori d'una pàgina del web de GNOSS." },
+      },
+      tablet: {
+        src: "/projects/gnoss-ai/device-tablet.png",
+        alt: { en: "Tablet view of a GNOSS section cover.", es: "Vista de tablet de una portada de sección de GNOSS.", ca: "Vista de tablet d'una portada de secció de GNOSS." },
+      },
+      mobile: {
+        src: "/projects/gnoss-ai/device-mobile.png",
+        alt: { en: "Mobile view of a GNOSS website page.", es: "Vista móvil de una página de la web de GNOSS.", ca: "Vista mòbil d'una pàgina del web de GNOSS." },
+      },
+      caption: {
+        en: "New pages, built to feel native to GNOSS's own system.",
+        es: "Páginas nuevas, construidas para sentirse nativas del propio sistema de GNOSS.",
+        ca: "Pàgines noves, construïdes per sentir-se natives del propi sistema de GNOSS.",
+      },
+    },
+    // Palette confirmed by diseñador; typeface pair confirmed live from
+    // gnoss.com's own computed styles (h1/h2/body) — same pair as elBulli.
+    designSystem: {
+      palette: [
+        { hex: "#1a2a0a", label: { es: "Fondo oscuro", en: "Dark background", ca: "Fons fosc" } },
+        { hex: "#2d5c1a", label: { es: "Fondo medio", en: "Mid background", ca: "Fons mitjà" } },
+        { hex: "#c4a35a", label: { es: "Acento", en: "Accent", ca: "Accent" } },
+      ],
+      typography: [
+        { typeface: "PP Neue Machina (Light)", usage: { es: "Titulares", en: "Headlines", ca: "Titulars" } },
+        { typeface: "Inter (Light)", usage: { es: "Texto e interfaz", en: "Body & interface", ca: "Text i interfície" } },
+      ],
+    },
     cover: "/covers/cover-gnoss.svg",
     coverAlt: {
       en: "Cover with the GNOSS logo in white on a dark background.",
@@ -1099,6 +1405,29 @@ export const projects: Project[] = [
     tags: ["Claude Code", "Notion", "Web Design"],
     gradient: "linear-gradient(135deg, #1a0808 0%, #3d1010 60%, #7a2020 100%)",
     accentColor: "#b84040",
+    // Placeholder paths — no real desktop/tablet/mobile captures exist yet.
+    // See the final summary for what's pending.
+    deviceShowcase: {
+      style: "float",
+      primary: "mobile",
+      desktop: {
+        src: "/projects/castellera/device-desktop.png",
+        alt: { en: "Desktop view of the Colla Castellera website homepage.", es: "Vista de escritorio de la portada de la web de la Colla Castellera.", ca: "Vista d'escriptori de la portada del web de la Colla Castellera." },
+      },
+      tablet: {
+        src: "/projects/castellera/device-tablet.png",
+        alt: { en: "Tablet view of the team/formation page.", es: "Vista de tablet de la página del equipo/formación.", ca: "Vista de tablet de la pàgina de l'equip/formació." },
+      },
+      mobile: {
+        src: "/projects/castellera/device-mobile.png",
+        alt: { en: "Mobile view of the contact form.", es: "Vista móvil del formulario de contacto.", ca: "Vista mòbil del formulari de contacte." },
+      },
+      caption: {
+        en: "Built mobile-first, for members checking rehearsals on the go.",
+        es: "Construida mobile-first, para quienes consultan los ensayos desde el móvil.",
+        ca: "Construïda mobile-first, per a qui consulta els assajos des del mòbil.",
+      },
+    },
     video: "/covers/tritoners.mp4",
     cover: "/covers/cover-castellera.webp",
     coverAlt: {

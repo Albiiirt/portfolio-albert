@@ -14,6 +14,8 @@ import SmoothScroll from "@/components/SmoothScroll";
 import ProjectScreensShowcase from "@/components/proyectos/ProjectScreensShowcase";
 import ProjectDesktopWalkthrough from "@/components/proyectos/ProjectDesktopWalkthrough";
 import ProjectWalkthroughVideo from "@/components/proyectos/ProjectWalkthroughVideo";
+import ProjectDeviceShowcase from "@/components/proyectos/ProjectDeviceShowcase";
+import ProjectDesignSystemSheet from "@/components/proyectos/ProjectDesignSystemSheet";
 import { EASE } from "@/lib/animations";
 import { useLang, type Lang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
@@ -463,6 +465,8 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
           </div>
         </section>
 
+        <ProjectDeviceShowcase project={project} data={activeSubProject.deviceShowcase} />
+
         {/* ── Intro compartida (cliente) — no se re-anima al cambiar de pestaña ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
@@ -692,6 +696,7 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
                       <SvgBlocks />
                     </div>
                   </div>
+                  <ProjectDesignSystemSheet data={project.designSystem} accentColor={ACCENT} />
                 </div>
               </section>
             )}

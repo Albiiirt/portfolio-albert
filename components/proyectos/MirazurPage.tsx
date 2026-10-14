@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import NextProjectCard from "@/components/proyectos/NextProjectCard";
+import ProjectDeviceShowcase from "@/components/proyectos/ProjectDeviceShowcase";
 import { AnimatePresence, motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import CustomCursor from "@/components/CustomCursor";
@@ -325,6 +326,8 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
             </div>
           </div>
         </section>
+
+        <ProjectDeviceShowcase project={project} data={activeSubProject.deviceShowcase} />
 
         {/* ── Intro compartida (cliente) — no se re-anima al cambiar de pestaña ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>

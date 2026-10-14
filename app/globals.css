@@ -613,6 +613,34 @@ html.custom-cursor-active .cursor-hidden {
   100% { transform: translateY(6px); }
 }
 
+/* ── Project device showcase (desktop/tablet/mobile composition) ──
+   Below ~860px every style (cascade/diptych/triptych/float) collapses to
+   the same fallback: one big centered mobile frame + desktop/tablet as two
+   small chips underneath (see ProjectDeviceShowcase). Two pre-rendered
+   trees toggled by media query — same convention as `.work-accordion`
+   below — rather than a JS width check, so there's no hydration mismatch. */
+.device-showcase-fallback {
+  display: none;
+}
+@media (max-width: 860px) {
+  .device-showcase-main { display: none !important; }
+  .device-showcase-fallback { display: flex !important; }
+}
+
+/* ── Project design system sheet (palette + typography specimen) ──
+   `!important` is required here (see `.proj-grid-2` above for the same
+   convention): the swatches set `flex`/`maxWidth` as inline styles, which
+   always outrank a plain class selector regardless of the media query. */
+@media (max-width: 640px) {
+  .design-system-palette {
+    flex-wrap: wrap;
+  }
+  .design-system-palette > div {
+    flex: 0 0 calc(50% - 0.5rem) !important;
+    max-width: none !important;
+  }
+}
+
 /* ── Project desktop walkthrough (full-bleed straight strip) ── */
 
 .walkthrough-strip {

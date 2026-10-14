@@ -173,6 +173,9 @@ export const t = {
         structure: "The structure",
         screens: "The screens",
         videoWalkthrough: "Video walkthrough",
+        deviceShowcase: "The product",
+        mobileJourney: "The mobile journey",
+        designSystem: "The visual system",
       },
       metaLabels: {
         client: "Client",
@@ -375,6 +378,9 @@ export const t = {
         structure: "La estructura",
         screens: "Las pantallas",
         videoWalkthrough: "Recorrido en vídeo",
+        deviceShowcase: "El producto",
+        mobileJourney: "El recorrido móvil",
+        designSystem: "El sistema visual",
       },
       metaLabels: {
         client: "Cliente",
@@ -577,6 +583,9 @@ export const t = {
         structure: "L'estructura",
         screens: "Les pantalles",
         videoWalkthrough: "Recorregut en vídeo",
+        deviceShowcase: "El producte",
+        mobileJourney: "El recorregut mòbil",
+        designSystem: "El sistema visual",
       },
       metaLabels: {
         client: "Client",

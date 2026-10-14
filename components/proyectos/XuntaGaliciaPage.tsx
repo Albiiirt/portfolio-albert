@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import XuntaUnificadorVideo from "@/components/proyectos/XuntaUnificadorVideo";
+import ProjectDeviceShowcase from "@/components/proyectos/ProjectDeviceShowcase";
 import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
@@ -149,6 +150,8 @@ export default function XuntaGaliciaPage() {
             pointerEvents: "none",
           }} />
         </section>
+
+        <ProjectDeviceShowcase project={project} data={project.deviceShowcase} />
 
         {/* ── Overview ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>

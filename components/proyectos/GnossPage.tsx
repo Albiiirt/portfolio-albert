@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import NextProjectCard from "@/components/proyectos/NextProjectCard";
+import ProjectDeviceShowcase from "@/components/proyectos/ProjectDeviceShowcase";
+import ProjectDesignSystemSheet from "@/components/proyectos/ProjectDesignSystemSheet";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import CustomCursor from "@/components/CustomCursor";
@@ -178,6 +180,8 @@ export default function GnossPage() {
           </div>
         </section>
 
+        <ProjectDeviceShowcase project={project} data={project.deviceShowcase} />
+
         {/* ── Overview ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
@@ -248,8 +252,18 @@ export default function GnossPage() {
           </div>
         </section>
 
-        {/* ── El trabajo ── */}
+        {/* ── El sistema visual ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+          <div className="site-content">
+            <FadeInView>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.designSystem}</p>
+            </FadeInView>
+            <ProjectDesignSystemSheet data={project.designSystem} accentColor={ACCENT} />
+          </div>
+        </section>
+
+        {/* ── El trabajo ── */}
+        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1rem" }}>{t[lang].projectPage.sectionLabels.work}</p>
@@ -264,7 +278,7 @@ export default function GnossPage() {
                     padding: "1.75rem",
                     borderRadius: "1rem",
                     border: "1px solid var(--border-mid)",
-                    background: "var(--bg)",
+                    background: "var(--bg-alt)",
                     height: "100%",
                   }}>
                     <div style={{
@@ -285,7 +299,7 @@ export default function GnossPage() {
         </section>
 
         {/* ── El resultado ── */}
-        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
@@ -297,7 +311,7 @@ export default function GnossPage() {
         </section>
 
         {/* ── Aprendizajes ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>
