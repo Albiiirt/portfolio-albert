@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { useLang } from "@/lib/LanguageContext";
 import { t } from "@/data/translations";
@@ -10,6 +10,7 @@ import PlanetOrbit from "@/components/PlanetOrbit";
 export default function Hero() {
   const { lang } = useLang();
   const tx = t[lang].hero;
+  const reducedMotion = useReducedMotion();
 
   return (
     <section
@@ -101,7 +102,12 @@ export default function Hero() {
 
         </div>
 
-        {/* Right: planet */}
+        {/* Right: planet / hero teaser video — same "glass" card tokens as
+            components/proyectos/MadridWalkthroughVideo.tsx (border, inset+
+            outer shadow, translucent background), same hero-orbit slot (so
+            it inherits the existing mobile display:none for free) and same
+            clamp sizing. PlanetOrbit stays as the real reduced-motion
+            fallback, not just a loading placeholder. */}
         <motion.div
           initial={{ opacity: 0, x: 24 }}
           animate={{ opacity: 1, x: 0 }}
@@ -109,7 +115,34 @@ export default function Hero() {
           className="hero-orbit"
           style={{ flexShrink: 0, width: "clamp(260px, 36vw, 480px)" }}
         >
-          <PlanetOrbit />
+          {reducedMotion ? (
+            <PlanetOrbit />
+          ) : (
+            <div
+              style={{
+                width: "100%",
+                aspectRatio: "16 / 9",
+                borderRadius: "1.375rem",
+                border: "1.5px solid rgba(255,255,255,0.16)",
+                boxShadow: "0 1px 0 rgba(255,255,255,0.14) inset, 0 6px 28px var(--glass-shadow)",
+                background: "rgba(255,255,255,0.06)",
+                overflow: "hidden",
+                position: "relative",
+              }}
+            >
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                poster="/videos/hero-teaser-poster.jpg"
+                aria-hidden="true"
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+              >
+                <source src="/videos/hero-teaser.mp4" type="video/mp4" />
+              </video>
+            </div>
+          )}
         </motion.div>
 
       </div>
