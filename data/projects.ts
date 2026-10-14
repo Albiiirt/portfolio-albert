@@ -581,8 +581,9 @@ export const projects: Project[] = [
         ca: "Un mateix disseny, coherent en escriptori, tablet i mòbil.",
       },
     },
-    // Madrid-only — 3 static mobile screens (see ProjectMobileFlowStrip).
-    // Placeholder paths — no real captures exist yet, see final summary.
+    // Madrid-only — static mobile screens (see ProjectMobileFlowStrip).
+    // flow-3.png removed (see audit 2026-10-14): file doesn't exist in
+    // public/projects/madrid/. Re-add a 3rd screen once a real capture exists.
     mobileFlowStrip: {
       screens: [
         {
@@ -594,11 +595,6 @@ export const projects: Project[] = [
           src: "/projects/madrid/flow-2.png",
           alt: { en: "A winery experience page with available time slots.", es: "Ficha de una experiencia en bodega con horarios disponibles.", ca: "Fitxa d'una experiència en celler amb horaris disponibles." },
           caption: { en: "Pick an experience", es: "Elige experiencia", ca: "Tria experiència" },
-        },
-        {
-          src: "/projects/madrid/flow-3.png",
-          alt: { en: "Booking confirmation screen for a wine tasting.", es: "Pantalla de confirmación de reserva para una cata de vino.", ca: "Pantalla de confirmació de reserva per a un tast de vi." },
-          caption: { en: "Book instantly", es: "Reserva al momento", ca: "Reserva a l'instant" },
         },
       ],
     },
@@ -1096,28 +1092,29 @@ export const projects: Project[] = [
           ca: "El projecte va quedar en pausa per part del client; el que es va dissenyar fins a aquell punt queda documentat aquí.",
         },
         tags: ["Figma"],
-        // Placeholder paths — no real desktop/tablet/mobile captures exist
-        // yet for the recipe portal. See the final summary.
-        deviceShowcase: {
-          style: "diptych",
-          desktop: {
-            src: "/projects/mirazur-recetas/device-desktop.png",
-            alt: { en: "Desktop view of the recipe listing.", es: "Vista de escritorio del listado de recetas.", ca: "Vista d'escriptori del llistat de receptes." },
-          },
-          tablet: {
-            src: "/projects/mirazur-recetas/device-tablet.png",
-            alt: { en: "Tablet view of an individual recipe page.", es: "Vista de tablet de una ficha de receta individual.", ca: "Vista de tablet d'una fitxa de recepta individual." },
-          },
-          mobile: {
-            src: "/projects/mirazur-recetas/device-mobile.png",
-            alt: { en: "Mobile view of the recipe access flow.", es: "Vista móvil del flujo de acceso a recetas.", ca: "Vista mòbil del flux d'accés a receptes." },
-          },
-          caption: {
-            en: "The recipe portal, designed up to the point the project paused.",
-            es: "El portal de recetas, diseñado hasta el punto en que el proyecto se pausó.",
-            ca: "El portal de receptes, dissenyat fins al punt en què el projecte es va pausar.",
-          },
-        },
+        // Hidden: existing capture files show the wrong content (see audit
+        // 2026-10-14) — these 3 images are from an unrelated project ("M2O"),
+        // not Mirazur/recetas. Replace with real captures before re-enabling.
+        // deviceShowcase: {
+        //   style: "diptych",
+        //   desktop: {
+        //     src: "/projects/mirazur-recetas/device-desktop.png",
+        //     alt: { en: "Desktop view of the recipe listing.", es: "Vista de escritorio del listado de recetas.", ca: "Vista d'escriptori del llistat de receptes." },
+        //   },
+        //   tablet: {
+        //     src: "/projects/mirazur-recetas/device-tablet.png",
+        //     alt: { en: "Tablet view of an individual recipe page.", es: "Vista de tablet de una ficha de receta individual.", ca: "Vista de tablet d'una fitxa de recepta individual." },
+        //   },
+        //   mobile: {
+        //     src: "/projects/mirazur-recetas/device-mobile.png",
+        //     alt: { en: "Mobile view of the recipe access flow.", es: "Vista móvil del flujo de acceso a recetas.", ca: "Vista mòbil del flux d'accés a receptes." },
+        //   },
+        //   caption: {
+        //     en: "The recipe portal, designed up to the point the project paused.",
+        //     es: "El portal de recetas, diseñado hasta el punto en que el proyecto se pausó.",
+        //     ca: "El portal de receptes, dissenyat fins al punt en què el projecte es va pausar.",
+        //   },
+        // },
         meta: [
           { labelKey: "status", value: { en: "On hold", es: "En pausa", ca: "En pausa" } },
           { labelKey: "stack", value: "Figma" },
@@ -1178,29 +1175,31 @@ export const projects: Project[] = [
     tags: ["Figma", "Design System", "Infographics", "Client Collaboration"],
     gradient: "linear-gradient(135deg, #1a2a0a 0%, #2d5c1a 50%, #c4a35a 100%)",
     accentColor: "#c4a35a",
-    // Placeholder paths — no real desktop/tablet/mobile captures exist yet.
-    // See the final summary for what's pending.
-    deviceShowcase: {
-      style: "float",
-      primary: "desktop",
-      desktop: {
-        src: "/projects/gnoss-ai/device-desktop.png",
-        alt: { en: "Desktop view of a GNOSS website page.", es: "Vista de escritorio de una página de la web de GNOSS.", ca: "Vista d'escriptori d'una pàgina del web de GNOSS." },
-      },
-      tablet: {
-        src: "/projects/gnoss-ai/device-tablet.png",
-        alt: { en: "Tablet view of a GNOSS section cover.", es: "Vista de tablet de una portada de sección de GNOSS.", ca: "Vista de tablet d'una portada de secció de GNOSS." },
-      },
-      mobile: {
-        src: "/projects/gnoss-ai/device-mobile.png",
-        alt: { en: "Mobile view of a GNOSS website page.", es: "Vista móvil de una página de la web de GNOSS.", ca: "Vista mòbil d'una pàgina del web de GNOSS." },
-      },
-      caption: {
-        en: "New pages, built to feel native to GNOSS's own system.",
-        es: "Páginas nuevas, construidas para sentirse nativas del propio sistema de GNOSS.",
-        ca: "Pàgines noves, construïdes per sentir-se natives del propi sistema de GNOSS.",
-      },
-    },
+    // Hidden: existing capture files show the wrong content (see audit
+    // 2026-10-14) — all 3 images are the same GNOSS homepage rescaled, not
+    // the distinct pages the alt text promises. Replace with real captures
+    // before re-enabling.
+    // deviceShowcase: {
+    //   style: "float",
+    //   primary: "desktop",
+    //   desktop: {
+    //     src: "/projects/gnoss-ai/device-desktop.png",
+    //     alt: { en: "Desktop view of a GNOSS website page.", es: "Vista de escritorio de una página de la web de GNOSS.", ca: "Vista d'escriptori d'una pàgina del web de GNOSS." },
+    //   },
+    //   tablet: {
+    //     src: "/projects/gnoss-ai/device-tablet.png",
+    //     alt: { en: "Tablet view of a GNOSS section cover.", es: "Vista de tablet de una portada de sección de GNOSS.", ca: "Vista de tablet d'una portada de secció de GNOSS." },
+    //   },
+    //   mobile: {
+    //     src: "/projects/gnoss-ai/device-mobile.png",
+    //     alt: { en: "Mobile view of a GNOSS website page.", es: "Vista móvil de una página de la web de GNOSS.", ca: "Vista mòbil d'una pàgina del web de GNOSS." },
+    //   },
+    //   caption: {
+    //     en: "New pages, built to feel native to GNOSS's own system.",
+    //     es: "Páginas nuevas, construidas para sentirse nativas del propio sistema de GNOSS.",
+    //     ca: "Pàgines noves, construïdes per sentir-se natives del propi sistema de GNOSS.",
+    //   },
+    // },
     // Palette confirmed by diseñador; typeface pair confirmed live from
     // gnoss.com's own computed styles (h1/h2/body) — same pair as elBulli.
     designSystem: {
@@ -1325,29 +1324,31 @@ export const projects: Project[] = [
     tags: ["Claude Code", "Notion", "Web Design"],
     gradient: "linear-gradient(135deg, #1a0808 0%, #3d1010 60%, #7a2020 100%)",
     accentColor: "#b84040",
-    // Placeholder paths — no real desktop/tablet/mobile captures exist yet.
-    // See the final summary for what's pending.
-    deviceShowcase: {
-      style: "float",
-      primary: "mobile",
-      desktop: {
-        src: "/projects/castellera/device-desktop.png",
-        alt: { en: "Desktop view of the Colla Castellera website homepage.", es: "Vista de escritorio de la portada de la web de la Colla Castellera.", ca: "Vista d'escriptori de la portada del web de la Colla Castellera." },
-      },
-      tablet: {
-        src: "/projects/castellera/device-tablet.png",
-        alt: { en: "Tablet view of the team/formation page.", es: "Vista de tablet de la página del equipo/formación.", ca: "Vista de tablet de la pàgina de l'equip/formació." },
-      },
-      mobile: {
-        src: "/projects/castellera/device-mobile.png",
-        alt: { en: "Mobile view of the contact form.", es: "Vista móvil del formulario de contacto.", ca: "Vista mòbil del formulari de contacte." },
-      },
-      caption: {
-        en: "Built mobile-first, for members checking rehearsals on the go.",
-        es: "Construida mobile-first, para quienes consultan los ensayos desde el móvil.",
-        ca: "Construïda mobile-first, per a qui consulta els assajos des del mòbil.",
-      },
-    },
+    // Hidden: existing capture files show the wrong content (see audit
+    // 2026-10-14) — all 3 images are the same CCBM homepage hero rescaled,
+    // not the distinct pages the alt text promises. Replace with real
+    // captures before re-enabling.
+    // deviceShowcase: {
+    //   style: "float",
+    //   primary: "mobile",
+    //   desktop: {
+    //     src: "/projects/castellera/device-desktop.png",
+    //     alt: { en: "Desktop view of the Colla Castellera website homepage.", es: "Vista de escritorio de la portada de la web de la Colla Castellera.", ca: "Vista d'escriptori de la portada del web de la Colla Castellera." },
+    //   },
+    //   tablet: {
+    //     src: "/projects/castellera/device-tablet.png",
+    //     alt: { en: "Tablet view of the team/formation page.", es: "Vista de tablet de la página del equipo/formación.", ca: "Vista de tablet de la pàgina de l'equip/formació." },
+    //   },
+    //   mobile: {
+    //     src: "/projects/castellera/device-mobile.png",
+    //     alt: { en: "Mobile view of the contact form.", es: "Vista móvil del formulario de contacto.", ca: "Vista mòbil del formulari de contacte." },
+    //   },
+    //   caption: {
+    //     en: "Built mobile-first, for members checking rehearsals on the go.",
+    //     es: "Construida mobile-first, para quienes consultan los ensayos desde el móvil.",
+    //     ca: "Construïda mobile-first, per a qui consulta els assajos des del mòbil.",
+    //   },
+    // },
     video: "/covers/tritoners.mp4",
     cover: "/covers/cover-castellera.webp",
     coverAlt: {
