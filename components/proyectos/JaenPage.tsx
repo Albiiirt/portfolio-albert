@@ -363,6 +363,7 @@ export default function JaenPage() {
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
               <FadeInView>
                 <p className="section-label" style={{ marginBottom: "1.5rem" }}>{t[lang].projectPage.sectionLabels.project}</p>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
                 <p style={{ fontSize: "var(--text-body)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
                   {project.problem[lang]}
                 </p>
@@ -426,6 +427,7 @@ export default function JaenPage() {
                     <h3 style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.4rem)", fontWeight: 700, color: "var(--text)", marginBottom: "1rem", lineHeight: 1.25 }}>
                       {card.heading[lang]}
                     </h3>
+                    <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
                     <p style={{ fontSize: "0.95rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                       {card.body[lang]}
                     </p>
@@ -447,11 +449,9 @@ export default function JaenPage() {
                 <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
                   {page.structureHeading![lang]}
                 </h2>
-                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                  {page.structureBody![0][lang]}
-                </p>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                  {page.structureBodyBold!.prefix[lang]}<span style={{ color: "var(--text)", fontWeight: 600 }}>{page.structureBodyBold!.bold[lang]}</span>
+                  {page.structureBody![0][lang]} {page.structureBodyBold!.prefix[lang]}<span style={{ color: "var(--text)", fontWeight: 600 }}>{page.structureBodyBold!.bold[lang]}</span>
                 </p>
               </FadeInView>
               <FadeInView delay={0.12}>
@@ -490,6 +490,7 @@ export default function JaenPage() {
                 <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
                   {page.processHeading![lang]}
                 </h2>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                   {project.process[lang]}
                 </p>
@@ -503,6 +504,7 @@ export default function JaenPage() {
           <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                 {project.result[lang]}
               </p>
@@ -518,6 +520,8 @@ export default function JaenPage() {
               <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.75rem" }}>
                 {t[lang].projectPage.learningsHeading}
               </h2>
+
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
 
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                 {page.learningsItems!.map((text, i) => (

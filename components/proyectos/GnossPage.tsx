@@ -188,6 +188,7 @@ export default function GnossPage() {
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
               <FadeInView>
                 <p className="section-label" style={{ marginBottom: "1.5rem" }}>{t[lang].projectPage.sectionLabels.project}</p>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
                 <p style={{ fontSize: "var(--text-body)", lineHeight: 1.75, color: "var(--text-muted)" }}>
                   {project.problem[lang]}
                 </p>
@@ -236,11 +237,9 @@ export default function GnossPage() {
                 <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
                   {page.challengeHeading![lang]}
                 </h2>
-                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                  {page.challengeBody![0][lang]}
-                </p>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                  {page.challengeBody![1][lang]}
+                  {page.challengeBody![0][lang]}
                 </p>
               </FadeInView>
               <FadeInView delay={0.12}>
@@ -267,6 +266,7 @@ export default function GnossPage() {
           <div className="site-content">
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1rem" }}>{t[lang].projectPage.sectionLabels.work}</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.75rem", maxWidth: 720 }}>
                 {project.process[lang]}
               </p>
@@ -303,6 +303,7 @@ export default function GnossPage() {
           <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                 {project.result[lang]}
               </p>
@@ -318,6 +319,7 @@ export default function GnossPage() {
               <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.75rem" }}>
                 {t[lang].projectPage.learningsHeading}
               </h2>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                 {page.learningsItems!.map((text, i) => (
                   <div key={i} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
