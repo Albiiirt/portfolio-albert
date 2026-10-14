@@ -3,19 +3,23 @@
 import Image from "next/image";
 import FadeInView from "@/components/FadeInView";
 import { useLang } from "@/lib/LanguageContext";
-import type { Project } from "@/data/projects";
+import type { MobileFlowStrip, Project } from "@/data/projects";
 
-// Madrid-only: 3 mobile screens, static side by side — no autoplay, no
-// drag, no dots. Deliberately a separate component rather than a variant of
-// ProjectScreensShowcase (that component is a carousel state machine;
-// forcing a static mode inside it would complicate it for one project).
-// Reuses ProjectScreensShowcase's own mobile glass-frame tokens literally.
+// Originally Madrid-only: N mobile screens, static side by side — no
+// autoplay, no drag, no dots. Deliberately a separate component rather than
+// a variant of ProjectScreensShowcase (that component is a carousel state
+// machine; forcing a static mode inside it would complicate it for one
+// project). Reuses ProjectScreensShowcase's own mobile glass-frame tokens
+// literally.
+// `data` (added for Mirazur's "cupon" tab, 2026-10-14) overrides
+// `project.mobileFlowStrip` when passed, so Mirazur's own strip never mixes
+// with Madrid's or with Mirazur's own "recetas" tab (which has none).
 const MOBILE_OUTER_RADIUS = "2.75rem";
 const MOBILE_INNER_RADIUS = "2.25rem";
 
-export default function ProjectMobileFlowStrip({ project }: { project: Project }) {
+export default function ProjectMobileFlowStrip({ project, data }: { project: Project; data?: MobileFlowStrip }) {
   const { lang } = useLang();
-  const strip = project.mobileFlowStrip;
+  const strip = data ?? project.mobileFlowStrip;
 
   if (!strip?.screens.length) return null;
 

@@ -2,10 +2,12 @@
 
 import type { KeyboardEvent } from "react";
 import { useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import NextProjectCard from "@/components/proyectos/NextProjectCard";
 import ProjectDeviceShowcase from "@/components/proyectos/ProjectDeviceShowcase";
+import ProjectMobileFlowStrip from "@/components/proyectos/ProjectMobileFlowStrip";
 import { AnimatePresence, motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import CustomCursor from "@/components/CustomCursor";
@@ -14,7 +16,7 @@ import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import { EASE } from "@/lib/animations";
 import { useLang, type Lang } from "@/lib/LanguageContext";
-import { projects } from "@/data/projects";
+import { projects, type MobileFlowStrip } from "@/data/projects";
 import { t } from "@/data/translations";
 
 const ACCENT = "#7aad3a";
@@ -23,6 +25,64 @@ const subProjects = project.subProjects!;
 const DEFAULT_SUB_ID = "cupon";
 
 const chips = ["Figma", "Claude Design", "Web Design"];
+
+// "cupon" tab only — 3 real mobile screens (see ProjectMobileFlowStrip's
+// `data` prop), kept local to this file rather than on the shared Project/
+// SubProject data shape so it never mixes with Madrid's own mobileFlowStrip
+// or leaks into the "recetas" tab (which has no real material yet).
+const CUPON_MOBILE_FLOW: MobileFlowStrip = {
+  screens: [
+    {
+      src: "/projects/mirazur-cupon/mobile-1.jpg",
+      alt: {
+        en: "Cover of the Mirazur gift voucher landing page, mobile view.",
+        es: "Portada de la landing del cupón de Mirazur, vista móvil.",
+        ca: "Portada de la landing del cupó de Mirazur, vista mòbil.",
+      },
+      caption: { en: "Cover", es: "Portada", ca: "Portada" },
+    },
+    {
+      src: "/projects/mirazur-cupon/mobile-2.jpg",
+      alt: {
+        en: "The tasting menu, dish by dish, mobile view.",
+        es: "El menú, plato a plato, vista móvil.",
+        ca: "El menú, plat a plat, vista mòbil.",
+      },
+      caption: { en: "The menu, dish by dish", es: "El menú, plato a plato", ca: "El menú, plat a plat" },
+    },
+    {
+      src: "/projects/mirazur-cupon/mobile-3.jpg",
+      alt: {
+        en: "The ten-point philosophy section, mobile view.",
+        es: "La sección de la filosofía en 10 puntos, vista móvil.",
+        ca: "La secció de la filosofia en 10 punts, vista mòbil.",
+      },
+      caption: { en: "The philosophy, in 10 points", es: "La filosofía, en 10 puntos", ca: "La filosofia, en 10 punts" },
+    },
+  ],
+};
+
+// "cupon" tab only — 5 real dish photographs from the tasting menu, shown
+// in a 3-column grid (see .proj-grid-3) next to SvgLandingAnatomy.
+const CUPON_PLATOS = [
+  "/projects/mirazur-cupon/plato-1.jpg",
+  "/projects/mirazur-cupon/plato-2.jpg",
+  "/projects/mirazur-cupon/plato-3.jpg",
+  "/projects/mirazur-cupon/plato-4.jpg",
+  "/projects/mirazur-cupon/plato-5.jpg",
+];
+
+const platosLabel: Record<Lang, string> = {
+  en: "The dishes, one by one",
+  es: "Los platos, uno a uno",
+  ca: "Els plats, un a un",
+};
+
+const platosAlt: Record<Lang, string> = {
+  en: "Dish from Mirazur's tasting menu.",
+  es: "Plato de la carta de Mirazur.",
+  ca: "Plat de la carta de Mirazur.",
+};
 
 const tabsAriaLabel: Record<Lang, string> = {
   en: "Mirazur — projects",
@@ -446,32 +506,90 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
             )}
 
             {activeSubProject.id === "cupon" && (
-              <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
-                <div className="site-content">
-                  <FadeInView>
-                    <p className="section-label" style={{ marginBottom: "0.5rem", color: ACCENT }}>{page!.project2Label![lang]}</p>
-                    <p className="section-label" style={{ marginBottom: "1.75rem" }}>{page!.project2SectionLabel![lang]}</p>
-                  </FadeInView>
-                  <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "center" }}>
+              <>
+                <ProjectMobileFlowStrip project={project} data={CUPON_MOBILE_FLOW} />
+
+                <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+                  <div className="site-content">
                     <FadeInView>
-                      <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
-                        {page!.project2Heading![lang]}
-                      </h2>
-                      <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
-                      {page!.project2Body!.map((paragraph, i) => (
-                        <p key={i} style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: i < page!.project2Body!.length - 1 ? "1.25rem" : 0 }}>
-                          {paragraph[lang]}
-                        </p>
-                      ))}
+                      <p className="section-label" style={{ marginBottom: "0.5rem", color: ACCENT }}>{page!.project2Label![lang]}</p>
+                      <p className="section-label" style={{ marginBottom: "1.75rem" }}>{page!.project2SectionLabel![lang]}</p>
                     </FadeInView>
-                    <FadeInView delay={0.1}>
-                      <div style={{ display: "flex", justifyContent: "center" }}>
-                        <SvgLandingAnatomy />
+                    <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "center" }}>
+                      <FadeInView>
+                        <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
+                          {page!.project2Heading![lang]}
+                        </h2>
+                        <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
+                        {page!.project2Body!.map((paragraph, i) => (
+                          <p key={i} style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: i < page!.project2Body!.length - 1 ? "1.25rem" : 0 }}>
+                            {paragraph[lang]}
+                          </p>
+                        ))}
+                      </FadeInView>
+                      <FadeInView delay={0.1}>
+                        <div style={{ display: "flex", justifyContent: "center" }}>
+                          <SvgLandingAnatomy />
+                        </div>
+                      </FadeInView>
+                    </div>
+
+                    {/* Dish grid + motion clip, both real material added 2026-10-14 */}
+                    <FadeInView delay={0.15} style={{ marginTop: "clamp(2.5rem, 5vh, 3.5rem)" }}>
+                      <p className="section-label" style={{ marginBottom: "1.5rem" }}>{platosLabel[lang]}</p>
+                      <div className="proj-grid-3" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "clamp(1rem, 2vw, 2rem)" }}>
+                        {CUPON_PLATOS.map((src, i) => (
+                          <div
+                            key={src}
+                            style={{
+                              position: "relative",
+                              width: "100%",
+                              aspectRatio: "3 / 4",
+                              borderRadius: "0.75rem",
+                              border: "1px solid var(--border)",
+                              overflow: "hidden",
+                            }}
+                          >
+                            <Image
+                              src={src}
+                              alt={`${platosAlt[lang]} ${i + 1}/${CUPON_PLATOS.length}`}
+                              fill
+                              sizes="(max-width: 640px) 90vw, (max-width: 900px) 45vw, 30vw"
+                              style={{ objectFit: "cover", objectPosition: "center" }}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </FadeInView>
+
+                    <FadeInView delay={0.22} style={{ marginTop: "clamp(2.5rem, 5vh, 3.5rem)" }}>
+                      <div
+                        style={{
+                          width: "100%",
+                          aspectRatio: "16 / 9",
+                          borderRadius: "1.375rem",
+                          border: "1.5px solid rgba(255,255,255,0.16)",
+                          boxShadow: "0 1px 0 rgba(255,255,255,0.14) inset, 0 6px 28px var(--glass-shadow)",
+                          background: "rgba(255,255,255,0.06)",
+                          overflow: "hidden",
+                          position: "relative",
+                        }}
+                      >
+                        <video
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          aria-label={`${project.title[lang]} — formulario de solicitud del cupón`}
+                          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                        >
+                          <source src="/videos/mirazur-form-bono.mp4" type="video/mp4" />
+                        </video>
                       </div>
                     </FadeInView>
                   </div>
-                </div>
-              </section>
+                </section>
+              </>
             )}
           </motion.div>
         </AnimatePresence>

@@ -34,7 +34,7 @@ export type ProjectScreen =
 // ProjectDeviceShowcase). `primary` only matters for the "float" style —
 // it names which of the three frames renders large/centered with an
 // accent-colored ring, while the other two become small satellites.
-export type DeviceShowcaseStyle = "cascade" | "diptych" | "triptych" | "float";
+export type DeviceShowcaseStyle = "cascade" | "diptych" | "triptych" | "float" | "pedestal";
 export type DeviceShowcaseSlot = { src: string; alt: LocalizedText };
 export type DeviceShowcase = {
   style: DeviceShowcaseStyle;
@@ -544,21 +544,21 @@ export const projects: Project[] = [
     tags: ["Next.js", "Claude Code", "Strapi", "Web Design"],
     gradient: "linear-gradient(135deg, #1a0a0f 0%, #4a1528 60%, #8c3a5a 100%)",
     accentColor: "#8c3a5a",
-    // Placeholder paths — no real desktop/tablet/mobile captures exist yet.
-    // See the final summary for what's pending.
+    // Real captures (see audit 2026-10-14) — studio-vitrine "pedestal"
+    // mockup, diseñador-specified for Madrid specifically.
     deviceShowcase: {
-      style: "triptych",
+      style: "pedestal",
       desktop: {
-        src: "/projects/madrid/device-desktop.png",
+        src: "/projects/madrid/device-desktop.jpg",
         alt: { en: "Desktop view of the Enoturismo Madrid homepage.", es: "Vista de escritorio de la portada de Enoturismo Madrid.", ca: "Vista d'escriptori de la portada d'Enoturisme Madrid." },
       },
       tablet: {
-        src: "/projects/madrid/device-tablet.png",
+        src: "/projects/madrid/device-tablet.jpg",
         alt: { en: "Tablet view of a winery profile page.", es: "Vista de tablet de la ficha de una bodega.", ca: "Vista de tablet de la fitxa d'un celler." },
       },
       mobile: {
-        src: "/projects/madrid/device-mobile.png",
-        alt: { en: "Mobile view of a wine route page.", es: "Vista móvil de la ficha de una ruta de vino.", ca: "Vista mòbil de la fitxa d'una ruta de vi." },
+        src: "/projects/madrid/device-mobile.jpg",
+        alt: { en: "Mobile view of the Enoturismo Madrid homepage.", es: "Vista móvil de la portada de Enoturismo Madrid.", ca: "Vista mòbil de la portada d'Enoturisme Madrid." },
       },
       caption: {
         en: "One design, consistent across desktop, tablet and mobile.",
@@ -566,20 +566,20 @@ export const projects: Project[] = [
         ca: "Un mateix disseny, coherent en escriptori, tablet i mòbil.",
       },
     },
-    // Madrid-only — static mobile screens (see ProjectMobileFlowStrip).
-    // flow-3.png removed (see audit 2026-10-14): file doesn't exist in
-    // public/projects/madrid/. Re-add a 3rd screen once a real capture exists.
+    // Madrid-only — static mobile screens (see ProjectMobileFlowStrip). Real
+    // captures (see audit 2026-10-14) — still only 2 screens, no 3rd real
+    // capture exists yet.
     mobileFlowStrip: {
       screens: [
         {
-          src: "/projects/madrid/flow-1.png",
-          alt: { en: "Browsing the list of wine routes with the map filter open.", es: "Explorando el listado de rutas de vino con el filtro de mapa abierto.", ca: "Explorant el llistat de rutes de vi amb el filtre de mapa obert." },
-          caption: { en: "Explore routes", es: "Explora rutas", ca: "Explora rutes" },
+          src: "/projects/madrid/flow-1.jpg",
+          alt: { en: "Browsing the wine region of San Martín de Valdeiglesias on mobile.", es: "Explorando la zona vitivinícola de San Martín de Valdeiglesias en móvil.", ca: "Explorant la zona vitivinícola de San Martín de Valdeiglesias en mòbil." },
+          caption: { en: "Explore zones", es: "Explora zonas", ca: "Explora zones" },
         },
         {
-          src: "/projects/madrid/flow-2.png",
-          alt: { en: "A winery experience page with available time slots.", es: "Ficha de una experiencia en bodega con horarios disponibles.", ca: "Fitxa d'una experiència en celler amb horaris disponibles." },
-          caption: { en: "Pick an experience", es: "Elige experiencia", ca: "Tria experiència" },
+          src: "/projects/madrid/flow-2.jpg",
+          alt: { en: "List of wineries in the Comunidad de Madrid in mobile view.", es: "Listado de bodegas de la Comunidad de Madrid en vista móvil.", ca: "Llistat de cellers de la Comunidad de Madrid en vista mòbil." },
+          caption: { en: "Discover wineries", es: "Descubre bodegas", ca: "Descobreix cellers" },
         },
       ],
     },

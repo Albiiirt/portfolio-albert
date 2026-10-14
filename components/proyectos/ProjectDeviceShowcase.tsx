@@ -7,10 +7,11 @@ import { useLang, type Lang } from "@/lib/LanguageContext";
 import { t } from "@/data/translations";
 import type { Project, DeviceShowcase, DeviceShowcaseSlot } from "@/data/projects";
 
-// Diseñador's spec, reused literally from ProjectScreensShowcase's mobile
-// frame tokens — never reinvented. Desktop/tablet share the same glass
-// border/highlight/background, just a different single radius and no
-// bezel/padding (no dynamic island, no chrome bar — frontal only, no tilt).
+// Diseñador's spec (revised 2026-10-14: glass frame removed — see below).
+// Desktop/tablet render frameless (image to the edge, just radius +
+// shadow); mobile keeps a solid dark bezel so the notch/dynamic island
+// still reads as a chassis. No bezel/padding on desktop/tablet (no chrome
+// bar — frontal only, no tilt).
 type DeviceKind = "desktop" | "tablet" | "mobile";
 
 const ASPECT: Record<DeviceKind, number> = {
@@ -21,9 +22,11 @@ const ASPECT: Record<DeviceKind, number> = {
 const RADIUS_OUTER: Record<DeviceKind, number> = { desktop: 14, tablet: 20, mobile: 44 };
 const MOBILE_INNER_RADIUS = 36;
 
-const GLASS_BORDER = "1.5px solid rgba(255,255,255,0.16)";
-const GLASS_HIGHLIGHT = "0 1px 0 rgba(255,255,255,0.14) inset";
-const GLASS_BG = "rgba(255,255,255,0.09)";
+// Replaces the old translucent "glass" frame (GLASS_BORDER/HIGHLIGHT/BG,
+// removed 2026-10-14): desktop/tablet now go borderless/transparent (just
+// radius + shadow, image to the edge); mobile keeps a solid dark bezel so
+// the notch/dynamic island still reads as a chassis.
+const MOBILE_BEZEL = "#111113";
 // Shadow is always neutral black — never tinted with the project's accent,
 // per diseñador's spec. The one exception ("float") swaps it for a colored
 // ring entirely, it never mixes the two.
@@ -50,10 +53,10 @@ function DeviceFrame({
   const isMobile = kind === "mobile";
   const outer = RADIUS_OUTER[kind];
 
-  const border = ring ? `1.5px solid ${ring}` : GLASS_BORDER;
-  const boxShadow = ring
-    ? `${GLASS_HIGHLIGHT}, 0 0 0 3px ${ring}40`
-    : `${GLASS_HIGHLIGHT}, ${dominant ? SHADOW_DOMINANT : SHADOW_SATELLITE}`;
+  // "float"'s ring keeps its colored glow as the only shadow (never mixed
+  // with the neutral one); everyone else keeps the plain neutral shadow.
+  // No border, no inset highlight on either path — frame is gone.
+  const boxShadow = ring ? `0 0 0 3px ${ring}40` : dominant ? SHADOW_DOMINANT : SHADOW_SATELLITE;
 
   return (
     <div
@@ -61,9 +64,9 @@ function DeviceFrame({
         position: "relative",
         aspectRatio: String(ASPECT[kind]),
         borderRadius: outer,
-        border,
+        border: "none",
         boxShadow,
-        background: GLASS_BG,
+        background: isMobile ? MOBILE_BEZEL : "transparent",
         padding: isMobile ? 10 : 0,
         ...style,
       }}
@@ -145,12 +148,10 @@ function DiptychLayout({ desktop, tablet, mobile, lang }: {
           priority
           style={{
             width: "100%",
-            borderTop: GLASS_BORDER,
-            borderLeft: GLASS_BORDER,
-            borderRight: "none",
-            borderBottom: "none",
+            // The "cut corner" now reads purely from the asymmetric radius +
+            // shadow — no border on any side (glass frame removed).
             borderRadius: "14px 0 0 0",
-            boxShadow: `${GLASS_HIGHLIGHT}, ${SHADOW_DOMINANT}`,
+            boxShadow: SHADOW_DOMINANT,
           }}
         />
       </FadeInView>
@@ -237,6 +238,171 @@ function FloatLayout({
   );
 }
 
+// ── Style 5: pedestal — studio-vitrine mockup, assigned to Madrid. Unlike
+// the other 4 styles this is a forced-perspective still life, not a flat
+// composition: the tablet sits furthest back (and highest in frame), the
+// laptop is the dominant frontal hero, the mobile sits closest to the
+// floor off to one side. Devices keep DeviceFrame fully intact (no
+// bezel/glass, per Part A) — only tilted via a wrapping transform, never
+// recolored. Widths/positions/z-index below are this component's own
+// compositional choices; only the pedestal proportions (height, width
+// ratio, bottom) and device rotations come from diseñador's spec.
+const PEDESTAL_TOP_FACE_H = 9; // px — fixed regardless of stage size
+const PEDESTAL_DELAY: Record<DeviceKind, number> = { desktop: 0, tablet: 0.08, mobile: 0.16 };
+
+type PedestalSpec = {
+  kind: DeviceKind;
+  widthPct: number; // device width, % of stage width
+  centerXPct: number; // device/pedestal shared horizontal center, % of stage width
+  rotate: string;
+  bottomPct: number; // pedestal's own bottom, % of stage height
+  heightPct: number; // pedestal's own front-face height, % of stage height
+  widthRatio: number; // pedestal width, relative to the device's own width
+  zIndex: number;
+};
+
+const PEDESTAL_SPECS: PedestalSpec[] = [
+  { kind: "tablet", widthPct: 22, centerXPct: 30, rotate: "rotateY(-14deg)", bottomPct: 46, heightPct: 30, widthRatio: 0.6, zIndex: 1 },
+  { kind: "desktop", widthPct: 48, centerXPct: 53, rotate: "rotateY(-6deg) rotateX(1deg)", bottomPct: 18, heightPct: 14, widthRatio: 0.92, zIndex: 3 },
+  { kind: "mobile", widthPct: 13, centerXPct: 80, rotate: "rotateY(18deg) rotateZ(-3deg)", bottomPct: 14, heightPct: 10, widthRatio: 0.7, zIndex: 2 },
+];
+
+function PedestalLayout({
+  accentColor, desktop, tablet, mobile, lang,
+}: {
+  accentColor: string;
+  desktop: DeviceShowcaseSlot; tablet: DeviceShowcaseSlot; mobile: DeviceShowcaseSlot; lang: Lang;
+}) {
+  const slots: Record<DeviceKind, DeviceShowcaseSlot> = { desktop, tablet, mobile };
+  const wallTint = `color-mix(in srgb, ${accentColor} 16%, #eef1ee 84%)`;
+
+  return (
+    <div
+      style={{
+        width: "100%",
+        maxWidth: 920,
+        aspectRatio: "3 / 2",
+        margin: "0 auto",
+        borderRadius: 24,
+        overflow: "hidden",
+        position: "relative",
+        boxShadow: SHADOW_DOMINANT,
+      }}
+    >
+      {/* Walls */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "68%",
+          background: `linear-gradient(100deg, ${wallTint} 0%, ${wallTint} 54%, #e4e6e8 56%, #e4e6e8 100%)`,
+        }}
+      />
+      {/* Floor */}
+      <div
+        aria-hidden="true"
+        style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "32%", background: "#f4f3f1" }}
+      >
+        {/* Contact-shadow vignette where the floor meets the wall — the
+            gradient's own hotspot sits at its box's bottom (center 50% 100%);
+            flipped vertically so it reads at the floor's *top* edge instead. */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "radial-gradient(ellipse 140% 60% at 50% 100%, rgba(0,0,0,0.05), transparent 70%)",
+            transform: "scaleY(-1)",
+          }}
+        />
+      </div>
+
+      {PEDESTAL_SPECS.map((spec) => {
+        const pedestalWidthPct = spec.widthPct * spec.widthRatio;
+        const pedestalLeftPct = spec.centerXPct - pedestalWidthPct / 2;
+        const deviceLeftPct = spec.centerXPct - spec.widthPct / 2;
+        const shadowWidthPct = pedestalWidthPct * 1.22;
+        const shadowLeftPct = spec.centerXPct - shadowWidthPct / 2;
+        const topFaceBottom = `${spec.bottomPct + spec.heightPct}%`;
+        const deviceBottom = `calc(${spec.bottomPct + spec.heightPct}% + ${PEDESTAL_TOP_FACE_H}px)`;
+
+        return (
+          <FadeInView
+            key={spec.kind}
+            delay={PEDESTAL_DELAY[spec.kind]}
+            style={{ position: "absolute", inset: 0, zIndex: spec.zIndex }}
+          >
+            {/* Contact shadow */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                left: `${shadowLeftPct}%`,
+                width: `${shadowWidthPct}%`,
+                bottom: `calc(${spec.bottomPct}% - 6px)`,
+                height: 16,
+                borderRadius: "50%",
+                background: "radial-gradient(ellipse, rgba(0,0,0,0.22) 0%, transparent 70%)",
+                filter: "blur(6px)",
+              }}
+            />
+            {/* Pedestal front face */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                left: `${pedestalLeftPct}%`,
+                width: `${pedestalWidthPct}%`,
+                bottom: `${spec.bottomPct}%`,
+                height: `${spec.heightPct}%`,
+                background: "linear-gradient(180deg, #ffffff 0%, #f1f0ee 100%)",
+                borderRadius: "3px 3px 0 0",
+              }}
+            />
+            {/* Pedestal top face */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                left: `${pedestalLeftPct}%`,
+                width: `${pedestalWidthPct}%`,
+                bottom: topFaceBottom,
+                height: PEDESTAL_TOP_FACE_H,
+                background: "#ffffff",
+                clipPath: "polygon(10% 0, 90% 0, 100% 100%, 0% 100%)",
+              }}
+            />
+            {/* Device, tilted, resting on top of the pedestal */}
+            <div
+              style={{
+                position: "absolute",
+                left: `${deviceLeftPct}%`,
+                width: `${spec.widthPct}%`,
+                bottom: deviceBottom,
+                perspective: 1400,
+                transformOrigin: "bottom center",
+              }}
+            >
+              <div style={{ transform: spec.rotate, transformOrigin: "bottom center" }}>
+                <DeviceFrame
+                  kind={spec.kind}
+                  slot={slots[spec.kind]}
+                  lang={lang}
+                  priority={spec.kind === "desktop"}
+                  style={{ width: "100%" }}
+                />
+              </div>
+            </div>
+          </FadeInView>
+        );
+      })}
+    </div>
+  );
+}
+
 // ── Fallback (<~860px, shared by all 4 styles): one centered mobile frame,
 // desktop+tablet as two small chips underneath ──
 function Fallback({ desktop, tablet, mobile, lang }: {
@@ -289,6 +455,9 @@ export default function ProjectDeviceShowcase({
           {style === "triptych" && <TriptychLayout desktop={desktop} tablet={tablet} mobile={mobile} lang={lang} />}
           {style === "float" && (
             <FloatLayout accentColor={project.accentColor} primary={primary} desktop={desktop} tablet={tablet} mobile={mobile} lang={lang} />
+          )}
+          {style === "pedestal" && (
+            <PedestalLayout accentColor={project.accentColor} desktop={desktop} tablet={tablet} mobile={mobile} lang={lang} />
           )}
         </div>
 
