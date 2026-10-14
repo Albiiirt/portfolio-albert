@@ -283,8 +283,28 @@ export default function CastelleraPage() {
           </div>
         </section>
 
-        {/* ── El resultado ── */}
+        {/* ── El sistema ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+          <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
+            <FadeInView>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.system}</p>
+            </FadeInView>
+            <FadeInView>
+              <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
+                {page.systemHeading![lang]}
+              </h2>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
+              {page.systemBody!.map((paragraph, i) => (
+                <p key={i} style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.75rem" }}>
+                  {paragraph[lang]}
+                </p>
+              ))}
+            </FadeInView>
+          </div>
+        </section>
+
+        {/* ── El resultado ── */}
+        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
@@ -297,7 +317,7 @@ export default function CastelleraPage() {
         </section>
 
         {/* ── Aprendizajes ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>

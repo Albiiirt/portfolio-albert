@@ -536,9 +536,9 @@ export const projects: Project[] = [
       ca: "El site d'enoturisme de Madrid ja existia, però amb pàgines disperses i una navegació que no ajudava a trobar cellers, rutes o experiències. L'encàrrec: un redisseny complet que unifiqués el disseny i el fes funcional per al visitant.",
     },
     process: {
-      en: "The starting point was a single AI-generated page, not built to grow. I migrated it to Next.js and designed and built the rest of the site myself with Claude Code — wineries, routes and experiences — with a Strapi CMS so the team can publish content without touching code.",
-      es: "La base era una página única generada con IA, no pensada para crecer. La migré a Next.js y diseñé y construí yo solo el resto del site con Claude Code —bodegas, rutas y experiencias— con un CMS en Strapi para que el equipo publique contenido sin tocar código.",
-      ca: "El punt de partida va ser una única pàgina generada amb IA, no pensada per créixer. La vaig migrar a Next.js i vaig dissenyar i construir la resta del site jo sol amb Claude Code —cellers, rutes i experiències— amb un CMS a Strapi perquè l'equip publiqui contingut sense tocar codi.",
+      en: "The starting point was a single AI-generated page, not built to grow. I migrated it to Next.js and designed and built the rest of the site myself with Claude Code: the winery, route and experience pages that make up most of the site today.",
+      es: "La base era una página única generada con IA, no pensada para crecer. La migré a Next.js y diseñé y construí yo solo el resto del site con Claude Code: las páginas de bodegas, rutas y experiencias que hoy forman el grueso del contenido.",
+      ca: "El punt de partida va ser una única pàgina generada amb IA, no pensada per créixer. La vaig migrar a Next.js i vaig dissenyar i construir la resta del site jo sol amb Claude Code: les pàgines de cellers, rutes i experiències que avui formen el gruix del contingut.",
     },
     result: {
       en: "A site built single-handedly from start to finish, with a Strapi CMS that lets the team publish new content without technical help and a navigation built to take visitors from route to booking.",
@@ -632,6 +632,18 @@ export const projects: Project[] = [
         es: "Una base generada por IA",
         ca: "Una base generada per IA",
       },
+      systemHeading: {
+        en: "Every new winery has to fit on its own",
+        es: "Que cada bodega nueva encaje sola",
+        ca: "Que cada celler nou encaixi sol",
+      },
+      systemBody: [
+        {
+          en: "Wineries, routes and experiences are different kinds of content, but on the site they have to read as part of the same place. In Strapi I set up each one separately: when the tourism team adds a new winery or publishes another route, it shows up already laid out, matching the rest of the site — without going through me or a developer.",
+          es: "Bodegas, rutas y experiencias son contenidos distintos, pero en la web tienen que leerse como parte del mismo sitio. En Strapi configuré cada tipo por separado: cuando el equipo de turismo añade una bodega nueva o publica otra ruta, esta aparece ya maquetada con el mismo diseño que las demás — sin pasar por mí ni por un desarrollador.",
+          ca: "Cellers, rutes i experiències són continguts diferents, però al web han de llegir-se com a part del mateix lloc. A Strapi vaig configurar cada tipus per separat: quan l'equip de turisme afegeix un celler nou o publica una altra ruta, apareix ja maquetada amb el mateix disseny que la resta — sense passar per mi ni per un desenvolupador.",
+        },
+      ],
       workHeading: {
         en: "From base to finished product",
         es: "De la base al producto terminado",
@@ -1313,9 +1325,9 @@ export const projects: Project[] = [
       ca: "Una colla castellera necessitava molt més que una web bonica: poder actualitzar el contingut sense tocar codi, i formularis que arribessin de veritat als seus correus corporatius. Un problema de producte, no només de disseny.",
     },
     process: {
-      en: "I designed and developed the website with Claude Code, set up a Notion CMS, wired the contact forms to corporate emails, and deployed the site from GitHub to the contracted server and domain.",
-      es: "Diseñé y desarrollé la web con Claude Code, configuré un CMS con Notion, conecté los formularios a los correos corporativos y desplegué el site desde GitHub al servidor y dominio contratados.",
-      ca: "Vaig dissenyar i desenvolupar la web amb Claude Code, vaig configurar un CMS amb Notion, vaig connectar els formularis als correus corporatius i vaig desplegar el site des de GitHub al servidor i domini contractats.",
+      en: "I designed and developed the website with Claude Code, wired the contact forms to corporate emails, and deployed the site from GitHub to the contracted server and domain.",
+      es: "Diseñé y desarrollé la web con Claude Code, conecté los formularios a los correos corporativos y desplegué el site desde GitHub al servidor y dominio contratados.",
+      ca: "Vaig dissenyar i desenvolupar la web amb Claude Code, vaig connectar els formularis als correus corporatius i vaig desplegar el site des de GitHub al servidor i domini contractats.",
     },
     result: {
       en: "A fully operational website with a simple content management system, working contact forms, and a complete deployment pipeline.",
@@ -1412,14 +1424,6 @@ export const projects: Project[] = [
           },
         },
         {
-          label: { en: "CMS with Notion", es: "CMS con Notion", ca: "CMS amb Notion" },
-          desc: {
-            en: "I connected Notion as a content management system so the team could update text and information without touching code.",
-            es: "Conecté Notion como sistema de gestión de contenido para que el equipo pudiera actualizar textos e información sin tocar código.",
-            ca: "Vaig connectar Notion com a sistema de gestió de contingut perquè l'equip pogués actualitzar textos i informació sense tocar codi.",
-          },
-        },
-        {
           label: { en: "Deployment", es: "Despliegue", ca: "Desplegament" },
           desc: {
             en: "I linked the GitHub repository to the contracted server and domain to get the site running with an automatic pipeline.",
@@ -1434,6 +1438,18 @@ export const projects: Project[] = [
             es: "Configuré la ficha de Google Business para que al buscar la colla aparezca la tarjeta de Maps con la web, la dirección y los datos de contacto actualizados.",
             ca: "Vaig configurar la fitxa de Google Business perquè en cercar la colla aparegui la targeta de Maps amb la web, l'adreça i les dades de contacte actualitzades.",
           },
+        },
+      ],
+      systemHeading: {
+        en: "The colla, not a tech department",
+        es: "La colla, no un equipo técnico",
+        ca: "La colla, no un equip tècnic",
+      },
+      systemBody: [
+        {
+          en: "There's no development team behind the website: it's the colla itself, a non-technical team that also has to keep it up to date. I connected Notion as their content manager so they could update text and information on their own, without depending on anyone with coding knowledge.",
+          es: "Detrás de la web no hay un equipo de desarrollo: hay la propia colla, un equipo no técnico que también tiene que mantenerla al día. Conecté Notion como su gestor de contenido para que pudieran actualizar textos e información por su cuenta, sin depender de nadie con conocimientos de código.",
+          ca: "Darrere del web no hi ha un equip de desenvolupament: hi ha la pròpia colla, un equip no tècnic que també ha de mantenir-lo al dia. Vaig connectar Notion com el seu gestor de contingut perquè poguessin actualitzar textos i informació pel seu compte, sense dependre de ningú amb coneixements de codi.",
         },
       ],
       learningsItems: [
