@@ -11,6 +11,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import MadridWalkthroughVideo from "@/components/proyectos/MadridWalkthroughVideo";
 import ProjectDeviceShowcase from "@/components/proyectos/ProjectDeviceShowcase";
 import ProjectMobileFlowStrip from "@/components/proyectos/ProjectMobileFlowStrip";
+import ProjectDesignSystemSheet from "@/components/proyectos/ProjectDesignSystemSheet";
 import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
@@ -288,8 +289,18 @@ export default function MadridPage() {
           </div>
         </section>
 
-        {/* ── El trabajo ── */}
+        {/* ── La paleta y tipografía ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+          <div className="site-content">
+            <FadeInView>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.designSystem}</p>
+            </FadeInView>
+            <ProjectDesignSystemSheet data={project.designSystem} accentColor={ACCENT} tightTop />
+          </div>
+        </section>
+
+        {/* ── El trabajo ── */}
+        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.work}</p>

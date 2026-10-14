@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import NextProjectCard from "@/components/proyectos/NextProjectCard";
 import ProjectDeviceShowcase from "@/components/proyectos/ProjectDeviceShowcase";
 import ProjectMobileFlowStrip from "@/components/proyectos/ProjectMobileFlowStrip";
+import ProjectDesignSystemSheet from "@/components/proyectos/ProjectDesignSystemSheet";
 import { AnimatePresence, motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import CustomCursor from "@/components/CustomCursor";
@@ -423,8 +424,18 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
           </div>
         </section>
 
+        {/* ── La paleta y tipografía (a nivel de proyecto, no de pestaña) ── */}
+        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+          <div className="site-content">
+            <FadeInView>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.designSystem}</p>
+            </FadeInView>
+            <ProjectDesignSystemSheet data={project.designSystem} accentColor={ACCENT} tightTop />
+          </div>
+        </section>
+
         {/* ── Control de pestañas ── */}
-        <section style={{ background: "var(--bg)", padding: "clamp(2.5rem, 5vh, 3.5rem) var(--space-section-x) 0" }}>
+        <section style={{ background: "var(--bg-alt)", padding: "clamp(2.5rem, 5vh, 3.5rem) var(--space-section-x) 0" }}>
           <div className="site-content">
             <div role="tablist" aria-label={tabsAriaLabel[lang]} style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem" }}>
               {subProjects.map((sp, i) => {

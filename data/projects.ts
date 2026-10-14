@@ -553,6 +553,19 @@ export const projects: Project[] = [
     tags: ["Next.js", "Claude Code", "Strapi", "Web Design"],
     gradient: "linear-gradient(135deg, #1a0a0f 0%, #4a1528 60%, #8c3a5a 100%)",
     accentColor: "#8c3a5a",
+    designSystem: {
+      palette: [
+        { hex: "#e30613", label: { es: "Acento institucional", en: "Institutional accent", ca: "Accent institucional" } },
+        { hex: "#1a1a1a", label: { es: "Texto", en: "Text", ca: "Text" } },
+        { hex: "#6b6b6b", label: { es: "Texto secundario", en: "Secondary text", ca: "Text secundari" } },
+        { hex: "#ffffff", label: { es: "Fondo", en: "Background", ca: "Fons" } },
+        { hex: "#8c3a5a", label: { es: "Acento del proyecto (hero)", en: "Project accent (hero)", ca: "Accent del projecte (hero)" } },
+      ],
+      typography: [
+        { typeface: "DM Serif Display", usage: { es: "Titulares", en: "Headlines", ca: "Titulars" } },
+        { typeface: "Roboto", usage: { es: "Texto e interfaz", en: "Body & interface", ca: "Text i interfície" } },
+      ],
+    },
     // Real captures (see audit 2026-10-14) — studio-vitrine "pedestal"
     // mockup, diseñador-specified for Madrid specifically.
     deviceShowcase: {
@@ -978,6 +991,20 @@ export const projects: Project[] = [
     tags: ["Figma", "Claude Design", "Web Design"],
     gradient: "linear-gradient(135deg, #1a2a0d 0%, #3d5c1e 60%, #7aad3a 100%)",
     accentColor: "#7aad3a",
+    designSystem: {
+      palette: [
+        { hex: "#0a0908", label: { es: "Fondo", en: "Background", ca: "Fons" } },
+        { hex: "#14110f", label: { es: "Fondo secundario", en: "Secondary background", ca: "Fons secundari" } },
+        { hex: "#ede0bd", label: { es: "Titulares", en: "Headlines", ca: "Titulars" } },
+        { hex: "#ece8e1", label: { es: "Texto", en: "Text", ca: "Text" } },
+        { hex: "#cd9a50", label: { es: "Acento (ámbar)", en: "Accent (amber)", ca: "Accent (ambre)" } },
+      ],
+      typography: [
+        { typeface: "Goudy Old Style", usage: { es: "Títulos de sección", en: "Section headings", ca: "Títols de secció" } },
+        { typeface: "Cormorant Garamond", usage: { es: "Titular principal (cursiva)", en: "Main headline (italic)", ca: "Titular principal (cursiva)" } },
+        { typeface: "Saans", usage: { es: "Texto e interfaz", en: "Body & interface", ca: "Text i interfície" } },
+      ],
+    },
     video: "/covers/mirazur.mp4",
     cover: "/covers/cover-mirazur.webp",
     coverAlt: {
@@ -1157,8 +1184,8 @@ export const projects: Project[] = [
       ca: "Disseny web, infografies i presentacions per a GNOSS — mantenint i ampliant el seu sistema de disseny en col·laboració directa amb el seu equip.",
     },
     tags: ["Figma", "Design System", "Infographics", "Client Collaboration"],
-    gradient: "linear-gradient(135deg, #1a2a0a 0%, #2d5c1a 50%, #c4a35a 100%)",
-    accentColor: "#c4a35a",
+    gradient: "linear-gradient(135deg, #0a0e14 0%, #10263f 55%, #0a66f2 100%)",
+    accentColor: "#0a66f2",
     // Hidden: existing capture files show the wrong content (see audit
     // 2026-10-14) — all 3 images are the same GNOSS homepage rescaled, not
     // the distinct pages the alt text promises. Replace with real captures
@@ -1188,9 +1215,9 @@ export const projects: Project[] = [
     // gnoss.com's own computed styles (h1/h2/body) — same pair as elBulli.
     designSystem: {
       palette: [
-        { hex: "#1a2a0a", label: { es: "Fondo oscuro", en: "Dark background", ca: "Fons fosc" } },
-        { hex: "#2d5c1a", label: { es: "Fondo medio", en: "Mid background", ca: "Fons mitjà" } },
-        { hex: "#c4a35a", label: { es: "Acento", en: "Accent", ca: "Accent" } },
+        { hex: "#BEBEBE", label: { es: "Fondo", en: "Background", ca: "Fons" } },
+        { hex: "#FFFFFF", label: { es: "Texto y logotipo", en: "Text & logo", ca: "Text i logotip" } },
+        { hex: "#0A66F2", label: { es: "Acento", en: "Accent", ca: "Accent" } },
       ],
       typography: [
         { typeface: "PP Neue Machina (Light)", usage: { es: "Titulares", en: "Headlines", ca: "Titulars" } },

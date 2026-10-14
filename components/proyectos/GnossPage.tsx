@@ -15,7 +15,7 @@ import { useLang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
 import { t } from "@/data/translations";
 
-const ACCENT = "#c4a35a";
+const ACCENT = "#0a66f2";
 const project = projects.find((p) => p.id === "gnoss-ai")!;
 const page = project.page!;
 
@@ -97,7 +97,7 @@ export default function GnossPage() {
           minHeight: "clamp(420px, 55svh, 620px)",
           display: "flex",
           flexDirection: "column",
-          background: "linear-gradient(135deg, #1a2a0a 0%, #2d5c1a 50%, #c4a35a 100%)",
+          background: "linear-gradient(135deg, #0a0e14 0%, #10263f 55%, #0a66f2 100%)",
           paddingTop: "clamp(5.5rem, 9vh, 8rem)",
           paddingLeft: "var(--space-section-x)",
           paddingRight: "var(--space-section-x)",
