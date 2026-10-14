@@ -10,6 +10,7 @@ import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import XuntaUnificadorVideo from "@/components/proyectos/XuntaUnificadorVideo";
 import ProjectDeviceShowcase from "@/components/proyectos/ProjectDeviceShowcase";
+import ProjectDesignSystemSheet from "@/components/proyectos/ProjectDesignSystemSheet";
 import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
@@ -159,6 +160,7 @@ export default function XuntaGaliciaPage() {
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
               <FadeInView>
                 <p className="section-label" style={{ marginBottom: "1.5rem" }}>{t[lang].projectPage.sectionLabels.project}</p>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
                 <p style={{ fontSize: "var(--text-body)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
                   {project.problem[lang]}
                 </p>
@@ -186,6 +188,16 @@ export default function XuntaGaliciaPage() {
           </div>
         </section>
 
+        {/* ── La paleta y tipografía ── */}
+        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+          <div className="site-content">
+            <FadeInView>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.designSystem}</p>
+            </FadeInView>
+            <ProjectDesignSystemSheet data={project.designSystem} accentColor={ACCENT} tightTop />
+          </div>
+        </section>
+
         <XuntaUnificadorVideo project={project} />
 
         {/* ── El trabajo ── */}
@@ -199,6 +211,7 @@ export default function XuntaGaliciaPage() {
                 <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
                   {page.workHeading![lang]}
                 </h2>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                   {project.process[lang]}
                 </p>
@@ -234,6 +247,7 @@ export default function XuntaGaliciaPage() {
               <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
                 {page.resultHeading![lang]}
               </h2>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                 {project.result[lang]}
               </p>
@@ -263,6 +277,8 @@ export default function XuntaGaliciaPage() {
               <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.75rem" }}>
                 {page.learningsHeading![lang]}
               </h2>
+
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
 
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                 {page.learningsItems!.map((text, i) => (

@@ -406,19 +406,19 @@ export const projects: Project[] = [
     category: { en: "Custom Product", es: "Producto a medida", ca: "Producte a mida" },
     year: "2026",
     problem: {
-      en: "A specific client within the Xunta de Galicia manages a database with a large number of files, a significant share of them duplicated. They needed a tool that would use an algorithm to suggest which files correspond to each other, so the person only had to review and confirm each match — with the option to edit it or create an entry manually when the algorithm gets it wrong. The challenge wasn't starting from an already-defined design, but truly understanding that review flow in order to design something genuinely intuitive, functional and personalized.",
-      es: "Un cliente concreto dentro de la Xunta de Galicia gestiona una base de datos con muchos archivos, una parte significativa de ellos duplicados. Necesitaban una herramienta que, mediante un algoritmo, sugiriera qué archivos corresponden entre sí, para que la persona solo tuviera que revisar y confirmar cada coincidencia — con la opción de editarla o crear una entrada manualmente cuando el algoritmo no acierta. El reto no era partir de un diseño ya definido, sino entender a fondo ese flujo de revisión para diseñar algo realmente intuitivo, funcional y personalizado.",
-      ca: "Un client concret dins la Xunta de Galicia gestiona una base de dades amb molts arxius, una part significativa d'ells duplicats. Necessitaven una eina que, mitjançant un algorisme, suggerís quins arxius es corresponen entre ells, perquè la persona només hagués de revisar i confirmar cada coincidència — amb l'opció d'editar-la o crear una entrada manualment quan l'algorisme no l'encerta. El repte no era partir d'un disseny ja definit, sinó entendre a fons aquest flux de revisió per poder dissenyar alguna cosa realment intuïtiva, funcional i personalitzada.",
+      en: "A Xunta de Galicia client manages a database full of duplicated files and needed a tool that would use an algorithm to suggest matches, so the person only had to review and confirm each one. The challenge wasn't starting from a defined design, but truly understanding that review flow.",
+      es: "Un cliente de la Xunta de Galicia gestiona una base de datos con muchos archivos duplicados y necesitaba una herramienta que sugiriera coincidencias mediante un algoritmo, para que la persona solo revisara y confirmara cada una. El reto no era partir de un diseño ya definido, sino entender a fondo ese flujo de revisión.",
+      ca: "Un client de la Xunta de Galicia gestiona una base de dades amb molts arxius duplicats i necessitava una eina que suggerís coincidències mitjançant un algorisme, perquè la persona només revisés i confirmés cada una. El repte no era partir d'un disseny ja definit, sinó entendre a fons aquest flux de revisió.",
     },
     process: {
-      en: "We started from a reference prototype GNOSS sent us, but the approach was a bit ambiguous and didn't make the process or the final product very clear — it helped us see a few specific features, but not much more. From there, the work focused on understanding the client's real task and designing the product from scratch, with a couple of check-in meetings with GNOSS along the way to validate progress.",
-      es: "Partimos de un prototipo de referencia que nos envió GNOSS, pero el planteamiento era un poco ambiguo y no dejaba muy claro ni el proceso ni el producto final — nos sirvió para ver algunas funcionalidades concretas, pero poco más. A partir de ahí, el trabajo se centró en entender la tarea real del cliente y diseñar el producto desde cero, con un par de reuniones de seguimiento con GNOSS a lo largo del proceso para ir validando el avance.",
-      ca: "Vam partir d'un prototip de referència que ens va enviar GNOSS, però el plantejament era una mica ambigu i no deixava gaire clar ni el procés ni el producte final — ens va servir per veure algunes funcionalitats concretes, però poc més. A partir d'aquí, la feina es va centrar a entendre la tasca real del client i dissenyar el producte des de zero, amb un parell de reunions de seguiment amb GNOSS al llarg del procés per anar validant l'avanç.",
+      en: "We started from a reference prototype GNOSS sent us — useful for a few features, but ambiguous overall. From there, we designed the product from scratch around the client's real task, with check-in meetings to validate progress.",
+      es: "Partimos de un prototipo de referencia de GNOSS, útil para ver algunas funcionalidades pero ambiguo en el conjunto. A partir de ahí, diseñamos el producto desde cero centrados en la tarea real del cliente, con reuniones de seguimiento para validar el avance.",
+      ca: "Vam partir d'un prototip de referència de GNOSS — útil per veure algunes funcionalitats, però ambigu en el conjunt. A partir d'aquí, vam dissenyar el producte des de zero centrats en la tasca real del client, amb reunions de seguiment per validar l'avanç.",
     },
     result: {
-      en: "The client approved the product with no further rounds of revision after delivery. Based on feedback that came back through GNOSS, the team using it day to day finds it intuitive — though we haven't spoken with them directly.",
-      es: "El cliente aprobó el producto sin rondas adicionales de revisión tras la entrega. Según el feedback que llegó de vuelta a través de GNOSS, el equipo que lo usa a diario lo encuentra intuitivo — aunque no hemos hablado con ellos en persona.",
-      ca: "El client va aprovar el producte sense rondes addicionals de revisió després del lliurament. Segons el feedback que va arribar a través de GNOSS, l'equip que l'utilitza a diari el troba intuïtiu — encara que no hem parlat amb ells en persona.",
+      en: "The client approved the product with no further rounds of revision. Feedback that came back through GNOSS says the team using it daily finds it intuitive.",
+      es: "El cliente aprobó el producto sin rondas de revisión adicionales. Según el feedback que llegó a través de GNOSS, el equipo que lo usa a diario lo encuentra intuitivo.",
+      ca: "El client va aprovar el producte sense rondes addicionals de revisió. Segons el feedback que va arribar a través de GNOSS, l'equip que l'utilitza a diari el troba intuïtiu.",
     },
     description: {
       en: "Custom product for a Xunta de Galicia client, through GNOSS — design centered on understanding their real day-to-day task, still in progress.",
@@ -428,6 +428,15 @@ export const projects: Project[] = [
     tags: ["UX Research", "Product Design", "Figma"],
     gradient: "linear-gradient(135deg, #001515 0%, #0d3d3d 60%, #2a8c8c 100%)",
     accentColor: "#2a8c8c",
+    designSystem: {
+      palette: [
+        { hex: "#001515", label: { es: "Fondo oscuro", en: "Dark background", ca: "Fons fosc" } },
+        { hex: "#0d3d3d", label: { es: "Fondo medio", en: "Mid background", ca: "Fons mitjà" } },
+        { hex: "#2a8c8c", label: { es: "Acento del proyecto", en: "Project accent", ca: "Accent del projecte" } },
+        { hex: "#007bc4", label: { es: "Azul institucional (Xunta)", en: "Institutional blue (Xunta)", ca: "Blau institucional (Xunta)" } },
+      ],
+      typography: [],
+    },
     // deviceShowcase removed temporarily: no real desktop/tablet/mobile
     // captures exist yet (confirmed by Albert).
     cover: "/covers/cover-xunta.svg",
@@ -503,14 +512,14 @@ export const projects: Project[] = [
       learningsBadge: { en: "In progress", es: "En progreso", ca: "En curs" },
       learningsItems: [
         {
-          en: "Working through an intermediary studio (GNOSS) instead of talking directly to the end client taught me to ask the right questions to pull real requirements out of an ambiguous brief, instead of taking the first reference at face value.",
-          es: "Trabajar a través de un estudio intermediario (GNOSS) en vez de hablar directamente con el cliente final me enseñó a hacer las preguntas correctas para sacar información real de un brief ambiguo, en vez de dar por buena la primera referencia que llega.",
-          ca: "Treballar a través d'un estudi intermediari (GNOSS) en comptes de parlar directament amb el client final em va ensenyar a fer les preguntes correctes per treure informació real d'un brief ambigu, en comptes de donar per bona la primera referència que arriba.",
+          en: "Working through an intermediary studio (GNOSS), without talking to the end client, taught me to ask the right questions to pull real requirements out of an ambiguous brief.",
+          es: "Trabajar a través de un estudio intermediario (GNOSS), sin hablar con el cliente final, me enseñó a hacer las preguntas correctas para sacar información real de un brief ambiguo.",
+          ca: "Treballar a través d'un estudi intermediari (GNOSS), sense parlar amb el client final, em va ensenyar a fer les preguntes correctes per treure informació real d'un brief ambigu.",
         },
         {
-          en: "Seeing that the people using the product find it intuitive — without ever talking to them directly — confirmed that designing from the real task, not a generic prototype, is what actually makes the difference.",
-          es: "Ver que las personas que usan el producto lo encuentran intuitivo, sin haber hablado con ellas directamente, confirma que diseñar desde la tarea real — y no desde un prototipo genérico — es lo que de verdad marca la diferencia.",
-          ca: "Veure que les persones que fan servir el producte el troben intuïtiu, sense haver-hi parlat directament, confirma que dissenyar des de la tasca real — i no des d'un prototip genèric — és el que realment marca la diferència.",
+          en: "Seeing the team find it intuitive, without ever talking to them, confirms that designing from the real task — not a generic prototype — is what makes the difference.",
+          es: "Ver que el equipo lo encuentra intuitivo, sin haber hablado con ellos, confirma que diseñar desde la tarea real — no desde un prototipo genérico — es lo que marca la diferencia.",
+          ca: "Veure que l'equip el troba intuïtiu, sense haver-hi parlat, confirma que dissenyar des de la tasca real — no des d'un prototip genèric — és el que marca la diferència.",
         },
       ],
     },
@@ -1272,14 +1281,14 @@ export const projects: Project[] = [
     category: { en: "Web Design & Dev", es: "Diseño y desarrollo web", ca: "Disseny i desenvolupament web" },
     year: "2026",
     problem: {
-      en: "A castellers association needed more than a nice-looking website: they needed to update content themselves without touching code, and contact forms that actually reached their corporate emails. A product and operations problem, not just a design one.",
-      es: "Una colla castellera necesitaba mucho más que una web bonita: necesitaban poder actualizar el contenido ellos mismos sin tocar código, y formularios de contacto que llegaran de verdad a sus correos corporativos. Un problema de producto y de operativa, no solo de diseño.",
-      ca: "Una colla castellera necessitava molt més que una web bonica: necessitaven poder actualitzar el contingut ells mateixos sense tocar codi, i formularis de contacte que arribessin de veritat als seus correus corporatius. Un problema de producte i d'operativa, no només de disseny.",
+      en: "A castellers association needed more than a nice-looking website: updating content without touching code, and forms that actually reached their corporate emails. A product problem, not just a design one.",
+      es: "Una colla castellera necesitaba mucho más que una web bonita: poder actualizar el contenido sin tocar código, y formularios que llegaran de verdad a sus correos corporativos. Un problema de producto, no solo de diseño.",
+      ca: "Una colla castellera necessitava molt més que una web bonica: poder actualitzar el contingut sense tocar codi, i formularis que arribessin de veritat als seus correus corporatius. Un problema de producte, no només de disseny.",
     },
     process: {
-      en: "Designed and developed the website with Claude Code, set up a Notion CMS for content management, wired contact forms to corporate emails, and deployed the site from GitHub to the contracted server and domain.",
-      es: "Diseñé y desarrollé la web con Claude Code, configuré un CMS con Notion para gestionar el contenido, conecté los formularios a los correos corporativos y desplegué el site desde GitHub al servidor y dominio contratados.",
-      ca: "Vaig dissenyar i desenvolupar la web amb Claude Code, vaig configurar un CMS amb Notion per gestionar el contingut, vaig connectar els formularis als correus corporatius i vaig desplegar el site des de GitHub al servidor i domini contractats.",
+      en: "I designed and developed the website with Claude Code, set up a Notion CMS, wired the contact forms to corporate emails, and deployed the site from GitHub to the contracted server and domain.",
+      es: "Diseñé y desarrollé la web con Claude Code, configuré un CMS con Notion, conecté los formularios a los correos corporativos y desplegué el site desde GitHub al servidor y dominio contratados.",
+      ca: "Vaig dissenyar i desenvolupar la web amb Claude Code, vaig configurar un CMS amb Notion, vaig connectar els formularis als correus corporatius i vaig desplegar el site des de GitHub al servidor i domini contractats.",
     },
     result: {
       en: "A fully operational website with a simple content management system, working contact forms, and a complete deployment pipeline.",
@@ -1292,8 +1301,20 @@ export const projects: Project[] = [
       ca: "Projecte personal — disseny, desenvolupament, CMS amb Notion i desplegament complet per a una colla castellera.",
     },
     tags: ["Claude Code", "Notion", "Web Design"],
-    gradient: "linear-gradient(135deg, #1a0808 0%, #3d1010 60%, #7a2020 100%)",
-    accentColor: "#b84040",
+    gradient: "linear-gradient(135deg, #030f11 0%, #0a3d47 60%, #01758c 100%)",
+    accentColor: "#01758c",
+    designSystem: {
+      palette: [
+        { hex: "#01758c", label: { es: "Acento (color de la colla)", en: "Accent (colla's color)", ca: "Accent (color de la colla)" } },
+        { hex: "#015c6e", label: { es: "Acento oscuro", en: "Dark accent", ca: "Accent fosc" } },
+        { hex: "#1a1a1a", label: { es: "Texto", en: "Text", ca: "Text" } },
+        { hex: "#ffffff", label: { es: "Fondo", en: "Background", ca: "Fons" } },
+        { hex: "#f0f6f7", label: { es: "Fondo secundario", en: "Secondary background", ca: "Fons secundari" } },
+      ],
+      typography: [
+        { typeface: "Poppins", usage: { es: "Titulares y cuerpo de texto", en: "Headlines & body", ca: "Titulars i cos de text" } },
+      ],
+    },
     // Hidden: existing capture files show the wrong content (see audit
     // 2026-10-14) — all 3 images are the same CCBM homepage hero rescaled,
     // not the distinct pages the alt text promises. Replace with real
@@ -1390,9 +1411,9 @@ export const projects: Project[] = [
       ],
       learningsItems: [
         {
-          en: "I did the design, code, CMS, forms and deployment myself: when something broke, there was no one else to ask, so I ended up truly understanding every layer, not just the one my title covered.",
-          es: "Diseño, código, CMS, formularios y despliegue los hice todos yo: cuando algo no funcionaba no había nadie más a quien preguntar, así que terminé entendiendo de verdad cada capa, no solo la que me tocaba por título.",
-          ca: "Disseny, codi, CMS, formularis i desplegament els vaig fer tots jo: quan alguna cosa no funcionava no hi havia ningú més a qui preguntar, així que vaig acabar entenent de veritat cada capa, no només la que em tocava pel títol.",
+          en: "Design, code, CMS, forms and deployment — I did them all myself: with no one else to ask, I ended up truly understanding every layer, not just the one my title covered.",
+          es: "Diseño, código, CMS, formularios y despliegue los hice todos yo: sin nadie más a quien preguntar, terminé entendiendo de verdad cada capa, no solo la que me tocaba por título.",
+          ca: "Disseny, codi, CMS, formularis i desplegament els vaig fer tots jo: sense ningú més a qui preguntar, vaig acabar entenent de veritat cada capa, no només la que em tocava pel títol.",
         },
         {
           en: "Connecting Notion as a CMS was a simple, effective solution for a non-technical team. Sometimes the best tool is the one the client already knows.",
@@ -1400,9 +1421,9 @@ export const projects: Project[] = [
           ca: "Connectar Notion com a CMS va ser una solució simple i efectiva per a un equip no tècnic. A vegades la millor eina és la que ja coneix el client.",
         },
         {
-          en: "Real deployment — server, domain, GitHub pipeline — is a part of the work that usually falls outside the design role. Handling it on my own broadened my view of the whole process a lot.",
-          es: "El despliegue real — servidor, dominio, pipeline de GitHub — es una parte del trabajo que habitualmente queda fuera del rol de diseño. Resolverlo de forma autónoma amplió mucho mi visión del proceso completo.",
-          ca: "El desplegament real — servidor, domini, pipeline de GitHub — és una part de la feina que habitualment queda fora del rol de disseny. Resoldre-ho de forma autònoma va ampliar molt la meva visió del procés complet.",
+          en: "Real deployment — server, domain, GitHub pipeline — usually falls outside the design role. Handling it alone broadened my view of the whole process a lot.",
+          es: "El despliegue real — servidor, dominio, pipeline de GitHub — queda habitualmente fuera del rol de diseño. Resolverlo solo amplió mucho mi visión del proceso completo.",
+          ca: "El desplegament real — servidor, domini, pipeline de GitHub — queda habitualment fora del rol de disseny. Resoldre-ho sol va ampliar molt la meva visió del procés complet.",
         },
       ],
     },

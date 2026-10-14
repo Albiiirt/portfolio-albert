@@ -9,12 +9,13 @@ import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import NextProjectCard from "@/components/proyectos/NextProjectCard";
 import ProjectDeviceShowcase from "@/components/proyectos/ProjectDeviceShowcase";
+import ProjectDesignSystemSheet from "@/components/proyectos/ProjectDesignSystemSheet";
 import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
 import { projects } from "@/data/projects";
 import { t } from "@/data/translations";
 
-const ACCENT = "#b84040";
+const ACCENT = "#01758c";
 const project = projects.find((p) => p.id === "castellera")!;
 const page = project.page!;
 
@@ -198,6 +199,7 @@ export default function CastelleraPage() {
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
               <FadeInView>
                 <p className="section-label" style={{ marginBottom: "1.5rem" }}>{t[lang].projectPage.sectionLabels.project}</p>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
                 <p style={{ fontSize: "var(--text-body)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
                   {project.problem[lang]}
                 </p>
@@ -235,8 +237,18 @@ export default function CastelleraPage() {
           </div>
         </section>
 
-        {/* ── El trabajo ── */}
+        {/* ── La paleta y tipografía ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+          <div className="site-content">
+            <FadeInView>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.designSystem}</p>
+            </FadeInView>
+            <ProjectDesignSystemSheet data={project.designSystem} accentColor={ACCENT} tightTop />
+          </div>
+        </section>
+
+        {/* ── El trabajo ── */}
+        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.work}</p>
@@ -246,6 +258,7 @@ export default function CastelleraPage() {
                 <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
                   {page.workHeading![lang]}
                 </h2>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.5rem" }}>
                   {project.process[lang]}
                 </p>
@@ -271,10 +284,11 @@ export default function CastelleraPage() {
         </section>
 
         {/* ── El resultado ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                 {project.result[lang]}
               </p>
@@ -283,13 +297,14 @@ export default function CastelleraPage() {
         </section>
 
         {/* ── Aprendizajes ── */}
-        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>
               <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.75rem" }}>
                 {t[lang].projectPage.learningsHeading}
               </h2>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                 {page.learningsItems!.map((text, i) => (
                   <div key={i} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
