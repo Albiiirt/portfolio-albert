@@ -15,16 +15,18 @@ import type { ComponentsSheet } from "@/data/projects";
 export default function ProjectComponentsSheet({
   data,
   accentColor,
+  tightTop,
 }: {
   data?: ComponentsSheet;
   accentColor: string;
+  tightTop?: boolean;
 }) {
   const { lang } = useLang();
 
   if (!data || (!data.buttons.length && !data.cardSpecimen)) return null;
 
   return (
-    <div style={{ marginTop: "clamp(2rem, 4vh, 3rem)", display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+    <div style={{ marginTop: tightTop ? 0 : "clamp(2rem, 4vh, 3rem)", display: "flex", gap: "1rem", flexWrap: "wrap" }}>
       {data.buttons.map((btn, i) => (
         <FadeInView key={i} style={{ flex: "1 1 200px" }}>
           <div

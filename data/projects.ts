@@ -310,28 +310,8 @@ export const projects: Project[] = [
         },
         tags: ["Figma", "Strapi", "Design System"],
         cover: "/covers/cover-elbulli.webp",
-        // Placeholder paths — no real desktop/tablet/mobile captures exist
-        // yet for the Archivo. See the final summary for what's pending.
-        deviceShowcase: {
-          style: "cascade",
-          desktop: {
-            src: "/projects/elbulli-archivo/device-desktop.png",
-            alt: { en: "Desktop view of the elBulli archive homepage.", es: "Vista de escritorio de la portada del archivo elBulli.", ca: "Vista d'escriptori de la portada de l'arxiu elBulli." },
-          },
-          tablet: {
-            src: "/projects/elbulli-archivo/device-tablet.png",
-            alt: { en: "Tablet view of an elBulli archive content page.", es: "Vista de tablet de una página de contenido del archivo elBulli.", ca: "Vista de tablet d'una pàgina de contingut de l'arxiu elBulli." },
-          },
-          mobile: {
-            src: "/projects/elbulli-archivo/device-mobile.png",
-            alt: { en: "Mobile view of the elBulli archive.", es: "Vista móvil del archivo elBulli.", ca: "Vista mòbil de l'arxiu elBulli." },
-          },
-          caption: {
-            en: "The archive, from the editor's desktop to a visitor's phone.",
-            es: "El archivo, desde el escritorio del editor hasta el móvil de quien lo visita.",
-            ca: "L'arxiu, des de l'escriptori de l'editor fins al mòbil de qui el visita.",
-          },
-        },
+        // deviceShowcase removed temporarily: no real desktop/tablet/mobile
+        // captures exist yet for the Archivo (confirmed by Albert).
         meta: [
           { labelKey: "status", value: status.inProgress },
           { labelKey: "role", value: { en: "Web design · Code implementation · Next.js", es: "Diseño web · Implementación en código · Next.js", ca: "Disseny web · Implementació en codi · Next.js" } },
@@ -420,28 +400,8 @@ export const projects: Project[] = [
         },
         tags: ["Claude Design", "Claude Code", "E-commerce"],
         video: "/videos/bullipedia-walkthrough.mp4",
-        // Placeholder paths — no real desktop/tablet/mobile captures exist
-        // yet for Bullipedia. See the final summary for what's pending.
-        deviceShowcase: {
-          style: "cascade",
-          desktop: {
-            src: "/projects/elbulli-marketplace/device-desktop.png",
-            alt: { en: "Desktop view of the Bullipedia book catalogue.", es: "Vista de escritorio del catálogo de libros de Bullipedia.", ca: "Vista d'escriptori del catàleg de llibres de Bullipedia." },
-          },
-          tablet: {
-            src: "/projects/elbulli-marketplace/device-tablet.png",
-            alt: { en: "Tablet view of a Bullipedia book chapter.", es: "Vista de tablet de un capítulo de libro en Bullipedia.", ca: "Vista de tablet d'un capítol de llibre a Bullipedia." },
-          },
-          mobile: {
-            src: "/projects/elbulli-marketplace/device-mobile.png",
-            alt: { en: "Mobile view of Bullipedia.", es: "Vista móvil de Bullipedia.", ca: "Vista mòbil de Bullipedia." },
-          },
-          caption: {
-            en: "Bullipedia, read on any screen, with its resources alongside the text.",
-            es: "Bullipedia, leída en cualquier pantalla, con sus recursos junto al texto.",
-            ca: "Bullipedia, llegida en qualsevol pantalla, amb els seus recursos al costat del text.",
-          },
-        },
+        // deviceShowcase removed temporarily: captures exist but show an
+        // unfinished wireframe, not the final design (confirmed by Albert).
         meta: [
           { labelKey: "role", value: { en: "Design & development", es: "Diseño y desarrollo", ca: "Disseny i desenvolupament" } },
           { labelKey: "stack", value: "Claude Design · Claude Code" },
@@ -483,28 +443,8 @@ export const projects: Project[] = [
     tags: ["UX Research", "Product Design", "Figma"],
     gradient: "linear-gradient(135deg, #001515 0%, #0d3d3d 60%, #2a8c8c 100%)",
     accentColor: "#2a8c8c",
-    // Placeholder paths — no real desktop/tablet/mobile captures exist yet.
-    // See the final summary for what's pending.
-    deviceShowcase: {
-      style: "diptych",
-      desktop: {
-        src: "/projects/xunta-galicia/device-desktop.png",
-        alt: { en: "Desktop view of the Galiciana Thesaurus review tool.", es: "Vista de escritorio de la herramienta de revisión de Galiciana Thesaurus.", ca: "Vista d'escriptori de l'eina de revisió de Galiciana Thesaurus." },
-      },
-      tablet: {
-        src: "/projects/xunta-galicia/device-tablet.png",
-        alt: { en: "Tablet view of a suggested match in Galiciana Thesaurus.", es: "Vista de tablet de una coincidencia sugerida en Galiciana Thesaurus.", ca: "Vista de tablet d'una coincidència suggerida a Galiciana Thesaurus." },
-      },
-      mobile: {
-        src: "/projects/xunta-galicia/device-mobile.png",
-        alt: { en: "Mobile view of Galiciana Thesaurus.", es: "Vista móvil de Galiciana Thesaurus.", ca: "Vista mòbil de Galiciana Thesaurus." },
-      },
-      caption: {
-        en: "The review tool, from the team's desktop to a quick mobile check.",
-        es: "La herramienta de revisión, desde el escritorio del equipo hasta una comprobación rápida en el móvil.",
-        ca: "L'eina de revisió, des de l'escriptori de l'equip fins a una comprovació ràpida al mòbil.",
-      },
-    },
+    // deviceShowcase removed temporarily: no real desktop/tablet/mobile
+    // captures exist yet (confirmed by Albert).
     cover: "/covers/cover-xunta.svg",
     coverAlt: {
       en: "Cover with the Xunta de Galicia logo in white on a teal gradient background.",
@@ -1103,28 +1043,8 @@ export const projects: Project[] = [
           ca: "El disseny va quedar validat pel client i llest per passar a desenvolupament.",
         },
         tags: ["Claude Design"],
-        // Placeholder paths — no real desktop/tablet/mobile captures exist
-        // yet for the experience landing. See the final summary.
-        deviceShowcase: {
-          style: "diptych",
-          desktop: {
-            src: "/projects/mirazur-cupon/device-desktop.png",
-            alt: { en: "Desktop view of the Mirazur experience landing page.", es: "Vista de escritorio de la landing de experiencia de Mirazur.", ca: "Vista d'escriptori de la landing d'experiència del Mirazur." },
-          },
-          tablet: {
-            src: "/projects/mirazur-cupon/device-tablet.png",
-            alt: { en: "Tablet view of the landing's dish gallery.", es: "Vista de tablet de la galería de platos de la landing.", ca: "Vista de tablet de la galeria de plats de la landing." },
-          },
-          mobile: {
-            src: "/projects/mirazur-cupon/device-mobile.png",
-            alt: { en: "Mobile view of the landing's request form.", es: "Vista móvil del formulario de solicitud de la landing.", ca: "Vista mòbil del formulari de sol·licitud de la landing." },
-          },
-          caption: {
-            en: "The experience landing, from the full scroll to the form on a phone.",
-            es: "La landing de experiencia, desde el scroll completo hasta el formulario en el móvil.",
-            ca: "La landing d'experiència, des del scroll complet fins al formulari al mòbil.",
-          },
-        },
+        // deviceShowcase removed temporarily: no real desktop/tablet/mobile
+        // captures exist yet for the experience landing (confirmed by Albert).
         meta: [
           { labelKey: "status", value: { en: "Design completed", es: "Diseño completado", ca: "Disseny completat" } },
           { labelKey: "stack", value: "Claude Design" },

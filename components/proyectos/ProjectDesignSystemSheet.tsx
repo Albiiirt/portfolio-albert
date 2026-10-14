@@ -13,16 +13,18 @@ import type { DesignSystemSheet } from "@/data/projects";
 export default function ProjectDesignSystemSheet({
   data,
   accentColor,
+  tightTop,
 }: {
   data?: DesignSystemSheet;
   accentColor: string;
+  tightTop?: boolean;
 }) {
   const { lang } = useLang();
 
   if (!data || (!data.palette.length && !data.typography.length)) return null;
 
   return (
-    <div style={{ marginTop: "clamp(2rem, 4vh, 3rem)", display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+    <div style={{ marginTop: tightTop ? 0 : "clamp(2rem, 4vh, 3rem)", display: "flex", flexDirection: "column", gap: "1.5rem" }}>
       {data.palette.length > 0 && (
         <div className="design-system-palette" style={{ display: "flex", gap: "1rem" }}>
           {data.palette.map((swatch) => (

@@ -460,14 +460,22 @@ export default function JaenPage() {
                 </div>
               </FadeInView>
             </div>
+          </div>
+        </section>
 
-            <ProjectDesignSystemSheet data={project.designSystem} accentColor={ACCENT} />
-            <ProjectComponentsSheet data={project.componentsSheet} accentColor={ACCENT} />
+        {/* ── La paleta, tipografía y componentes ── */}
+        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+          <div className="site-content">
+            <FadeInView>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.designSystem}</p>
+            </FadeInView>
+            <ProjectDesignSystemSheet data={project.designSystem} accentColor={ACCENT} tightTop />
+            <ProjectComponentsSheet data={project.componentsSheet} accentColor={ACCENT} tightTop />
           </div>
         </section>
 
         {/* ── El proceso ── */}
-        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.process}</p>
@@ -491,7 +499,7 @@ export default function JaenPage() {
         </section>
 
         {/* ── El resultado ── */}
-        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
@@ -503,7 +511,7 @@ export default function JaenPage() {
         </section>
 
         {/* ── Aprendizajes ── */}
-        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+        <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>

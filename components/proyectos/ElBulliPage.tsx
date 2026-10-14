@@ -696,13 +696,22 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
                       <SvgBlocks />
                     </div>
                   </div>
-                  <ProjectDesignSystemSheet data={project.designSystem} accentColor={ACCENT} />
+                </div>
+              </section>
+            )}
+
+            {/* ── La paleta y tipografía (solo archivo) ── */}
+            {hasSystem && (
+              <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+                <div className="site-content">
+                  <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.designSystem}</p>
+                  <ProjectDesignSystemSheet data={project.designSystem} accentColor={ACCENT} tightTop />
                 </div>
               </section>
             )}
 
             {/* ── El resultado (siempre) ── */}
-            <section style={{ background: hasSystem ? "var(--bg)" : "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+            <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
               <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
                 <div>
                   <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
@@ -715,7 +724,7 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
 
             {/* ── Aprendizajes (solo si el sub-proyecto tiene contenido propio) ── */}
             {hasLearnings && (
-              <section style={{ background: hasSystem ? "var(--bg-alt)" : "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+              <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
                 <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
                   <div>
                     <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.75rem" }}>

@@ -258,7 +258,7 @@ export default function GnossPage() {
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.designSystem}</p>
             </FadeInView>
-            <ProjectDesignSystemSheet data={project.designSystem} accentColor={ACCENT} />
+            <ProjectDesignSystemSheet data={project.designSystem} accentColor={ACCENT} tightTop />
           </div>
         </section>
 

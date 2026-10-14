@@ -15,7 +15,7 @@ type DeviceKind = "desktop" | "tablet" | "mobile";
 
 const ASPECT: Record<DeviceKind, number> = {
   desktop: 16 / 10,
-  tablet: 3 / 4,
+  tablet: 5 / 4,
   mobile: 9 / 19.5,
 };
 const RADIUS_OUTER: Record<DeviceKind, number> = { desktop: 14, tablet: 20, mobile: 44 };
