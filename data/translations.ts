@@ -176,6 +176,7 @@ export const t = {
         deviceShowcase: "The product",
         mobileJourney: "The mobile journey",
         designSystem: "The visual system",
+        palette: "Palette",
       },
       metaLabels: {
         client: "Client",
@@ -381,6 +382,7 @@ export const t = {
         deviceShowcase: "El producto",
         mobileJourney: "El recorrido móvil",
         designSystem: "El sistema visual",
+        palette: "Gráfica",
       },
       metaLabels: {
         client: "Cliente",
@@ -586,6 +588,7 @@ export const t = {
         deviceShowcase: "El producte",
         mobileJourney: "El recorregut mòbil",
         designSystem: "El sistema visual",
+        palette: "Paleta",
       },
       metaLabels: {
         client: "Client",

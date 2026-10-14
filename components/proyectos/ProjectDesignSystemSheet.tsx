@@ -2,6 +2,7 @@
 
 import FadeInView from "@/components/FadeInView";
 import { useLang } from "@/lib/LanguageContext";
+import { t } from "@/data/translations";
 import type { DesignSystemSheet } from "@/data/projects";
 
 // Palette swatches + typeface specimen, shown inside a project's own
@@ -26,26 +27,31 @@ export default function ProjectDesignSystemSheet({
   return (
     <div style={{ marginTop: tightTop ? 0 : "clamp(2rem, 4vh, 3rem)", display: "flex", flexDirection: "column", gap: "1.5rem" }}>
       {data.palette.length > 0 && (
-        <div className="design-system-palette" style={{ display: "flex", gap: "1rem" }}>
-          {data.palette.map((swatch) => (
-            <div key={swatch.hex} style={{ flex: 1, maxWidth: 160 }}>
-              <div style={{ aspectRatio: "1", borderRadius: "0.5rem", background: swatch.hex }} />
-              <p
-                style={{
-                  fontSize: "0.67rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  color: "var(--text-subtle)",
-                  marginTop: "0.6rem",
-                  marginBottom: "0.2rem",
-                }}
-              >
-                {swatch.label[lang]}
-              </p>
-              <p style={{ fontSize: "0.88rem", color: "var(--text-muted)", margin: 0 }}>{swatch.hex}</p>
-            </div>
-          ))}
+        <div className="design-system-palette-breakout">
+          <p className="section-label" style={{ marginBottom: "1.75rem" }}>
+            {t[lang].projectPage.sectionLabels.palette}
+          </p>
+          <div className="design-system-palette">
+            {data.palette.map((swatch) => (
+              <div key={swatch.hex}>
+                <div style={{ aspectRatio: "5 / 2", borderRadius: "0.5rem", background: swatch.hex }} />
+                <p
+                  style={{
+                    fontSize: "0.67rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    color: "var(--text-subtle)",
+                    marginTop: "0.6rem",
+                    marginBottom: "0.2rem",
+                  }}
+                >
+                  {swatch.label[lang]}
+                </p>
+                <p style={{ fontSize: "0.88rem", color: "var(--text-muted)", margin: 0 }}>{swatch.hex}</p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
@@ -62,8 +68,11 @@ export default function ProjectDesignSystemSheet({
                   height: "100%",
                 }}
               >
-                <p style={{ fontFamily: "var(--font-sans)", fontSize: "1.5rem", fontWeight: 800, color: "var(--text)", margin: "0 0 0.5rem" }}>
+                <p style={{ fontFamily: "var(--font-sans)", fontSize: "1.5rem", fontWeight: 800, color: "var(--text)", margin: "0 0 0.35rem" }}>
                   {item.typeface}
+                </p>
+                <p style={{ fontFamily: "var(--font-sans)", fontSize: "1rem", fontWeight: 500, letterSpacing: "0.02em", color: "var(--text)", margin: "0 0 0.75rem" }}>
+                  AaBbCcGg · 0123456789 · &?!
                 </p>
                 <p style={{ fontSize: "0.88rem", color: "var(--text-muted)", margin: 0 }}>{item.usage[lang]}</p>
               </div>
