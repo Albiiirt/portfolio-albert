@@ -522,19 +522,19 @@ export const projects: Project[] = [
     category: { en: "Web Design", es: "Diseño Web", ca: "Disseny Web" },
     year: "2026",
     problem: {
-      en: "The wine tourism site for the Community of Madrid already existed, but it carried disjointed page designs and navigation that didn't help visitors find wineries, routes or experiences. The brief was a full redesign: unify the design across pages, modernise it visually — and above all, make it functional for the visitor.",
-      es: "El site de enoturismo de la Comunidad de Madrid ya existía, pero arrastraba páginas con diseños dispares y una navegación que no ayudaba a encontrar bodegas, rutas o experiencias. El encargo era un rediseño completo: unificar el diseño entre páginas, modernizarlo visualmente — y sobre todo, hacerlo funcional para el visitante.",
-      ca: "El site d'enoturisme de la Comunitat de Madrid ja existia, però arrossegava pàgines amb dissenys dispars i una navegació que no ajudava a trobar cellers, rutes o experiències. L'encàrrec era un redisseny complet: unificar el disseny entre pàgines, modernitzar-lo visualment — i sobretot, fer-lo funcional per al visitant.",
+      en: "Madrid's wine tourism site already existed, but with disjointed pages and navigation that didn't help visitors find wineries, routes or experiences. The brief: a full redesign to unify the design and make it functional for the visitor.",
+      es: "El site de enoturismo de Madrid ya existía, pero con páginas dispares y una navegación que no ayudaba a encontrar bodegas, rutas o experiencias. El encargo: un rediseño completo que unificara el diseño y lo hiciera funcional para el visitante.",
+      ca: "El site d'enoturisme de Madrid ja existia, però amb pàgines disperses i una navegació que no ajudava a trobar cellers, rutes o experiències. L'encàrrec: un redisseny complet que unifiqués el disseny i el fes funcional per al visitant.",
     },
     process: {
-      en: "The starting point was an AI-generated HTML base — good enough as a single landing page, but not built to grow. I moved it into Next.js and, from there, designed and built the rest of the site's pages myself with Claude Code: wineries, routes and experiences, making every design and UX decision directly in code — route maps, smooth navigation, an experience built to be explored, not just shown. Content lives in Strapi, a content manager (CMS) that keeps information separate from code: each winery, route or experience is an entry the team can create, edit or publish on their own, without touching a line of code, and the site displays it automatically with the same design.",
-      es: "El punto de partida fue una base generada con IA — suficiente como página única, pero no pensada para crecer. La pasé a Next.js y, a partir de ahí, diseñé y construí yo solo el resto de páginas del site con Claude Code: bodegas, rutas y experiencias, tomando cada decisión de diseño y experiencia de usuario directamente en código — mapas de las rutas, navegación fluida, una experiencia pensada para explorarse, no solo para mostrarse. El contenido vive en Strapi, un gestor de contenido (CMS) que separa la información del código: cada bodega, ruta o experiencia es una ficha que el equipo puede crear, editar o publicar por su cuenta, sin tocar código, y que la web muestra automáticamente con el mismo diseño.",
-      ca: "El punt de partida va ser una base generada amb IA — suficient com a pàgina única, però no pensada per créixer. La vaig passar a Next.js i, a partir d'aquí, vaig dissenyar i construir jo sol la resta de pàgines del site amb Claude Code: cellers, rutes i experiències, prenent cada decisió de disseny i experiència d'usuari directament en codi — mapes de les rutes, navegació fluida, una experiència pensada per explorar-se, no només per mostrar-se. El contingut viu a Strapi, un gestor de contingut (CMS) que separa la informació del codi: cada celler, ruta o experiència és una fitxa que l'equip pot crear, editar o publicar pel seu compte, sense tocar codi, i que el web mostra automàticament amb el mateix disseny.",
+      en: "The starting point was a single AI-generated page, not built to grow. I migrated it to Next.js and designed and built the rest of the site myself with Claude Code — wineries, routes and experiences — with a Strapi CMS so the team can publish content without touching code.",
+      es: "La base era una página única generada con IA, no pensada para crecer. La migré a Next.js y diseñé y construí yo solo el resto del site con Claude Code —bodegas, rutas y experiencias— con un CMS en Strapi para que el equipo publique contenido sin tocar código.",
+      ca: "El punt de partida va ser una única pàgina generada amb IA, no pensada per créixer. La vaig migrar a Next.js i vaig dissenyar i construir la resta del site jo sol amb Claude Code —cellers, rutes i experiències— amb un CMS a Strapi perquè l'equip publiqui contingut sense tocar codi.",
     },
     result: {
-      en: "A site built single-handedly from start to finish — from migrating the initial base to every winery, route and experience page — with a Strapi CMS that lets the tourism team publish new content without technical help, and a navigation built to take visitors from route to booking.",
-      es: "Una web construida por una sola persona de principio a fin —desde la migración de la base inicial hasta cada página de bodegas, rutas y experiencias—, con un CMS en Strapi que permite al equipo de turismo publicar contenido nuevo sin ayuda técnica, y una navegación pensada para llevar al visitante de la ruta a la reserva.",
-      ca: "Un web construït per una sola persona de principi a fi —des de la migració de la base inicial fins a cada pàgina de cellers, rutes i experiències—, amb un CMS a Strapi que permet a l'equip de turisme publicar contingut nou sense ajuda tècnica, i una navegació pensada per portar el visitant de la ruta a la reserva.",
+      en: "A site built single-handedly from start to finish, with a Strapi CMS that lets the team publish new content without technical help and a navigation built to take visitors from route to booking.",
+      es: "Una web construida en solitario, de principio a fin, con un CMS en Strapi para que el equipo publique sin ayuda técnica y una navegación pensada para llevar de la ruta a la reserva.",
+      ca: "Un web construït en solitari de principi a fi, amb un CMS a Strapi perquè l'equip publiqui contingut nou sense ajuda tècnica i una navegació pensada per portar el visitant de la ruta a la reserva.",
     },
     description: {
       en: "Full project, solo — migrated an AI-generated HTML base to Next.js and designed and built every page of Madrid's wine tourism site with Claude Code.",
@@ -1014,9 +1014,9 @@ export const projects: Project[] = [
           ca: "Aquest projecte va consistir a portar l'experiència del Mirazur més enllà de la taula, no a tancar una transacció. També va arribar a mig fer.",
         },
         process: {
-          en: "I built the page myself with Claude Design, working through several rounds of direct revision with the client, and proposed which fields the form needed to make the data collection legally compliant.",
-          es: "Construí la página yo mismo con Claude Design, trabajando en varias rondas de revisión directas con el cliente, y propuse qué campos debía llevar el formulario para que la captación de datos fuera legal.",
-          ca: "Vaig construir la pàgina jo mateix amb Claude Design, treballant en diverses rondes de revisió directes amb el client, i vaig proposar quins camps havia de portar el formulari perquè la captació de dades fos legal.",
+          en: "I built the page myself with Claude Design, with several rounds of direct review with the client, and proposed the form fields so data capture would be legal.",
+          es: "Construí la página yo mismo con Claude Design, con varias rondas de revisión directas con el cliente, y propuse los campos del formulario para que la captación de datos fuera legal.",
+          ca: "Vaig construir la pàgina jo mateix amb Claude Design, amb diverses rondes de revisió directes amb el client, i vaig proposar els camps del formulari perquè la captació de dades fos legal.",
         },
         result: {
           en: "The design was validated by the client and is ready to move into development.",
@@ -1036,21 +1036,16 @@ export const projects: Project[] = [
           project2Heading: { en: "A landing that distills an experience", es: "Una landing que resume una experiencia", ca: "Una landing que resumeix una experiència" },
           project2Body: [
             {
-              en: "This project was about taking the Mirazur experience beyond the table, not closing a transaction. It also arrived half-finished.",
-              es: "Este proyecto consistió en llevar la experiencia de Mirazur más allá de la mesa, no en cerrar una transacción. También llegó a medias.",
-              ca: "Aquest projecte va consistir a portar l'experiència del Mirazur més enllà de la taula, no a tancar una transacció. També va arribar a mig fer.",
-            },
-            {
-              en: "The landing distills the Mirazur experience in a single scroll — the setting, the dishes, the philosophy — with a simple form at the end.",
-              es: "La landing resume la experiencia de Mirazur en un único scroll — el entorno, los platos, la filosofía — con un formulario sencillo al final.",
-              ca: "La landing resumeix l'experiència del Mirazur en un únic scroll — l'entorn, els plats, la filosofia — amb un formulari senzill al final.",
+              en: "Taking the Mirazur experience beyond the table, not closing a transaction — the project arrived half-finished. The landing distills the setting, dishes and philosophy in a single scroll, with a simple form at the end.",
+              es: "Llevar la experiencia de Mirazur más allá de la mesa, no cerrar una transacción — el proyecto llegó a medias. La landing resume el entorno, los platos y la filosofía del restaurante en un único scroll, con un formulario sencillo al final.",
+              ca: "Portar l'experiència del Mirazur més enllà de la taula, no tancar una transacció — el projecte va arribar a mig fer. La landing resumeix l'entorn, els plats i la filosofia en un únic scroll, amb un formulari senzill al final.",
             },
           ],
           learningsItems: [
             {
-              en: "Building the landing myself with AI changed how I experienced the revision rounds: every change the client asked for, I could apply right away, without waiting on anyone. That also changes how you negotiate a design detail.",
-              es: "Construir la landing yo mismo con IA cambió cómo viví las revisiones: cada cambio que pedía el cliente lo podía aplicar al momento, sin esperar a nadie. Eso también cambia cómo se negocia un detalle de diseño.",
-              ca: "Construir la landing jo mateix amb IA va canviar com vaig viure les revisions: cada canvi que demanava el client el podia aplicar a l'instant, sense esperar ningú. Això també canvia com es negocia un detall de disseny.",
+              en: "Building the landing myself with AI changed the reviews: every change the client asked for, I could apply on the spot, without waiting on anyone — and that changes how you negotiate a design detail.",
+              es: "Construir la landing yo mismo con IA cambió las revisiones: cada cambio del cliente lo aplicaba al momento, sin esperar a nadie — y eso cambia cómo se negocia un detalle de diseño.",
+              ca: "Construir la landing jo mateix amb IA va canviar les revisions: cada canvi que demanava el client el podia aplicar a l'instant, sense esperar ningú — i això canvia com es negocia un detall de disseny.",
             },
           ],
         },
@@ -1110,21 +1105,16 @@ export const projects: Project[] = [
           project1Heading: { en: "Fine dining, made accessible", es: "Alta cocina accesible", ca: "Alta cuina accessible" },
           project1Body: [
             {
-              en: "The project arrived half-finished. The idea was clear — a portal where users pay to access the restaurant's recipes, a model that takes fine dining beyond the table — but the design was incomplete.",
-              es: "El proyecto llegó a medias. La idea era clara — un portal donde los usuarios pagan para acceder a las recetas del restaurante, un modelo que lleva la alta cocina más allá de la mesa — pero el diseño estaba incompleto.",
-              ca: "El projecte va arribar a mig fer. La idea era clara — un portal on els usuaris paguen per accedir a les receptes del restaurant, un model que porta l'alta cuina més enllà de la taula — però el disseny estava incomplet.",
-            },
-            {
-              en: "I picked the Figma design back up and moved forward on the recipe listing, the individual recipe page, the access flow and the restaurant profile.",
-              es: "Retomé el diseño en Figma y avancé el listado de recetas, la ficha individual, el flujo de acceso y el perfil del restaurante.",
-              ca: "Vaig reprendre el disseny a Figma i vaig avançar el llistat de receptes, la fitxa individual, el flux d'accés i el perfil del restaurant.",
+              en: "The project arrived half-finished: a portal where users pay to access the restaurant's recipes, with the design still incomplete. I picked the Figma work back up and moved forward on the listing, the recipe page, the access flow and the restaurant profile.",
+              es: "El proyecto llegó a medias: un portal donde los usuarios pagan para acceder a las recetas del restaurante, pero con el diseño incompleto. Retomé el trabajo en Figma y avancé el listado, la ficha individual, el flujo de acceso y el perfil del restaurante.",
+              ca: "El projecte va arribar a mig fer: un portal on els usuaris paguen per accedir a les receptes del restaurant, amb el disseny encara incomplet. Vaig reprendre la feina a Figma i vaig avançar el llistat, la fitxa individual, el flux d'accés i el perfil del restaurant.",
             },
           ],
           learningsItems: [
             {
-              en: "Picking this one up mid-process forced me to understand before touching anything — reading the decisions already baked into the Figma file before changing a thing. And I learned something else: a project that stays on hold still teaches you something.",
-              es: "Retomar este proyecto a medias me obligó a entender antes de tocar — leer las decisiones que ya estaban en el archivo de Figma antes de cambiar nada. Y aprendí algo más: un proyecto que se queda en pausa también enseña.",
-              ca: "Represendre aquest projecte a mig fer em va obligar a entendre abans de tocar — llegir les decisions que ja hi havia a l'arxiu de Figma abans de canviar res. I vaig aprendre una altra cosa: un projecte que es queda en pausa també ensenya.",
+              en: "Picking up this half-finished project meant understanding before touching anything — reading the decisions already made in Figma before changing anything. I also learned that a paused project keeps teaching.",
+              es: "Retomar este proyecto a medias me obligó a entender antes de tocar — leer las decisiones ya tomadas en Figma antes de cambiar nada. Aprendí también que un proyecto en pausa sigue enseñando.",
+              ca: "Reprendre aquest projecte a mig fer em va obligar a entendre abans de tocar — llegir les decisions ja preses a Figma abans de canviar res. Vaig aprendre també que un projecte en pausa continua ensenyant.",
             },
           ],
         },

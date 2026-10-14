@@ -335,6 +335,7 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
               <FadeInView>
                 <p className="section-label" style={{ marginBottom: "1.5rem" }}>{t[lang].projectPage.sectionLabels.project}</p>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
                 <p style={{ fontSize: "var(--text-body)", lineHeight: 1.75, color: "var(--text-muted)" }}>
                   {project.problem[lang]}
                 </p>
@@ -427,12 +428,12 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
                       <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
                         {page!.project1Heading![lang]}
                       </h2>
-                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                        {page!.project1Body![0][lang]}
-                      </p>
-                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                        {page!.project1Body![1][lang]}
-                      </p>
+                      <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
+                      {page!.project1Body!.map((paragraph, i) => (
+                        <p key={i} style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: i < page!.project1Body!.length - 1 ? "1.25rem" : 0 }}>
+                          {paragraph[lang]}
+                        </p>
+                      ))}
                     </FadeInView>
                     <FadeInView delay={0.12}>
                       <div style={{ display: "flex", justifyContent: "center" }}>
@@ -456,12 +457,12 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
                       <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
                         {page!.project2Heading![lang]}
                       </h2>
-                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                        {page!.project2Body![0][lang]}
-                      </p>
-                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                        {page!.project2Body![1][lang]}
-                      </p>
+                      <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
+                      {page!.project2Body!.map((paragraph, i) => (
+                        <p key={i} style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: i < page!.project2Body!.length - 1 ? "1.25rem" : 0 }}>
+                          {paragraph[lang]}
+                        </p>
+                      ))}
                     </FadeInView>
                     <FadeInView delay={0.1}>
                       <div style={{ display: "flex", justifyContent: "center" }}>
@@ -480,6 +481,7 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
           <div className="site-content" style={{ maxWidth: 720, margin: 0, display: "flex", flexDirection: "column", gap: "clamp(2.5rem, 5vh, 3.5rem)" }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.approach}</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
               <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                 {activeSubProject.process[lang]}
               </p>
