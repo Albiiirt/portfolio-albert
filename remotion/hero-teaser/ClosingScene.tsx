@@ -1,75 +1,43 @@
 import { AbsoluteFill, Freeze, interpolate, useCurrentFrame } from "remotion";
-import { ChatScene } from "./ChatScene";
-import { DiagonalWipeLayer } from "./DiagonalWipeLayer";
-import { ProjectLabel } from "./ProjectLabel";
-import { NARRATOR, PROJECT_ACCENT, WIPE_BORDER_FADE_FRAMES, WIPE_FRAMES } from "./tokens";
+import { HeadlineText } from "./HeadlineText";
+import { OpeningScene } from "./OpeningScene";
+import { NARRATOR } from "./tokens";
 
-// ── Scene 6 — Cierre/reposo, 60 frames total: the 4 project cards held in a
-// static fan (42 solid frames), then the LOOP wipe back to the chat scene's
-// very first frame (12 wipe + 6 border-fade, the same two spec'd durations
-// as every other cut) — all inside this scene's own 60-frame budget, since
-// there's no real "scene 7" Sequence for it to borrow overlap time from the
-// way the other 5 cuts do (see hero-teaser-video.tsx's accounting comment).
+// ── Capítulo 5 — cierre, tipografía pura, 60 frames (2.0s). Same flat dark
+// bg as Capítulo 0, closing the loop back into it. "ALBERT CANADÉS" (wipe)
+// and "PRODUCT DESIGNER" (tracking) mirror Capítulo 0's own DISEÑO/QUE SE
+// USA split — one word per technique — using the site's own already-
+// approved H1 copy (data/translations.ts es.hero: "Hola, soy Albert" /
+// "diseñador" / "de producto"), not new marketing copy invented here.
 //
-// Structure mirrors every other cut: the incoming layer (here, a FROZEN
-// copy of ChatScene pinned to ITS OWN frame 0 via <Freeze>, previewing the
-// loop's restart) sits unclipped underneath; the outgoing layer (the fan)
-// sits on top, wrapped in the same DiagonalWipeLayer used everywhere else.
-export const CLOSING_SOLID_DURATION = 42;
-export const CLOSING_SCENE_DURATION = CLOSING_SOLID_DURATION + WIPE_FRAMES + WIPE_BORDER_FADE_FRAMES; // 60
+// The last CLOSING_DISSOLVE_FRAMES are the loop seam: a FROZEN copy of
+// OpeningScene's own frame 0 sits unclipped underneath (previewing the
+// restart, same <Freeze> trick the previous build used for its own chat
+// scene), while THIS scene's content simply fades out on top — a plain
+// opacity crossfade, not a DiagonalWipeLayer cut, because both ends of this
+// seam are the exact same flat background: there's nothing physically
+// different to wipe between them.
+const CLOSING_SOLID_DURATION = 42;
+const CLOSING_DISSOLVE_FRAMES = 18;
+export const CLOSING_SCENE_DURATION = CLOSING_SOLID_DURATION + CLOSING_DISSOLVE_FRAMES; // 60
 
-type Card = { label: string; gradient: string; accent: string; dark: boolean };
-const CARDS: Card[] = [
-  { label: "ENOTURISMO MADRID", gradient: "linear-gradient(135deg, #1a0a0f 0%, #4a1528 60%, #8c3a5a 100%)", accent: PROJECT_ACCENT.madrid, dark: true },
-  { label: "BULLIPEDIA", gradient: "linear-gradient(135deg, #f7f7f2 0%, #eef3df 100%)", accent: PROJECT_ACCENT.bullipedia, dark: false },
-  { label: "XUNTA / GNOSS", gradient: "linear-gradient(135deg, #001515 0%, #0d3d3d 60%, #2a8c8c 100%)", accent: PROJECT_ACCENT.xunta, dark: true },
-  { label: "MIRAZUR", gradient: "linear-gradient(135deg, #1a2a0d 0%, #3d5c1e 60%, #7aad3a 100%)", accent: PROJECT_ACCENT.mirazur, dark: true },
-];
-const ANGLES = [-12, -8, 8, 12];
-// Spaced so adjacent 300px-wide cards DON'T overlap (320px between centers,
-// a 20px gap) — an earlier pass used 227px spacing, which overlapped each
-// card's right edge with the next one's left edge by ~70px and silently
-// clipped the longer labels ("ENOTURISMO MADRID", "XUNTA / GNOSS") behind
-// the following card. The rotateY tilts + perspective still read as a fan
-// without literal card overlap.
-const OFFSETS_X = [-480, -160, 160, 480];
+const F = {
+  nameStart: 0, // wipe 0–12, tracks 12–24
+  roleStart: 16, // track-only 16–28
+};
 
-function FanContent() {
+function ClosingContent() {
   const frame = useCurrentFrame();
+  const dissolveOpacity = interpolate(frame, [CLOSING_SOLID_DURATION, CLOSING_SCENE_DURATION], [1, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
   return (
-    <AbsoluteFill style={{ background: NARRATOR.bg, alignItems: "center", justifyContent: "center" }}>
-      <div style={{ position: "relative", width: "100%", height: "100%", perspective: 1600 }}>
-        {CARDS.map((card, i) => {
-          const enter = interpolate(frame, [i * 3, i * 3 + 14], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-          return (
-            <div
-              key={card.label}
-              style={{
-                position: "absolute",
-                left: "50%",
-                top: "50%",
-                width: 300,
-                height: 400,
-                marginLeft: -150,
-                marginTop: -200,
-                opacity: enter,
-                transform: `translate(${OFFSETS_X[i]}px, ${Math.abs(ANGLES[i]) * 2}px) translateY(${(1 - enter) * 24}px) rotateY(${ANGLES[i]}deg)`,
-                transformStyle: "preserve-3d",
-                borderRadius: 18,
-                overflow: "hidden",
-                background: card.gradient,
-                border: "1px solid rgba(255,255,255,0.14)",
-                boxShadow: "0 30px 70px rgba(0,0,0,0.5)",
-                display: "flex",
-                alignItems: "flex-end",
-                padding: 24,
-                boxSizing: "border-box",
-              }}
-            >
-              <ProjectLabel text={card.label} accentColor={card.accent} persist fixed={false} textColor={card.dark ? "#ffffff" : "#1a1a1a"} />
-            </div>
-          );
-        })}
+    <AbsoluteFill style={{ background: NARRATOR.bg, alignItems: "center", justifyContent: "center", opacity: dissolveOpacity }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 14 }}>
+        <HeadlineText text="ALBERT CANADÉS" startFrame={F.nameStart} fontSize={88} textAlign="center" />
+        <HeadlineText text="PRODUCT DESIGNER" startFrame={F.roleStart} fontSize={40} textAlign="center" mode="track" color="rgba(255,255,255,0.75)" />
       </div>
     </AbsoluteFill>
   );
@@ -78,19 +46,17 @@ function FanContent() {
 export function ClosingScene() {
   return (
     <AbsoluteFill>
-      {/* Incoming (unclipped): the loop's restart, frozen at the chat
-          scene's own frame 0 — revealed as the fan's wipe recedes. */}
+      {/* Incoming (unclipped): the loop's restart, frozen at Capítulo 0's
+          own frame 0 — revealed as the closing content's opacity fades. */}
       <AbsoluteFill>
         <Freeze frame={0}>
-          <ChatScene />
+          <OpeningScene />
         </Freeze>
       </AbsoluteFill>
-      {/* Outgoing (clipped): the fan, wiping away in the scene's last
-          12 + 6 frames exactly like every other top-level cut. */}
+      {/* Outgoing: this chapter's own content, plain-dissolving away in its
+          last CLOSING_DISSOLVE_FRAMES. */}
       <AbsoluteFill>
-        <DiagonalWipeLayer contentDuration={CLOSING_SOLID_DURATION} accentColor={PROJECT_ACCENT.madrid}>
-          <FanContent />
-        </DiagonalWipeLayer>
+        <ClosingContent />
       </AbsoluteFill>
     </AbsoluteFill>
   );

@@ -41,3 +41,15 @@ export const WIPE_BORDER_FADE_FRAMES = 6;
 // value Hero.tsx:52 already uses for the "Barcelona" badge.
 export const LABEL_TRACK_FROM = -0.01;
 export const LABEL_TRACK_TO = 0.06;
+
+// Full gradients (not just the flat accent) for the chapters that overlay
+// their own project's wine/teal/olive wash on top of real b-roll footage —
+// copied 1:1 from data/projects.ts, same duplication precedent already kept
+// by remotion/madrid/tokens.ts, remotion/xunta/tokens.ts and
+// remotion/mirazur/tokens.ts (each keeps its own copy instead of importing a
+// client component module into a Remotion render process).
+export const CHAPTER_GRADIENT = {
+  madrid: "linear-gradient(135deg, #1a0a0f 0%, #4a1528 60%, #8c3a5a 100%)",
+  xunta: "linear-gradient(135deg, #001515 0%, #0d3d3d 60%, #2a8c8c 100%)",
+  mirazur: "linear-gradient(135deg, #1a2a0d 0%, #3d5c1e 60%, #7aad3a 100%)",
+};

@@ -20,21 +20,25 @@ import { WIPE_ANGLE_DEG, WIPE_BORDER_FADE_FRAMES, WIPE_FRAMES } from "./tokens";
 // factors and visibly distort the 14° angle. Pixel points are converted to
 // independent per-axis percentages only at the very end, which reproduces
 // the same pixel geometry regardless of the box's aspect ratio.
-type Pt = [number, number];
+export type Pt = [number, number];
 
-function makeDir(angleDeg: number) {
+// Exported so other pieces (TextWipeReveal) can drive the identical 14°
+// diagonal-cut geometry against a DIFFERENT box than the full video frame
+// (a headline's own bounding box instead of the whole 1920×1080 canvas) —
+// same mechanic, smaller box, per the new hero-teaser spec's point A.
+export function makeDir(angleDeg: number) {
   const rad = (angleDeg * Math.PI) / 180;
   return { x: Math.cos(rad), y: -Math.sin(rad) };
 }
 
-function dot(dir: { x: number; y: number }, x: number, y: number) {
+export function dot(dir: { x: number; y: number }, x: number, y: number) {
   return x * dir.x + y * dir.y;
 }
 
 // Sutherland–Hodgman clip of the full-frame rectangle against the half-plane
 // dot(p) <= threshold — the vertices of the region that stays covered
 // (still rendered) by the outgoing layer.
-function clipRect(dir: { x: number; y: number }, threshold: number, w: number, h: number): Pt[] {
+export function clipRect(dir: { x: number; y: number }, threshold: number, w: number, h: number): Pt[] {
   const corners: Pt[] = [
     [0, 0],
     [w, 0],

@@ -12,9 +12,11 @@ import { HeroTeaserVideo, TOTAL_DURATION as HERO_TEASER_DURATION } from "./hero-
 // - BullipediaWalkthrough: elBulli Foundation's Bullipedia marketplace —
 //   pure interface navigation (catálogo → ficha → capítulo → artículo),
 //   embedded in components/proyectos/ElBulliPage.tsx (marketplace sub-project).
-// - HeroTeaser: the home Hero's looping video teaser (chat → Madrid payoff →
-//   Bullipedia/Xunta/Mirazur glimpses → closing fan), embedded in
-//   components/Hero.tsx in place of <PlanetOrbit /> for motion-OK users.
+// - HeroTeaser: the home Hero's looping video teaser — 6 short chapters
+//   (opening typography → Madrid → Bullipedia → Xunta → Mirazur → closing
+//   typography), each a factual sentence over real b-roll/art with only a
+//   brief flash of the real product, embedded in components/Hero.tsx in
+//   place of <PlanetOrbit /> for motion-OK users.
 export function RemotionRoot() {
   return (
     <>
