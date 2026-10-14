@@ -177,6 +177,7 @@ export const t = {
         mobileJourney: "The mobile journey",
         designSystem: "The visual system",
         palette: "Palette",
+        essentials: "The essentials",
       },
       metaLabels: {
         client: "Client",
@@ -383,6 +384,7 @@ export const t = {
         mobileJourney: "El recorrido móvil",
         designSystem: "El sistema visual",
         palette: "Gráfica",
+        essentials: "Lo esencial",
       },
       metaLabels: {
         client: "Cliente",
@@ -589,6 +591,7 @@ export const t = {
         mobileJourney: "El recorregut mòbil",
         designSystem: "El sistema visual",
         palette: "Paleta",
+        essentials: "El fonamental",
       },
       metaLabels: {
         client: "Client",

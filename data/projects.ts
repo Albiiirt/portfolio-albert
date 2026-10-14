@@ -234,9 +234,9 @@ export const projects: Project[] = [
     category: { en: "Design System", es: "Sistema de Diseño", ca: "Sistema de Disseny" },
     year: "2026",
     problem: {
-      en: "The elBulli Foundation is a client with two digital initiatives underway: the archive, a living monument to one of the most influential restaurants in history, and a new marketplace for its books. Two related projects, each with its own product challenge.",
-      es: "La Fundació elBulli es un cliente con dos iniciativas digitales en marcha: el archivo, un monumento vivo a uno de los restaurantes más influyentes de la historia, y un nuevo marketplace para sus libros. Dos proyectos relacionados, cada uno con su propio reto de producto.",
-      ca: "La Fundació elBulli és un client amb dues iniciatives digitals en marxa: l'arxiu, un monument viu a un dels restaurants més influents de la història, i un nou marketplace per als seus llibres. Dos projectes relacionats, cadascun amb el seu propi repte de producte.",
+      en: "Two projects for the elBulli Foundation: a digital archive for the restaurant and a marketplace for its books. Each with its own product challenge.",
+      es: "Dos proyectos para la Fundació elBulli: el archivo digital del restaurante y un marketplace para sus libros. Cada uno con su propio reto de producto.",
+      ca: "Dos projectes per a la Fundació elBulli: un arxiu digital del restaurant i un marketplace per als seus llibres. Cadascun amb el seu propi repte de producte.",
     },
     process: {
       en: "On the archive I designed and maintained the design system and its content structure in Strapi; on the marketplace, still ongoing, I'm continuing the design system in Claude Design while transcribing the books onto the new platform.",
@@ -294,19 +294,19 @@ export const projects: Project[] = [
         category: { en: "Design System", es: "Sistema de Diseño", ca: "Sistema de Disseny" },
         year: "2026",
         problem: {
-          en: "The elBulli Foundation archive is a living digital monument to one of the most influential restaurants in history, with hundreds of pages and content that keeps growing. The product challenge: give the editorial team the ability to publish new content without depending on a developer every time, without breaking the archive's visual consistency.",
-          es: "El archivo de la Fundació elBulli es un monumento digital vivo a uno de los restaurantes más influyentes de la historia, con cientos de páginas y contenido que no deja de crecer. El reto de producto: dar al equipo editorial la capacidad de publicar contenido nuevo sin depender de un desarrollador cada vez, sin romper la consistencia visual del archivo.",
-          ca: "L'arxiu de la Fundació elBulli és un monument digital viu a un dels restaurants més influents de la història, amb centenars de pàgines i contingut que no deixa de créixer. El repte de producte: donar a l'equip editorial la capacitat de publicar contingut nou sense dependre d'un desenvolupador cada vegada, sense trencar la consistència visual de l'arxiu.",
+          en: "A digital archive with hundreds of pages, growing constantly. The challenge: let the editorial team publish without a developer, without breaking visual consistency.",
+          es: "Un archivo digital con cientos de páginas en crecimiento constante. El reto: que el equipo editorial publique sin depender de un desarrollador ni romper la consistencia visual.",
+          ca: "Un arxiu digital amb centenars de pàgines en creixement constant. El repte: que l'equip editorial publiqui sense dependre d'un desenvolupador ni trencar la consistència visual.",
         },
         process: {
-          en: "We started in Figma, but the process quickly moved to being done entirely in Claude. I designed and maintained the design system (a set of reusable visual rules, so that any new page stays consistent with the rest), and made the call to model it as reusable content blocks in Strapi, a content manager (CMS) that keeps information separate from code — dish entries, timelines, galleries, quotes — each with its own visual rules inherited from the system. That lets the editorial team combine blocks and publish without needing me for every new page. I also designed and coded specific pages of the archive myself.",
-          es: "Empezamos en Figma, pero el proceso pasó pronto a hacerse por completo en Claude. Diseñé y mantuve el sistema de diseño (un conjunto de reglas visuales reutilizables, para que cualquier página nueva se vea coherente con el resto), y tomé la decisión de modelarlo como bloques de contenido reutilizables en Strapi, un gestor de contenido (CMS) que separa la información del código — fichas de platos, cronologías, galerías, citas — cada uno con sus propias reglas visuales heredadas del sistema. Así el equipo editorial puede combinar bloques y publicar sin depender de mí para cada página nueva. Además diseñé y construí en código páginas concretas del archivo.",
-          ca: "Vam començar a Figma, però el procés va passar aviat a fer-se del tot a Claude. Vaig dissenyar i mantenir el sistema de disseny (un conjunt de regles visuals reutilitzables, perquè qualsevol pàgina nova es vegi coherent amb la resta), i vaig prendre la decisió de modelar-lo com a blocs de contingut reutilitzables a Strapi, un gestor de contingut (CMS) que separa la informació del codi — fitxes de plats, cronologies, galeries, cites — cadascun amb les seves pròpies regles visuals heretades del sistema. Així l'equip editorial pot combinar blocs i publicar sense dependre de mi per a cada pàgina nova. A més, vaig dissenyar i construir en codi pàgines concretes de l'arxiu.",
+          en: "I designed the system and modeled it as reusable blocks in Strapi. The team combines blocks and publishes without me; I designed and coded specific pages myself.",
+          es: "Diseñé el sistema y lo modelé como bloques reutilizables en Strapi. El equipo combina bloques y publica sin depender de mí; yo diseñé y construí en código páginas concretas.",
+          ca: "Vaig dissenyar el sistema i el vaig modelar com a blocs reutilitzables a Strapi. L'equip combina blocs i publica sense dependre de mi; jo vaig dissenyar i construir en codi pàgines concretes.",
         },
         result: {
-          en: "A design and content system that doubles as a CMS: the archive grows with new pages without losing visual consistency, and the team edits and publishes on its own thanks to the Strapi structure.",
-          es: "Un sistema de diseño y de contenido que funciona a la vez como CMS: el archivo crece con nuevas páginas sin perder consistencia visual, y el equipo edita y publica de forma autónoma gracias a la estructura en Strapi.",
-          ca: "Un sistema de disseny i de contingut que funciona alhora com a CMS: l'arxiu creix amb noves pàgines sense perdre consistència visual, i l'equip edita i publica de forma autònoma gràcies a l'estructura a Strapi.",
+          en: "A system that doubles as a CMS: the archive grows with new pages without losing visual consistency, and the team edits and publishes on its own.",
+          es: "Un sistema que funciona también como CMS: el archivo crece con páginas nuevas sin perder consistencia visual, y el equipo edita y publica de forma autónoma.",
+          ca: "Un sistema que funciona també com a CMS: l'arxiu creix amb pàgines noves sense perdre consistència visual, i l'equip edita i publica de forma autònoma.",
         },
         tags: ["Figma", "Strapi", "Design System"],
         cover: "/covers/cover-elbulli.webp",
@@ -325,14 +325,9 @@ export const projects: Project[] = [
           },
           challengeBody: [
             {
-              en: "The elBulli Foundation archive never stops. Some pages arrived with the design already defined — my job was to turn them into responsive, production-ready code. Others I'm designing directly, as the project moves forward.",
-              es: "El archivo de la Fundació elBulli no se detiene. Algunas páginas llegaron con diseño definido — y mi trabajo fue llevarlas a código, responsive y lista para producción. Otras las estoy diseñando directamente, a medida que el proyecto avanza.",
-              ca: "L'arxiu de la Fundació elBulli no s'atura. Algunes pàgines van arribar amb el disseny ja definit — la meva feina va ser portar-les a codi, responsive i llestes per a producció. D'altres les estic dissenyant directament, a mesura que el projecte avança.",
-            },
-            {
-              en: "Designing and coding the archive at the same time means every new block — a dish entry, a timeline — has to work visually from day one, and keep working once the editorial team uses it without me around.",
-              es: "Diseñar y programar el archivo a la vez significa que cada bloque nuevo —una ficha de plato, una cronología— tiene que funcionar visualmente desde el primer día, y seguir funcionando cuando el equipo editorial lo use sin mí delante.",
-              ca: "Dissenyar i programar l'arxiu alhora significa que cada bloc nou —una fitxa de plat, una cronologia— ha de funcionar visualment des del primer dia, i seguir funcionant quan l'equip editorial l'utilitzi sense mi al davant.",
+              en: "The archive never stops: design and code happen at once. Every new block has to work from day one, and keep working once the team uses it without me.",
+              es: "El archivo no se detiene: diseño y código van a la vez. Cada bloque nuevo tiene que funcionar desde el primer día, y seguir haciéndolo cuando el equipo lo use sin mí.",
+              ca: "L'arxiu no s'atura: disseny i codi van alhora. Cada bloc nou ha de funcionar des del primer dia, i seguir funcionant quan l'equip l'utilitzi sense mi.",
             },
           ],
           solutionHeading: {
@@ -347,14 +342,9 @@ export const projects: Project[] = [
           },
           systemBody: [
             {
-              en: "The archive is built from well-defined content types — dish entries, timelines, galleries, articles, quotes — each turned into a combinable block in Strapi.",
-              es: "El archivo se construye con tipos de contenido bien definidos — fichas de platos, cronologías, galerías, artículos, citas — cada uno convertido en un bloque combinable en Strapi.",
-              ca: "L'arxiu es construeix amb tipus de contingut ben definits — fitxes de plats, cronologies, galeries, articles, cites — cadascun convertit en un bloc combinable a Strapi.",
-            },
-            {
-              en: "The editor picks the blocks, fills in the fields and publishes. They can't break the design even if they try: every block has its own visual rules, inherited from the design system.",
-              es: "El editor elige los bloques, rellena los campos y publica. No puede romper el diseño aunque quiera: cada bloque tiene sus propias reglas visuales, heredadas del design system.",
-              ca: "L'editor tria els blocs, omple els camps i publica. No pot trencar el disseny encara que vulgui: cada bloc té les seves pròpies regles visuals, heretades del sistema de disseny.",
+              en: "The archive is built from defined content types —dish entries, timelines, galleries— turned into blocks. The editor picks, fills in and publishes without breaking the design.",
+              es: "El archivo se construye con tipos de contenido definidos —fichas, cronologías, galerías— convertidos en bloques. El editor elige, rellena y publica sin poder romper el diseño.",
+              ca: "L'arxiu es construeix amb tipus de contingut definits —fitxes, cronologies, galeries— convertits en blocs. L'editor tria, omple i publica sense poder trencar el disseny.",
             },
           ],
           learningsHeading: {
@@ -365,14 +355,9 @@ export const projects: Project[] = [
           learningsBadge: { en: "In progress", es: "En progreso", ca: "En curs" },
           learningsItems: [
             {
-              en: "The project let me work with Strapi as a headless CMS and go deeper into AI-assisted design tools. Learning to fit these pieces into a real workflow has been one of the most valuable parts of the collaboration.",
-              es: "El proyecto me permitió trabajar con Strapi como CMS headless y profundizar en herramientas de diseño asistido por IA. Aprender a encajar estas piezas dentro de un flujo de trabajo real ha sido una de las partes más valiosas de la colaboración.",
-              ca: "El projecte em va permetre treballar amb Strapi com a CMS headless i aprofundir en eines de disseny assistit per IA. Aprendre a encaixar aquestes peces dins d'un flux de treball real ha estat una de les parts més valuoses de la col·laboració.",
-            },
-            {
-              en: "Collaborating on a project of this scale and cultural sensitivity gave me perspective on how systems design doesn't end at delivery — it evolves with use, and maintaining it matters as much as building it.",
-              es: "Colaborar en un proyecto de esta escala y sensibilidad cultural me ha dado perspectiva sobre cómo el diseño de sistemas no acaba cuando se entrega — evoluciona con el uso, y mantenerlo es tan importante como construirlo.",
-              ca: "Col·laborar en un projecte d'aquesta escala i sensibilitat cultural m'ha donat perspectiva sobre com el disseny de sistemes no s'acaba quan es lliura — evoluciona amb l'ús, i mantenir-lo és tan important com construir-lo.",
+              en: "I went deeper into Strapi as a headless CMS and AI-assisted design. A project like this taught me a design system doesn't end at delivery: maintaining it matters as much as building it.",
+              es: "Profundicé en Strapi como CMS headless y en IA aplicada al diseño. Un proyecto así me enseñó que un sistema de diseño no acaba al entregarlo: mantenerlo importa tanto como construirlo.",
+              ca: "Vaig aprofundir en Strapi com a CMS headless i en IA aplicada al disseny. Un projecte així em va ensenyar que un sistema de disseny no s'acaba en lliurar-lo: mantenir-lo importa tant com construir-lo.",
             },
           ],
         },
@@ -384,19 +369,19 @@ export const projects: Project[] = [
         category: { en: "E-commerce", es: "E-commerce", ca: "E-commerce" },
         year: "2026",
         problem: {
-          en: "A physical book can't carry its complementary resources with it — Excel budget spreadsheets, images, videos — they stay separate from the content that generates them.",
-          es: "Un libro en papel no puede llevar consigo sus recursos complementarios — tablas de presupuestos en Excel, imágenes, vídeos —, quedan siempre separados del contenido que los origina.",
-          ca: "Un llibre en paper no pot portar amb ell els seus recursos complementaris — taules de pressupostos en Excel, imatges, vídeos —, sempre queden separats del contingut que els origina.",
+          en: "A physical book can't carry its complementary resources —budget spreadsheets, images, videos—; they stay separate from the content that creates them.",
+          es: "Un libro en papel no puede llevar sus recursos complementarios —Excel de presupuestos, imágenes, vídeos—; quedan siempre separados del contenido que los origina.",
+          ca: "Un llibre en paper no pot portar els seus recursos complementaris —Excel de pressupostos, imatges, vídeos—; sempre queden separats del contingut que els origina.",
         },
         process: {
-          en: "We're building an ecommerce-style platform for the elBulli Foundation's books, continuing the design system in Claude Design and building the platform itself in Claude too. My work, still ongoing, is transcribing the PDFs of the already-digitized books into the new platform, chapter by chapter, bringing in their original resources alongside the text — budget spreadsheets, images, videos.",
-          es: "Estamos construyendo una plataforma tipo ecommerce para los libros de la Fundació elBulli, con el sistema de diseño continuado en Claude Design y el desarrollo de la propia plataforma hecho también en Claude. Mi trabajo, todavía en marcha, es transcribir los PDF de los libros ya digitalizados a la nueva plataforma, capítulo a capítulo, incorporando junto al texto sus recursos originales — Excel de presupuestos, imágenes, vídeos.",
-          ca: "Estem construint una plataforma tipus ecommerce per als llibres de la Fundació elBulli, amb el sistema de disseny continuat a Claude Design i el desenvolupament de la mateixa plataforma fet també a Claude. La meva feina, encara en marxa, és transcriure els PDF dels llibres ja digitalitzats a la nova plataforma, capítol a capítol, incorporant al costat del text els seus recursos originals — Excel de pressupostos, imatges, vídeos.",
+          en: "We're building an ecommerce platform for the books, with design and development done in Claude. My work: transcribing the books chapter by chapter, with their original resources.",
+          es: "Construimos una plataforma ecommerce para los libros, con diseño y desarrollo hechos en Claude. Mi trabajo: transcribir los libros capítulo a capítulo, con sus recursos originales.",
+          ca: "Construïm una plataforma ecommerce per als llibres, amb disseny i desenvolupament fets a Claude. La meva feina: transcriure els llibres capítol a capítol, amb els recursos originals.",
         },
         result: {
-          en: "The project is still in progress, but chapter by chapter it's already showing: each book now carries the resources that stayed out of the printed page, a richer read the physical format could never offer.",
-          es: "El proyecto sigue en curso, pero capítulo a capítulo ya se nota: cada libro incorpora ahora los recursos que en papel quedaban fuera, una lectura ampliada que el formato impreso nunca pudo ofrecer.",
-          ca: "El projecte segueix en curs, però capítol a capítol ja es nota: cada llibre incorpora ara els recursos que en paper quedaven fora, una lectura ampliada que el format imprès mai va poder oferir.",
+          en: "Still in progress, but it already shows chapter by chapter: each book now carries the resources print left out, a read the printed format could never offer.",
+          es: "El proyecto sigue en curso, pero ya se nota capítulo a capítulo: cada libro incorpora los recursos que en papel quedaban fuera, una lectura que el impreso nunca pudo ofrecer.",
+          ca: "Encara en curs, però ja es nota capítol a capítol: cada llibre incorpora els recursos que en paper quedaven fora, una lectura que l'imprès mai va poder oferir.",
         },
         tags: ["Claude Design", "Claude Code", "E-commerce"],
         video: "/videos/bullipedia-walkthrough.mp4",

@@ -473,6 +473,7 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
               <FadeInView>
                 <p className="section-label" style={{ marginBottom: "1.5rem" }}>{t[lang].projectPage.sectionLabels.project}</p>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
                 <p style={{ fontSize: "var(--text-body)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
                   {project.problem[lang]}
                 </p>
@@ -562,6 +563,7 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
                     <p className="section-label" style={{ marginBottom: "1.5rem", color: ACCENT }}>
                       {activeSubProject.num} · {activeSubProject.category[lang]} · {activeSubProject.year}
                     </p>
+                    <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
                     <p style={{ fontSize: "var(--text-body)", lineHeight: 1.75, color: "var(--text-muted)", fontWeight: 400 }}>
                       {activeSubProject.problem[lang]}
                     </p>
@@ -623,12 +625,12 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
                       <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
                         {page!.challengeHeading![lang]}
                       </h2>
-                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                        {page!.challengeBody![0][lang]}
-                      </p>
-                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                        {page!.challengeBody![1][lang]}
-                      </p>
+                      <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
+                      {page!.challengeBody!.map((paragraph, i) => (
+                        <p key={i} style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: i < page!.challengeBody!.length - 1 ? "1.25rem" : 0 }}>
+                          {paragraph[lang]}
+                        </p>
+                      ))}
                     </div>
                     <div style={{ display: "flex", justifyContent: "center" }}>
                       <SvgBottleneck />
@@ -656,6 +658,7 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
                             {page.solutionHeading[lang]}
                           </h2>
                         )}
+                        <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
                         <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                           {activeSubProject.process[lang]}
                         </p>
@@ -667,6 +670,7 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
                     <p className="section-label" style={{ marginBottom: page?.solutionHeading ? "1.75rem" : "1.5rem" }}>
                       {t[lang].projectPage.sectionLabels.solution}
                     </p>
+                    <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
                     <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                       {activeSubProject.process[lang]}
                     </p>
@@ -685,12 +689,12 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
                       <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
                         {page!.systemHeading![lang]}
                       </h2>
-                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.25rem" }}>
-                        {page!.systemBody![0][lang]}
-                      </p>
-                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.75rem" }}>
-                        {page!.systemBody![1][lang]}
-                      </p>
+                      <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
+                      {page!.systemBody!.map((paragraph, i) => (
+                        <p key={i} style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.75rem" }}>
+                          {paragraph[lang]}
+                        </p>
+                      ))}
                     </div>
                     <div style={{ display: "flex", justifyContent: "center" }}>
                       <SvgBlocks />
@@ -715,6 +719,7 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
               <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
                 <div>
                   <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
+                  <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
                   <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
                     {activeSubProject.result[lang]}
                   </p>
@@ -747,6 +752,8 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
                         {page!.learningsHeading[lang]}
                       </h2>
                     )}
+
+                    <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
 
                     <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                       {page!.learningsItems!.map((text, i) => (
