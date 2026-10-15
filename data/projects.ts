@@ -204,8 +204,12 @@ export type Project = {
   desktopWalkthrough?: DesktopWalkthroughStep[];
   // See SubProject — same flag, same behavior, for top-level projects.
   desktopWalkthroughHideCaptions?: boolean;
-  // See DeviceShowcase above — undefined for clients with subProjects
-  // (elBulli, Mirazur), which set it per sub-project instead.
+  // See DeviceShowcase above — the type allows this on any Project,
+  // including clients with subProjects. elBulli currently leaves it
+  // undefined here (its two tabs would set their own, once real captures
+  // exist). Mirazur sets it here deliberately: one shared showcase for the
+  // whole client, shown once regardless of which tab (cupón/recetas) is
+  // active — not per sub-project.
   deviceShowcase?: DeviceShowcase;
   // Madrid-only — see MobileFlowStrip above.
   mobileFlowStrip?: MobileFlowStrip;
@@ -1009,6 +1013,40 @@ export const projects: Project[] = [
         { typeface: "Cormorant Garamond", usage: { es: "Titular principal (cursiva)", en: "Main headline (italic)", ca: "Titular principal (cursiva)" } },
         { typeface: "Saans", usage: { es: "Texto e interfaz", en: "Body & interface", ca: "Text i interfície" } },
       ],
+    },
+    // Project-level, not per sub-project — shared across both tabs (see
+    // Project.deviceShowcase above). Real captures from the recipe portal
+    // (Figma) and the experience landing's brief material.
+    deviceShowcase: {
+      desktop: {
+        src: "/projects/mirazur/device-desktop.jpg",
+        alt: {
+          es: "Equipo de cocina de Mirazur trabajando en la línea de pase, con un muro de flores frescas al fondo.",
+          en: "Mirazur's kitchen team at work on the pass, with a wall of fresh flowers in the background.",
+          ca: "Equip de cuina del Mirazur treballant a la línia de pas, amb un mur de flors fresques al fons.",
+        },
+      },
+      tablet: {
+        src: "/projects/mirazur/device-tablet.jpg",
+        alt: {
+          es: "Un miembro del equipo de sala prepara una presentación de sala con frascos pequeños y un tarro de ingredientes en conserva, frente a un muro de musgo.",
+          en: "A member of the service team sets up a tableside presentation with small bottles and a jar of preserved ingredients, in front of a moss wall.",
+          ca: "Un membre de l'equip de sala prepara una presentació de sala amb pots petits i un tarro d'ingredients en conserva, davant d'un mur de molsa.",
+        },
+      },
+      mobile: {
+        src: "/projects/mirazur/device-mobile.jpg",
+        alt: {
+          es: "Primer plano de una técnica de emplatado: una flor comestible colocada con pinzas sobre hielo seco, con el logotipo de Mirazur al fondo.",
+          en: "Close-up of a plating technique: an edible flower placed with tweezers over dry ice, with the Mirazur logo visible in the background.",
+          ca: "Primer pla d'una tècnica d'emplatat: una flor comestible col·locada amb pinces sobre gel sec, amb el logotip del Mirazur al fons.",
+        },
+      },
+      caption: {
+        es: "El oficio que ambos proyectos intentan trasladar a pantalla.",
+        en: "The craft both projects set out to translate to screen.",
+        ca: "L'ofici que tots dos projectes intenten traslladar a pantalla.",
+      },
     },
     video: "/covers/mirazur.mp4",
     cover: "/covers/cover-mirazur.webp",

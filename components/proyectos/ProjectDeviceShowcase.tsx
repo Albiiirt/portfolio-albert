@@ -28,10 +28,14 @@ const ASPECT: Record<DeviceKind, number> = {
 
 const ORDER: DeviceKind[] = ["desktop", "tablet", "mobile"];
 
-// Shown between a project page's Hero and Overview sections. For elBulli and
-// Mirazur (tabbed clients), `data` is the active sub-project's own
+// Shown between a project page's Hero and Overview sections. For elBulli
+// (tabbed client), `data` would be the active sub-project's own
 // deviceShowcase — the composition changes with the tab, same convention as
-// ProjectWalkthroughVideo.
+// ProjectWalkthroughVideo (currently undefined on both tabs, no real
+// captures yet). Mirazur is the exception: its two tabs share one
+// project-level deviceShowcase, so the caller passes `project.deviceShowcase`
+// instead of the active sub-project's — the showcase stays the same
+// regardless of which tab is open.
 export default function ProjectDeviceShowcase({
   project,
   data,

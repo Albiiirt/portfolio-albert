@@ -388,7 +388,9 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
           </div>
         </section>
 
-        <ProjectDeviceShowcase project={project} data={activeSubProject.deviceShowcase} />
+        {/* Project-level, not per sub-project — shared across tabs (see
+            Project.deviceShowcase in data/projects.ts). */}
+        <ProjectDeviceShowcase project={project} data={project.deviceShowcase} />
 
         {/* ── Intro compartida (cliente) — no se re-anima al cambiar de pestaña ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
