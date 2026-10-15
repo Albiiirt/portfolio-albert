@@ -180,69 +180,6 @@ function SvgRecipeFlow() {
   );
 }
 
-// ── SVG: anatomía de la landing de experiencia ──────────────────────────────
-function SvgLandingAnatomy() {
-  const blocks = [
-    { n: "01", title: "Hero",        sub: "el entorno, el Mediterráneo" },
-    { n: "02", title: "Platos",      sub: "la filosofía de Mauro Colagreco" },
-    { n: "03", title: "Formulario",  sub: "solicitud del cupón", accent: true },
-  ];
-  const BOX_W = 220, BOX_H = 68, GAP = 24;
-  const totalH = blocks.length * BOX_H + (blocks.length - 1) * GAP + 16;
-
-  return (
-    <svg viewBox={`0 0 244 ${totalH}`} fill="none" style={{ width: "100%", maxWidth: 244, height: "auto" }} aria-hidden>
-      <defs>
-        <marker id="arr-v" markerWidth={7} markerHeight={7} refX={3} refY={6} orient="auto">
-          <path d="M0.5,0 L6,0 L3,7 z" fill="var(--border-mid)" />
-        </marker>
-        <marker id="arr-va" markerWidth={7} markerHeight={7} refX={3} refY={6} orient="auto">
-          <path d="M0.5,0 L6,0 L3,7 z" fill={ACCENT} />
-        </marker>
-      </defs>
-
-      {blocks.map((b, i) => {
-        const y = 8 + i * (BOX_H + GAP);
-        const isLast = i === blocks.length - 1;
-        return (
-          <g key={i}>
-            <rect x={12} y={y} width={BOX_W} height={BOX_H} rx={10}
-              fill="var(--bg-alt)"
-              stroke={b.accent ? ACCENT : "var(--border-mid)"}
-              strokeWidth={b.accent ? 1.5 : 1} />
-            {b.accent && (
-              <rect x={14} y={y + 10} width={3} height={BOX_H - 20} rx={1.5} fill={ACCENT} />
-            )}
-            <text x={12 + (b.accent ? 26 : 18)} y={y + 28}
-              fill={b.accent ? ACCENT : "var(--text-muted)"}
-              fontSize={12} fontWeight={b.accent ? 700 : 500} fontFamily="var(--font-sans)">
-              {b.title}
-            </text>
-            <text x={12 + (b.accent ? 26 : 18)} y={y + 46}
-              fill="var(--text-subtle)" fontSize={9} fontFamily="var(--font-sans)">
-              {b.sub}
-            </text>
-            <text x={12 + BOX_W - 12} y={y + 20}
-              textAnchor="end" fill={b.accent ? ACCENT : "var(--border-mid)"}
-              fontSize={8} fontWeight={700} fontFamily="var(--font-sans)" letterSpacing={0.5}>
-              {b.n}
-            </text>
-            {!isLast && (
-              <line
-                x1={12 + BOX_W / 2} y1={y + BOX_H + 3}
-                x2={12 + BOX_W / 2} y2={y + BOX_H + GAP - 4}
-                stroke={blocks[i + 1].accent ? ACCENT : "var(--border-mid)"}
-                strokeWidth={1.5}
-                markerEnd={blocks[i + 1].accent ? "url(#arr-va)" : "url(#arr-v)"}
-              />
-            )}
-          </g>
-        );
-      })}
-    </svg>
-  );
-}
-
 // ── Page ────────────────────────────────────────────────────────────────────
 export default function MirazurPage({ initialTab }: { initialTab?: string } = {}) {
   const { lang } = useLang();
@@ -545,57 +482,25 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
                         ))}
                       </FadeInView>
                       <FadeInView delay={0.1}>
-                        <div style={{ display: "flex", justifyContent: "center" }}>
-                          <SvgLandingAnatomy />
+                        {/* Native 1280×636, not 16:9 — cover at 16:9 crops
+                            74px off each side, enough to clip the sticky
+                            "M&O" logo (top-left) and the "retour en haut"
+                            button (bottom-right). Real aspect ratio instead,
+                            zero crop. */}
+                        <div style={{ width: "100%", aspectRatio: "1280 / 636", borderRadius: 10, overflow: "hidden", position: "relative" }}>
+                          <video
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            aria-label={`${project.title[lang]} — recorrido completo de la landing, de arriba a abajo`}
+                            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                          >
+                            <source src="/videos/mirazur-landing-scroll.mp4" type="video/mp4" />
+                          </video>
                         </div>
                       </FadeInView>
                     </div>
-
-                    <FadeInView delay={0.18} style={{ marginTop: "clamp(2.5rem, 5vh, 3.5rem)" }}>
-                      <div
-                        style={{
-                          width: "100%",
-                          aspectRatio: "16 / 9",
-                          borderRadius: 10,
-                          overflow: "hidden",
-                          position: "relative",
-                        }}
-                      >
-                        <video
-                          autoPlay
-                          muted
-                          loop
-                          playsInline
-                          aria-label={`${project.title[lang]} — recorrido completo de la landing, de arriba a abajo`}
-                          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-                        >
-                          <source src="/videos/mirazur-landing-scroll.mp4" type="video/mp4" />
-                        </video>
-                      </div>
-                    </FadeInView>
-
-                    <FadeInView delay={0.22} style={{ marginTop: "clamp(2.5rem, 5vh, 3.5rem)" }}>
-                      <div
-                        style={{
-                          width: "100%",
-                          aspectRatio: "16 / 9",
-                          borderRadius: 10,
-                          overflow: "hidden",
-                          position: "relative",
-                        }}
-                      >
-                        <video
-                          autoPlay
-                          muted
-                          loop
-                          playsInline
-                          aria-label={`${project.title[lang]} — formulario de solicitud del cupón`}
-                          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-                        >
-                          <source src="/videos/mirazur-form-bono.mp4" type="video/mp4" />
-                        </video>
-                      </div>
-                    </FadeInView>
                   </div>
                 </section>
 
@@ -639,22 +544,54 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
           </motion.div>
         </AnimatePresence>
 
-        {/* ── El enfoque / El resultado (parametrizado por la pestaña activa) ── */}
+        {/* ── El enfoque / El resultado (parametrizado por la pestaña activa) ──
+            "cupon" only: 2 columns, form-bono video on the right — Albert
+            asked for it next to this text, 2026-10-15. "recetas" has no
+            video, so it keeps the single centered column. */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
-          <div className="site-content" style={{ maxWidth: 720, margin: 0, display: "flex", flexDirection: "column", gap: "clamp(2.5rem, 5vh, 3.5rem)" }}>
-            <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.approach}</p>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
-              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                {activeSubProject.process[lang]}
-              </p>
-            </FadeInView>
-            {activeSubProject.result[lang] && (
-              <FadeInView delay={0.05}>
-                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
+          <div
+            className={activeSubProject.id === "cupon" ? "proj-grid-2" : undefined}
+            style={
+              activeSubProject.id === "cupon"
+                ? { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "center" }
+                : { maxWidth: 720, margin: 0, display: "flex", flexDirection: "column", gap: "clamp(2.5rem, 5vh, 3.5rem)" }
+            }
+          >
+            <div style={activeSubProject.id === "cupon" ? { display: "flex", flexDirection: "column", gap: "clamp(2.5rem, 5vh, 3.5rem)" } : undefined}>
+              <FadeInView>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.approach}</p>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                  {activeSubProject.result[lang]}
+                  {activeSubProject.process[lang]}
                 </p>
+              </FadeInView>
+              {activeSubProject.result[lang] && (
+                <FadeInView delay={0.05}>
+                  <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
+                  <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                    {activeSubProject.result[lang]}
+                  </p>
+                </FadeInView>
+              )}
+            </div>
+            {activeSubProject.id === "cupon" && (
+              <FadeInView delay={0.1}>
+                {/* Native 1440×960 (3:2), not 16:9 — cover at 16:9 crops 75px
+                    off top and bottom, enough to clip the modal's own top
+                    edge (close button) since the modal starts only ~48px
+                    from the frame's top. Real aspect ratio instead. */}
+                <div style={{ width: "100%", aspectRatio: "3 / 2", borderRadius: 10, overflow: "hidden", position: "relative" }}>
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    aria-label={`${project.title[lang]} — formulario de solicitud del cupón`}
+                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                  >
+                    <source src="/videos/mirazur-form-bono.mp4" type="video/mp4" />
+                  </video>
+                </div>
               </FadeInView>
             )}
           </div>
