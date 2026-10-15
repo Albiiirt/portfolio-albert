@@ -477,6 +477,11 @@ export const projects: Project[] = [
     // no raw material for this one like Madrid/Mirazur had, but the demo
     // itself is real and deployed, so these are headless screenshots of it
     // at each breakpoint rather than anything synthesized, 2026-10-15.
+    // Only 2 distinct real screens exist in the demo (terminos.html,
+    // trabajo.html — confirmed by checking its linked pages directly, it's
+    // a static 2-page site, not a bigger app with hidden routes), so
+    // desktop uses one and tablet/mobile the other, rather than 3 crops of
+    // the same single page.
     deviceShowcase: {
       desktop: {
         src: "/projects/xunta-galicia/device-desktop.png",
@@ -489,17 +494,17 @@ export const projects: Project[] = [
       tablet: {
         src: "/projects/xunta-galicia/device-tablet.png",
         alt: {
-          es: "El mismo listado de términos en tablet, con la barra de filtros todavía a la izquierda.",
-          en: "The same term list on tablet, with the filter sidebar still on the left.",
-          ca: "El mateix llistat de termes a tablet, amb la barra de filtres encara a l'esquerra.",
+          es: "El tablero de trabajo del Unificador en tablet, con las propuestas agrupadas por estado: pendiente, en revisión, revisado, bloqueado.",
+          en: "The Unificador's work board on tablet, with proposals grouped by status: pending, in review, reviewed, blocked.",
+          ca: "El tauler de treball de l'Unificador a tablet, amb les propostes agrupades per estat: pendent, en revisió, revisat, bloquejat.",
         },
       },
       mobile: {
         src: "/projects/xunta-galicia/device-mobile.png",
         alt: {
-          es: "El listado de términos en móvil — la herramienta está pensada para escritorio, así que el ajuste responsive es mínimo.",
-          en: "The term list on mobile — the tool is built for desktop use, so the responsive adaptation is minimal.",
-          ca: "El llistat de termes a mòbil — l'eina està pensada per a escriptori, així que l'ajust responsive és mínim.",
+          es: "El mismo tablero de trabajo en móvil — la herramienta está pensada para escritorio, así que el ajuste responsive es mínimo.",
+          en: "The same work board on mobile — the tool is built for desktop use, so the responsive adaptation is minimal.",
+          ca: "El mateix tauler de treball a mòbil — l'eina està pensada per a escriptori, així que l'ajust responsive és mínim.",
         },
       },
       caption: {
