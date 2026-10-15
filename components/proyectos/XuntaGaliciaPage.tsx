@@ -303,8 +303,6 @@ export default function XuntaGaliciaPage() {
           }} />
         </section>
 
-        <XuntaScreensSlider />
-
         {/* ── Overview ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
@@ -338,6 +336,12 @@ export default function XuntaGaliciaPage() {
             </div>
           </div>
         </section>
+
+        {/* Visual showcase after the intro text, same placement convention
+            as Madrid (MadridInterficiaShowcase after "El punto de partida")
+            and Mirazur (ProjectMobileFlowStrip after the cupon intro text) —
+            used to sit right after the Hero with no text context first. */}
+        <XuntaScreensSlider />
 
         {/* ── La paleta y tipografía ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
