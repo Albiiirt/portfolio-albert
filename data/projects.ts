@@ -472,8 +472,42 @@ export const projects: Project[] = [
       ],
       typography: [],
     },
-    // deviceShowcase removed temporarily: no real desktop/tablet/mobile
-    // captures exist yet (confirmed by Albert).
+    // Real captures of the live demo (xunta-thesaurus-demo.vercel.app,
+    // linked from this page's own Hero CTA) — Albert pointed out there was
+    // no raw material for this one like Madrid/Mirazur had, but the demo
+    // itself is real and deployed, so these are headless screenshots of it
+    // at each breakpoint rather than anything synthesized, 2026-10-15.
+    deviceShowcase: {
+      desktop: {
+        src: "/projects/xunta-galicia/device-desktop.png",
+        alt: {
+          es: "Listado de términos del Unificador GNOSS en escritorio, con filtros por estado de unificación y tamaño de la propuesta.",
+          en: "Term list in the GNOSS Unificador on desktop, with filters by unification status and proposal size.",
+          ca: "Llistat de termes de l'Unificador GNOSS a escriptori, amb filtres per estat d'unificació i mida de la proposta.",
+        },
+      },
+      tablet: {
+        src: "/projects/xunta-galicia/device-tablet.png",
+        alt: {
+          es: "El mismo listado de términos en tablet, con la barra de filtros todavía a la izquierda.",
+          en: "The same term list on tablet, with the filter sidebar still on the left.",
+          ca: "El mateix llistat de termes a tablet, amb la barra de filtres encara a l'esquerra.",
+        },
+      },
+      mobile: {
+        src: "/projects/xunta-galicia/device-mobile.png",
+        alt: {
+          es: "El listado de términos en móvil — la herramienta está pensada para escritorio, así que el ajuste responsive es mínimo.",
+          en: "The term list on mobile — the tool is built for desktop use, so the responsive adaptation is minimal.",
+          ca: "El llistat de termes a mòbil — l'eina està pensada per a escriptori, així que l'ajust responsive és mínim.",
+        },
+      },
+      caption: {
+        en: "Real screens from the live GNOSS Unificador demo.",
+        es: "Pantallas reales de la demo en marcha del Unificador GNOSS.",
+        ca: "Pantalles reals de la demo en marxa de l'Unificador GNOSS.",
+      },
+    },
     cover: "/covers/cover-xunta.svg",
     coverAlt: {
       en: "Cover with the Xunta de Galicia logo in white on a teal gradient background.",

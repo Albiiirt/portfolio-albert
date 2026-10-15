@@ -9,7 +9,7 @@ import { projects } from "@/data/projects";
 import { EASE } from "@/lib/animations";
 import Image from "next/image";
 
-const FEATURED_IDS = ["elbulli", "xunta-galicia", "madrid", "mirazur"];
+const FEATURED_IDS = ["madrid", "mirazur", "xunta-galicia"];
 const featured = FEATURED_IDS.map((id) => projects.find((p) => p.id === id)!).filter(Boolean);
 
 const cardVariants = {

@@ -14,7 +14,7 @@ import { t } from "@/data/translations";
 import { projects } from "@/data/projects";
 import { EASE } from "@/lib/animations";
 
-const PINNED_PROJECT_IDS = ["elbulli", "xunta-galicia", "madrid", "mirazur"];
+const PINNED_PROJECT_IDS = ["madrid", "mirazur", "xunta-galicia"];
 const orderedProjects = [...projects].sort((a, b) => {
   const aIndex = PINNED_PROJECT_IDS.indexOf(a.id);
   const bIndex = PINNED_PROJECT_IDS.indexOf(b.id);
