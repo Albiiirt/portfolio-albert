@@ -62,14 +62,33 @@ const CUPON_MOBILE_FLOW: MobileFlowStrip = {
   ],
 };
 
-// "cupon" tab only — 5 real dish photographs from the tasting menu, shown
-// in a 3-column grid (see .proj-grid-3) next to SvgLandingAnatomy.
+// "cupon" tab only — 20 real dish photographs from the tasting menu
+// (interficia material's platos/menu-*.jpg, 5 originally + 15 more added
+// 2026-10-15), shown in an infinite horizontal marquee (see
+// .mirazur-platos-marquee) instead of the static 3-column grid it started
+// as — Albert asked for the overflowing/looping version once he saw how few
+// of the real photos the grid actually used.
 const CUPON_PLATOS = [
   "/projects/mirazur-cupon/plato-1.jpg",
   "/projects/mirazur-cupon/plato-2.jpg",
   "/projects/mirazur-cupon/plato-3.jpg",
   "/projects/mirazur-cupon/plato-4.jpg",
   "/projects/mirazur-cupon/plato-5.jpg",
+  "/projects/mirazur-cupon/plato-6.jpg",
+  "/projects/mirazur-cupon/plato-7.jpg",
+  "/projects/mirazur-cupon/plato-8.jpg",
+  "/projects/mirazur-cupon/plato-9.jpg",
+  "/projects/mirazur-cupon/plato-10.jpg",
+  "/projects/mirazur-cupon/plato-11.jpg",
+  "/projects/mirazur-cupon/plato-12.jpg",
+  "/projects/mirazur-cupon/plato-13.jpg",
+  "/projects/mirazur-cupon/plato-14.jpg",
+  "/projects/mirazur-cupon/plato-15.jpg",
+  "/projects/mirazur-cupon/plato-16.jpg",
+  "/projects/mirazur-cupon/plato-17.jpg",
+  "/projects/mirazur-cupon/plato-18.jpg",
+  "/projects/mirazur-cupon/plato-19.jpg",
+  "/projects/mirazur-cupon/plato-20.jpg",
 ];
 
 const platosLabel: Record<Lang, string> = {
@@ -542,31 +561,26 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
                       </FadeInView>
                     </div>
 
-                    {/* Dish grid + motion clip, both real material added 2026-10-14 */}
-                    <FadeInView delay={0.15} style={{ marginTop: "clamp(2.5rem, 5vh, 3.5rem)" }}>
-                      <p className="section-label" style={{ marginBottom: "1.5rem" }}>{platosLabel[lang]}</p>
-                      <div className="proj-grid-3" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "clamp(1rem, 2vw, 2rem)" }}>
-                        {CUPON_PLATOS.map((src, i) => (
-                          <div
-                            key={src}
-                            style={{
-                              position: "relative",
-                              width: "100%",
-                              aspectRatio: "3 / 4",
-                              borderRadius: "0.75rem",
-                              border: "1px solid var(--border)",
-                              overflow: "hidden",
-                            }}
-                          >
-                            <Image
-                              src={src}
-                              alt={`${platosAlt[lang]} ${i + 1}/${CUPON_PLATOS.length}`}
-                              fill
-                              sizes="(max-width: 640px) 90vw, (max-width: 900px) 45vw, 30vw"
-                              style={{ objectFit: "cover", objectPosition: "center" }}
-                            />
-                          </div>
-                        ))}
+                    <FadeInView delay={0.18} style={{ marginTop: "clamp(2.5rem, 5vh, 3.5rem)" }}>
+                      <div
+                        style={{
+                          width: "100%",
+                          aspectRatio: "16 / 9",
+                          borderRadius: 10,
+                          overflow: "hidden",
+                          position: "relative",
+                        }}
+                      >
+                        <video
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          aria-label={`${project.title[lang]} — recorrido completo de la landing, de arriba a abajo`}
+                          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                        >
+                          <source src="/videos/mirazur-landing-scroll.mp4" type="video/mp4" />
+                        </video>
                       </div>
                     </FadeInView>
 
@@ -594,6 +608,29 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
                     </FadeInView>
                   </div>
                 </section>
+
+                {/* Full-bleed, overflows past site-content on both sides —
+                    deliberately not inside .site-content. Duplicates the
+                    20-photo list once so the 0%→-50% translateX loops
+                    seamlessly; paused under prefers-reduced-motion in CSS. */}
+                <div style={{ background: "var(--bg)", paddingBlock: "clamp(2.5rem, 5vh, 3.5rem)" }}>
+                  <p className="section-label" style={{ marginBottom: "1.5rem", marginInline: "var(--space-section-x)" }}>{platosLabel[lang]}</p>
+                  <div className="mirazur-platos-marquee">
+                    <div className="mirazur-platos-marquee-track">
+                      {[...CUPON_PLATOS, ...CUPON_PLATOS].map((src, i) => (
+                        <div key={i} className="mirazur-platos-marquee-item">
+                          <Image
+                            src={src}
+                            alt={`${platosAlt[lang]} ${(i % CUPON_PLATOS.length) + 1}/${CUPON_PLATOS.length}`}
+                            fill
+                            sizes="260px"
+                            style={{ objectFit: "cover", objectPosition: "center" }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </>
             )}
           </motion.div>

@@ -967,6 +967,43 @@ html.custom-cursor-active .cursor-hidden {
   outline-offset: 2px;
 }
 
+/* ── Mirazur: infinite platos marquee (Albert, 2026-10-15) ──
+   Full-bleed past site-content on both sides (classic 100vw/negative-margin
+   breakout — intentional here, unlike `.design-system-palette-breakout`,
+   which broke the same way by accident). The track holds the 20-photo list
+   twice back to back; animating translateX from 0 to exactly -50% moves
+   through the first copy and lands precisely on the start of the second,
+   so the loop never shows a seam or a jump. `width: max-content` lets the
+   track be exactly as wide as its (doubled) content instead of the
+   viewport, which the animation needs to calculate -50% correctly. */
+.mirazur-platos-marquee {
+  overflow: hidden;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+.mirazur-platos-marquee-track {
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
+  animation: mirazurPlatosScroll 55s linear infinite;
+}
+.mirazur-platos-marquee-item {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(160px, 16vw, 240px);
+  aspect-ratio: 3 / 4;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+@keyframes mirazurPlatosScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 /* ── Reduce motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
