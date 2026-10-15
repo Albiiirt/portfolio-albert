@@ -5,21 +5,27 @@ import { useLang } from "@/lib/LanguageContext";
 import { t } from "@/data/translations";
 import type { Project } from "@/data/projects";
 
-// Same pattern as components/proyectos/XuntaUnificadorVideo.tsx: a 16:9
-// "glass" frame embedding a Remotion-rendered walkthrough. The difference
-// here is the source material — enoturismo.comunidad.madrid is Albert's own
-// real, live site, so remotion/madrid/ composites real screenshots of it
-// (not a hand-built mockup) with a synthetic cursor on top, instead of
-// recreating the UI as components. Hardcodes its own video path rather than
-// reading project.video, which stays pointed at the hero's /covers/madrid.mp4
-// cover reel — a separate, already-approved asset this component must not
-// touch.
+// Used to be the same "glass" frame + gradient background pattern as
+// components/proyectos/XuntaUnificadorVideo.tsx, with a Remotion-rendered
+// walkthrough (remotion/madrid/) compositing real screenshots behind a
+// synthetic browser-chrome frame and cursor. Albert dropped that look,
+// 2026-10-15: no colored background, no decorative frame — matches the
+// plain dark-background/rounded-corners treatment used everywhere else in
+// this case study (the bento video grid, the mobile row). Source swapped
+// from the Remotion render (madrid-walkthrough.mp4, carries its own fake
+// browser chrome baked into the video) to the raw buscador.mp4 capture
+// from the interficia material — no synthetic frame to begin with. Still
+// hardcodes its own video path rather than reading project.video, which
+// stays pointed at the hero's /covers/madrid.mp4 cover reel — a separate,
+// already-approved asset this component must not touch.
+const DARK_BG = "#12100e";
+
 export default function MadridWalkthroughVideo({ project }: { project: Project }) {
   const { lang } = useLang();
   const tx = t[lang].projectPage;
 
   return (
-    <section style={{ background: project.gradient, padding: "var(--space-section-y) var(--space-section-x)" }}>
+    <section style={{ background: DARK_BG, padding: "var(--space-section-y) var(--space-section-x)" }}>
       <div className="site-content" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <FadeInView>
           <p className="section-label" style={{ color: project.accentColor, marginBottom: "1.75rem", textAlign: "center" }}>
@@ -32,10 +38,7 @@ export default function MadridWalkthroughVideo({ project }: { project: Project }
             style={{
               width: "min(1040px, 90vw)",
               aspectRatio: "16 / 9",
-              borderRadius: "1.375rem",
-              border: "1.5px solid rgba(255,255,255,0.16)",
-              boxShadow: "0 1px 0 rgba(255,255,255,0.14) inset, 0 6px 28px var(--glass-shadow)",
-              background: "rgba(255,255,255,0.06)",
+              borderRadius: 10,
               overflow: "hidden",
               position: "relative",
             }}
@@ -48,7 +51,7 @@ export default function MadridWalkthroughVideo({ project }: { project: Project }
               aria-label={`${project.title[lang]} — recorrido por el sitio real`}
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
             >
-              <source src="/videos/madrid-walkthrough.mp4" type="video/mp4" />
+              <source src="/videos/madrid-buscador.mp4" type="video/mp4" />
             </video>
           </div>
         </FadeInView>
