@@ -185,7 +185,7 @@
     height: min(clamp(480px, 82vh, 720px), calc(92vw * 1.5));
     aspect-ratio: 2 / 3;
   }
-  .revista-page--text .revista-title-block { top: 30% !important; bottom: 18% !important; }
+  .revista-page--text .revista-title-block { top: 30% !important; bottom: 20% !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {

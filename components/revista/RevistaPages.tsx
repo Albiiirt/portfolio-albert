@@ -58,7 +58,7 @@ export const RevistaTextPage = forwardRef<HTMLDivElement, TextPageProps>(functio
           style={{
             position: "absolute",
             top: "48%",
-            bottom: "20%",
+            bottom: "22%",
             left: "12%",
             right: "16%",
             overflow: "hidden",
@@ -162,7 +162,10 @@ export const RevistaTextPage = forwardRef<HTMLDivElement, TextPageProps>(functio
         </div>
 
         {/* Credits — single horizontal row, low on the page, only the keys
-            that actually exist for this project (capped at 4). */}
+            that actually exist for this project (capped at 4). Pinned well
+            above the page-number corner (fixed, generous "bottom" on both —
+            not a content-height-dependent gap) so a 2-line value never
+            reads as glued to the page number below it. */}
         {credits.length > 0 && (
           <div
             className="revista-credits"
@@ -170,9 +173,9 @@ export const RevistaTextPage = forwardRef<HTMLDivElement, TextPageProps>(functio
               position: "absolute",
               left: "12%",
               right: "12%",
-              bottom: "7%",
+              bottom: "15%",
               display: "flex",
-              gap: "1.25rem",
+              gap: "1rem",
               overflow: "hidden",
             }}
           >
@@ -183,11 +186,11 @@ export const RevistaTextPage = forwardRef<HTMLDivElement, TextPageProps>(functio
                   display: "flex",
                   flexDirection: "column",
                   gap: "0.2rem",
-                  // Equal shares, not content-weighted — so a long value
-                  // (e.g. "role") never crushes short neighbours like
-                  // "client"/"year" down to nothing.
+                  // Equal shares with a real floor — so a long value (e.g.
+                  // "role") never crushes short neighbours like
+                  // "client"/"year" down to an unreadable sliver.
                   flex: "1 1 0%",
-                  minWidth: 0,
+                  minWidth: "4rem",
                 }}
               >
                 <span
@@ -206,9 +209,15 @@ export const RevistaTextPage = forwardRef<HTMLDivElement, TextPageProps>(functio
                   style={{
                     fontSize: "0.75rem",
                     color: "var(--text-muted)",
-                    whiteSpace: "nowrap",
+                    lineHeight: 1.3,
+                    // Values wrap up to 2 lines instead of truncating to one
+                    // — "Fundació elBulli"/"Colla Castellera del Baix
+                    // Montseny" aren't unusually long, they just don't fit a
+                    // quarter of a ~500px page on a single line.
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
                     overflow: "hidden",
-                    textOverflow: "ellipsis",
                   }}
                 >
                   {metaValueText(item.value, lang)}
@@ -223,7 +232,7 @@ export const RevistaTextPage = forwardRef<HTMLDivElement, TextPageProps>(functio
             style={{
               position: "absolute",
               left: "12%",
-              bottom: "5%",
+              bottom: "4%",
               fontSize: "0.68rem",
               letterSpacing: "0.08em",
               color: "var(--text-subtle)",
