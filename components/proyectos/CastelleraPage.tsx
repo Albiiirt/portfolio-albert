@@ -247,32 +247,23 @@ export default function CastelleraPage() {
           </div>
         </section>
 
-        {/* ── El trabajo ── */}
+        {/* ── El sistema ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.work}</p>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.system}</p>
             </FadeInView>
             <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "center" }}>
               <FadeInView>
                 <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
-                  {page.workHeading![lang]}
+                  {page.systemHeading![lang]}
                 </h2>
                 <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
-                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.5rem" }}>
-                  {project.process[lang]}
-                </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-                  {page.workCards!.map(({ label, desc }, i) => (
-                    <div key={i} style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "1rem", alignItems: "start" }}>
-                      <div style={{ width: 6, height: 6, borderRadius: "50%", background: ACCENT, marginTop: "0.55rem", flexShrink: 0 }} />
-                      <div>
-                        <p style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text)", margin: "0 0 0.25rem" }}>{label[lang]}</p>
-                        <p style={{ fontSize: "0.9rem", lineHeight: 1.7, color: "var(--text-muted)", margin: 0 }}>{desc[lang]}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                {page.systemBody!.map((paragraph, i) => (
+                  <p key={i} style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.75rem" }}>
+                    {paragraph[lang]}
+                  </p>
+                ))}
               </FadeInView>
               <FadeInView delay={0.12}>
                 <div style={{ display: "flex", justifyContent: "center" }}>
@@ -283,22 +274,29 @@ export default function CastelleraPage() {
           </div>
         </section>
 
-        {/* ── El sistema ── */}
+        {/* ── El trabajo ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
             <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.system}</p>
-            </FadeInView>
-            <FadeInView>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.work}</p>
               <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
-                {page.systemHeading![lang]}
+                {page.workHeading![lang]}
               </h2>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
-              {page.systemBody!.map((paragraph, i) => (
-                <p key={i} style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.75rem" }}>
-                  {paragraph[lang]}
-                </p>
-              ))}
+              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.5rem" }}>
+                {project.process[lang]}
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                {page.workCards!.map(({ label, desc }, i) => (
+                  <div key={i} style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "1rem", alignItems: "start" }}>
+                    <div style={{ width: 6, height: 6, borderRadius: "50%", background: ACCENT, marginTop: "0.55rem", flexShrink: 0 }} />
+                    <div>
+                      <p style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text)", margin: "0 0 0.25rem" }}>{label[lang]}</p>
+                      <p style={{ fontSize: "0.9rem", lineHeight: 1.7, color: "var(--text-muted)", margin: 0 }}>{desc[lang]}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </FadeInView>
           </div>
         </section>

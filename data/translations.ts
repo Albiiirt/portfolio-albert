@@ -179,6 +179,13 @@ export const t = {
         palette: "Palette",
         essentials: "The essentials",
       },
+      // Short device labels for the editorial device showcase's figcaptions
+      // (see ProjectDeviceShowcase).
+      deviceLabels: {
+        desktop: "Desktop",
+        tablet: "Tablet",
+        mobile: "Mobile",
+      },
       metaLabels: {
         client: "Client",
         year: "Year",
@@ -397,6 +404,13 @@ export const t = {
         palette: "Gráfica",
         essentials: "Lo esencial",
       },
+      // Etiquetas cortas de dispositivo para los figcaptions del showcase
+      // editorial (ver ProjectDeviceShowcase).
+      deviceLabels: {
+        desktop: "Escritorio",
+        tablet: "Tablet",
+        mobile: "Móvil",
+      },
       metaLabels: {
         client: "Cliente",
         year: "Año",
@@ -614,6 +628,13 @@ export const t = {
         designSystem: "El sistema visual",
         palette: "Paleta",
         essentials: "El fonamental",
+      },
+      // Etiquetes curtes de dispositiu per als figcaptions del showcase
+      // editorial (vegeu ProjectDeviceShowcase).
+      deviceLabels: {
+        desktop: "Escriptori",
+        tablet: "Tablet",
+        mobile: "Mòbil",
       },
       metaLabels: {
         client: "Client",

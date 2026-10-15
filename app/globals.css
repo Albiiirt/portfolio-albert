@@ -215,6 +215,11 @@ html { scroll-behavior: auto; background: var(--bg); }
   .proj-grid-3 { grid-template-columns: 1fr !important; }
   .proj-next-grid { grid-template-columns: 1fr !important; }
 
+  /* Editorial device showcase: headline loses its measure cap so it can
+     use the full line width on small screens (font-size already shrinks
+     via --text-display's own clamp()) */
+  .device-showcase-headline { max-width: none !important; }
+
   /* Projects listing: 1 col, taller cards with less padding so title/desc/tags/CTA fit */
   .projects-grid { grid-template-columns: 1fr !important; }
   .project-card { aspect-ratio: 4/5 !important; }

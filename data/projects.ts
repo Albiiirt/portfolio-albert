@@ -31,14 +31,9 @@ export type ProjectScreen =
 
 // Diseñador-specified composition for the desktop/tablet/mobile device
 // showcase shown between a project page's Hero and Overview (see
-// ProjectDeviceShowcase). `primary` only matters for the "float" style —
-// it names which of the three frames renders large/centered with an
-// accent-colored ring, while the other two become small satellites.
-export type DeviceShowcaseStyle = "cascade" | "diptych" | "triptych" | "float" | "pedestal";
+// ProjectDeviceShowcase) — editorial/frameless, one single style site-wide.
 export type DeviceShowcaseSlot = { src: string; alt: LocalizedText };
 export type DeviceShowcase = {
-  style: DeviceShowcaseStyle;
-  primary?: "desktop" | "tablet" | "mobile"; // only used when style is "float"
   desktop: DeviceShowcaseSlot;
   tablet: DeviceShowcaseSlot;
   mobile: DeviceShowcaseSlot;
@@ -569,7 +564,6 @@ export const projects: Project[] = [
     // Real captures (see audit 2026-10-14) — studio-vitrine "pedestal"
     // mockup, diseñador-specified for Madrid specifically.
     deviceShowcase: {
-      style: "pedestal",
       desktop: {
         src: "/projects/madrid/device-desktop.jpg",
         alt: { en: "Desktop view of the Enoturismo Madrid homepage.", es: "Vista de escritorio de la portada de Enoturismo Madrid.", ca: "Vista d'escriptori de la portada d'Enoturisme Madrid." },
@@ -725,7 +719,6 @@ export const projects: Project[] = [
     // true desktop/tablet/mobile comparisons of the same view — see the
     // final summary for what Albert should swap in.
     deviceShowcase: {
-      style: "cascade",
       desktop: {
         src: "/screens/jaen/jaen-mapa.webp",
         alt: { en: "Desktop view of the interactive map with filtered results.", es: "Vista de escritorio del mapa interactivo con resultados filtrados.", ca: "Vista d'escriptori del mapa interactiu amb resultats filtrats." },
