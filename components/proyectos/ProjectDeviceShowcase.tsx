@@ -147,7 +147,7 @@ export default function ProjectDeviceShowcase({
                     fill
                     priority={i === 0}
                     sizes="(max-width: 900px) 100vw, 1200px"
-                    style={{ objectFit: "cover", objectPosition: "top center", borderRadius: 0, display: "block" }}
+                    style={{ objectFit: "cover", objectPosition: "center center", borderRadius: 0, display: "block" }}
                   />
                 </div>
                 <figcaption
