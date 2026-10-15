@@ -6,66 +6,30 @@ import FadeInView from "@/components/FadeInView";
 import { useLang } from "@/lib/LanguageContext";
 import type {
   InterficiaShowcase,
-  InterficiaVideoStripBlock,
   InterficiaMobileRowBlock,
   InterficiaVideoGridBlock,
 } from "@/data/projects";
 
-// Literal port of 3 Interficia reference blocks for "Enoturismo Madrid"
-// (prototype approved by Albert 2026-10-15 — see the 3 ref-*.html files in
+// Literal port of Interficia reference blocks for "Enoturismo Madrid"
+// (prototype approved by Albert 2026-10-15 — see the ref-*.html files in
 // the approval scratchpad). Colors and breakpoint are the prototype's own
 // literal values, not the site's theme tokens — same precedent as
 // MadridPage's own Hero gradient, since this reproduces another site's
 // design verbatim rather than adapting to the portfolio's own look.
-// Renders all 3 blocks in order; shown between the Hero and "El proyecto"
-// in place of the old ProjectDeviceShowcase/ProjectMobileFlowStrip pairing.
 //
-// Scope correction (Albert, 2026-10-15): "tal cual" meant the 3 reference
+// Scope correction (Albert, 2026-10-15): "tal cual" meant the reference
 // mockups literally, not an invitation to add marketing copy or new UI
 // chrome that wasn't in the reference. Removed: the eyebrow/heading/dek/
-// "see all" text block in Bloque 1 (that was the real Comunidad de Madrid
-// site's own marketing copy, not portfolio case-study content) and the
-// pause/play button overlay on every video (my own addition, not part of
-// what was shown). Just the plain autoplay videos + photos now.
+// "see all" text block (that was the real Comunidad de Madrid site's own
+// marketing copy, not portfolio case-study content) and the pause/play
+// button overlay on every video (my own addition, not part of what was
+// shown). Bloque 1 (vídeo + franja de 3 fotos, right under the Hero) was
+// removed outright at Albert's request, 2026-10-15 — he didn't want that
+// content at the top of the page at all.
 
-const PAPER = "#f5f2ee";
 const DARK_BG = "#12100e";
 const CREAM = "#f5f1e8";
 const CAPTION_LIGHT = "#cfc9bd";
-
-// ── Bloque 1 — vídeo + franja de 3 fotos (ref-1-video-fondo.html) ──────────
-function VideoStripBlock({ data }: { data: InterficiaVideoStripBlock }) {
-  const { lang } = useLang();
-  return (
-    <section style={{ background: PAPER, padding: "56px var(--space-section-x) 120px" }}>
-      <div className="site-content">
-        <FadeInView>
-          <div style={{ position: "relative", borderRadius: 4, overflow: "hidden" }}>
-            <video autoPlay loop muted playsInline style={{ display: "block", width: "100%", height: "auto" }}>
-              <source src={data.videoSrc} type="video/mp4" />
-            </video>
-          </div>
-        </FadeInView>
-
-        <FadeInView delay={0.08}>
-          <div className="madrid-interficia-photo-strip" style={{ marginTop: 40 }}>
-            {data.photos.map((photo) => (
-              <div className="frame" key={photo.src}>
-                <Image
-                  src={photo.src}
-                  alt={photo.alt[lang]}
-                  fill
-                  sizes="(max-width: 860px) 100vw, 33vw"
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
-            ))}
-          </div>
-        </FadeInView>
-      </div>
-    </section>
-  );
-}
 
 // ── Bloque 2 — 3 capturas de móvil en fila (ref-2-moviles-fila.html) ───────
 function MobileRowBlock({ data }: { data: InterficiaMobileRowBlock }) {
@@ -121,7 +85,7 @@ function VideoGridBlock({ data }: { data: InterficiaVideoGridBlock }) {
   // ~1.21 the raw frame bbox implied) — at 1.21 the rendered video clipped
   // the first letter of the eyebrow/paragraph text on the left, so the
   // margin isn't fully gone, but nothing from the real content is cut.
-  const videoStyleZoomed: CSSProperties = { ...videoStyle, transform: "scale(1.1)", transformOrigin: "center" };
+  const videoStyleZoomed: CSSProperties = { ...videoStyle, transform: "scale(1.15)", transformOrigin: "center" };
 
   const renderVideo = (src: string, style: CSSProperties = videoStyle) => (
     <video autoPlay loop muted playsInline style={style}>
@@ -159,12 +123,7 @@ function VideoGridBlock({ data }: { data: InterficiaVideoGridBlock }) {
 
 export default function MadridInterficiaShowcase({ data }: { data?: InterficiaShowcase }) {
   if (!data) return null;
-  return (
-    <>
-      <VideoStripBlock data={data.videoStrip} />
-      <MobileRowBlock data={data.mobileRow} />
-    </>
-  );
+  return <MobileRowBlock data={data.mobileRow} />;
 }
 
 export function MadridInterficiaVideoGrid({ data }: { data?: InterficiaShowcase }) {
