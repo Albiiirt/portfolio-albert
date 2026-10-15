@@ -141,15 +141,21 @@ export function MadridInterficiaVideoGrid({ data }: { data?: InterficiaShowcase 
 }
 
 // Placed by MadridPage next to the "El sistema" paragraph (contenidos-s2.mp4
-// moved here from the video grid's panel-d, 2026-10-15). Same crop as it had
-// there: 1.06x centered scale — its content sits closer to the frame edges
-// than panel-b's (the "Inicio" breadcrumb read "nicio" at 1.15x), so it
-// can't reuse panel-b's heavier zoom.
+// moved here from the video grid's panel-d, 2026-10-15). No zoom/crop here,
+// unlike panel-b: this video scrolls through 4 different pages (zona, ficha
+// de bodega, ruta, cata) at different scroll positions, so its white margin
+// isn't constant — on the "zona" page the nav bar is scrolled out of view
+// (margin above the content), but on "ficha de bodega" the capture starts
+// at the top of the page, with the real nav bar flush against the frame
+// edge. A fixed scale tuned for one page's margin clips the next page's
+// content instead (the nav bar and its buttons got cut at 1.06x). Natural
+// size avoids that — a visible margin on some pages beats cutting UI on
+// others.
 export function MadridInterficiaSystemVideo({ data }: { data?: InterficiaShowcase }) {
   if (!data?.systemVideo) return null;
   return (
     <div style={{ borderRadius: 10, overflow: "hidden", background: "#1c1a17" }}>
-      <video autoPlay loop muted playsInline style={{ display: "block", width: "100%", height: "auto", transform: "scale(1.06)", transformOrigin: "center" }}>
+      <video autoPlay loop muted playsInline style={{ display: "block", width: "100%", height: "auto" }}>
         <source src={data.systemVideo.src} type="video/mp4" />
       </video>
     </div>
