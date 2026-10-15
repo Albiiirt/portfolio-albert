@@ -115,11 +115,13 @@ function VideoGridBlock({ data }: { data: InterficiaVideoGridBlock }) {
   // Madrid page: the card + map sit inside a wide margin of the page's own
   // white background (unlike panel-a/c, which are full-bleed app screens),
   // so at natural size that margin reads as a light block against the dark
-  // section. A centered 1.21x scale (paint-only transform, doesn't affect
-  // the box's own layout size) zooms past that margin on all 4 sides —
-  // measured from the actual frame content's bounding box — while leaving
-  // the real content (headings, card, map) comfortably inside the crop.
-  const videoStyleZoomed: CSSProperties = { ...videoStyle, transform: "scale(1.21)", transformOrigin: "center" };
+  // section. A centered scale (paint-only transform, doesn't affect the
+  // box's own layout size) zooms past most of that margin on all 4 sides.
+  // Kept deliberately short of the measured content edge (1.1, not the
+  // ~1.21 the raw frame bbox implied) — at 1.21 the rendered video clipped
+  // the first letter of the eyebrow/paragraph text on the left, so the
+  // margin isn't fully gone, but nothing from the real content is cut.
+  const videoStyleZoomed: CSSProperties = { ...videoStyle, transform: "scale(1.1)", transformOrigin: "center" };
 
   const renderVideo = (src: string, style: CSSProperties = videoStyle) => (
     <video autoPlay loop muted playsInline style={style}>
