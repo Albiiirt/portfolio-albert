@@ -10,7 +10,6 @@ import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
-import XuntaUnificadorVideo from "@/components/proyectos/XuntaUnificadorVideo";
 import ProjectDesignSystemSheet from "@/components/proyectos/ProjectDesignSystemSheet";
 import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
@@ -350,8 +349,6 @@ export default function XuntaGaliciaPage() {
           </div>
         </section>
 
-        <XuntaUnificadorVideo project={project} />
-
         {/* ── El trabajo ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
@@ -391,19 +388,36 @@ export default function XuntaGaliciaPage() {
           </div>
         </section>
 
-        {/* ── El resultado ── */}
+        {/* ── El resultado — vídeo a la derecha del texto, Albert, 2026-10-15
+            (era su propia sección con XuntaUnificadorVideo, ahora borrado) ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
-          <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
-            <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
-              <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
-                {page.resultHeading![lang]}
-              </h2>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
-              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                {project.result[lang]}
-              </p>
-            </FadeInView>
+          <div className="site-content">
+            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "center" }}>
+              <FadeInView>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
+                <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
+                  {page.resultHeading![lang]}
+                </h2>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
+                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                  {project.result[lang]}
+                </p>
+              </FadeInView>
+              <FadeInView delay={0.1}>
+                <div style={{ width: "100%", aspectRatio: "16 / 9", borderRadius: 10, overflow: "hidden", position: "relative" }}>
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    aria-label={`${project.title[lang]} — vista previa del producto`}
+                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                  >
+                    <source src="/videos/xunta-unificador.mp4" type="video/mp4" />
+                  </video>
+                </div>
+              </FadeInView>
+            </div>
           </div>
         </section>
 

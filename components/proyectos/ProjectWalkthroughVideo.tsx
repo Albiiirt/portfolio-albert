@@ -4,14 +4,13 @@ import FadeInView from "@/components/FadeInView";
 import { useLang } from "@/lib/LanguageContext";
 import type { Project } from "@/data/projects";
 
-// Generic counterpart of XuntaUnificadorVideo.tsx. Used to share that file's
-// "glass" frame — rgba border/background, --glass-shadow, 1.375rem radius —
-// over a project.gradient background. Albert dropped that look site-wide,
-// 2026-10-15 (see MadridWalkthroughVideo's removal for the reference): no
-// colored background, no decorative frame — flat dark background, plain
-// rounded corners only. Kept as a separate component rather than refactoring
-// XuntaUnificadorVideo in place, since that file has unrelated work in
-// flight elsewhere.
+// Used to share a "glass" frame — rgba border/background, --glass-shadow,
+// 1.375rem radius — over a project.gradient background with
+// XuntaUnificadorVideo.tsx (since deleted; Xunta-Galicia's video moved
+// inline into its own "El resultado" section). Albert dropped that look
+// site-wide, 2026-10-15 (see MadridWalkthroughVideo's removal for the
+// reference): no colored background, no decorative frame — flat dark
+// background, plain rounded corners only.
 const DARK_BG = "#12100e";
 
 export default function ProjectWalkthroughVideo({
