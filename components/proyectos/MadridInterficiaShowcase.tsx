@@ -25,10 +25,12 @@ import type {
 // button overlay on every video (my own addition, not part of what was
 // shown). Bloque 1 (vídeo + franja de 3 fotos, right under the Hero) was
 // removed outright at Albert's request, 2026-10-15 — he didn't want that
-// content at the top of the page at all.
+// content at the top of the page at all. The cream phone-bezel background
+// in Bloque 2 (the prototype's own literal color) was dropped the same
+// day too — Albert flagged it as an unwanted colored frame around the 3
+// mobile shots, not a deliberate part of the case-study presentation.
 
 const DARK_BG = "#12100e";
-const CREAM = "#f5f1e8";
 const CAPTION_LIGHT = "#cfc9bd";
 
 // ── Bloque 2 — 3 capturas de móvil en fila (ref-2-moviles-fila.html) ───────
@@ -40,17 +42,15 @@ function MobileRowBlock({ data }: { data: InterficiaMobileRowBlock }) {
         <div className="madrid-interficia-mobile-row">
           {data.shots.map((shot) => (
             <div key={shot.src}>
-              <div style={{ background: CREAM, borderRadius: 6, padding: "14px 14px 0", overflow: "hidden" }}>
-                <div style={{ borderRadius: 3, overflow: "hidden" }}>
-                  <Image
-                    src={shot.src}
-                    alt={shot.alt[lang]}
-                    width={1170}
-                    height={2532}
-                    sizes="(max-width: 860px) 100vw, 33vw"
-                    style={{ display: "block", width: "100%", height: "auto" }}
-                  />
-                </div>
+              <div style={{ borderRadius: 8, overflow: "hidden" }}>
+                <Image
+                  src={shot.src}
+                  alt={shot.alt[lang]}
+                  width={1170}
+                  height={2532}
+                  sizes="(max-width: 860px) 100vw, 28vw"
+                  style={{ display: "block", width: "100%", height: "auto" }}
+                />
               </div>
               <p style={{ marginTop: 18, fontSize: 14, lineHeight: 1.4, color: CAPTION_LIGHT }}>{shot.caption[lang]}</p>
             </div>
