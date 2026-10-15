@@ -118,7 +118,7 @@ function XuntaScreensSlider() {
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 2L4 8l6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </button>
 
-            <div style={{ width: "100%", maxWidth: "52%", borderRadius: 10, overflow: "hidden", position: "relative", aspectRatio: "1600 / 1000" }}>
+            <div style={{ width: "100%", maxWidth: "70%", borderRadius: 10, overflow: "hidden", position: "relative", aspectRatio: "1600 / 1000" }}>
               <AnimatePresence initial={false}>
                 <motion.div
                   key={current.src}
