@@ -86,6 +86,11 @@ function VideoGridBlock({ data }: { data: InterficiaVideoGridBlock }) {
   // the first letter of the eyebrow/paragraph text on the left, so the
   // margin isn't fully gone, but nothing from the real content is cut.
   const videoStyleZoomed: CSSProperties = { ...videoStyle, transform: "scale(1.15)", transformOrigin: "center" };
+  // panel-d (contenidos-s2.mp4) is a different page capture than panel-b —
+  // its content sits closer to the frame edges (the "Inicio" breadcrumb
+  // clipped to "nicio" at 1.15), so it gets its own, more conservative
+  // scale rather than reusing panel-b's value.
+  const videoStyleZoomedD: CSSProperties = { ...videoStyle, transform: "scale(1.06)", transformOrigin: "center" };
 
   const renderVideo = (src: string, style: CSSProperties = videoStyle) => (
     <video autoPlay loop muted playsInline style={style}>
@@ -105,7 +110,9 @@ function VideoGridBlock({ data }: { data: InterficiaVideoGridBlock }) {
               between them (same gap value as the column gap), so the
               vertical rhythm matches the horizontal one regardless of how
               tall any individual video is. Column 1: A, then C below it.
-              Column 2: B. A future 4th video would go into column 2. */}
+              Column 2: B, then D below it (D added 2026-10-15: contenidos-s2
+              from the interficia material, 4 different page types — zona,
+              ficha de bodega, ruta, cata — in one capture). */}
           <div className="madrid-interficia-bento">
             <div className="madrid-interficia-bento-col">
               <div className="panel-a" style={panelStyle}>{renderVideo(data.panelA.src)}</div>
@@ -113,6 +120,9 @@ function VideoGridBlock({ data }: { data: InterficiaVideoGridBlock }) {
             </div>
             <div className="madrid-interficia-bento-col">
               <div className="panel-b" style={panelStyle}>{renderVideo(data.panelB.src, videoStyleZoomed)}</div>
+              {data.panelD && (
+                <div className="panel-d" style={panelStyle}>{renderVideo(data.panelD.src, videoStyleZoomedD)}</div>
+              )}
             </div>
           </div>
         </FadeInView>

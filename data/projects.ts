@@ -69,6 +69,7 @@ export type InterficiaVideoGridBlock = {
   panelA: { src: string };
   panelB: { src: string };
   panelC: { src: string };
+  panelD?: { src: string };
 };
 export type InterficiaShowcase = {
   videoStrip: InterficiaVideoStripBlock;
@@ -641,6 +642,10 @@ export const projects: Project[] = [
         panelA: { src: "/videos/madrid-movilidad.mp4" },
         panelB: { src: "/videos/madrid-zonas-mapa.mp4" },
         panelC: { src: "/videos/madrid-directorio.mp4" },
+        // 4 páginas distintas en un único vídeo (zona → ficha de bodega →
+        // ruta → cata), encontrado en el material de interficia y añadido
+        // a petición de Albert, 2026-10-15.
+        panelD: { src: "/videos/madrid-contenidos.mp4" },
       },
     },
     cover: "/covers/cover-madrid.webp",
