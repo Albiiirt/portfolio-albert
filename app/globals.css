@@ -656,11 +656,9 @@ html.custom-cursor-active .cursor-hidden {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
-  max-width: 84%;
-  margin: 0 auto;
 }
 @media (max-width: 860px) {
-  .madrid-interficia-mobile-row { grid-template-columns: 1fr !important; gap: 48px !important; max-width: 60% !important; }
+  .madrid-interficia-mobile-row { grid-template-columns: 1fr !important; gap: 48px !important; }
 }
 
 /* 2-column masonry (Albert, 2026-10-15): column 1 stacks A then C, column 2
@@ -677,8 +675,6 @@ html.custom-cursor-active .cursor-hidden {
   grid-template-columns: repeat(2, 1fr);
   align-items: start;
   gap: 24px;
-  max-width: 84%;
-  margin: 0 auto;
 }
 .madrid-interficia-bento-col {
   display: flex;
@@ -686,30 +682,18 @@ html.custom-cursor-active .cursor-hidden {
   gap: 24px;
 }
 @media (max-width: 860px) {
-  .madrid-interficia-bento { grid-template-columns: 1fr !important; max-width: 100% !important; }
+  .madrid-interficia-bento { grid-template-columns: 1fr !important; }
 }
 
 /* ── Project design system sheet (palette + typography specimen) ──
-   `.design-system-palette-breakout` escapes `.site-content`'s centered
-   max-width the same way other full-bleed strips do on this site (viewport-
-   relative left/right/width + negative margins), then re-applies
-   `--space-section-x` as padding so the grid's outer edge lines up with the
-   section's own edge instead of touching the viewport edge. Wraps both the
-   "Gráfica" label and the grid so the label stays aligned with it. 4 columns
-   on desktop, 2 on tablet, 1 on mobile — `!important` only needed where an
-   inline style could otherwise outrank the media query (see `.proj-grid-2`
-   for the same convention; here the swatches no longer set inline
-   flex/maxWidth, so plain overrides are enough). */
-.design-system-palette-breakout {
-  position: relative;
-  left: 50%;
-  right: 50%;
-  width: 100vw;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  padding: 0 var(--space-section-x);
-  box-sizing: border-box;
-}
+   `.design-system-palette-breakout` used to escape `.site-content`'s
+   centered max-width via a 100vw/negative-margin trick, but that only
+   lines up with the section's edge when the viewport is narrower than
+   site-content's own 1440px max-width — on a wider screen it breaks out
+   past site-content's actual edge, misaligning the swatches' left margin
+   from the paragraph text above them. Albert caught this, 2026-10-15: no
+   breakout at all — the wrapper now just flows at site-content's own
+   width, so it lines up with the rest of the section automatically. */
 
 .design-system-palette {
   display: grid;
