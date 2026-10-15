@@ -440,16 +440,6 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
           </div>
         </section>
 
-        {/* ── La paleta y tipografía (a nivel de proyecto, no de pestaña) ── */}
-        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
-          <div className="site-content">
-            <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.designSystem}</p>
-            </FadeInView>
-            <ProjectDesignSystemSheet data={project.designSystem} accentColor={ACCENT} tightTop />
-          </div>
-        </section>
-
         {/* ── Control de pestañas ── */}
         <section style={{ background: "var(--bg-alt)", padding: "clamp(2.5rem, 5vh, 3.5rem) var(--space-section-x) 0" }}>
           <div className="site-content">
@@ -631,6 +621,19 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
                     </div>
                   </div>
                 </div>
+
+                {/* ── La paleta y tipografía — Albert, 2026-10-15: vive dentro
+                    de la pestaña de la landing, no a nivel de proyecto
+                    (el sistema visual de "cupon" no aplica a "recetas",
+                    que no tiene brand propia todavía). ── */}
+                <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+                  <div className="site-content">
+                    <FadeInView>
+                      <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.designSystem}</p>
+                    </FadeInView>
+                    <ProjectDesignSystemSheet data={project.designSystem} accentColor={ACCENT} tightTop />
+                  </div>
+                </section>
               </>
             )}
           </motion.div>
