@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import NextProjectCard from "@/components/proyectos/NextProjectCard";
-import ProjectDeviceShowcase from "@/components/proyectos/ProjectDeviceShowcase";
 import ProjectMobileFlowStrip from "@/components/proyectos/ProjectMobileFlowStrip";
 import ProjectDesignSystemSheet from "@/components/proyectos/ProjectDesignSystemSheet";
 import { AnimatePresence, motion } from "framer-motion";
@@ -387,10 +386,6 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
             </div>
           </div>
         </section>
-
-        {/* Project-level, not per sub-project — shared across tabs (see
-            Project.deviceShowcase in data/projects.ts). */}
-        <ProjectDeviceShowcase project={project} data={project.deviceShowcase} />
 
         {/* ── Intro compartida (cliente) — no se re-anima al cambiar de pestaña ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
