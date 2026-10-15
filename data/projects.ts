@@ -40,12 +40,48 @@ export type DeviceShowcase = {
   caption: LocalizedText;
 };
 
-// Madrid-only static row of 3 mobile screens (see ProjectMobileFlowStrip) —
-// deliberately not a variant of ProjectScreensShowcase (that component is a
-// carousel state machine with autoplay/drag/dots; forcing a static mode
-// inside it would complicate it for one project).
+// Row of 3 static mobile screens (see ProjectMobileFlowStrip) — deliberately
+// not a variant of ProjectScreensShowcase (that component is a carousel
+// state machine with autoplay/drag/dots; forcing a static mode inside it
+// would complicate it for one project). No longer populated via
+// Project.mobileFlowStrip (Madrid's own data moved into interficiaShowcase
+// below) — Mirazur's "cupón" tab passes its own data directly instead.
 export type MobileFlowStripScreen = { src: string; alt: LocalizedText; caption: LocalizedText };
 export type MobileFlowStrip = { screens: MobileFlowStripScreen[] }; // exactly 3
+
+// Madrid-only — literal reproduction of 3 validated Interficia reference
+// blocks shown between the Hero and "El proyecto" (prototype approved
+// 2026-10-15, see MadridInterficiaShowcase). Not a generalized type; kept
+// specific to this one project rather than reusing DeviceShowcase/
+// MobileFlowStrip, since the layout and copy are a literal port, not a
+// site-wide pattern.
+export type InterficiaVideoStripBlock = {
+  videoSrc: string;
+  eyebrow: LocalizedText;
+  heading: LocalizedText; // plain lead-in, e.g. "Visita una bodega,"
+  headingEmphasis: LocalizedText; // italic close, e.g. "vive una historia."
+  dek: LocalizedText;
+  seeAllLabel: LocalizedText;
+  seeAllHref: string;
+  videoLabel: LocalizedText; // accessible name used by the video's pause/play toggle
+  photos: { src: string; alt: LocalizedText }[]; // exactly 3
+};
+export type InterficiaMobileRowBlock = {
+  shots: { src: string; alt: LocalizedText; caption: LocalizedText }[]; // exactly 3
+};
+export type InterficiaVideoGridPanel = { src: string; label: LocalizedText };
+export type InterficiaVideoGridBlock = {
+  panelA: InterficiaVideoGridPanel;
+  panelB: InterficiaVideoGridPanel;
+  panelC: InterficiaVideoGridPanel;
+};
+export type InterficiaShowcase = {
+  videoStrip: InterficiaVideoStripBlock;
+  mobileRow: InterficiaMobileRowBlock;
+  videoGrid: InterficiaVideoGridBlock;
+  pauseLabel: LocalizedText;
+  playLabel: LocalizedText;
+};
 
 // Palette + typeface specimen shown inside a project's own "system" section
 // (see ProjectDesignSystemSheet) — elBulli, Turisme Jaén, Gnoss AI only.
@@ -211,8 +247,10 @@ export type Project = {
   // whole client, shown once regardless of which tab (cupón/recetas) is
   // active — not per sub-project.
   deviceShowcase?: DeviceShowcase;
-  // Madrid-only — see MobileFlowStrip above.
+  // No current project populates this — see MobileFlowStrip above.
   mobileFlowStrip?: MobileFlowStrip;
+  // Madrid-only — see InterficiaShowcase above.
+  interficiaShowcase?: InterficiaShowcase;
   // elBulli, Turisme Jaén, Gnoss AI only — see DesignSystemSheet above.
   designSystem?: DesignSystemSheet;
   // Turisme Jaén only — see ComponentsSheet above.
@@ -565,43 +603,74 @@ export const projects: Project[] = [
         { typeface: "Roboto", usage: { es: "Texto e interfaz", en: "Body & interface", ca: "Text i interfície" } },
       ],
     },
-    // Real captures (see audit 2026-10-14) — studio-vitrine "pedestal"
-    // mockup, diseñador-specified for Madrid specifically.
-    deviceShowcase: {
-      desktop: {
-        src: "/projects/madrid/device-desktop.jpg",
-        alt: { en: "Desktop view of the Enoturismo Madrid homepage.", es: "Vista de escritorio de la portada de Enoturismo Madrid.", ca: "Vista d'escriptori de la portada d'Enoturisme Madrid." },
-      },
-      tablet: {
-        src: "/projects/madrid/device-tablet.jpg",
-        alt: { en: "Tablet view of a winery profile page.", es: "Vista de tablet de la ficha de una bodega.", ca: "Vista de tablet de la fitxa d'un celler." },
-      },
-      mobile: {
-        src: "/projects/madrid/device-mobile.jpg",
-        alt: { en: "Mobile view of the Enoturismo Madrid homepage.", es: "Vista móvil de la portada de Enoturismo Madrid.", ca: "Vista mòbil de la portada d'Enoturisme Madrid." },
-      },
-      caption: {
-        en: "One design, consistent across desktop, tablet and mobile.",
-        es: "Un mismo diseño, coherente en escritorio, tablet y móvil.",
-        ca: "Un mateix disseny, coherent en escriptori, tablet i mòbil.",
-      },
-    },
-    // Madrid-only — static mobile screens (see ProjectMobileFlowStrip). Real
-    // captures (see audit 2026-10-14) — still only 2 screens, no 3rd real
-    // capture exists yet.
-    mobileFlowStrip: {
-      screens: [
-        {
-          src: "/projects/madrid/flow-1.jpg",
-          alt: { en: "Browsing the wine region of San Martín de Valdeiglesias on mobile.", es: "Explorando la zona vitivinícola de San Martín de Valdeiglesias en móvil.", ca: "Explorant la zona vitivinícola de San Martín de Valdeiglesias en mòbil." },
-          caption: { en: "Explore zones", es: "Explora zonas", ca: "Explora zones" },
+    // Literal reproduction of 3 validated Interficia reference blocks
+    // (prototype approved 2026-10-15, see MadridInterficiaShowcase) —
+    // replaces the generic deviceShowcase/mobileFlowStrip mockup that used
+    // to sit here. Madrid-only, not a generalized type.
+    interficiaShowcase: {
+      videoStrip: {
+        videoSrc: "/videos/madrid-zonas-mapa.mp4",
+        eyebrow: { en: "Wineries with tours", es: "Bodegas con visita", ca: "Cellers amb visita" },
+        heading: { en: "Visit a winery,", es: "Visita una bodega,", ca: "Visita un celler," },
+        headingEmphasis: { en: "live a story.", es: "vive una historia.", ca: "viu una història." },
+        dek: {
+          en: "Wineries vetted by the destination, with guided tours, tastings and experiences bookable directly on their own website.",
+          es: "Bodegas validadas por el destino con visitas guiadas, catas y experiencias reservables directamente en su web.",
+          ca: "Cellers validats per la destinació amb visites guiades, tastos i experiències reservables directament al seu web.",
         },
-        {
-          src: "/projects/madrid/flow-2.jpg",
-          alt: { en: "List of wineries in the Comunidad de Madrid in mobile view.", es: "Listado de bodegas de la Comunidad de Madrid en vista móvil.", ca: "Llistat de cellers de la Comunidad de Madrid en vista mòbil." },
-          caption: { en: "Discover wineries", es: "Descubre bodegas", ca: "Descobreix cellers" },
+        seeAllLabel: { en: "See all wineries →", es: "Ver todas las bodegas →", ca: "Veure tots els cellers →" },
+        seeAllHref: "#",
+        videoLabel: { en: "Map of wine regions", es: "Mapa de zonas vitivinícolas", ca: "Mapa de zones vitivinícoles" },
+        photos: [
+          {
+            src: "/projects/madrid/bodegas-1.jpg",
+            alt: { en: "Vineyard landscape in San Martín de Valdeiglesias.", es: "Paisaje de viñedo en San Martín de Valdeiglesias.", ca: "Paisatge de vinya a San Martín de Valdeiglesias." },
+          },
+          {
+            src: "/projects/madrid/bodegas-2.jpg",
+            alt: { en: "Winery building with institutional signage, Cenicientos.", es: "Edificio de bodega con cartel institucional, Cenicientos.", ca: "Edifici de celler amb rètol institucional, Cenicientos." },
+          },
+          {
+            src: "/projects/madrid/bodegas-3.jpg",
+            alt: { en: "Cluster of red grapes on the vine.", es: "Racimo de uva tinta en la viña.", ca: "Raïm negre al cep." },
+          },
+        ],
+      },
+      mobileRow: {
+        shots: [
+          {
+            src: "/projects/madrid/device-mobile.jpg",
+            alt: { en: "Mobile view of the Enoturismo Madrid homepage.", es: "Vista móvil de la portada de Enoturismo Madrid.", ca: "Vista mòbil de la portada d'Enoturisme Madrid." },
+            caption: { en: "Homepage: hero and zone selector", es: "Portada: hero y selector de zona", ca: "Portada: hero i selector de zona" },
+          },
+          {
+            src: "/projects/madrid/flow-1.jpg",
+            alt: { en: "Browsing the wine region of San Martín de Valdeiglesias on mobile.", es: "Explorando la zona vitivinícola de San Martín de Valdeiglesias en móvil.", ca: "Explorant la zona vitivinícola de San Martín de Valdeiglesias en mòbil." },
+            caption: { en: "The four wine regions", es: "Las cuatro zonas vitivinícolas", ca: "Les quatre zones vitivinícoles" },
+          },
+          {
+            src: "/projects/madrid/flow-2.jpg",
+            alt: { en: "List of wineries in the Comunidad de Madrid in mobile view.", es: "Listado de bodegas de la Comunidad de Madrid en vista móvil.", ca: "Llistat de cellers de la Comunidad de Madrid en vista mòbil." },
+            caption: { en: "Wineries with tours, in a carousel", es: "Bodegas con visita, en carrusel", ca: "Cellers amb visita, en carrusel" },
+          },
+        ],
+      },
+      videoGrid: {
+        panelA: {
+          src: "/videos/madrid-movilidad.mp4",
+          label: { en: "Getting around by public transport", es: "Movilidad en transporte público", ca: "Mobilitat en transport públic" },
         },
-      ],
+        panelB: {
+          src: "/videos/madrid-zonas-mapa.mp4",
+          label: { en: "Exploring the territory by zone", es: "Conoce el territorio por zonas", ca: "Coneix el territori per zones" },
+        },
+        panelC: {
+          src: "/videos/madrid-directorio.mp4",
+          label: { en: "Searching and filtering the winery directory", es: "Buscador y filtro del directorio de bodegas", ca: "Cercador i filtre del directori de cellers" },
+        },
+      },
+      pauseLabel: { en: "Pause video", es: "Pausar vídeo", ca: "Pausar vídeo" },
+      playLabel: { en: "Play video", es: "Reproducir vídeo", ca: "Reproduir vídeo" },
     },
     cover: "/covers/cover-madrid.webp",
     coverAlt: {

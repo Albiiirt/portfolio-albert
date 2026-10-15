@@ -632,6 +632,58 @@ html.custom-cursor-active .cursor-hidden {
   .device-showcase-fallback { display: flex !important; }
 }
 
+/* ── Madrid Interficia showcase (literal reproduction of 3 validated
+   Interficia reference blocks, approved 2026-10-15 — see
+   MadridInterficiaShowcase). Colors/breakpoint below are hardcoded to match
+   the approved prototype exactly, not the site's own theme tokens — same
+   precedent as MadridPage's own Hero gradient. ── */
+.madrid-interficia-photo-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.madrid-interficia-photo-strip .frame {
+  position: relative;
+  height: 420px;
+  overflow: hidden;
+}
+@media (max-width: 860px) {
+  .madrid-interficia-photo-strip { grid-template-columns: 1fr !important; }
+  .madrid-interficia-photo-strip .frame { height: 260px !important; }
+}
+
+.madrid-interficia-mobile-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+@media (max-width: 860px) {
+  .madrid-interficia-mobile-row { grid-template-columns: 1fr !important; gap: 48px !important; }
+}
+
+.madrid-interficia-bento {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr;
+  grid-template-rows: 300px 300px;
+  gap: 24px;
+}
+.madrid-interficia-bento .panel-a { grid-column: 1; grid-row: 1; }
+.madrid-interficia-bento .panel-b { grid-column: 2; grid-row: 1; }
+.madrid-interficia-bento .panel-c { grid-column: 1; grid-row: 2; }
+@media (max-width: 860px) {
+  .madrid-interficia-bento {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: none !important;
+  }
+  .madrid-interficia-bento .panel-a,
+  .madrid-interficia-bento .panel-b,
+  .madrid-interficia-bento .panel-c {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    height: 260px !important;
+  }
+}
+
 /* ── Project design system sheet (palette + typography specimen) ──
    `.design-system-palette-breakout` escapes `.site-content`'s centered
    max-width the same way other full-bleed strips do on this site (viewport-
