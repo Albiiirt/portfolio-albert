@@ -656,9 +656,11 @@ html.custom-cursor-active .cursor-hidden {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
+  max-width: 65%;
+  margin: 0 auto;
 }
 @media (max-width: 860px) {
-  .madrid-interficia-mobile-row { grid-template-columns: 1fr !important; gap: 48px !important; }
+  .madrid-interficia-mobile-row { grid-template-columns: 1fr !important; gap: 48px !important; max-width: 55% !important; }
 }
 
 /* 2-column masonry (Albert, 2026-10-15): column 1 stacks A then C, column 2

@@ -75,6 +75,10 @@ export type InterficiaShowcase = {
   videoStrip: InterficiaVideoStripBlock;
   mobileRow: InterficiaMobileRowBlock;
   videoGrid: InterficiaVideoGridBlock;
+  // Shown beside the "El sistema" paragraph in MadridPage, not part of the
+  // video grid — contenidos-s2 moved here from panelD at Albert's request,
+  // 2026-10-15 (he wanted it next to that text instead of in the grid).
+  systemVideo?: { src: string };
 };
 
 // Palette + typeface specimen shown inside a project's own "system" section
@@ -642,11 +646,13 @@ export const projects: Project[] = [
         panelA: { src: "/videos/madrid-movilidad.mp4" },
         panelB: { src: "/videos/madrid-zonas-mapa.mp4" },
         panelC: { src: "/videos/madrid-directorio.mp4" },
-        // 4 páginas distintas en un único vídeo (zona → ficha de bodega →
-        // ruta → cata), encontrado en el material de interficia y añadido
-        // a petición de Albert, 2026-10-15.
-        panelD: { src: "/videos/madrid-contenidos.mp4" },
+        // Era contenidos-s2 (panelD original); Albert lo movió junto al
+        // texto de "El sistema" (ver systemVideo) y pidió el buscador aquí
+        // en su lugar — era el vídeo de MadridWalkthroughVideo, que ya no
+        // existe como sección aparte, 2026-10-15.
+        panelD: { src: "/videos/madrid-buscador.mp4" },
       },
+      systemVideo: { src: "/videos/madrid-contenidos.mp4" },
     },
     cover: "/covers/cover-madrid.webp",
     coverAlt: {

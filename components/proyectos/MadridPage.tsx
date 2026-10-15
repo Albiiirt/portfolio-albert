@@ -8,8 +8,7 @@ import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
-import MadridWalkthroughVideo from "@/components/proyectos/MadridWalkthroughVideo";
-import MadridInterficiaShowcase, { MadridInterficiaVideoGrid } from "@/components/proyectos/MadridInterficiaShowcase";
+import MadridInterficiaShowcase, { MadridInterficiaVideoGrid, MadridInterficiaSystemVideo } from "@/components/proyectos/MadridInterficiaShowcase";
 import ProjectDesignSystemSheet from "@/components/proyectos/ProjectDesignSystemSheet";
 import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
@@ -227,8 +226,6 @@ export default function MadridPage() {
           </div>
         </section>
 
-        <MadridInterficiaShowcase data={project.interficiaShowcase} />
-
         {/* ── Overview ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
@@ -288,23 +285,30 @@ export default function MadridPage() {
           </div>
         </section>
 
+        <MadridInterficiaShowcase data={project.interficiaShowcase} />
+
         {/* ── El sistema ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.system}</p>
             </FadeInView>
-            <FadeInView>
-              <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
-                {page.systemHeading![lang]}
-              </h2>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
-              {page.systemBody!.map((paragraph, i) => (
-                <p key={i} style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.75rem" }}>
-                  {paragraph[lang]}
-                </p>
-              ))}
-            </FadeInView>
+            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "center" }}>
+              <FadeInView>
+                <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
+                  {page.systemHeading![lang]}
+                </h2>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
+                {page.systemBody!.map((paragraph, i) => (
+                  <p key={i} style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.75rem" }}>
+                    {paragraph[lang]}
+                  </p>
+                ))}
+              </FadeInView>
+              <FadeInView delay={0.1}>
+                <MadridInterficiaSystemVideo data={project.interficiaShowcase} />
+              </FadeInView>
+            </div>
           </div>
         </section>
 
@@ -350,8 +354,6 @@ export default function MadridPage() {
             </div>
           </div>
         </section>
-
-        <MadridWalkthroughVideo project={project} />
 
         {/* ── El resultado ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>

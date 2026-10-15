@@ -86,11 +86,6 @@ function VideoGridBlock({ data }: { data: InterficiaVideoGridBlock }) {
   // the first letter of the eyebrow/paragraph text on the left, so the
   // margin isn't fully gone, but nothing from the real content is cut.
   const videoStyleZoomed: CSSProperties = { ...videoStyle, transform: "scale(1.15)", transformOrigin: "center" };
-  // panel-d (contenidos-s2.mp4) is a different page capture than panel-b —
-  // its content sits closer to the frame edges (the "Inicio" breadcrumb
-  // clipped to "nicio" at 1.15), so it gets its own, more conservative
-  // scale rather than reusing panel-b's value.
-  const videoStyleZoomedD: CSSProperties = { ...videoStyle, transform: "scale(1.06)", transformOrigin: "center" };
 
   const renderVideo = (src: string, style: CSSProperties = videoStyle) => (
     <video autoPlay loop muted playsInline style={style}>
@@ -110,9 +105,13 @@ function VideoGridBlock({ data }: { data: InterficiaVideoGridBlock }) {
               between them (same gap value as the column gap), so the
               vertical rhythm matches the horizontal one regardless of how
               tall any individual video is. Column 1: A, then C below it.
-              Column 2: B, then D below it (D added 2026-10-15: contenidos-s2
-              from the interficia material, 4 different page types — zona,
-              ficha de bodega, ruta, cata — in one capture). */}
+              Column 2: B, then D below it — D is the buscador.mp4 capture
+              (search → results → bodega detail), swapped in 2026-10-15 for
+              the contenidos-s2 video that used to live here (that one moved
+              next to the "El sistema" paragraph instead, see
+              MadridInterficiaSystemVideo below). Both A/C and D are
+              full-bleed app/page captures with no white margin to crop, so
+              they render at natural size like A and C — no zoom needed. */}
           <div className="madrid-interficia-bento">
             <div className="madrid-interficia-bento-col">
               <div className="panel-a" style={panelStyle}>{renderVideo(data.panelA.src)}</div>
@@ -121,7 +120,7 @@ function VideoGridBlock({ data }: { data: InterficiaVideoGridBlock }) {
             <div className="madrid-interficia-bento-col">
               <div className="panel-b" style={panelStyle}>{renderVideo(data.panelB.src, videoStyleZoomed)}</div>
               {data.panelD && (
-                <div className="panel-d" style={panelStyle}>{renderVideo(data.panelD.src, videoStyleZoomedD)}</div>
+                <div className="panel-d" style={panelStyle}>{renderVideo(data.panelD.src)}</div>
               )}
             </div>
           </div>
@@ -139,4 +138,20 @@ export default function MadridInterficiaShowcase({ data }: { data?: InterficiaSh
 export function MadridInterficiaVideoGrid({ data }: { data?: InterficiaShowcase }) {
   if (!data) return null;
   return <VideoGridBlock data={data.videoGrid} />;
+}
+
+// Placed by MadridPage next to the "El sistema" paragraph (contenidos-s2.mp4
+// moved here from the video grid's panel-d, 2026-10-15). Same crop as it had
+// there: 1.06x centered scale — its content sits closer to the frame edges
+// than panel-b's (the "Inicio" breadcrumb read "nicio" at 1.15x), so it
+// can't reuse panel-b's heavier zoom.
+export function MadridInterficiaSystemVideo({ data }: { data?: InterficiaShowcase }) {
+  if (!data?.systemVideo) return null;
+  return (
+    <div style={{ borderRadius: 10, overflow: "hidden", background: "#1c1a17" }}>
+      <video autoPlay loop muted playsInline style={{ display: "block", width: "100%", height: "auto", transform: "scale(1.06)", transformOrigin: "center" }}>
+        <source src={data.systemVideo.src} type="video/mp4" />
+      </video>
+    </div>
+  );
 }
