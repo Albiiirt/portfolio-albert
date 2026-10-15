@@ -94,7 +94,7 @@ function VideoGridBlock({ data }: { data: InterficiaVideoGridBlock }) {
   );
 
   return (
-    <section style={{ background: DARK_BG, padding: "0 var(--space-section-x) 120px" }}>
+    <section style={{ background: DARK_BG, padding: "var(--space-section-y) var(--space-section-x) 120px" }}>
       <div className="site-content">
         <FadeInView>
           {/* 2 independent masonry columns, not a single grid — the 3 videos
