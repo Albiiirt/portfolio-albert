@@ -207,6 +207,17 @@ export const t = {
       lightboxAriaLabel: "Enlarged view: {title}",
       videoLabel: "Video",
     },
+    revista: {
+      strap: "Selected Work",
+      issueFooter: "No. 01 — Barcelona",
+      liveLink: "View live project ↗",
+      caseLink: "View full case study ↗",
+      prevPage: "Previous page",
+      nextPage: "Next page",
+      closingHeading: "The end",
+      closingLink: "See all projects ↗",
+      viewAsMagazine: "View as a magazine ↗",
+    },
   },
   es: {
     nav: {
@@ -414,6 +425,17 @@ export const t = {
       lightboxAriaLabel: "Vista ampliada: {title}",
       videoLabel: "Vídeo",
     },
+    revista: {
+      strap: "Trabajos seleccionados",
+      issueFooter: "N.º 01 — Barcelona",
+      liveLink: "Ver proyecto en vivo ↗",
+      caseLink: "Ver el caso completo ↗",
+      prevPage: "Página anterior",
+      nextPage: "Página siguiente",
+      closingHeading: "Fin",
+      closingLink: "Ver todos los proyectos ↗",
+      viewAsMagazine: "Ver como revista ↗",
+    },
   },
   ca: {
     nav: {
@@ -620,6 +642,17 @@ export const t = {
       closeLightbox: "Tancar",
       lightboxAriaLabel: "Vista ampliada: {title}",
       videoLabel: "Vídeo",
+    },
+    revista: {
+      strap: "Treballs seleccionats",
+      issueFooter: "N.º 01 — Barcelona",
+      liveLink: "Veure projecte en directe ↗",
+      caseLink: "Veure el cas complet ↗",
+      prevPage: "Pàgina anterior",
+      nextPage: "Pàgina següent",
+      closingHeading: "Fi",
+      closingLink: "Veure tots els projectes ↗",
+      viewAsMagazine: "Veure com a revista ↗",
     },
   },
 };

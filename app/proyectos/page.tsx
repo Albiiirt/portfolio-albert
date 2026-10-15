@@ -210,6 +210,9 @@ export default function ProyectosPage() {
                     {subline[lang]}
                   </p>
                 </div>
+                <Link href="/revista" className="btn-ghost" style={{ marginTop: "1.25rem", fontSize: "0.78rem", padding: "0.65rem 1.3rem" }}>
+                  {t[lang].revista.viewAsMagazine}
+                </Link>
               </div>
             </FadeInView>
 

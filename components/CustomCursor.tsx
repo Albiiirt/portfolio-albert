@@ -45,7 +45,10 @@ export default function CustomCursor() {
         target.tagName === "A" ||
         target.tagName === "BUTTON" ||
         target.closest("a") ||
-        target.closest("button");
+        target.closest("button") ||
+        // /revista's page-corner "grab" zones (see RevistaPages.tsx) —
+        // decorative, not links, but should read as grabbable too.
+        target.closest(".revista-fold-corner");
 
       if (isInteractive) {
         ring.style.width = "56px";
