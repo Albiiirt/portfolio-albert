@@ -504,29 +504,6 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
 
                 <ProjectMobileFlowStrip project={project} data={CUPON_MOBILE_FLOW} />
 
-                {/* Full-bleed, overflows past site-content on both sides —
-                    deliberately not inside .site-content. Duplicates the
-                    20-photo list once so the 0%→-50% translateX loops
-                    seamlessly; paused under prefers-reduced-motion in CSS. */}
-                <div style={{ background: "var(--bg)", paddingBlock: "clamp(2.5rem, 5vh, 3.5rem)" }}>
-                  <p className="section-label" style={{ marginBottom: "1.5rem", marginInline: "var(--space-section-x)" }}>{platosLabel[lang]}</p>
-                  <div className="mirazur-platos-marquee">
-                    <div className="mirazur-platos-marquee-track">
-                      {[...CUPON_PLATOS, ...CUPON_PLATOS].map((src, i) => (
-                        <div key={i} className="mirazur-platos-marquee-item">
-                          <Image
-                            src={src}
-                            alt={`${platosAlt[lang]} ${(i % CUPON_PLATOS.length) + 1}/${CUPON_PLATOS.length}`}
-                            fill
-                            sizes="260px"
-                            style={{ objectFit: "cover", objectPosition: "center" }}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
                 {/* ── La paleta y tipografía — Albert, 2026-10-15: vive dentro
                     de la pestaña de la landing, no a nivel de proyecto
                     (el sistema visual de "cupon" no aplica a "recetas",
@@ -596,6 +573,34 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
             )}
           </div>
         </section>
+
+        {/* "cupon" only — moved here, right before "Lo que me llevé", at
+            Albert's request, 2026-10-15 (used to sit right after the mobile
+            flow strip, several sections earlier). Full-bleed, overflows past
+            site-content on both sides — deliberately not inside
+            .site-content. Duplicates the 20-photo list once so the
+            0%→-50% translateX loops seamlessly; paused under
+            prefers-reduced-motion in CSS. */}
+        {activeSubProject.id === "cupon" && (
+          <div style={{ background: "var(--bg)", paddingBlock: "clamp(2.5rem, 5vh, 3.5rem)" }}>
+            <p className="section-label" style={{ marginBottom: "1.5rem", marginInline: "var(--space-section-x)" }}>{platosLabel[lang]}</p>
+            <div className="mirazur-platos-marquee">
+              <div className="mirazur-platos-marquee-track">
+                {[...CUPON_PLATOS, ...CUPON_PLATOS].map((src, i) => (
+                  <div key={i} className="mirazur-platos-marquee-item">
+                    <Image
+                      src={src}
+                      alt={`${platosAlt[lang]} ${(i % CUPON_PLATOS.length) + 1}/${CUPON_PLATOS.length}`}
+                      fill
+                      sizes="260px"
+                      style={{ objectFit: "cover", objectPosition: "center" }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* ── Aprendizajes (parametrizado por la pestaña activa) ── */}
         {activeSubProject.page?.learningsItems && (
