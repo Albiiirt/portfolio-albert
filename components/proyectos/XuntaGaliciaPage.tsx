@@ -1,9 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import NextProjectCard from "@/components/proyectos/NextProjectCard";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
@@ -22,17 +23,20 @@ const page = project.page!;
 
 const chips = ["UX Research", "Product Design", "Figma"];
 
-// 3 real screens of the live demo (xunta-thesaurus-demo.vercel.app, linked
+// 5 real screens of the live demo (xunta-thesaurus-demo.vercel.app, linked
 // from this page's Hero CTA), captured at the demo's own desktop width —
 // 1600×1000 exactly, so they render at natural aspect with no crop. Shown
 // at desktop size deliberately: an earlier pass captured these at mobile
 // width, but the tool has no real mobile layout (one desktop stylesheet,
 // no responsive breakpoints — a narrow viewport just overflows it), so
 // presenting that as "mobile" would misrepresent the product, 2026-10-15.
-// The 3rd screen (ficha.html's merge comparison) isn't linked anywhere in
-// the static HTML — terminos.js builds its href as a template literal per
-// row (`ficha.html?grupo=${t.grupoId}`), only found by reading the page's
-// own JS directly.
+// Screens 3-5 (ficha.html, in its 3 real states) aren't linked anywhere in
+// the static HTML — terminos.js builds each href as a template literal per
+// row (`ficha.html?grupo=${t.grupoId}` / `?termino=${t.id}`), only found by
+// reading the page's own JS directly. Two more interactive states exist
+// (trabajo.html's Kanban⇄Listado toggle, ficha.html's MARC⇄ISAAR schema
+// toggle) but both are pure in-memory JS state with no URL param, so a
+// static screenshot can't reach them without a real click.
 const XUNTA_SCREENS = [
   {
     src: "/projects/xunta-galicia/screen-1.png",
@@ -58,7 +62,110 @@ const XUNTA_SCREENS = [
       ca: "Comparació de fusió, camp a camp, amb el valor triat ressaltat.",
     },
   },
+  {
+    src: "/projects/xunta-galicia/screen-4.png",
+    caption: {
+      en: "The same comparison with 3 candidate records instead of 2.",
+      es: "La misma comparación con 3 registros candidatos en vez de 2.",
+      ca: "La mateixa comparació amb 3 registres candidats en comptes de 2.",
+    },
+  },
+  {
+    src: "/projects/xunta-galicia/screen-5.png",
+    caption: {
+      en: "A single record with no duplicate candidates found.",
+      es: "Un registro individual sin candidatos a duplicado.",
+      ca: "Un registre individual sense candidats a duplicat.",
+    },
+  },
 ];
+
+// ── Slider for the 5 real screens — a plain crossfade + arrows + dots, not
+// ProjectScreensShowcase (that component is a phone-frame carousel, fixed
+// 9:19.5 portrait; these are 16:10 desktop captures). No autoplay: 5 dense
+// screens read at their own pace, not on a timer. ──────────────────────────
+function XuntaScreensSlider() {
+  const { lang } = useLang();
+  const [active, setActive] = useState(0);
+  const count = XUNTA_SCREENS.length;
+  const current = XUNTA_SCREENS[active];
+
+  const goTo = (i: number) => setActive((i + count) % count);
+
+  return (
+    <section style={{ background: "#001515", padding: "var(--space-section-y) var(--space-section-x)" }}>
+      <div className="site-content">
+        <FadeInView>
+          <div style={{ borderRadius: 10, overflow: "hidden", position: "relative", aspectRatio: "1600 / 1000" }}>
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={current.src}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3, ease: EASE }}
+                style={{ position: "absolute", inset: 0 }}
+              >
+                <Image
+                  src={current.src}
+                  alt={current.caption[lang]}
+                  fill
+                  sizes="(max-width: 860px) 100vw, 1600px"
+                  priority={active === 0}
+                  style={{ objectFit: "cover" }}
+                />
+              </motion.div>
+            </AnimatePresence>
+
+            <button
+              type="button"
+              onClick={() => goTo(active - 1)}
+              aria-label={lang === "en" ? "Previous screen" : lang === "ca" ? "Pantalla anterior" : "Pantalla anterior"}
+              style={{
+                position: "absolute", top: "50%", left: 16, transform: "translateY(-50%)",
+                width: 40, height: 40, borderRadius: "50%", border: "none", cursor: "pointer",
+                background: "rgba(0,0,0,0.5)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center",
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 2L4 8l6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </button>
+            <button
+              type="button"
+              onClick={() => goTo(active + 1)}
+              aria-label={lang === "en" ? "Next screen" : lang === "ca" ? "Pantalla següent" : "Pantalla siguiente"}
+              style={{
+                position: "absolute", top: "50%", right: 16, transform: "translateY(-50%)",
+                width: 40, height: 40, borderRadius: "50%", border: "none", cursor: "pointer",
+                background: "rgba(0,0,0,0.5)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center",
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 2l6 6-6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </button>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginTop: 18, gap: "1rem" }}>
+            <p style={{ fontSize: 13, lineHeight: 1.4, color: "rgba(255,255,255,0.65)", margin: 0 }}>{current.caption[lang]}</p>
+            <div style={{ display: "flex", gap: 8, flexShrink: 0 }}>
+              {XUNTA_SCREENS.map((screen, i) => (
+                <button
+                  key={screen.src}
+                  type="button"
+                  onClick={() => goTo(i)}
+                  aria-label={`${i + 1}/${count}`}
+                  aria-current={i === active}
+                  style={{
+                    width: 8, height: 8, borderRadius: "50%", border: "none", cursor: "pointer", padding: 0,
+                    background: i === active ? ACCENT : "rgba(255,255,255,0.3)",
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        </FadeInView>
+      </div>
+    </section>
+  );
+}
 
 export default function XuntaGaliciaPage() {
   const { lang } = useLang();
@@ -190,28 +297,7 @@ export default function XuntaGaliciaPage() {
           }} />
         </section>
 
-        {/* ── Pantallas reales de la demo (ver XUNTA_SCREENS) ── */}
-        <section style={{ background: "#001515", padding: "var(--space-section-y) var(--space-section-x)" }}>
-          <div className="site-content">
-            <div className="proj-grid-3" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "clamp(1rem, 2vw, 2rem)" }}>
-              {XUNTA_SCREENS.map((screen, i) => (
-                <FadeInView key={screen.src} delay={i * 0.08}>
-                  <div style={{ borderRadius: 10, overflow: "hidden" }}>
-                    <Image
-                      src={screen.src}
-                      alt={screen.caption[lang]}
-                      width={1600}
-                      height={1000}
-                      sizes="(max-width: 860px) 100vw, 33vw"
-                      style={{ display: "block", width: "100%", height: "auto" }}
-                    />
-                  </div>
-                  <p style={{ marginTop: 14, fontSize: 13, lineHeight: 1.4, color: "rgba(255,255,255,0.65)" }}>{screen.caption[lang]}</p>
-                </FadeInView>
-              ))}
-            </div>
-          </div>
-        </section>
+        <XuntaScreensSlider />
 
         {/* ── Overview ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
