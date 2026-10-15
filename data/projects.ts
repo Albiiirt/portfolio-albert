@@ -53,34 +53,27 @@ export type MobileFlowStrip = { screens: MobileFlowStripScreen[] }; // exactly 3
 // blocks shown between the Hero and "El proyecto" (prototype approved
 // 2026-10-15, see MadridInterficiaShowcase). Not a generalized type; kept
 // specific to this one project rather than reusing DeviceShowcase/
-// MobileFlowStrip, since the layout and copy are a literal port, not a
-// site-wide pattern.
+// MobileFlowStrip, since the layout is a literal port, not a site-wide
+// pattern. Media only — no marketing copy, no pause/play labels: Albert's
+// "tal cual" meant the 3 reference mockups themselves, not the real
+// Comunidad de Madrid site's own headline/body text, and not UI chrome
+// (like a pause button) that wasn't in the reference.
 export type InterficiaVideoStripBlock = {
   videoSrc: string;
-  eyebrow: LocalizedText;
-  heading: LocalizedText; // plain lead-in, e.g. "Visita una bodega,"
-  headingEmphasis: LocalizedText; // italic close, e.g. "vive una historia."
-  dek: LocalizedText;
-  seeAllLabel: LocalizedText;
-  seeAllHref: string;
-  videoLabel: LocalizedText; // accessible name used by the video's pause/play toggle
   photos: { src: string; alt: LocalizedText }[]; // exactly 3
 };
 export type InterficiaMobileRowBlock = {
   shots: { src: string; alt: LocalizedText; caption: LocalizedText }[]; // exactly 3
 };
-export type InterficiaVideoGridPanel = { src: string; label: LocalizedText };
 export type InterficiaVideoGridBlock = {
-  panelA: InterficiaVideoGridPanel;
-  panelB: InterficiaVideoGridPanel;
-  panelC: InterficiaVideoGridPanel;
+  panelA: { src: string };
+  panelB: { src: string };
+  panelC: { src: string };
 };
 export type InterficiaShowcase = {
   videoStrip: InterficiaVideoStripBlock;
   mobileRow: InterficiaMobileRowBlock;
   videoGrid: InterficiaVideoGridBlock;
-  pauseLabel: LocalizedText;
-  playLabel: LocalizedText;
 };
 
 // Palette + typeface specimen shown inside a project's own "system" section
@@ -610,17 +603,6 @@ export const projects: Project[] = [
     interficiaShowcase: {
       videoStrip: {
         videoSrc: "/videos/madrid-zonas-mapa.mp4",
-        eyebrow: { en: "Wineries with tours", es: "Bodegas con visita", ca: "Cellers amb visita" },
-        heading: { en: "Visit a winery,", es: "Visita una bodega,", ca: "Visita un celler," },
-        headingEmphasis: { en: "live a story.", es: "vive una historia.", ca: "viu una història." },
-        dek: {
-          en: "Wineries vetted by the destination, with guided tours, tastings and experiences bookable directly on their own website.",
-          es: "Bodegas validadas por el destino con visitas guiadas, catas y experiencias reservables directamente en su web.",
-          ca: "Cellers validats per la destinació amb visites guiades, tastos i experiències reservables directament al seu web.",
-        },
-        seeAllLabel: { en: "See all wineries →", es: "Ver todas las bodegas →", ca: "Veure tots els cellers →" },
-        seeAllHref: "#",
-        videoLabel: { en: "Map of wine regions", es: "Mapa de zonas vitivinícolas", ca: "Mapa de zones vitivinícoles" },
         photos: [
           {
             src: "/projects/madrid/bodegas-1.jpg",
@@ -656,21 +638,10 @@ export const projects: Project[] = [
         ],
       },
       videoGrid: {
-        panelA: {
-          src: "/videos/madrid-movilidad.mp4",
-          label: { en: "Getting around by public transport", es: "Movilidad en transporte público", ca: "Mobilitat en transport públic" },
-        },
-        panelB: {
-          src: "/videos/madrid-zonas-mapa.mp4",
-          label: { en: "Exploring the territory by zone", es: "Conoce el territorio por zonas", ca: "Coneix el territori per zones" },
-        },
-        panelC: {
-          src: "/videos/madrid-directorio.mp4",
-          label: { en: "Searching and filtering the winery directory", es: "Buscador y filtro del directorio de bodegas", ca: "Cercador i filtre del directori de cellers" },
-        },
+        panelA: { src: "/videos/madrid-movilidad.mp4" },
+        panelB: { src: "/videos/madrid-zonas-mapa.mp4" },
+        panelC: { src: "/videos/madrid-directorio.mp4" },
       },
-      pauseLabel: { en: "Pause video", es: "Pausar vídeo", ca: "Pausar vídeo" },
-      playLabel: { en: "Play video", es: "Reproducir vídeo", ca: "Reproduir vídeo" },
     },
     cover: "/covers/cover-madrid.webp",
     coverAlt: {

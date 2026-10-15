@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type CSSProperties } from "react";
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import FadeInView from "@/components/FadeInView";
 import { useLang } from "@/lib/LanguageContext";
@@ -9,7 +9,6 @@ import type {
   InterficiaVideoStripBlock,
   InterficiaMobileRowBlock,
   InterficiaVideoGridBlock,
-  LocalizedText,
 } from "@/data/projects";
 
 // Literal port of 3 Interficia reference blocks for "Enoturismo Madrid"
@@ -20,178 +19,35 @@ import type {
 // design verbatim rather than adapting to the portfolio's own look.
 // Renders all 3 blocks in order; shown between the Hero and "El proyecto"
 // in place of the old ProjectDeviceShowcase/ProjectMobileFlowStrip pairing.
+//
+// Scope correction (Albert, 2026-10-15): "tal cual" meant the 3 reference
+// mockups literally, not an invitation to add marketing copy or new UI
+// chrome that wasn't in the reference. Removed: the eyebrow/heading/dek/
+// "see all" text block in Bloque 1 (that was the real Comunidad de Madrid
+// site's own marketing copy, not portfolio case-study content) and the
+// pause/play button overlay on every video (my own addition, not part of
+// what was shown). Just the plain autoplay videos + photos now.
 
 const PAPER = "#f5f2ee";
-const INK = "#17120f";
-const INK_SOFT = "#544d46";
-const RED = "#c8102e";
-
 const DARK_BG = "#12100e";
 const CREAM = "#f5f1e8";
 const CAPTION_LIGHT = "#cfc9bd";
 
-// ── Shared: autoplay video with a visible pause/play toggle (WCAG 2.2.2 —
-// content in motion for more than 5s needs a way to pause it). ───────────────
-function VideoWithToggle({
-  src,
-  accessibleLabel,
-  pauseLabel,
-  playLabel,
-  style,
-  videoStyle,
-}: {
-  src: string;
-  accessibleLabel: string;
-  pauseLabel: string;
-  playLabel: string;
-  style?: CSSProperties;
-  videoStyle?: CSSProperties;
-}) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(true);
-
-  const toggle = () => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (video.paused) {
-      video.play();
-      setPlaying(true);
-    } else {
-      video.pause();
-      setPlaying(false);
-    }
-  };
-
-  return (
-    <div style={{ position: "relative", ...style }}>
-      <video ref={videoRef} autoPlay loop muted playsInline style={{ display: "block", width: "100%", ...videoStyle }}>
-        <source src={src} type="video/mp4" />
-      </video>
-      <button
-        type="button"
-        onClick={toggle}
-        aria-label={`${(playing ? pauseLabel : playLabel)}: ${accessibleLabel}`}
-        aria-pressed={!playing}
-        style={{
-          position: "absolute",
-          bottom: 12,
-          right: 12,
-          width: 36,
-          height: 36,
-          borderRadius: "50%",
-          border: "none",
-          background: "rgba(0,0,0,0.55)",
-          color: "#fff",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          cursor: "pointer",
-          backdropFilter: "blur(4px)",
-          WebkitBackdropFilter: "blur(4px)",
-          transition: "background 0.2s",
-        }}
-        onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(0,0,0,0.75)")}
-        onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(0,0,0,0.55)")}
-      >
-        {playing ? (
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
-            <rect x="2.3" y="1.5" width="2.8" height="10" rx="0.8" fill="currentColor" />
-            <rect x="7.9" y="1.5" width="2.8" height="10" rx="0.8" fill="currentColor" />
-          </svg>
-        ) : (
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
-            <path d="M3 1.3 11 6.5 3 11.7Z" fill="currentColor" />
-          </svg>
-        )}
-      </button>
-    </div>
-  );
-}
-
 // ── Bloque 1 — vídeo + franja de 3 fotos (ref-1-video-fondo.html) ──────────
-function VideoStripBlock({
-  data,
-  pauseLabel,
-  playLabel,
-}: {
-  data: InterficiaVideoStripBlock;
-  pauseLabel: LocalizedText;
-  playLabel: LocalizedText;
-}) {
+function VideoStripBlock({ data }: { data: InterficiaVideoStripBlock }) {
   const { lang } = useLang();
   return (
     <section style={{ background: PAPER, padding: "56px var(--space-section-x) 120px" }}>
       <div className="site-content">
         <FadeInView>
           <div style={{ position: "relative", borderRadius: 4, overflow: "hidden" }}>
-            <VideoWithToggle
-              src={data.videoSrc}
-              accessibleLabel={data.videoLabel[lang]}
-              pauseLabel={pauseLabel[lang]}
-              playLabel={playLabel[lang]}
-              videoStyle={{ height: "auto" }}
-            />
+            <video autoPlay loop muted playsInline style={{ display: "block", width: "100%", height: "auto" }}>
+              <source src={data.videoSrc} type="video/mp4" />
+            </video>
           </div>
         </FadeInView>
 
         <FadeInView delay={0.08}>
-          <div
-            style={{
-              marginTop: 96,
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "space-between",
-              gap: 40,
-              flexWrap: "wrap",
-            }}
-          >
-            <div style={{ maxWidth: 620 }}>
-              <p
-                style={{
-                  color: RED,
-                  fontSize: 12,
-                  fontWeight: 700,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  margin: "0 0 14px",
-                }}
-              >
-                {data.eyebrow[lang]}
-              </p>
-              <h2
-                style={{
-                  fontFamily: 'Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif',
-                  fontWeight: 400,
-                  fontSize: "clamp(28px, 3.4vw, 44px)",
-                  lineHeight: 1.12,
-                  margin: "0 0 16px",
-                  color: INK,
-                }}
-              >
-                {data.heading[lang]} <em style={{ fontStyle: "italic" }}>{data.headingEmphasis[lang]}</em>
-              </h2>
-              <p style={{ fontSize: 15, lineHeight: 1.6, color: INK_SOFT, margin: 0, maxWidth: "48ch" }}>{data.dek[lang]}</p>
-            </div>
-            <a
-              href={data.seeAllHref}
-              style={{
-                flexShrink: 0,
-                color: RED,
-                fontWeight: 600,
-                fontSize: 14,
-                textDecoration: "none",
-                whiteSpace: "nowrap",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 6,
-              }}
-            >
-              {data.seeAllLabel[lang]}
-            </a>
-          </div>
-        </FadeInView>
-
-        <FadeInView delay={0.14}>
           <div className="madrid-interficia-photo-strip" style={{ marginTop: 40 }}>
             {data.photos.map((photo) => (
               <div className="frame" key={photo.src}>
@@ -244,16 +100,7 @@ function MobileRowBlock({ data }: { data: InterficiaMobileRowBlock }) {
 // ── Bloque 3 — grid desigual de 3 vídeos (ref-3-grid-desigual.html,
 // versión corregida: A y B en fila 1, C en fila 2 bajo A, col. 2 fila 2
 // vacía — zonas-mapa.mp4 es panorámico y se recortaba mal en vertical). ────
-function VideoGridBlock({
-  data,
-  pauseLabel,
-  playLabel,
-}: {
-  data: InterficiaVideoGridBlock;
-  pauseLabel: LocalizedText;
-  playLabel: LocalizedText;
-}) {
-  const { lang } = useLang();
+function VideoGridBlock({ data }: { data: InterficiaVideoGridBlock }) {
   const panelStyle: CSSProperties = {
     borderRadius: 10,
     overflow: "hidden",
@@ -262,10 +109,10 @@ function VideoGridBlock({
   };
   const videoFillStyle: CSSProperties = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" };
 
-  const panels: { className: string; src: string; label: LocalizedText }[] = [
-    { className: "panel-a", src: data.panelA.src, label: data.panelA.label },
-    { className: "panel-b", src: data.panelB.src, label: data.panelB.label },
-    { className: "panel-c", src: data.panelC.src, label: data.panelC.label },
+  const panels: { className: string; src: string }[] = [
+    { className: "panel-a", src: data.panelA.src },
+    { className: "panel-b", src: data.panelB.src },
+    { className: "panel-c", src: data.panelC.src },
   ];
 
   return (
@@ -275,14 +122,9 @@ function VideoGridBlock({
           <div className="madrid-interficia-bento">
             {panels.map((panel) => (
               <div key={panel.className} className={panel.className} style={panelStyle}>
-                <VideoWithToggle
-                  src={panel.src}
-                  accessibleLabel={panel.label[lang]}
-                  pauseLabel={pauseLabel[lang]}
-                  playLabel={playLabel[lang]}
-                  style={{ position: "absolute", inset: 0 }}
-                  videoStyle={videoFillStyle}
-                />
+                <video autoPlay loop muted playsInline style={videoFillStyle}>
+                  <source src={panel.src} type="video/mp4" />
+                </video>
               </div>
             ))}
           </div>
@@ -296,9 +138,9 @@ export default function MadridInterficiaShowcase({ data }: { data?: InterficiaSh
   if (!data) return null;
   return (
     <>
-      <VideoStripBlock data={data.videoStrip} pauseLabel={data.pauseLabel} playLabel={data.playLabel} />
+      <VideoStripBlock data={data.videoStrip} />
       <MobileRowBlock data={data.mobileRow} />
-      <VideoGridBlock data={data.videoGrid} pauseLabel={data.pauseLabel} playLabel={data.playLabel} />
+      <VideoGridBlock data={data.videoGrid} />
     </>
   );
 }
