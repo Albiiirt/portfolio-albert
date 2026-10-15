@@ -580,10 +580,7 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
                         style={{
                           width: "100%",
                           aspectRatio: "16 / 9",
-                          borderRadius: "1.375rem",
-                          border: "1.5px solid rgba(255,255,255,0.16)",
-                          boxShadow: "0 1px 0 rgba(255,255,255,0.14) inset, 0 6px 28px var(--glass-shadow)",
-                          background: "rgba(255,255,255,0.06)",
+                          borderRadius: 10,
                           overflow: "hidden",
                           position: "relative",
                         }}

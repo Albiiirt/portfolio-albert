@@ -9,13 +9,16 @@ import type { MobileFlowStrip, Project } from "@/data/projects";
 // autoplay, no drag, no dots. Deliberately a separate component rather than
 // a variant of ProjectScreensShowcase (that component is a carousel state
 // machine; forcing a static mode inside it would complicate it for one
-// project). Reuses ProjectScreensShowcase's own mobile glass-frame tokens
-// literally.
+// project). Used to reuse ProjectScreensShowcase's own mobile glass-frame
+// tokens (device bezel, dynamic-island notch) over a project.gradient
+// background — dropped at Albert's request, 2026-10-15, same as everywhere
+// else in the Madrid case study: flat dark background, plain rounded image,
+// no device chrome.
 // `data` (added for Mirazur's "cupon" tab, 2026-10-14) overrides
 // `project.mobileFlowStrip` when passed, so Mirazur's own strip never mixes
 // with Madrid's or with Mirazur's own "recetas" tab (which has none).
-const MOBILE_OUTER_RADIUS = "2.75rem";
-const MOBILE_INNER_RADIUS = "2.25rem";
+const DARK_BG = "#12100e";
+const MOBILE_RADIUS = "1rem";
 
 export default function ProjectMobileFlowStrip({ project, data }: { project: Project; data?: MobileFlowStrip }) {
   const { lang } = useLang();
@@ -24,7 +27,7 @@ export default function ProjectMobileFlowStrip({ project, data }: { project: Pro
   if (!strip?.screens.length) return null;
 
   return (
-    <section style={{ background: project.gradient, padding: "var(--space-section-y) var(--space-section-x)" }}>
+    <section style={{ background: DARK_BG, padding: "var(--space-section-y) var(--space-section-x)" }}>
       <div className="site-content" style={{ display: "flex", justifyContent: "center", gap: "var(--space-gap-lg)", flexWrap: "wrap" }}>
         {strip.screens.map((screen, i) => (
           <FadeInView key={screen.src} delay={i * 0.08}>
@@ -33,46 +36,18 @@ export default function ProjectMobileFlowStrip({ project, data }: { project: Pro
                 style={{
                   width: "clamp(200px, 22vw, 260px)",
                   aspectRatio: "9 / 19.5",
-                  borderRadius: MOBILE_OUTER_RADIUS,
-                  background: "rgba(255,255,255,0.09)",
-                  border: "1.5px solid rgba(255,255,255,0.16)",
-                  boxShadow: "0 1px 0 rgba(255,255,255,0.14) inset, 0 4px 20px rgba(0,0,0,0.5)",
-                  padding: "10px",
+                  borderRadius: MOBILE_RADIUS,
+                  overflow: "hidden",
                   position: "relative",
                 }}
               >
-                <div
-                  style={{
-                    position: "relative",
-                    width: "100%",
-                    height: "100%",
-                    borderRadius: MOBILE_INNER_RADIUS,
-                    overflow: "hidden",
-                    background: "#000",
-                  }}
-                >
-                  <Image
-                    src={screen.src}
-                    alt={screen.alt[lang]}
-                    fill
-                    sizes="260px"
-                    style={{ objectFit: "cover", objectPosition: "top center" }}
-                  />
-                  <div
-                    aria-hidden="true"
-                    style={{
-                      position: "absolute",
-                      top: 14,
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      width: "34%",
-                      height: 20,
-                      borderRadius: "100px",
-                      background: "rgba(0,0,0,0.85)",
-                      pointerEvents: "none",
-                    }}
-                  />
-                </div>
+                <Image
+                  src={screen.src}
+                  alt={screen.alt[lang]}
+                  fill
+                  sizes="260px"
+                  style={{ objectFit: "cover", objectPosition: "top center" }}
+                />
               </div>
               <p
                 style={{
