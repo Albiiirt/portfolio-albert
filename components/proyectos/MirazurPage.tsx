@@ -461,8 +461,6 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
 
             {activeSubProject.id === "cupon" && (
               <>
-                <ProjectMobileFlowStrip project={project} data={CUPON_MOBILE_FLOW} />
-
                 <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
                   <div className="site-content">
                     <FadeInView>
@@ -503,6 +501,8 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
                     </div>
                   </div>
                 </section>
+
+                <ProjectMobileFlowStrip project={project} data={CUPON_MOBILE_FLOW} />
 
                 {/* Full-bleed, overflows past site-content on both sides —
                     deliberately not inside .site-content. Duplicates the
