@@ -113,22 +113,13 @@ export default function Magazine() {
             ref={bookRef}
             className="revista-flipbook"
             style={{}}
-            width={720}
-            height={480}
+            width={480}
+            height={720}
             size="stretch"
-            // Bounds must cover the real rendered range of a single 3:2
-            // page across breakpoints — from the mobile single-page book
-            // (as narrow as ~345x230 on a small phone) up to a large
-            // desktop two-page spread (a single page up to ~880x590). The
-            // old 480–900 / 320–600 bounds were sized for the previous
-            // portrait ratio and were too large on the low end: StPageFlip
-            // "stretch" sizing refuses to shrink below minWidth/minHeight,
-            // so on mobile it forced pages wider than the CSS container,
-            // overflowing the viewport.
-            minWidth={340}
-            maxWidth={920}
-            minHeight={227}
-            maxHeight={613}
+            minWidth={320}
+            maxWidth={600}
+            minHeight={480}
+            maxHeight={900}
             drawShadow
             flippingTime={flippingTime}
             usePortrait={isMobile}

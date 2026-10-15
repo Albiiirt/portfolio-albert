@@ -51,17 +51,13 @@ export const RevistaTextPage = forwardRef<HTMLDivElement, TextPageProps>(functio
           </p>
         )}
 
-        {/* Title block — now on a wide/short landscape page instead of a
-            tall portrait one, so it claims most of the page height (was
-            48%–22%, i.e. the middle 30%, sized for a page roughly twice as
-            tall; a landscape page needs far more of its shorter height for
-            the same title+subtitle+description+link content, tightened
-            further on mobile via revista.css where the page is shortest). */}
+        {/* Title block — centered toward ~55% of the page height, leaving a
+            generous blank third above (reduced on mobile via revista.css). */}
         <div
           className="revista-title-block"
           style={{
             position: "absolute",
-            top: "26%",
+            top: "48%",
             bottom: "22%",
             left: "12%",
             right: "16%",
@@ -71,7 +67,6 @@ export const RevistaTextPage = forwardRef<HTMLDivElement, TextPageProps>(functio
           }}
         >
           <h2
-            className="revista-title"
             style={{
               fontFamily: "var(--font-serif-revista)",
               fontStyle: "italic",
@@ -95,7 +90,6 @@ export const RevistaTextPage = forwardRef<HTMLDivElement, TextPageProps>(functio
             {project.title[lang]}
           </h2>
           <p
-            className="revista-subtitle"
             style={{
               margin: "0 0 0.85rem 0",
               fontSize: "1rem",
@@ -112,7 +106,6 @@ export const RevistaTextPage = forwardRef<HTMLDivElement, TextPageProps>(functio
             {subtitle}
           </p>
           <p
-            className="revista-description"
             style={{
               margin: 0,
               fontSize: "1rem",
@@ -134,7 +127,6 @@ export const RevistaTextPage = forwardRef<HTMLDivElement, TextPageProps>(functio
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="revista-cta"
               style={{
                 display: "inline-block",
                 marginTop: "0.9rem",
@@ -152,7 +144,6 @@ export const RevistaTextPage = forwardRef<HTMLDivElement, TextPageProps>(functio
           ) : (
             <Link
               href={link.href}
-              className="revista-cta"
               style={{
                 display: "inline-block",
                 marginTop: "0.9rem",
@@ -182,7 +173,7 @@ export const RevistaTextPage = forwardRef<HTMLDivElement, TextPageProps>(functio
               position: "absolute",
               left: "12%",
               right: "12%",
-              bottom: "9%",
+              bottom: "15%",
               display: "flex",
               gap: "1rem",
               overflow: "hidden",
@@ -238,11 +229,10 @@ export const RevistaTextPage = forwardRef<HTMLDivElement, TextPageProps>(functio
 
         {project.num && (
           <span
-            className="revista-page-num"
             style={{
               position: "absolute",
               left: "12%",
-              bottom: "3%",
+              bottom: "4%",
               fontSize: "0.68rem",
               letterSpacing: "0.08em",
               color: "var(--text-subtle)",
@@ -273,15 +263,16 @@ export const RevistaImagePage = forwardRef<HTMLDivElement, ImagePageProps>(funct
         <div
           style={{
             position: "absolute",
-            inset: 0,
+            inset: "5%",
             overflow: "hidden",
+            borderRadius: "2px",
           }}
         >
           <Image
             src={image.src}
             alt={image.alt}
             fill
-            sizes="(max-width: 900px) 92vw, 900px"
+            sizes="(max-width: 900px) 70vw, 600px"
             className="revista-photo"
             style={{ objectFit: "cover", objectPosition: "center" }}
           />
@@ -296,17 +287,7 @@ export const RevistaImagePage = forwardRef<HTMLDivElement, ImagePageProps>(funct
             bottom: "2.5%",
             fontSize: "0.68rem",
             letterSpacing: "0.08em",
-            // Now sitting directly on the photo (image goes edge-to-edge,
-            // no more 5% page-background margin behind it) — var(--text
-            // -subtle) relied on the cream page background for contrast
-            // and can disappear over a light photo area, so it's pinned to
-            // white + a dark drop shadow instead, same as other on-photo
-            // overlays on the site. Left un-z-indexed on purpose: the
-            // invisible .revista-fold-corner grab zone (see CustomCursor.tsx)
-            // must stay on top of it so hovering the corner, including over
-            // these digits, still shows the "grab to flip" cursor.
-            color: "#fff",
-            textShadow: "0 1px 4px rgba(0, 0, 0, 0.55)",
+            color: "var(--text-subtle)",
           }}
         >
           {project.num}
