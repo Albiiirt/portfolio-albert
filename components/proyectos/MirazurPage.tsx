@@ -380,7 +380,7 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
         {/* ── Control de pestañas ── */}
         <section style={{ background: "var(--bg-alt)", padding: "clamp(2.5rem, 5vh, 3.5rem) var(--space-section-x) 0" }}>
           <div className="site-content">
-            <div role="tablist" aria-label={tabsAriaLabel[lang]} style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem" }}>
+            <div role="tablist" aria-label={tabsAriaLabel[lang]} style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
               {subProjects.map((sp, i) => {
                 const selected = sp.id === activeId;
                 return (
