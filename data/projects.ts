@@ -475,43 +475,45 @@ export const projects: Project[] = [
     // Real captures of the live demo (xunta-thesaurus-demo.vercel.app,
     // linked from this page's own Hero CTA) — Albert pointed out there was
     // no raw material for this one like Madrid/Mirazur had, but the demo
-    // itself is real and deployed, so these are headless screenshots of it
-    // at each breakpoint rather than anything synthesized, 2026-10-15.
-    // Only 2 distinct real screens exist in the demo (terminos.html,
-    // trabajo.html — confirmed by checking its linked pages directly, it's
-    // a static 2-page site, not a bigger app with hidden routes), so
-    // desktop uses one and tablet/mobile the other, rather than 3 crops of
-    // the same single page.
-    deviceShowcase: {
-      desktop: {
-        src: "/projects/xunta-galicia/device-desktop.png",
-        alt: {
-          es: "Listado de términos del Unificador GNOSS en escritorio, con filtros por estado de unificación y tamaño de la propuesta.",
-          en: "Term list in the GNOSS Unificador on desktop, with filters by unification status and proposal size.",
-          ca: "Llistat de termes de l'Unificador GNOSS a escriptori, amb filtres per estat d'unificació i mida de la proposta.",
+    // itself is real and deployed. He also asked specifically for 3 mobile
+    // captures of 3 different real pages — ProjectDeviceShowcase doesn't
+    // fit that (desktop/tablet/mobile of one view), so this uses
+    // mobileFlowStrip instead, same frameless row as Madrid's. The 3rd page
+    // (ficha.html, individual record + duplicate-merge comparison) isn't
+    // reachable from a static link — terminos.js builds its href as a
+    // template literal per row (`ficha.html?termino=${t.id}` or
+    // `?grupo=${t.grupoId}`), so it never showed up scanning raw HTML;
+    // found it by reading the page's own JS instead.
+    mobileFlowStrip: {
+      screens: [
+        {
+          src: "/projects/xunta-galicia/mobile-1.png",
+          alt: {
+            es: "Listado de términos del Unificador GNOSS en móvil, con filtros por estado de unificación.",
+            en: "Term list in the GNOSS Unificador on mobile, with filters by unification status.",
+            ca: "Llistat de termes de l'Unificador GNOSS a mòbil, amb filtres per estat d'unificació.",
+          },
+          caption: { en: "Term list, with filters", es: "Listado de términos, con filtros", ca: "Llistat de termes, amb filtres" },
         },
-      },
-      tablet: {
-        src: "/projects/xunta-galicia/device-tablet.png",
-        alt: {
-          es: "El tablero de trabajo del Unificador en tablet, con las propuestas agrupadas por estado: pendiente, en revisión, revisado, bloqueado.",
-          en: "The Unificador's work board on tablet, with proposals grouped by status: pending, in review, reviewed, blocked.",
-          ca: "El tauler de treball de l'Unificador a tablet, amb les propostes agrupades per estat: pendent, en revisió, revisat, bloquejat.",
+        {
+          src: "/projects/xunta-galicia/mobile-2.png",
+          alt: {
+            es: "Tablero de trabajo en móvil, con las propuestas agrupadas por estado: pendiente, en revisión, revisado, bloqueado.",
+            en: "Work board on mobile, with proposals grouped by status: pending, in review, reviewed, blocked.",
+            ca: "Tauler de treball a mòbil, amb les propostes agrupades per estat: pendent, en revisió, revisat, bloquejat.",
+          },
+          caption: { en: "Work board, by status", es: "Tablero de trabajo, por estado", ca: "Tauler de treball, per estat" },
         },
-      },
-      mobile: {
-        src: "/projects/xunta-galicia/device-mobile.png",
-        alt: {
-          es: "El mismo tablero de trabajo en móvil — la herramienta está pensada para escritorio, así que el ajuste responsive es mínimo.",
-          en: "The same work board on mobile — the tool is built for desktop use, so the responsive adaptation is minimal.",
-          ca: "El mateix tauler de treball a mòbil — l'eina està pensada per a escriptori, així que l'ajust responsive és mínim.",
+        {
+          src: "/projects/xunta-galicia/mobile-3.png",
+          alt: {
+            es: "Comparación campo a campo de dos registros candidatos a fusión, con el valor elegido resaltado en cada fila.",
+            en: "Field-by-field comparison of two merge-candidate records, with the chosen value highlighted on each row.",
+            ca: "Comparació camp a camp de dos registres candidats a fusió, amb el valor triat ressaltat a cada fila.",
+          },
+          caption: { en: "Merge comparison, field by field", es: "Comparación de fusión, campo a campo", ca: "Comparació de fusió, camp a camp" },
         },
-      },
-      caption: {
-        en: "Real screens from the live GNOSS Unificador demo.",
-        es: "Pantallas reales de la demo en marcha del Unificador GNOSS.",
-        ca: "Pantalles reals de la demo en marxa de l'Unificador GNOSS.",
-      },
+      ],
     },
     cover: "/covers/cover-xunta.svg",
     coverAlt: {
