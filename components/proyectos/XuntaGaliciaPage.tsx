@@ -22,20 +22,29 @@ const page = project.page!;
 
 const chips = ["UX Research", "Product Design", "Figma"];
 
-// 5 real screens of the live demo (xunta-thesaurus-demo.vercel.app, linked
+// 4 real screens of the live demo (xunta-thesaurus-demo.vercel.app, linked
 // from this page's Hero CTA), captured at the demo's own desktop width —
 // 1600×1000 exactly, so they render at natural aspect with no crop. Shown
 // at desktop size deliberately: an earlier pass captured these at mobile
 // width, but the tool has no real mobile layout (one desktop stylesheet,
 // no responsive breakpoints — a narrow viewport just overflows it), so
 // presenting that as "mobile" would misrepresent the product, 2026-10-15.
-// Screens 3-5 (ficha.html, in its 3 real states) aren't linked anywhere in
-// the static HTML — terminos.js builds each href as a template literal per
-// row (`ficha.html?grupo=${t.grupoId}` / `?termino=${t.id}`), only found by
-// reading the page's own JS directly. Two more interactive states exist
-// (trabajo.html's Kanban⇄Listado toggle, ficha.html's MARC⇄ISAAR schema
-// toggle) but both are pure in-memory JS state with no URL param, so a
-// static screenshot can't reach them without a real click.
+// Screens 3-4 (ficha.html, in 2 of its real states) aren't linked anywhere
+// in the static HTML — terminos.js builds each href as a template literal
+// per row (`ficha.html?grupo=${t.grupoId}` / `?termino=${t.id}`), only
+// found by reading the page's own JS directly.
+//
+// Dropped a 5th screen (the same merge comparison with a 3-candidate group,
+// g003 instead of g001): Albert flagged it as both too repetitive next to
+// the 2-candidate version already here, and badly cropped mid-table — that
+// group's comparison table is taller than fits in a 1600×1000 capture, so
+// the screenshot just cut off wherever the viewport ended. Not worth a
+// taller re-capture for a screen that was already redundant.
+//
+// Two more interactive states exist (trabajo.html's Kanban⇄Listado toggle,
+// ficha.html's MARC⇄ISAAR schema toggle) but both are pure in-memory JS
+// state with no URL param, so a static screenshot can't reach them without
+// a real click.
 const XUNTA_SCREENS = [
   {
     src: "/projects/xunta-galicia/screen-1.png",
@@ -59,14 +68,6 @@ const XUNTA_SCREENS = [
       en: "Merge comparison, field by field, with the chosen value highlighted.",
       es: "Comparación de fusión, campo a campo, con el valor elegido resaltado.",
       ca: "Comparació de fusió, camp a camp, amb el valor triat ressaltat.",
-    },
-  },
-  {
-    src: "/projects/xunta-galicia/screen-4.png",
-    caption: {
-      en: "The same comparison with 3 candidate records instead of 2.",
-      es: "La misma comparación con 3 registros candidatos en vez de 2.",
-      ca: "La mateixa comparació amb 3 registres candidats en comptes de 2.",
     },
   },
   {
