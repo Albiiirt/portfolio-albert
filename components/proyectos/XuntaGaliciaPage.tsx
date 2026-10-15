@@ -349,40 +349,17 @@ export default function XuntaGaliciaPage() {
 
         {/* ── El trabajo ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
-          <div className="site-content">
+          <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.work}</p>
+              <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
+                {page.workHeading![lang]}
+              </h2>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
+              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                {project.process[lang]}
+              </p>
             </FadeInView>
-            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
-              <FadeInView>
-                <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
-                  {page.workHeading![lang]}
-                </h2>
-                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
-                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                  {project.process[lang]}
-                </p>
-              </FadeInView>
-              <FadeInView delay={0.1}>
-                <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                  {page.workCards!.map(({ label, desc }, i) => (
-                    <div key={i} style={{
-                      padding: "1.25rem 1.5rem",
-                      borderRadius: "0.75rem",
-                      border: `1px solid ${ACCENT}44`,
-                      background: `${ACCENT}06`,
-                    }}>
-                      <p style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: ACCENT, marginBottom: "0.5rem" }}>
-                        {label[lang]}
-                      </p>
-                      <p style={{ fontSize: "0.9rem", lineHeight: 1.65, color: "var(--text-muted)", margin: 0 }}>
-                        {desc[lang]}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </FadeInView>
-            </div>
           </div>
         </section>
 
