@@ -96,63 +96,66 @@ function XuntaScreensSlider() {
     <section style={{ background: "#001515", padding: "var(--space-section-y) var(--space-section-x)" }}>
       <div className="site-content">
         <FadeInView>
-          {/* max-width: wasn't the "frameless but still massive" look the
-              rest of the page uses elsewhere — same instinct as Madrid's
-              video grid. No `mode="wait"` on the AnimatePresence: that mode
-              fades the old slide fully out before starting the new one in,
-              which reads as a flash/blank beat rather than a dissolve;
-              default (sync) mode overlaps exit and enter for a real
-              crossfade. */}
-          <div style={{ maxWidth: "72%", margin: "0 auto", borderRadius: 10, overflow: "hidden", position: "relative", aspectRatio: "1600 / 1000" }}>
-            <AnimatePresence initial={false}>
-              <motion.div
-                key={current.src}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                style={{ position: "absolute", inset: 0 }}
-              >
-                <Image
-                  src={current.src}
-                  alt={current.caption[lang]}
-                  fill
-                  sizes="(max-width: 860px) 100vw, 1600px"
-                  priority={active === 0}
-                  style={{ objectFit: "cover" }}
-                />
-              </motion.div>
-            </AnimatePresence>
-
+          {/* Arrows sit outside the image now (flex siblings, not absolutely
+              positioned over it) and the frame is smaller still — Albert's
+              follow-up after the first pass still read as too big. Caption
+              dropped for now (Albert: "el texto de momento lo quitamos").
+              No `mode="wait"` on the AnimatePresence: that mode fades the
+              old slide fully out before starting the new one in, which
+              reads as a flash/blank beat rather than a dissolve; default
+              (sync) mode overlaps exit and enter for a real crossfade. */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
             <button
               type="button"
               onClick={() => goTo(active - 1)}
               aria-label={lang === "en" ? "Previous screen" : lang === "ca" ? "Pantalla anterior" : "Pantalla anterior"}
               style={{
-                position: "absolute", top: "50%", left: 16, transform: "translateY(-50%)",
+                flexShrink: 0,
                 width: 40, height: 40, borderRadius: "50%", border: "none", cursor: "pointer",
-                background: "rgba(0,0,0,0.5)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center",
+                background: "rgba(255,255,255,0.08)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center",
               }}
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 2L4 8l6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </button>
+
+            <div style={{ width: "100%", maxWidth: "52%", borderRadius: 10, overflow: "hidden", position: "relative", aspectRatio: "1600 / 1000" }}>
+              <AnimatePresence initial={false}>
+                <motion.div
+                  key={current.src}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  style={{ position: "absolute", inset: 0 }}
+                >
+                  <Image
+                    src={current.src}
+                    alt={current.caption[lang]}
+                    fill
+                    sizes="(max-width: 860px) 100vw, 900px"
+                    priority={active === 0}
+                    style={{ objectFit: "cover" }}
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
             <button
               type="button"
               onClick={() => goTo(active + 1)}
               aria-label={lang === "en" ? "Next screen" : lang === "ca" ? "Pantalla següent" : "Pantalla siguiente"}
               style={{
-                position: "absolute", top: "50%", right: 16, transform: "translateY(-50%)",
+                flexShrink: 0,
                 width: 40, height: 40, borderRadius: "50%", border: "none", cursor: "pointer",
-                background: "rgba(0,0,0,0.5)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center",
+                background: "rgba(255,255,255,0.08)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center",
               }}
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 2l6 6-6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </button>
           </div>
 
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginTop: 18, gap: "1rem" }}>
-            <p style={{ fontSize: 13, lineHeight: 1.4, color: "rgba(255,255,255,0.65)", margin: 0 }}>{current.caption[lang]}</p>
-            <div style={{ display: "flex", gap: 8, flexShrink: 0 }}>
+          <div style={{ display: "flex", justifyContent: "center", marginTop: 18 }}>
+            <div style={{ display: "flex", gap: 8 }}>
               {XUNTA_SCREENS.map((screen, i) => (
                 <button
                   key={screen.src}
