@@ -96,14 +96,21 @@ function XuntaScreensSlider() {
     <section style={{ background: "#001515", padding: "var(--space-section-y) var(--space-section-x)" }}>
       <div className="site-content">
         <FadeInView>
-          <div style={{ borderRadius: 10, overflow: "hidden", position: "relative", aspectRatio: "1600 / 1000" }}>
-            <AnimatePresence mode="wait" initial={false}>
+          {/* max-width: wasn't the "frameless but still massive" look the
+              rest of the page uses elsewhere — same instinct as Madrid's
+              video grid. No `mode="wait"` on the AnimatePresence: that mode
+              fades the old slide fully out before starting the new one in,
+              which reads as a flash/blank beat rather than a dissolve;
+              default (sync) mode overlaps exit and enter for a real
+              crossfade. */}
+          <div style={{ maxWidth: "72%", margin: "0 auto", borderRadius: 10, overflow: "hidden", position: "relative", aspectRatio: "1600 / 1000" }}>
+            <AnimatePresence initial={false}>
               <motion.div
                 key={current.src}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.3, ease: EASE }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
                 style={{ position: "absolute", inset: 0 }}
               >
                 <Image
