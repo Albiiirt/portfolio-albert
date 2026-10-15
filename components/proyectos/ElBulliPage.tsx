@@ -503,7 +503,7 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
         </section>
 
         {/* ── Control de pestañas ── */}
-        <section style={{ background: "var(--bg)", padding: "clamp(2.5rem, 5vh, 3.5rem) var(--space-section-x) 0" }}>
+        <section style={{ background: "var(--bg)", padding: "clamp(2.5rem, 5vh, 3.5rem) var(--space-section-x)" }}>
           <div className="site-content">
             <div role="tablist" aria-label={tabsAriaLabel[lang]} style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
               {subProjects.map((sp, i) => {
