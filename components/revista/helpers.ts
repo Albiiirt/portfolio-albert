@@ -80,7 +80,7 @@ export function getProjectLink(
 export const IDENTITY_PROJECT: Project = {
   id: "identity",
   num: "",
-  title: { en: "Albert Canadas", es: "Albert Canadas", ca: "Albert Canadas" },
+  title: { en: "Albert Canadés", es: "Albert Canadés", ca: "Albert Canadés" },
   category: { en: "", es: "", ca: "" },
   year: "2026",
   description: { en: "", es: "", ca: "" },
