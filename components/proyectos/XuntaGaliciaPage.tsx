@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import NextProjectCard from "@/components/proyectos/NextProjectCard";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
@@ -9,7 +10,6 @@ import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import XuntaUnificadorVideo from "@/components/proyectos/XuntaUnificadorVideo";
-import ProjectMobileFlowStrip from "@/components/proyectos/ProjectMobileFlowStrip";
 import ProjectDesignSystemSheet from "@/components/proyectos/ProjectDesignSystemSheet";
 import { EASE } from "@/lib/animations";
 import { useLang } from "@/lib/LanguageContext";
@@ -21,6 +21,44 @@ const project = projects.find((p) => p.id === "xunta-galicia")!;
 const page = project.page!;
 
 const chips = ["UX Research", "Product Design", "Figma"];
+
+// 3 real screens of the live demo (xunta-thesaurus-demo.vercel.app, linked
+// from this page's Hero CTA), captured at the demo's own desktop width —
+// 1600×1000 exactly, so they render at natural aspect with no crop. Shown
+// at desktop size deliberately: an earlier pass captured these at mobile
+// width, but the tool has no real mobile layout (one desktop stylesheet,
+// no responsive breakpoints — a narrow viewport just overflows it), so
+// presenting that as "mobile" would misrepresent the product, 2026-10-15.
+// The 3rd screen (ficha.html's merge comparison) isn't linked anywhere in
+// the static HTML — terminos.js builds its href as a template literal per
+// row (`ficha.html?grupo=${t.grupoId}`), only found by reading the page's
+// own JS directly.
+const XUNTA_SCREENS = [
+  {
+    src: "/projects/xunta-galicia/screen-1.png",
+    caption: {
+      en: "Term list, with filters by unification status and proposal size.",
+      es: "Listado de términos, con filtros por estado de unificación y tamaño de la propuesta.",
+      ca: "Llistat de termes, amb filtres per estat d'unificació i mida de la proposta.",
+    },
+  },
+  {
+    src: "/projects/xunta-galicia/screen-2.png",
+    caption: {
+      en: "Work board, proposals grouped by status.",
+      es: "Tablero de trabajo, propuestas agrupadas por estado.",
+      ca: "Tauler de treball, propostes agrupades per estat.",
+    },
+  },
+  {
+    src: "/projects/xunta-galicia/screen-3.png",
+    caption: {
+      en: "Merge comparison, field by field, with the chosen value highlighted.",
+      es: "Comparación de fusión, campo a campo, con el valor elegido resaltado.",
+      ca: "Comparació de fusió, camp a camp, amb el valor triat ressaltat.",
+    },
+  },
+];
 
 export default function XuntaGaliciaPage() {
   const { lang } = useLang();
@@ -152,7 +190,28 @@ export default function XuntaGaliciaPage() {
           }} />
         </section>
 
-        <ProjectMobileFlowStrip project={project} />
+        {/* ── Pantallas reales de la demo (ver XUNTA_SCREENS) ── */}
+        <section style={{ background: "#001515", padding: "var(--space-section-y) var(--space-section-x)" }}>
+          <div className="site-content">
+            <div className="proj-grid-3" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "clamp(1rem, 2vw, 2rem)" }}>
+              {XUNTA_SCREENS.map((screen, i) => (
+                <FadeInView key={screen.src} delay={i * 0.08}>
+                  <div style={{ borderRadius: 10, overflow: "hidden" }}>
+                    <Image
+                      src={screen.src}
+                      alt={screen.caption[lang]}
+                      width={1600}
+                      height={1000}
+                      sizes="(max-width: 860px) 100vw, 33vw"
+                      style={{ display: "block", width: "100%", height: "auto" }}
+                    />
+                  </div>
+                  <p style={{ marginTop: 14, fontSize: 13, lineHeight: 1.4, color: "rgba(255,255,255,0.65)" }}>{screen.caption[lang]}</p>
+                </FadeInView>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* ── Overview ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
