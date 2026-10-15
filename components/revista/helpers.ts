@@ -70,3 +70,30 @@ export function getProjectLink(
   }
   return { href: `/proyectos/${project.id}`, label: labels.caseLink, external: false };
 }
+
+// The opening spread (page 0/1) reuses RevistaTextPage "as-is" (no new
+// template, per diseñador) with identity content instead of a real project —
+// num/category are deliberately empty so the eyebrow line doesn't render,
+// and meta is empty so the credits row doesn't render either. Every other
+// required Project field exists only to satisfy the type and is never read
+// by RevistaTextPage.
+export const IDENTITY_PROJECT: Project = {
+  id: "identity",
+  num: "",
+  title: { en: "Albert Canadas", es: "Albert Canadas", ca: "Albert Canadas" },
+  category: { en: "", es: "", ca: "" },
+  year: "2026",
+  description: { en: "", es: "", ca: "" },
+  problem: { en: "", es: "", ca: "" },
+  process: { en: "", es: "", ca: "" },
+  result: { en: "", es: "", ca: "" },
+  tags: [],
+  gradient: "",
+  accentColor: "",
+  heroTagline: {
+    en: "Selected Work — 2026",
+    es: "Trabajos seleccionados — 2026",
+    ca: "Treballs seleccionats — 2026",
+  },
+  meta: [],
+};

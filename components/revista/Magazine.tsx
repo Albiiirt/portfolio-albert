@@ -5,7 +5,8 @@ import dynamic from "next/dynamic";
 import { useLang } from "@/lib/LanguageContext";
 import { t } from "@/data/translations";
 import { projects } from "@/data/projects";
-import { RevistaClosing, RevistaCover, RevistaImagePage, RevistaTextPage } from "./RevistaPages";
+import { IDENTITY_PROJECT } from "./helpers";
+import { RevistaClosing, RevistaImagePage, RevistaTextPage } from "./RevistaPages";
 
 // StPageFlip reads the DOM/canvas directly — never render it on the server.
 const HTMLFlipBook = dynamic(() => import("react-pageflip"), { ssr: false });
@@ -26,20 +27,6 @@ function useMediaQuery(query: string) {
   return matches;
 }
 
-// StPageFlip sizes itself from fixed width/height props, not from CSS — so
-// the "contenedor con altura acotada ≤85vh" rule needs the actual viewport
-// height, re-measured on resize/rotate.
-function useViewportHeight() {
-  const [height, setHeight] = useState(860);
-  useEffect(() => {
-    const update = () => setHeight(window.innerHeight);
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
-  return height;
-}
-
 // Minimal shape of what we actually call on the StPageFlip instance/ref —
 // react-pageflip itself only types these as `any`.
 interface PageFlipController {
@@ -58,16 +45,30 @@ export default function Magazine() {
   const tx = t[lang];
   const bookRef = useRef<FlipBookHandle | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const [showHint, setShowHint] = useState(false);
   const isMobile = useMediaQuery(MOBILE_QUERY);
   const reducedMotion = useMediaQuery(REDUCED_MOTION_QUERY);
-  const viewportHeight = useViewportHeight();
-  const bookMaxHeight = Math.max(420, Math.min(860, Math.round(viewportHeight * 0.85)));
 
-  // One project = one spread (text page + image page). Projects with
-  // subProjects (elBulli, Mirazur) still render a single spread here, built
-  // from the parent's own fields only — their tabs live on /proyectos.
-  const pageCount = projects.length * 2 + 2; // cover + spreads + colophon
+  // react-pageflip only ever constructs its underlying PageFlip instance
+  // once (guarded by `if (!pageFlip.current)` in its own source) — props
+  // like usePortrait are read on that first construction and never re-read
+  // on later prop changes. Mounting HTMLFlipBook before isMobile's own
+  // effect has resolved would freeze it as landscape-only, even on a phone.
+  // Holding the mount one tick (both effects fire in the same post-commit
+  // flush, isMobile's hook declared first above) guarantees usePortrait is
+  // already correct the one time the library reads it.
+  const [readyToMount, setReadyToMount] = useState(false);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setReadyToMount(true);
+  }, []);
+
+  // Page 0/1 is the opening identity spread (Albert Canadas + the first
+  // project's own photo, see IDENTITY_PROJECT in helpers.ts); every real
+  // project — including that first one — still gets its own full spread
+  // right after, so the 01–07 numbering stays intact. Projects with
+  // subProjects (elBulli, Mirazur) render a single spread each, built from
+  // the parent's own fields only — their tabs live on /proyectos.
+  const pageCount = 2 + projects.length * 2 + 1; // identity spread + project spreads + colophon
 
   const handleFlip = useCallback((e: FlipEvent) => {
     setCurrentPage(e.data);
@@ -91,77 +92,63 @@ export default function Magazine() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [goNext, goPrev]);
 
-  // First-use "this can be grabbed" hint: curl the front cover's corner once,
-  // on a plain CSS animation, never touching the real StPageFlip canvas.
-  useEffect(() => {
-    if (reducedMotion) return;
-    const timer = setTimeout(() => setShowHint(true), 900);
-    return () => clearTimeout(timer);
-  }, [reducedMotion]);
-
   const flippingTime = reducedMotion ? 50 : 700;
 
   const currentProjectTitle = useMemo(() => {
-    if (currentPage === 0) return null;
+    if (currentPage <= 1) return IDENTITY_PROJECT.title[lang];
     if (currentPage === pageCount - 1) return tx.revista.closingHeading;
-    const projectIndex = Math.floor((currentPage - 1) / 2);
+    const projectIndex = Math.floor((currentPage - 2) / 2);
     return projects[projectIndex]?.title[lang] ?? null;
   }, [currentPage, pageCount, lang, tx]);
 
   return (
-    <div
-      className="revista-stage"
-      role="region"
-      aria-label="Revista de proyectos"
-    >
+    <div className="revista-stage" role="region" aria-label="Revista de proyectos">
+      <div className="blob blob-1" aria-hidden="true" />
+      <div className="blob blob-3" aria-hidden="true" />
+
       <div className="revista-book-wrap">
-        {!reducedMotion && (
-          <div
-            className={`revista-hint-corner${showHint ? " is-playing" : ""}`}
-            aria-hidden="true"
-            onAnimationEnd={() => setShowHint(false)}
-          />
+        <div className="revista-sheen" aria-hidden="true" />
+        {readyToMount && (
+          <HTMLFlipBook
+            ref={bookRef}
+            className="revista-flipbook"
+            style={{}}
+            width={480}
+            height={720}
+            size="stretch"
+            minWidth={320}
+            maxWidth={600}
+            minHeight={480}
+            maxHeight={900}
+            drawShadow
+            flippingTime={flippingTime}
+            usePortrait={isMobile}
+            startZIndex={0}
+            autoSize
+            maxShadowOpacity={0.55}
+            showCover={false}
+            mobileScrollSupport
+            clickEventForward
+            useMouseEvents
+            swipeDistance={30}
+            showPageCorners
+            disableFlipByClick={false}
+            startPage={0}
+            onFlip={handleFlip}
+          >
+            <RevistaTextPage
+              project={IDENTITY_PROJECT}
+              lang={lang}
+              linkOverride={{ href: "/proyectos", label: tx.revista.closingLink }}
+            />
+            <RevistaImagePage project={projects[0]} lang={lang} />
+            {projects.map((project) => [
+              <RevistaTextPage key={`${project.id}-text`} project={project} lang={lang} />,
+              <RevistaImagePage key={`${project.id}-image`} project={project} lang={lang} />,
+            ])}
+            <RevistaClosing lang={lang} />
+          </HTMLFlipBook>
         )}
-        <HTMLFlipBook
-          ref={bookRef}
-          className="revista-flipbook"
-          style={{}}
-          width={560}
-          height={bookMaxHeight}
-          size="stretch"
-          // StPageFlip also applies minWidth as a literal CSS min-width on
-          // its own wrapper (times 1 when usePortrait, see page-flip's
-          // UI.ts) — keep this at a value every real phone clears. Portrait
-          // mode itself is still driven by usePortrait={isMobile} below;
-          // StPageFlip switches to single-page under ~560px of its own
-          // accord, which covers every phone width.
-          minWidth={280}
-          maxWidth={560}
-          minHeight={420}
-          maxHeight={bookMaxHeight}
-          drawShadow
-          flippingTime={flippingTime}
-          usePortrait={isMobile}
-          startZIndex={0}
-          autoSize
-          maxShadowOpacity={0.55}
-          showCover
-          mobileScrollSupport
-          clickEventForward
-          useMouseEvents
-          swipeDistance={30}
-          showPageCorners
-          disableFlipByClick={false}
-          startPage={0}
-          onFlip={handleFlip}
-        >
-          <RevistaCover lang={lang} />
-          {projects.map((project) => [
-            <RevistaTextPage key={`${project.id}-text`} project={project} lang={lang} />,
-            <RevistaImagePage key={`${project.id}-image`} project={project} lang={lang} />,
-          ])}
-          <RevistaClosing lang={lang} />
-        </HTMLFlipBook>
       </div>
 
       <div className="revista-controls">

@@ -8,96 +8,48 @@ import type { Project } from "@/data/projects";
 import { t } from "@/data/translations";
 import { getCoverImage, getProjectLink, getSubtitle, metaValueText, pickCredits } from "./helpers";
 
-// ── Front cover (page 0) — typography only, no photo. The first photograph
-// only appears once the reader opens past it, as a deliberate reveal. ──────
-export const RevistaCover = forwardRef<HTMLDivElement, { lang: Lang }>(function RevistaCover(
-  { lang },
-  ref
-) {
-  return (
-    <div ref={ref} className="revista-page">
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          padding: "11% 12%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-        }}
-      >
-        <div style={{ marginTop: "8%" }}>
-          <h1
-            style={{
-              fontFamily: "var(--font-serif-revista)",
-              fontStyle: "italic",
-              fontWeight: 400,
-              letterSpacing: 0,
-              fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
-              lineHeight: 0.98,
-              margin: 0,
-              color: "var(--text)",
-            }}
-          >
-            Albert Canadas
-          </h1>
-          <p
-            style={{
-              margin: "0.75rem 0 0 0",
-              fontSize: "0.95rem",
-              fontWeight: 500,
-              color: "var(--text-muted)",
-            }}
-          >
-            {t[lang].revista.strap} · 2026
-          </p>
-        </div>
-
-        <footer
-          style={{
-            position: "absolute",
-            left: "12%",
-            bottom: "9%",
-            fontSize: "0.68rem",
-            letterSpacing: "0.08em",
-            color: "var(--text-subtle)",
-          }}
-        >
-          {t[lang].revista.issueFooter}
-        </footer>
-      </div>
-    </div>
-  );
-});
-
-// ── Left (text) page of a project spread ────────────────────────────────────
-type TextPageProps = { project: Project; lang: Lang; isFirstTextPage?: boolean };
+// ── Left (text) page of a project spread — also reused, unchanged, for the
+// opening identity spread (page 0) with IDENTITY_PROJECT (see helpers.ts):
+// no new template, just empty num/category/meta so the eyebrow and credits
+// row gracefully don't render, plus an explicit link override so "Ver el
+// caso completo" doesn't point at a non-existent /proyectos/identity. ──────
+type TextPageProps = {
+  project: Project;
+  lang: Lang;
+  linkOverride?: { href: string; label: string };
+};
 
 export const RevistaTextPage = forwardRef<HTMLDivElement, TextPageProps>(function RevistaTextPage(
-  { project, lang },
+  { project, lang, linkOverride },
   ref
 ) {
   const tx = t[lang];
   const credits = pickCredits(project.meta);
   const subtitle = getSubtitle(project, lang);
-  const link = getProjectLink(project, lang, { liveLink: tx.revista.liveLink, caseLink: tx.revista.caseLink });
+  const link = linkOverride
+    ? { ...linkOverride, external: false }
+    : getProjectLink(project, lang, { liveLink: tx.revista.liveLink, caseLink: tx.revista.caseLink });
+  const eyebrow = [project.num, project.category[lang]].filter(Boolean).join(" · ");
 
   return (
     <div ref={ref} className="revista-page revista-page--text">
       <div style={{ position: "absolute", inset: 0, padding: "11% 12%" }}>
-        {/* Eyebrow */}
-        <p
-          style={{
-            margin: 0,
-            fontSize: "0.95rem",
-            fontWeight: 500,
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color: "var(--text-subtle)",
-          }}
-        >
-          {project.num} · {project.category[lang]}
-        </p>
+        {/* Eyebrow — omitted entirely when a page has no num/category
+            (the identity spread) rather than rendering a stray " · ". */}
+        {eyebrow && (
+          <p
+            style={{
+              margin: 0,
+              fontSize: "0.95rem",
+              fontWeight: 500,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "var(--text-subtle)",
+            }}
+          >
+            {eyebrow}
+          </p>
+        )}
 
         {/* Title block — centered toward ~55% of the page height, leaving a
             generous blank third above (reduced on mobile via revista.css). */}
@@ -120,7 +72,11 @@ export const RevistaTextPage = forwardRef<HTMLDivElement, TextPageProps>(functio
               fontStyle: "italic",
               fontWeight: 400,
               letterSpacing: 0,
-              fontSize: "clamp(2rem, 4.2vw, 3.6rem)",
+              // The page is now a fixed real width (~320–600px), not a near
+              // full-viewport panel — sized off the page's own container
+              // width (cqw, see .revista-page's container-type) instead of
+              // the viewport (vw), which would read far too large/small now.
+              fontSize: "clamp(1.7rem, 9cqw, 2.75rem)",
               lineHeight: 1.02,
               margin: "0 0 0.6rem 0",
               color: "var(--text)",
@@ -262,18 +218,20 @@ export const RevistaTextPage = forwardRef<HTMLDivElement, TextPageProps>(functio
           </div>
         )}
 
-        <span
-          style={{
-            position: "absolute",
-            left: "12%",
-            bottom: "5%",
-            fontSize: "0.68rem",
-            letterSpacing: "0.08em",
-            color: "var(--text-subtle)",
-          }}
-        >
-          {project.num}
-        </span>
+        {project.num && (
+          <span
+            style={{
+              position: "absolute",
+              left: "12%",
+              bottom: "5%",
+              fontSize: "0.68rem",
+              letterSpacing: "0.08em",
+              color: "var(--text-subtle)",
+            }}
+          >
+            {project.num}
+          </span>
+        )}
 
         <div className="revista-fold-corner revista-fold-corner--left" aria-hidden="true" />
       </div>
@@ -305,25 +263,27 @@ export const RevistaImagePage = forwardRef<HTMLDivElement, ImagePageProps>(funct
             src={image.src}
             alt={image.alt}
             fill
-            sizes="(max-width: 900px) 90vw, 575px"
+            sizes="(max-width: 900px) 70vw, 600px"
             className="revista-photo"
             style={{ objectFit: "cover", objectPosition: "center" }}
           />
         </div>
       )}
 
-      <span
-        style={{
-          position: "absolute",
-          right: "5%",
-          bottom: "2.5%",
-          fontSize: "0.68rem",
-          letterSpacing: "0.08em",
-          color: "var(--text-subtle)",
-        }}
-      >
-        {project.num}
-      </span>
+      {project.num && (
+        <span
+          style={{
+            position: "absolute",
+            right: "5%",
+            bottom: "2.5%",
+            fontSize: "0.68rem",
+            letterSpacing: "0.08em",
+            color: "var(--text-subtle)",
+          }}
+        >
+          {project.num}
+        </span>
+      )}
 
       <div className="revista-fold-corner revista-fold-corner--right" aria-hidden="true" />
     </div>
@@ -357,7 +317,7 @@ export const RevistaClosing = forwardRef<HTMLDivElement, { lang: Lang }>(functio
             fontStyle: "italic",
             fontWeight: 400,
             letterSpacing: 0,
-            fontSize: "clamp(2rem, 4vw, 3rem)",
+            fontSize: "clamp(1.7rem, 8cqw, 2.4rem)",
             margin: 0,
             color: "var(--text)",
           }}

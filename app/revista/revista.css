@@ -2,28 +2,27 @@
    the root layout, so none of this leaks into the rest of the site. */
 
 .revista-stage {
+  position: relative;
   background: var(--bg-alt);
   min-height: 100svh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(1.5rem, 3vh, 2.5rem);
+  gap: clamp(1.25rem, 2.5vh, 2rem);
   padding: var(--space-section-y) var(--space-section-x);
+  overflow: hidden; /* contains the decorative blobs' blur radius */
 }
 
-.revista-book-wrap {
-  position: relative;
-  width: 100%;
-  max-width: 1150px;
-  filter: drop-shadow(0 40px 70px rgba(26, 23, 20, 0.22)) drop-shadow(0 8px 20px rgba(26, 23, 20, 0.12));
-}
-
-[data-theme="dark"] .revista-book-wrap {
-  filter: drop-shadow(0 40px 70px rgba(0, 0, 0, 0.55)) drop-shadow(0 8px 20px rgba(0, 0, 0, 0.4));
-}
+/* Reuses the same soft radial-gradient "blob" look already used elsewhere
+   on the site (see .blob/.blob-1/.blob-3 in app/globals.css) — no new
+   effect, no literal photo background, just a faint vignette behind the
+   book. */
+.revista-stage .blob { z-index: 0; }
 
 .revista-controls {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,6 +54,85 @@
   text-align: center;
 }
 
+/* ── The book itself ──────────────────────────────────────────────────────
+   Sized by HEIGHT, never by viewport width — width falls out of the 2:3
+   single-page ratio (4:3 for the open two-page spread, real book physics,
+   intentionally wider than tall). A plain rotateZ tilt (no rotateX/Y, no
+   perspective) keeps the box a true rectangle, not a 3D-skewed trapezoid.
+
+   Spiked with Playwright (real press/move/release drags at the corners,
+   not clicks) directly against the live dev server before settling here:
+   rotateZ(-3deg) reliably broke StPageFlip's corner-drag hit-testing (0/3
+   drags completed a flip, vs 3/3 at rotateZ(0deg)); rotateZ(-1.5deg) was
+   reliable again (3/3, from multiple corners). The tilt stays constant at
+   all times, including mid-drag — no flattening needed. */
+.revista-book-wrap {
+  position: relative;
+  z-index: 1;
+  /* Height-driven, but also capped so the ratio-derived width (4:3 open
+     spread here, 2:3 single page on mobile below) never exceeds the
+     viewport — on a tall narrow phone, 85vh of height alone can compute a
+     width wider than the screen; this picks whichever bound is smaller
+     while keeping the ratio exact (no squish). */
+  height: min(clamp(560px, 85vh, 920px), calc(92vw * 0.75));
+  aspect-ratio: 4 / 3;
+  margin: 0 auto;
+  transform: rotateZ(-1.5deg);
+  box-shadow:
+    24px 48px 90px -20px rgba(26, 23, 20, 0.28),
+    8px 16px 30px -8px rgba(26, 23, 20, 0.14);
+}
+
+[data-theme="dark"] .revista-book-wrap {
+  box-shadow:
+    24px 48px 90px -20px rgba(0, 0, 0, 0.55),
+    8px 16px 30px -8px rgba(0, 0, 0, 0.35);
+}
+
+/* Thin striped "cut paper" edge on both outer sides of the book, standing
+   in for real page-stack thickness without any 3D geometry. */
+.revista-book-wrap::before,
+.revista-book-wrap::after {
+  content: "";
+  position: absolute;
+  top: 1.5%;
+  bottom: 1.5%;
+  width: 5px;
+  pointer-events: none;
+  z-index: 3;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(26, 20, 14, 0.16) 0px,
+    rgba(26, 20, 14, 0.16) 1px,
+    rgba(26, 20, 14, 0.04) 1px,
+    rgba(26, 20, 14, 0.04) 2px
+  );
+}
+.revista-book-wrap::before { left: -3px; border-radius: 2px 0 0 2px; }
+.revista-book-wrap::after { right: -3px; border-radius: 0 2px 2px 0; }
+
+[data-theme="dark"] .revista-book-wrap::before,
+[data-theme="dark"] .revista-book-wrap::after {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0px,
+    rgba(0, 0, 0, 0.4) 1px,
+    rgba(0, 0, 0, 0.12) 1px,
+    rgba(0, 0, 0, 0.12) 2px
+  );
+}
+
+/* Very faint diagonal sheen over the whole book — paper catching light,
+   not a new "glass" effect. Pure decoration: pointer-events:none so it
+   never intercepts the real drag/click target underneath. */
+.revista-sheen {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 40%);
+}
+
 .revista-flipbook {
   margin: 0 auto;
 }
@@ -66,6 +144,10 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
+  /* Page copy scales off the page's own real width (cqw), not the
+     viewport (vw) — the page is now a fixed ~320–600px panel, not a
+     near-full-viewport one. */
+  container-type: inline-size;
 }
 
 .revista-photo {
@@ -95,47 +177,17 @@
   border: 0;
 }
 
-/* One-shot "this can be grabbed" hint on the front cover's corner — pure
-   decoration, not the real StPageFlip canvas, so it can be triggered once
-   without touching the library's own flip state. */
-.revista-hint-corner {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 46%;
-  height: 40%;
-  pointer-events: none;
-  background: linear-gradient(135deg, transparent 55%, var(--border-mid) 56%, transparent 58%);
-  opacity: 0;
-  transform-origin: bottom right;
-}
-
-.revista-hint-corner.is-playing {
-  opacity: 1;
-  animation: revistaCornerPeek 1.1s ease-in-out 1;
-}
-
-@keyframes revistaCornerPeek {
-  0%   { transform: rotate(0deg) scale(1); opacity: 0; }
-  12%  { opacity: 1; }
-  45%  { transform: rotate(-8deg) scale(1.03); opacity: 1; }
-  100% { transform: rotate(0deg) scale(1); opacity: 0; }
-}
-
-/* ── Mobile (≤900px, same breakpoint as the rest of the site) ── */
+/* ── Mobile (≤900px, same breakpoint as the rest of the site) — single
+   page at a time, so the book container is sized as ONE 2:3 page instead
+   of a 4:3 spread. ── */
 @media (max-width: 900px) {
   .revista-book-wrap {
-    max-height: 85vh;
-    /* Keeps StPageFlip's own measured block width under its 560px
-       landscape/portrait threshold at every width in this range (not just
-       phones), so "one page at a time" starts exactly at the site's 900px
-       breakpoint instead of StPageFlip's own narrower default. */
-    max-width: 480px;
-    margin: 0 auto;
+    height: min(clamp(480px, 82vh, 720px), calc(92vw * 1.5));
+    aspect-ratio: 2 / 3;
   }
   .revista-page--text .revista-title-block { top: 30% !important; bottom: 18% !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .revista-hint-corner.is-playing { animation: none; opacity: 0; }
+  .revista-arrow { transition: none; }
 }
