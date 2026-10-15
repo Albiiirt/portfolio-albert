@@ -97,36 +97,57 @@ function MobileRowBlock({ data }: { data: InterficiaMobileRowBlock }) {
   );
 }
 
-// ── Bloque 3 — grid desigual de 3 vídeos (ref-3-grid-desigual.html,
-// versión corregida: A y B en fila 1, C en fila 2 bajo A, col. 2 fila 2
-// vacía — zonas-mapa.mp4 es panorámico y se recortaba mal en vertical). ────
+// ── Bloque 3 — grid de 3 vídeos a igual ancho (ref-3-grid-desigual.html,
+// reajustado a petición de Albert: las 3 columnas miden lo mismo, y cada
+// vídeo conserva su alto natural en vez de recortarse con object-fit:cover
+// dentro de una caja fija — así ninguno queda cortado. Rendered as its own
+// component so MadridPage can place it wherever it wants in the page
+// (moved to just before "Aprendizajes" per Albert, 2026-10-15), separate
+// from the videoStrip/mobileRow pairing at the top. ────────────────────────
 function VideoGridBlock({ data }: { data: InterficiaVideoGridBlock }) {
   const panelStyle: CSSProperties = {
     borderRadius: 10,
     overflow: "hidden",
-    position: "relative",
     background: "#1c1a17",
   };
-  const videoFillStyle: CSSProperties = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" };
+  const videoStyle: CSSProperties = { display: "block", width: "100%", height: "auto" };
+  // panel-b (zonas-mapa.mp4) is a raw capture of the real Comunidad de
+  // Madrid page: the card + map sit inside a wide margin of the page's own
+  // white background (unlike panel-a/c, which are full-bleed app screens),
+  // so at natural size that margin reads as a light block against the dark
+  // section. A centered 1.21x scale (paint-only transform, doesn't affect
+  // the box's own layout size) zooms past that margin on all 4 sides —
+  // measured from the actual frame content's bounding box — while leaving
+  // the real content (headings, card, map) comfortably inside the crop.
+  const videoStyleZoomed: CSSProperties = { ...videoStyle, transform: "scale(1.21)", transformOrigin: "center" };
 
-  const panels: { className: string; src: string }[] = [
-    { className: "panel-a", src: data.panelA.src },
-    { className: "panel-b", src: data.panelB.src },
-    { className: "panel-c", src: data.panelC.src },
-  ];
+  const renderVideo = (src: string, style: CSSProperties = videoStyle) => (
+    <video autoPlay loop muted playsInline style={style}>
+      <source src={src} type="video/mp4" />
+    </video>
+  );
 
   return (
     <section style={{ background: DARK_BG, padding: "0 var(--space-section-x) 120px" }}>
       <div className="site-content">
         <FadeInView>
+          {/* 2 independent masonry columns, not a single grid — the 3 videos
+              have different native aspect ratios, so a shared grid row
+              would size row 1 to its tallest cell, leaving uneven empty
+              space under the shorter video before row 2 starts. Each
+              column instead stacks its own videos with a fixed 24px gap
+              between them (same gap value as the column gap), so the
+              vertical rhythm matches the horizontal one regardless of how
+              tall any individual video is. Column 1: A, then C below it.
+              Column 2: B. A future 4th video would go into column 2. */}
           <div className="madrid-interficia-bento">
-            {panels.map((panel) => (
-              <div key={panel.className} className={panel.className} style={panelStyle}>
-                <video autoPlay loop muted playsInline style={videoFillStyle}>
-                  <source src={panel.src} type="video/mp4" />
-                </video>
-              </div>
-            ))}
+            <div className="madrid-interficia-bento-col">
+              <div className="panel-a" style={panelStyle}>{renderVideo(data.panelA.src)}</div>
+              <div className="panel-c" style={panelStyle}>{renderVideo(data.panelC.src)}</div>
+            </div>
+            <div className="madrid-interficia-bento-col">
+              <div className="panel-b" style={panelStyle}>{renderVideo(data.panelB.src, videoStyleZoomed)}</div>
+            </div>
           </div>
         </FadeInView>
       </div>
@@ -140,7 +161,11 @@ export default function MadridInterficiaShowcase({ data }: { data?: InterficiaSh
     <>
       <VideoStripBlock data={data.videoStrip} />
       <MobileRowBlock data={data.mobileRow} />
-      <VideoGridBlock data={data.videoGrid} />
     </>
   );
+}
+
+export function MadridInterficiaVideoGrid({ data }: { data?: InterficiaShowcase }) {
+  if (!data) return null;
+  return <VideoGridBlock data={data.videoGrid} />;
 }

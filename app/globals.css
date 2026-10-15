@@ -661,27 +661,30 @@ html.custom-cursor-active .cursor-hidden {
   .madrid-interficia-mobile-row { grid-template-columns: 1fr !important; gap: 48px !important; }
 }
 
+/* 2-column masonry (Albert, 2026-10-15): column 1 stacks A then C, column 2
+   holds B (room for a future 4th video). Two independent flex columns, not
+   a shared CSS grid — the 3 videos have different native aspect ratios, so
+   a shared grid row sizes itself to its tallest cell, leaving uneven empty
+   space under the shorter video before the next row starts. Each column's
+   own `gap` keeps the vertical rhythm between its own stacked videos
+   identical to the horizontal gap between columns, independent of the
+   other column's height. Natural video height (no crop) — each video keeps
+   its own intrinsic aspect ratio instead of being forced into a fixed box. */
 .madrid-interficia-bento {
   display: grid;
-  grid-template-columns: 1.2fr 0.9fr;
-  grid-template-rows: 300px 300px;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: start;
+  gap: 24px;
+  max-width: 84%;
+  margin: 0 auto;
+}
+.madrid-interficia-bento-col {
+  display: flex;
+  flex-direction: column;
   gap: 24px;
 }
-.madrid-interficia-bento .panel-a { grid-column: 1; grid-row: 1; }
-.madrid-interficia-bento .panel-b { grid-column: 2; grid-row: 1; }
-.madrid-interficia-bento .panel-c { grid-column: 1; grid-row: 2; }
 @media (max-width: 860px) {
-  .madrid-interficia-bento {
-    grid-template-columns: 1fr !important;
-    grid-template-rows: none !important;
-  }
-  .madrid-interficia-bento .panel-a,
-  .madrid-interficia-bento .panel-b,
-  .madrid-interficia-bento .panel-c {
-    grid-column: 1 !important;
-    grid-row: auto !important;
-    height: 260px !important;
-  }
+  .madrid-interficia-bento { grid-template-columns: 1fr !important; max-width: 100% !important; }
 }
 
 /* ── Project design system sheet (palette + typography specimen) ──
