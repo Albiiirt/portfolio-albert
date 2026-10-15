@@ -347,16 +347,6 @@ export default function XuntaGaliciaPage() {
             used to sit right after the Hero with no text context first. */}
         <XuntaScreensSlider />
 
-        {/* ── La paleta y tipografía ── */}
-        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
-          <div className="site-content">
-            <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.designSystem}</p>
-            </FadeInView>
-            <ProjectDesignSystemSheet data={project.designSystem} accentColor={ACCENT} tightTop />
-          </div>
-        </section>
-
         {/* ── El trabajo ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
@@ -393,6 +383,17 @@ export default function XuntaGaliciaPage() {
                 </div>
               </FadeInView>
             </div>
+          </div>
+        </section>
+
+        {/* ── La paleta y tipografía — Albert, 2026-10-15: movida a después
+            de "El trabajo" (antes la precedía) ── */}
+        <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
+          <div className="site-content">
+            <FadeInView>
+              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.designSystem}</p>
+            </FadeInView>
+            <ProjectDesignSystemSheet data={project.designSystem} accentColor={ACCENT} tightTop />
           </div>
         </section>
 
