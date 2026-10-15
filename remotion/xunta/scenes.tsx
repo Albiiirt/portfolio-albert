@@ -2,7 +2,6 @@ import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
 import { EASE, GNOSS, SITE } from "./tokens";
 import { GRUPOS, TERMINOS } from "./data";
 import {
-  BrowserFrame,
   ComparativeTable,
   EsquemaToggle,
   FacetSidebar,
@@ -273,17 +272,17 @@ export function WorkScene() {
   const trabajo2Visible = frame >= F.trabajo2In[0];
 
   // ── Scripted cursor — one continuous script across every screen (position
-  // is always relative to the same BrowserFrame, so it keeps travelling
+  // is always relative to the same content div, so it keeps travelling
   // instead of snapping between screens). Hidden once the final hold starts.
-  // Every landing point below was measured pixel-for-pixel off rendered
-  // stills of this exact composition (not eyeballed), then converted from
-  // full-canvas pixels into the BrowserFrame content box's own coordinate
-  // space (x 141–1778, y 97–1040 of the 1920×1080 canvas) — the same space
-  // SimCursor's left/top percentages resolve against, since the cursor and
-  // every screen it clicks are both children of that one relatively
-  // positioned content div, offset from the canvas edge by the outer teal
-  // padding and the browser chrome bar. Mixing up the two spaces is exactly
-  // what made the first pass look "close but not on it". Targets: the facet
+  // Landing points were originally measured pixel-for-pixel off rendered
+  // stills from when this content sat inside a BrowserFrame (teal outer
+  // padding + chrome bar offsetting it from the canvas edge) — that frame
+  // is gone now (2026-10-15, see the comment on this function's return),
+  // so these percentages land against the full 1920×1080 canvas instead of
+  // that smaller offset box. Everything inside scales with its container
+  // (flex/%, no fixed pixel layout), so targets should still read as "on"
+  // the right element, just not re-verified pixel-for-pixel against the
+  // new, bigger box. Targets: the facet
   // row's highlight tint, the "Ver propuesta" link, the selected-cell green
   // fill, the active MARC/ISAAR button, the 4XX pill's blue fill, the green
   // accept button, the kanban card, and the "Volver al tablero" button.
@@ -304,18 +303,20 @@ export function WorkScene() {
   ];
 
   return (
-    <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", padding: "38px 140px" }}>
-      <TealBackdrop />
+    // No TealBackdrop, no padding, no BrowserFrame chrome (traffic lights +
+    // URL pill) — Albert dropped that look site-wide for every other
+    // project's video (see ProjectWalkthroughVideo/XuntaUnificadorVideo's
+    // own CSS-level frame removal, 2026-10-15); this one still had it baked
+    // into the Remotion render itself. Content fills the full 1920×1080
+    // canvas edge-to-edge now, like a real screen capture. The cursor
+    // hops below are percentages of the content div directly beneath this
+    // comment, which keeps its own width/height: 100% — so they still land
+    // on the same UI elements, just measured against a taller/wider box
+    // than before (no 38/140px outer padding, no ~43px chrome bar to
+    // subtract), not re-measured pixel-for-pixel against the new canvas.
+    <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
       <div style={{ position: "relative", width: "100%", height: "100%" }}>
-        <BrowserFrame
-          url={
-            trabajo1Visible || trabajo2Visible
-              ? "unificador.xunta.gal/trabajo"
-              : fichaVisible || ficha2Visible
-                ? "unificador.xunta.gal/ficha"
-                : "unificador.xunta.gal/terminos"
-          }
-        >
+        <div style={{ position: "relative", width: "100%", height: "100%", background: GNOSS.blanco, overflow: "hidden" }}>
           <div
             style={{
               position: "relative",
@@ -410,7 +411,7 @@ export function WorkScene() {
 
             {frame < F.clickVolver + 10 && <SimCursor hops={hops} />}
           </div>
-        </BrowserFrame>
+        </div>
       </div>
     </AbsoluteFill>
   );
