@@ -4,12 +4,16 @@ import FadeInView from "@/components/FadeInView";
 import { useLang } from "@/lib/LanguageContext";
 import type { Project } from "@/data/projects";
 
-// Generic counterpart of XuntaUnificadorVideo.tsx (same visual contract:
+// Generic counterpart of XuntaUnificadorVideo.tsx. Used to share that file's
 // "glass" frame — rgba border/background, --glass-shadow, 1.375rem radius —
-// in a 16:9 desktop-browser proportion) for any sub-project that ships a
-// real Remotion-recreated walkthrough video instead of static screens.
-// Kept as a separate component rather than refactoring XuntaUnificadorVideo
-// in place, since that file has unrelated work in flight elsewhere.
+// over a project.gradient background. Albert dropped that look site-wide,
+// 2026-10-15 (see MadridWalkthroughVideo's removal for the reference): no
+// colored background, no decorative frame — flat dark background, plain
+// rounded corners only. Kept as a separate component rather than refactoring
+// XuntaUnificadorVideo in place, since that file has unrelated work in
+// flight elsewhere.
+const DARK_BG = "#12100e";
+
 export default function ProjectWalkthroughVideo({
   project,
   videoSrc,
@@ -22,7 +26,7 @@ export default function ProjectWalkthroughVideo({
   const { lang } = useLang();
 
   return (
-    <section style={{ background: project.gradient, padding: "var(--space-section-y) var(--space-section-x)" }}>
+    <section style={{ background: DARK_BG, padding: "var(--space-section-y) var(--space-section-x)" }}>
       <div className="site-content" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <FadeInView>
           <p className="section-label" style={{ color: project.accentColor, marginBottom: "1.75rem", textAlign: "center" }}>
@@ -35,10 +39,7 @@ export default function ProjectWalkthroughVideo({
             style={{
               width: "min(1040px, 90vw)",
               aspectRatio: "16 / 9",
-              borderRadius: "1.375rem",
-              border: "1.5px solid rgba(255,255,255,0.16)",
-              boxShadow: "0 1px 0 rgba(255,255,255,0.14) inset, 0 6px 28px var(--glass-shadow)",
-              background: "rgba(255,255,255,0.06)",
+              borderRadius: 10,
               overflow: "hidden",
               position: "relative",
             }}
