@@ -2,7 +2,7 @@
 
 @theme {
   --font-sans: var(--font-space), "Space Grotesk", sans-serif;
-  --text-hero: clamp(2.5rem, 6vw, 6.5rem);
+  --text-hero: clamp(2.5rem, 7.2vw, 7.25rem);
   --text-display: clamp(2rem, 5.5vw, 6.5rem);
   --text-section: clamp(1.75rem, 3.6vw, 3.25rem);
   --text-label: 0.67rem;
@@ -135,11 +135,6 @@ html { scroll-behavior: auto; background: var(--bg); }
   width: 100%;
 }
 
-.hero-profile-section {
-  flex-shrink: 0;
-  width: clamp(300px, 40vw, 500px);
-}
-
 /* Accordion — hidden on desktop, shown on tablet/mobile */
 .work-accordion { display: none; }
 
@@ -166,8 +161,7 @@ html { scroll-behavior: auto; background: var(--bg); }
 /* Tablet (≤900px) */
 @media (max-width: 900px) {
   .about-grid { grid-template-columns: 1fr !important; }
-  .hero-float-cards,
-  .hero-profile-section { display: none !important; }
+  .hero-float-cards { display: none !important; }
 
   /* Work: accordion mode — hide right card column, show inline panels */
   .work-grid { grid-template-columns: 1fr !important; }
@@ -192,10 +186,6 @@ html { scroll-behavior: auto; background: var(--bg); }
 @media (max-width: 640px) {
   /* Nav: swap the link row for a hamburger + dropdown panel */
   .nav-hamburger { display: flex !important; }
-
-  /* Hero: stack vertically, hide orbit */
-  .hero-inner { flex-direction: column !important; align-items: stretch !important; }
-  .hero-orbit { display: none !important; }
 
   /* Work: disable scroll trap, accordion handles navigation */
   .work-section { height: auto !important; }

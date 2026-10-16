@@ -1,16 +1,14 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { useLang } from "@/lib/LanguageContext";
 import { t } from "@/data/translations";
 import { EASE } from "@/lib/animations";
-import PlanetOrbit from "@/components/PlanetOrbit";
 
 export default function Hero() {
   const { lang } = useLang();
   const tx = t[lang].hero;
-  const reducedMotion = useReducedMotion();
 
   return (
     <section
@@ -28,17 +26,15 @@ export default function Hero() {
         position: "relative",
         zIndex: 1,
         width: "100%",
-        display: "flex",
-        alignItems: "center",
-        gap: "clamp(3rem, 6vw, 8rem)",
         paddingTop: "clamp(4rem, 7vh, 6rem)",
         paddingBottom: "clamp(3rem, 6vh, 5rem)",
         paddingLeft: "var(--space-section-x)",
         paddingRight: "var(--space-section-x)",
       }}>
 
-        {/* Left: text */}
-        <div style={{ flex: "1 1 0", minWidth: 0, display: "flex", flexDirection: "column", gap: "clamp(1rem, 1.8vh, 1.75rem)" }}>
+        {/* Text block — capped width so it doesn't stretch edge-to-edge
+            on wide screens; aligned left, air to the right is intentional */}
+        <div style={{ maxWidth: "min(900px, 68ch)", display: "flex", flexDirection: "column", gap: "clamp(1rem, 1.8vh, 1.75rem)" }}>
 
           {/* Badge */}
           <motion.div
@@ -65,7 +61,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, ease: EASE, delay: 0.12 }}
-            style={{ margin: 0, lineHeight: 1, display: "flex", flexDirection: "column", minWidth: 0 }}
+            style={{ margin: 0, lineHeight: 1, display: "flex", flexDirection: "column", minWidth: 0, textWrap: "balance" }}
           >
             <span style={{ color: "var(--text)", fontSize: "clamp(1.8rem, 4vw, 5rem)", fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.03em", minWidth: 0, maxWidth: "100%", overflowWrap: "break-word" }}>
               {`${tx.line1} ${tx.line2}`}
@@ -101,49 +97,6 @@ export default function Hero() {
           </motion.div>
 
         </div>
-
-        {/* Right: planet / hero teaser video — same "glass" card tokens as
-            components/proyectos/MadridWalkthroughVideo.tsx (border, inset+
-            outer shadow, translucent background), same hero-orbit slot (so
-            it inherits the existing mobile display:none for free) and same
-            clamp sizing. PlanetOrbit stays as the real reduced-motion
-            fallback, not just a loading placeholder. */}
-        <motion.div
-          initial={{ opacity: 0, x: 24 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, ease: EASE, delay: 0.22 }}
-          className="hero-orbit"
-          style={{ flexShrink: 0, width: "clamp(260px, 36vw, 480px)" }}
-        >
-          {reducedMotion ? (
-            <PlanetOrbit />
-          ) : (
-            <div
-              style={{
-                width: "100%",
-                aspectRatio: "16 / 9",
-                borderRadius: "1.375rem",
-                border: "1.5px solid rgba(255,255,255,0.16)",
-                boxShadow: "0 1px 0 rgba(255,255,255,0.14) inset, 0 6px 28px var(--glass-shadow)",
-                background: "rgba(255,255,255,0.06)",
-                overflow: "hidden",
-                position: "relative",
-              }}
-            >
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                poster="/videos/hero-teaser-poster.jpg"
-                aria-hidden="true"
-                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-              >
-                <source src="/videos/hero-teaser.mp4" type="video/mp4" />
-              </video>
-            </div>
-          )}
-        </motion.div>
 
       </div>
     </section>
