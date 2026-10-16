@@ -194,8 +194,8 @@
 .revista-corner-shadow {
   position: absolute;
   z-index: 4;
-  width: 20%;
-  height: 18%;
+  width: 11%;
+  height: 11%;
   pointer-events: none;
   opacity: 0;
   transition: opacity 200ms ease;
@@ -207,14 +207,24 @@
    in Flip.ts) sits right at the corner and is opaque — a shadow peaking at
    that same corner point is wasted, hidden under the paper. A real folded
    sheet casts its shadow on the page it's NOT covering, concentrated right
-   where the lifted edge meets the surface — so the dark band here starts
-   past the corner (stops below ~35%, roughly where that triangle's own
-   edge falls) and peaks around 50-60%, not at 0%. The `to top right`/`to
-   bottom left`/etc keyword forms follow each box's own corner-to-corner
-   diagonal regardless of its aspect ratio, matching the fold's real
-   hypotenuse from whichever of the four corners it's anchored to. A
-   radial-gradient was tried first and rejected: circular iso-opacity lines
-   read as a round glow, not a shadow along a diagonal edge. */
+   where the lifted edge meets the surface, so the dark band starts past the
+   corner and fades out again — not a blob centred on the point.
+
+   Earlier attempts at this got visibly worse the more the box tried to
+   cover: a wide box (30%, then 20%) with the fade finishing late (100%,
+   then 85%) hit the box's own straight edges before fully fading — a
+   visible seam, since the box isn't square in real pixels (a %-of-page box
+   on a ~3:2 page) and a corner-to-corner gradient doesn't reach each edge
+   at the same real distance. Rounding the far corner to paper over that
+   seam made it worse again: 100% border-radius on a non-square box is a
+   quarter-ELLIPSE, which read as a big dome swallowing most of the page,
+   not a corner accent. The actual fix was simpler than either patch: make
+   the box small enough, and the fade finish early enough (65%, not
+   100%/85%), that it's fully transparent well before ANY edge regardless
+   of aspect — so neither the seam nor the dome can happen, no border-radius
+   needed. The `to top right`/`to bottom left`/etc keyword forms follow each
+   box's own corner-to-corner diagonal, matching the fold's hypotenuse from
+   whichever of the four corners it's anchored to. */
 .revista-corner-shadow--bottom-left,
 .revista-corner-shadow--bottom-right { bottom: 0; }
 .revista-corner-shadow--top-left,
@@ -225,47 +235,19 @@
 .revista-corner-shadow--top-right { right: 0; }
 
 .revista-corner-shadow--bottom-left {
-  background: linear-gradient(
-    to top right,
-    transparent 0%,
-    transparent 30%,
-    rgba(0, 0, 0, 0.8) 52%,
-    rgba(0, 0, 0, 0.25) 72%,
-    transparent 100%
-  );
+  background: linear-gradient(to top right, transparent 0%, transparent 15%, rgba(0, 0, 0, 0.8) 35%, transparent 65%);
 }
 
 .revista-corner-shadow--bottom-right {
-  background: linear-gradient(
-    to top left,
-    transparent 0%,
-    transparent 30%,
-    rgba(0, 0, 0, 0.8) 52%,
-    rgba(0, 0, 0, 0.25) 72%,
-    transparent 100%
-  );
+  background: linear-gradient(to top left, transparent 0%, transparent 15%, rgba(0, 0, 0, 0.8) 35%, transparent 65%);
 }
 
 .revista-corner-shadow--top-left {
-  background: linear-gradient(
-    to bottom right,
-    transparent 0%,
-    transparent 30%,
-    rgba(0, 0, 0, 0.8) 52%,
-    rgba(0, 0, 0, 0.25) 72%,
-    transparent 100%
-  );
+  background: linear-gradient(to bottom right, transparent 0%, transparent 15%, rgba(0, 0, 0, 0.8) 35%, transparent 65%);
 }
 
 .revista-corner-shadow--top-right {
-  background: linear-gradient(
-    to bottom left,
-    transparent 0%,
-    transparent 30%,
-    rgba(0, 0, 0, 0.8) 52%,
-    rgba(0, 0, 0, 0.25) 72%,
-    transparent 100%
-  );
+  background: linear-gradient(to bottom left, transparent 0%, transparent 15%, rgba(0, 0, 0, 0.8) 35%, transparent 65%);
 }
 
 .revista-flipbook {
