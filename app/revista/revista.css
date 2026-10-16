@@ -133,44 +133,6 @@
   );
 }
 
-/* Bottom page-stack edge — the same "cut paper" idea as the side edges
-   above, now along the bottom so the spread reads as a dome of stacked
-   sheets, not a flat card. A real DOM node (not a third pseudo-element —
-   only ::before/::after exist, both already spoken for), sitting just
-   below .revista-book-wrap's own box so it never overlaps the interactive
-   area. Deliberately NOT a rotateX/perspective tilt on the book itself —
-   see the long comment on .revista-book-wrap: StPageFlip's corner hit-test
-   assumes a flat, untilted-in-3D rectangle, and that was re-verified with
-   Playwright after the last ratio change. This strip inherits the book's
-   existing, already-safe rotateZ only (it's a sibling, not a transformed
-   child), plus its own independent skewX to fake a touch of depth — purely
-   decorative, pointer-events:none, no hit-testing involved. */
-.revista-book-edge {
-  position: absolute;
-  left: 3%;
-  right: 3%;
-  bottom: -9px;
-  height: 11px;
-  z-index: 0;
-  pointer-events: none;
-  transform: skewX(-1.2deg);
-  transform-origin: top;
-  border-radius: 0 0 3px 3px;
-  /* Actual paper tones (not a theme-dependent black/white alpha, like the
-     side edges above use) — a transparent-black stripe disappears against
-     the near-black dark-mode stage, same failure as the corner shadow
-     before it. Paper doesn't turn black in a dark room; two warm,
-     off-white tones read as a stacked page edge in both themes. */
-  background: repeating-linear-gradient(
-    to right,
-    #d8d0c0 0px,
-    #d8d0c0 1.5px,
-    #efe9de 1.5px,
-    #efe9de 3px
-  );
-  box-shadow: 0 7px 12px -5px rgba(0, 0, 0, 0.45);
-}
-
 /* Very faint diagonal sheen over the whole book — paper catching light,
    not a new "glass" effect. Pure decoration: pointer-events:none so it
    never intercepts the real drag/click target underneath. */
@@ -212,23 +174,25 @@
   );
 }
 
-/* Cast shadow for the two turnable corners (showPageCorners). StPageFlip
-   draws its own cast shadow (.stf__outerShadow/.stf__innerShadow, see the
-   base-stylesheet fix below) from the same "progress" value that drives the
-   fold's width — read straight from its source
-   (node_modules/page-flip/src/Render/Render.ts, setShadowData): width scales
-   with progress, and the resting corner-peek hint (fold_corner state) pins
-   progress to a fixed ~50px sliver, so the library's own shadow there is
-   only a few px wide and effectively invisible. This is a second, simpler
-   shadow anchored directly to each corner, independent of that progress
-   value, toggled by Magazine.tsx's onChangeState (foldActive) so it covers
-   both the resting hover peek and an active drag alike. z-index 4 — the
-   same gap StPageFlip's own scheme already leaves between the covered page
-   (3) and the flipping page (5), so it reads as cast onto the page below
-   without darkening the flap sitting on top of it. */
+/* Cast shadow for the four turnable corners (showPageCorners — StPageFlip's
+   own isPointOnCorners in Flip.ts checks both the top and bottom of each
+   page, not just the bottom, so all four need covering or a top-corner fold
+   shows no shadow at all while an unrelated bottom one stays lit, reading
+   as "two pages lifting"). StPageFlip draws its own cast shadow
+   (.stf__outerShadow/.stf__innerShadow, see the base-stylesheet fix below)
+   from the same "progress" value that drives the fold's width — read
+   straight from its source (node_modules/page-flip/src/Render/Render.ts,
+   setShadowData): width scales with progress, and the resting corner-peek
+   hint (fold_corner state) pins progress to a fixed ~50px sliver, so the
+   library's own shadow there is only a few px wide and effectively
+   invisible. This is a second, simpler shadow anchored directly to the
+   corner actually being turned (Magazine.tsx infers which of the four from
+   pointer position on each onChangeState change). z-index 4 — the same gap
+   StPageFlip's own scheme already leaves between the covered page (3) and
+   the flipping page (5), so it reads as cast onto the page below without
+   darkening the flap sitting on top of it. */
 .revista-corner-shadow {
   position: absolute;
-  bottom: 0;
   z-index: 4;
   width: 20%;
   height: 18%;
@@ -245,14 +209,22 @@
    sheet casts its shadow on the page it's NOT covering, concentrated right
    where the lifted edge meets the surface — so the dark band here starts
    past the corner (stops below ~35%, roughly where that triangle's own
-   edge falls) and peaks around 50-60%, not at 0%. `to top left`/`to top
-   right` (the keyword form, not a literal 45deg) follows the box's own
-   corner-to-corner diagonal regardless of its aspect ratio, matching the
-   fold's real hypotenuse. A radial-gradient was tried first and rejected:
-   circular iso-opacity lines read as a round glow, not a shadow along a
-   diagonal edge. */
-.revista-corner-shadow--left {
-  left: 0;
+   edge falls) and peaks around 50-60%, not at 0%. The `to top right`/`to
+   bottom left`/etc keyword forms follow each box's own corner-to-corner
+   diagonal regardless of its aspect ratio, matching the fold's real
+   hypotenuse from whichever of the four corners it's anchored to. A
+   radial-gradient was tried first and rejected: circular iso-opacity lines
+   read as a round glow, not a shadow along a diagonal edge. */
+.revista-corner-shadow--bottom-left,
+.revista-corner-shadow--bottom-right { bottom: 0; }
+.revista-corner-shadow--top-left,
+.revista-corner-shadow--top-right { top: 0; }
+.revista-corner-shadow--bottom-left,
+.revista-corner-shadow--top-left { left: 0; }
+.revista-corner-shadow--bottom-right,
+.revista-corner-shadow--top-right { right: 0; }
+
+.revista-corner-shadow--bottom-left {
   background: linear-gradient(
     to top right,
     transparent 0%,
@@ -263,10 +235,31 @@
   );
 }
 
-.revista-corner-shadow--right {
-  right: 0;
+.revista-corner-shadow--bottom-right {
   background: linear-gradient(
     to top left,
+    transparent 0%,
+    transparent 30%,
+    rgba(0, 0, 0, 0.8) 52%,
+    rgba(0, 0, 0, 0.25) 72%,
+    transparent 100%
+  );
+}
+
+.revista-corner-shadow--top-left {
+  background: linear-gradient(
+    to bottom right,
+    transparent 0%,
+    transparent 30%,
+    rgba(0, 0, 0, 0.8) 52%,
+    rgba(0, 0, 0, 0.25) 72%,
+    transparent 100%
+  );
+}
+
+.revista-corner-shadow--top-right {
+  background: linear-gradient(
+    to bottom left,
     transparent 0%,
     transparent 30%,
     rgba(0, 0, 0, 0.8) 52%,

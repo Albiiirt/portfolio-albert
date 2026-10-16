@@ -95,18 +95,23 @@ export default function Magazine() {
   // independent shadow anchored to the corner actually being turned,
   // visible whenever StPageFlip reports anything other than "read".
   const bookWrapRef = useRef<HTMLDivElement | null>(null);
-  const lastClientXRef = useRef<number | null>(null);
-  const [activeCorner, setActiveCorner] = useState<"left" | "right" | null>(null);
+  const lastClientRef = useRef<{ x: number; y: number } | null>(null);
+  type Corner = "top-left" | "top-right" | "bottom-left" | "bottom-right";
+  const [activeCorner, setActiveCorner] = useState<Corner | null>(null);
 
   // Lightweight, always-on position tracking (no React state, so no
   // re-renders) — just enough to know, the instant a fold starts, which
-  // half of the book the pointer is on.
+  // quadrant of the book the pointer is on. StPageFlip's own corner hit-test
+  // (isPointOnCorners in Flip.ts) checks both the top and bottom of each
+  // page, not just the bottom — missing the top half here was a real bug:
+  // a top-corner fold had no corner-shadow at all, while the unrelated
+  // bottom one lit up anyway, reading as "two pages lifting at once".
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => {
-      lastClientXRef.current = e.clientX;
+      lastClientRef.current = { x: e.clientX, y: e.clientY };
     };
     const onTouchMove = (e: TouchEvent) => {
-      if (e.touches[0]) lastClientXRef.current = e.touches[0].clientX;
+      if (e.touches[0]) lastClientRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     };
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("touchmove", onTouchMove);
@@ -118,21 +123,21 @@ export default function Magazine() {
 
   // onChangeState's event only carries a state string, never which corner
   // (confirmed in Flip.ts/Settings.ts — PageState has no corner field), so
-  // the corner is inferred from pointer position instead: which half of the
-  // book the cursor/touch is on when the fold starts. Good enough since a
-  // forward flip is always dragged from the right page's corner and a
-  // backward one from the left, so the pointer doesn't cross the midline
-  // mid-gesture.
+  // the corner is inferred from pointer position instead: which quadrant of
+  // the book the cursor/touch is in when the fold starts. Good enough since
+  // a drag doesn't cross the midline (horizontally or vertically) mid-gesture.
   const handleChangeState = useCallback((e: ChangeStateEvent) => {
     if (e.data === "read") {
       setActiveCorner(null);
       return;
     }
     const wrap = bookWrapRef.current;
-    const clientX = lastClientXRef.current;
-    if (!wrap || clientX === null) return;
+    const client = lastClientRef.current;
+    if (!wrap || !client) return;
     const rect = wrap.getBoundingClientRect();
-    setActiveCorner(clientX < rect.left + rect.width / 2 ? "left" : "right");
+    const half = client.y < rect.top + rect.height / 2 ? "top" : "bottom";
+    const side = client.x < rect.left + rect.width / 2 ? "left" : "right";
+    setActiveCorner(`${half}-${side}` as Corner);
   }, []);
 
   // react-pageflip only ever constructs its underlying PageFlip instance
@@ -196,15 +201,13 @@ export default function Magazine() {
       <div className="revista-book-wrap" ref={bookWrapRef}>
         <div className="revista-sheen" aria-hidden="true" />
         <div className="revista-spine" aria-hidden="true" />
-        <div className="revista-book-edge" aria-hidden="true" />
-        <div
-          className={`revista-corner-shadow revista-corner-shadow--left${activeCorner === "left" ? " is-active" : ""}`}
-          aria-hidden="true"
-        />
-        <div
-          className={`revista-corner-shadow revista-corner-shadow--right${activeCorner === "right" ? " is-active" : ""}`}
-          aria-hidden="true"
-        />
+        {(["top-left", "top-right", "bottom-left", "bottom-right"] as const).map((corner) => (
+          <div
+            key={corner}
+            className={`revista-corner-shadow revista-corner-shadow--${corner}${activeCorner === corner ? " is-active" : ""}`}
+            aria-hidden="true"
+          />
+        ))}
         {readyToMount && (
           <HTMLFlipBook
             // react-pageflip/StPageFlip constructs its PageFlip instance once
