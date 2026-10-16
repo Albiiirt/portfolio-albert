@@ -7,6 +7,7 @@ import GnossPage from "@/components/proyectos/GnossPage";
 import MadridPage from "@/components/proyectos/MadridPage";
 import CastelleraPage from "@/components/proyectos/CastelleraPage";
 import XuntaGaliciaPage from "@/components/proyectos/XuntaGaliciaPage";
+import BiccoPage from "@/components/proyectos/BiccoPage";
 import { projects } from "@/data/projects";
 
 type PageComponent = () => React.JSX.Element;
@@ -19,6 +20,7 @@ const pages: Record<string, PageComponent> = {
   madrid: MadridPage,
   castellera: CastelleraPage,
   "xunta-galicia": XuntaGaliciaPage,
+  bicco: BiccoPage,
 };
 
 export function generateStaticParams() {
