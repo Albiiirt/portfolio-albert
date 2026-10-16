@@ -435,6 +435,127 @@ export const projects: Project[] = [
     ],
   },
   {
+    id: "bicco",
+    num: "05",
+    title: { en: "Bicco", es: "Bicco", ca: "Bicco" },
+    category: { en: "AI Search Engine", es: "Buscador con IA", ca: "Cercador amb IA" },
+    year: "2026",
+    description: {
+      en: "AI search over an R&D knowledge graph for CDTI, through GNOSS — full interface designed and built with vibe coding, still in progress.",
+      es: "Buscador con IA sobre un grafo de conocimiento de I+D para el CDTI, a través de GNOSS — interfaz completa diseñada y construida con vibe coding, todavía en curso.",
+      ca: "Cercador amb IA sobre un graf de coneixement de R+D per al CDTI, a través de GNOSS — interfície completa dissenyada i construïda amb vibe coding, encara en curs.",
+    },
+    problem: {
+      en: "CDTI manages thousands of R&D grant files, organisations, technologies and funding lines, but that information lived scattered, with no connection between pieces. The brief, again through GNOSS: an interface able to work that knowledge as a graph, not as separate records.",
+      es: "CDTI gestiona miles de expedientes de ayudas a I+D, organizaciones, tecnologías y líneas de financiación, pero esa información vivía dispersa y sin conexión entre sí. El encargo, de nuevo a través de GNOSS: una interfaz capaz de explotar ese conocimiento como un grafo, no como fichas sueltas.",
+      ca: "El CDTI gestiona milers d'expedients d'ajudes a R+D, organitzacions, tecnologies i línies de finançament, però aquesta informació vivia dispersa i sense connexió entre si. L'encàrrec, novament a través de GNOSS: una interfície capaç d'explotar aquest coneixement com un graf, no com a fitxes soltes.",
+    },
+    process: {
+      en: "I designed and built the entire interface with vibe coding —home, faceted search, advanced search, seven entity record types and a technology trends explorer— working on top of the knowledge graph GNOSS builds behind it. The design was refined through real use: header and chart breakages on tablet and mobile, found and fixed one by one.",
+      es: "Diseñé y construí con vibe coding toda la interfaz —home, buscador con facetas, búsqueda avanzada, siete tipos de ficha de entidad y un explorador de tendencias tecnológicas— trabajando sobre el grafo de conocimiento que construye GNOSS detrás. El diseño se ajustó con el uso real: roturas de header y de gráficos en tableta y móvil que se fueron detectando y corrigiendo una a una.",
+      ca: "Vaig dissenyar i construir amb vibe coding tota la interfície —home, cercador amb facetes, cerca avançada, set tipus de fitxa d'entitat i un explorador de tendències tecnològiques— treballant sobre el graf de coneixement que construeix GNOSS al darrere. El disseny es va ajustar amb l'ús real: trencaments de capçalera i de gràfics en tauleta i mòbil que es van anar detectant i corregint un per un.",
+    },
+    result: {
+      en: "Today it's the internal tool CDTI analysts use to explore that connected knowledge. The client has already approved the design; the project is still ongoing.",
+      es: "Hoy es la herramienta de uso interno de los analistas del CDTI para explorar ese conocimiento conectado. El cliente ya ha validado el diseño; el proyecto sigue en marcha.",
+      ca: "Avui és l'eina d'ús intern dels analistes del CDTI per explorar aquest coneixement connectat. El client ja ha validat el disseny; el projecte segueix en marxa.",
+    },
+    tags: ["UX Design", "AI Search", "Vibe Coding"],
+    gradient: "linear-gradient(135deg, #081b3d 0%, #0d2b5e 55%, #183880 100%)",
+    accentColor: "#d63900",
+    cover: "/covers/cover-bicco.svg",
+    coverAlt: {
+      en: "White BICCO logomark on a dark navy gradient background — cover for the Bicco project.",
+      es: "Logotipo blanco de BICCO sobre un fondo degradado azul marino oscuro — portada del proyecto Bicco.",
+      ca: "Logotip blanc de BICCO sobre un fons degradat blau marí fosc — portada del projecte Bicco.",
+    },
+    heroTagline: {
+      en: "an AI search engine to connect CDTI's knowledge",
+      es: "un buscador con IA para conectar el conocimiento del CDTI",
+      ca: "un cercador amb IA per connectar el coneixement del CDTI",
+    },
+    meta: [
+      { labelKey: "client", value: "CDTI" },
+      { labelKey: "year", value: "2026" },
+      { labelKey: "status", value: status.inProgress },
+      { labelKey: "role", value: { en: "UX/UI design · Vibe coding", es: "Diseño UX/UI · Vibe coding", ca: "Disseny UX/UI · Vibe coding" } },
+      { labelKey: "studio", value: "GNOSS" },
+    ],
+    designSystem: {
+      palette: [
+        { hex: "#0d2b5e", label: { es: "Fondo navy", en: "Navy background", ca: "Fons navy" } },
+        { hex: "#081b3d", label: { es: "Navy oscuro (modo dark)", en: "Dark navy (dark mode)", ca: "Navy fosc (mode fosc)" } },
+        { hex: "#d63900", label: { es: "Acento naranja (buscador)", en: "Orange accent (search)", ca: "Accent taronja (cercador)" } },
+        { hex: "#efbc3e", label: { es: "Ámbar (acento modo dark)", en: "Amber (dark-mode accent)", ca: "Ambre (accent mode fosc)" } },
+      ],
+      typography: [
+        { typeface: "IBM Plex Sans", usage: { es: "Interfaz y texto", en: "UI & body text", ca: "Interfície i text" } },
+        { typeface: "IBM Plex Mono", usage: { es: "Cifras y datos (expedientes, importes)", en: "Figures & data (case numbers, amounts)", ca: "Xifres i dades (expedients, imports)" } },
+      ],
+    },
+    page: {
+      heroCta: { en: "View screens", es: "Ver pantallas", ca: "Veure pantalles" },
+      workHeading: {
+        en: "Designing on top of a knowledge graph",
+        es: "Diseñar sobre un grafo de conocimiento",
+        ca: "Dissenyar sobre un graf de coneixement",
+      },
+      workCards: [
+        {
+          label: { en: "Designing on a graph, not a database", es: "Diseñar sobre un grafo, no una base de datos", ca: "Dissenyar sobre un graf, no una base de dades" },
+          desc: {
+            en: "Grant files, organisations, technologies, funding lines and regions aren't separate tables: they're nodes connected to each other. The design had to surface those connections, not just each record on its own.",
+            es: "Expedientes, organizaciones, tecnologías, líneas de financiación y regiones no son tablas aparte: son nodos conectados entre sí. El diseño tenía que dejar ver esas conexiones, no solo cada ficha por separado.",
+            ca: "Expedients, organitzacions, tecnologies, línies de finançament i regions no són taules apart: són nodes connectats entre si. El disseny havia de deixar veure aquestes connexions, no només cada fitxa per separat.",
+          },
+        },
+        {
+          label: { en: "Seven record types, one system", es: "Siete fichas, un mismo sistema", ca: "Set fitxes, un mateix sistema" },
+          desc: {
+            en: "CDTI, Framework Programme, PCTI, Organisation, Funding line, Region, Scientific term: seven different entity types that had to read as part of the same product, not as seven separate designs.",
+            es: "CDTI, Programa Marco, PCTI, Organización, Línea de apoyo, Región, Término científico: siete tipos de entidad distintos que tenían que leerse como parte del mismo producto, no como siete diseños sueltos.",
+            ca: "CDTI, Programa Marc, PCTI, Organització, Línia de suport, Regió, Terme científic: set tipus d'entitat diferents que havien de llegir-se com a part del mateix producte, no com a set dissenys solts.",
+          },
+        },
+        {
+          label: { en: "Fixing what actually broke", es: "Arreglar lo que se rompía de verdad", ca: "Arreglar el que es trencava de veritat" },
+          desc: {
+            en: "Responsive was validated by testing, not by calculating: every breakage on tablet or mobile —a header overlapping, a chart overflowing the screen— was caught on the real product and fixed one at a time.",
+            es: "El responsive se validó probando, no calculando: cada rotura en tableta o móvil —un header que se montaba, un gráfico que se salía de la pantalla— se detectó con el producto real y se corrigió una por una.",
+            ca: "El responsive es va validar provant, no calculant: cada trencament en tauleta o mòbil —una capçalera que es muntava, un gràfic que es sortia de la pantalla— es va detectar amb el producte real i es va corregir un per un.",
+          },
+        },
+        {
+          label: { en: "A thesaurus to organise the knowledge", es: "Un tesauro para organizar el conocimiento", ca: "Un tesaurus per organitzar el coneixement" },
+          desc: {
+            en: "The search engine relies on a thesaurus of scientific-technological terms (a SKOS taxonomy): a hierarchy that had to be browsable and filterable without exposing the complexity behind it.",
+            es: "El buscador se apoya en un tesauro de términos científico-tecnológicos (taxonomía SKOS): una jerarquía que había que poder navegar y filtrar sin que se notara la complejidad detrás.",
+            ca: "El cercador es recolza en un tesaurus de termes científico-tecnològics (taxonomia SKOS): una jerarquia que calia poder navegar i filtrar sense que es notés la complexitat al darrere.",
+          },
+        },
+      ],
+      resultHeading: {
+        en: "Approved by the client, still in progress",
+        es: "Aprobado por el cliente, todavía en marcha",
+        ca: "Aprovat pel client, encara en marxa",
+      },
+      learningsHeading: { en: "What I'm learning", es: "Lo que estoy aprendiendo", ca: "El que estic aprenent" },
+      learningsBadge: { en: "In progress", es: "En progreso", ca: "En curs" },
+      learningsItems: [
+        {
+          en: "Vibe coding on top of a real knowledge graph —not a sample database— taught me to think of the interface as a layer over data I don't fully control: every record has to hold up even when the data filling it changes.",
+          es: "Vibe coding sobre un grafo de conocimiento real —no una base de datos de ejemplo— me enseñó a pensar en la interfaz como una capa encima de datos que yo no controlo del todo: cada ficha tiene que sostenerse aunque el dato que la rellena cambie.",
+          ca: "El vibe coding sobre un graf de coneixement real —no una base de dades d'exemple— em va ensenyar a pensar la interfície com una capa per sobre de dades que no controlo del tot: cada fitxa ha de sostenir-se encara que el dato que l'omple canviï.",
+        },
+        {
+          en: "Seeing so many responsive fixes chained one after another confirmed it doesn't get solved in one pass: it gets uncovered breakage by breakage, testing on real devices, not calculating breakpoints on paper.",
+          es: "Ver tantos ajustes de responsive encadenados, uno detrás de otro, me confirmó que no se resuelve de una vez: se va descubriendo rotura a rotura, probando en dispositivos reales, no calculando puntos de corte sobre el papel.",
+          ca: "Veure tants ajustos de responsive encadenats, un darrere l'altre, em va confirmar que no es resol d'una vegada: es va descobrint trencament a trencament, provant en dispositius reals, no calculant punts de tall sobre el paper.",
+        },
+      ],
+    },
+  },
+  {
     id: "xunta-galicia",
     num: "02",
     title: { en: "Galiciana Thesaurus", es: "Galiciana Thesaurus", ca: "Galiciana Thesaurus" },
@@ -755,7 +876,7 @@ export const projects: Project[] = [
   },
   {
     id: "turisme-jaen",
-    num: "05",
+    num: "06",
     title: { en: "Turisme Jaén", es: "Turisme Jaén", ca: "Turisme Jaén" },
     category: { en: "Web Design", es: "Diseño Web", ca: "Disseny Web" },
     year: "2026",
@@ -1034,7 +1155,7 @@ export const projects: Project[] = [
   },
   {
     id: "mirazur",
-    num: "06",
+    num: "07",
     title: { en: "Mirazur", es: "Mirazur", ca: "Mirazur" },
     category: { en: "Web Design", es: "Diseño Web", ca: "Disseny Web" },
     year: "2025–2026",
@@ -1268,7 +1389,7 @@ export const projects: Project[] = [
   },
   {
     id: "gnoss-ai",
-    num: "07",
+    num: "08",
     title: { en: "GNOSS AI Platform", es: "GNOSS AI Platform", ca: "GNOSS AI Platform" },
     category: { en: "Design System", es: "Sistema de Diseño", ca: "Sistema de Disseny" },
     year: "2026",
@@ -1564,127 +1685,6 @@ export const projects: Project[] = [
           en: "Real deployment — server, domain, GitHub pipeline — usually falls outside the design role. Handling it alone broadened my view of the whole process a lot.",
           es: "El despliegue real — servidor, dominio, pipeline de GitHub — queda habitualmente fuera del rol de diseño. Resolverlo solo amplió mucho mi visión del proceso completo.",
           ca: "El desplegament real — servidor, domini, pipeline de GitHub — queda habitualment fora del rol de disseny. Resoldre-ho sol va ampliar molt la meva visió del procés complet.",
-        },
-      ],
-    },
-  },
-  {
-    id: "bicco",
-    num: "08",
-    title: { en: "Bicco", es: "Bicco", ca: "Bicco" },
-    category: { en: "AI Search Engine", es: "Buscador con IA", ca: "Cercador amb IA" },
-    year: "2026",
-    description: {
-      en: "AI search over an R&D knowledge graph for CDTI, through GNOSS — full interface designed and built with vibe coding, still in progress.",
-      es: "Buscador con IA sobre un grafo de conocimiento de I+D para el CDTI, a través de GNOSS — interfaz completa diseñada y construida con vibe coding, todavía en curso.",
-      ca: "Cercador amb IA sobre un graf de coneixement de R+D per al CDTI, a través de GNOSS — interfície completa dissenyada i construïda amb vibe coding, encara en curs.",
-    },
-    problem: {
-      en: "CDTI manages thousands of R&D grant files, organisations, technologies and funding lines, but that information lived scattered, with no connection between pieces. The brief, again through GNOSS: an interface able to work that knowledge as a graph, not as separate records.",
-      es: "CDTI gestiona miles de expedientes de ayudas a I+D, organizaciones, tecnologías y líneas de financiación, pero esa información vivía dispersa y sin conexión entre sí. El encargo, de nuevo a través de GNOSS: una interfaz capaz de explotar ese conocimiento como un grafo, no como fichas sueltas.",
-      ca: "El CDTI gestiona milers d'expedients d'ajudes a R+D, organitzacions, tecnologies i línies de finançament, però aquesta informació vivia dispersa i sense connexió entre si. L'encàrrec, novament a través de GNOSS: una interfície capaç d'explotar aquest coneixement com un graf, no com a fitxes soltes.",
-    },
-    process: {
-      en: "I designed and built the entire interface with vibe coding —home, faceted search, advanced search, seven entity record types and a technology trends explorer— working on top of the knowledge graph GNOSS builds behind it. The design was refined through real use: header and chart breakages on tablet and mobile, found and fixed one by one.",
-      es: "Diseñé y construí con vibe coding toda la interfaz —home, buscador con facetas, búsqueda avanzada, siete tipos de ficha de entidad y un explorador de tendencias tecnológicas— trabajando sobre el grafo de conocimiento que construye GNOSS detrás. El diseño se ajustó con el uso real: roturas de header y de gráficos en tableta y móvil que se fueron detectando y corrigiendo una a una.",
-      ca: "Vaig dissenyar i construir amb vibe coding tota la interfície —home, cercador amb facetes, cerca avançada, set tipus de fitxa d'entitat i un explorador de tendències tecnològiques— treballant sobre el graf de coneixement que construeix GNOSS al darrere. El disseny es va ajustar amb l'ús real: trencaments de capçalera i de gràfics en tauleta i mòbil que es van anar detectant i corregint un per un.",
-    },
-    result: {
-      en: "Today it's the internal tool CDTI analysts use to explore that connected knowledge. The client has already approved the design; the project is still ongoing.",
-      es: "Hoy es la herramienta de uso interno de los analistas del CDTI para explorar ese conocimiento conectado. El cliente ya ha validado el diseño; el proyecto sigue en marcha.",
-      ca: "Avui és l'eina d'ús intern dels analistes del CDTI per explorar aquest coneixement connectat. El client ja ha validat el disseny; el projecte segueix en marxa.",
-    },
-    tags: ["UX Design", "AI Search", "Vibe Coding"],
-    gradient: "linear-gradient(135deg, #081b3d 0%, #0d2b5e 55%, #183880 100%)",
-    accentColor: "#d63900",
-    cover: "/covers/cover-bicco.svg",
-    coverAlt: {
-      en: "White BICCO logomark on a dark navy gradient background — cover for the Bicco project.",
-      es: "Logotipo blanco de BICCO sobre un fondo degradado azul marino oscuro — portada del proyecto Bicco.",
-      ca: "Logotip blanc de BICCO sobre un fons degradat blau marí fosc — portada del projecte Bicco.",
-    },
-    heroTagline: {
-      en: "an AI search engine to connect CDTI's knowledge",
-      es: "un buscador con IA para conectar el conocimiento del CDTI",
-      ca: "un cercador amb IA per connectar el coneixement del CDTI",
-    },
-    meta: [
-      { labelKey: "client", value: "CDTI" },
-      { labelKey: "year", value: "2026" },
-      { labelKey: "status", value: status.inProgress },
-      { labelKey: "role", value: { en: "UX/UI design · Vibe coding", es: "Diseño UX/UI · Vibe coding", ca: "Disseny UX/UI · Vibe coding" } },
-      { labelKey: "studio", value: "GNOSS" },
-    ],
-    designSystem: {
-      palette: [
-        { hex: "#0d2b5e", label: { es: "Fondo navy", en: "Navy background", ca: "Fons navy" } },
-        { hex: "#081b3d", label: { es: "Navy oscuro (modo dark)", en: "Dark navy (dark mode)", ca: "Navy fosc (mode fosc)" } },
-        { hex: "#d63900", label: { es: "Acento naranja (buscador)", en: "Orange accent (search)", ca: "Accent taronja (cercador)" } },
-        { hex: "#efbc3e", label: { es: "Ámbar (acento modo dark)", en: "Amber (dark-mode accent)", ca: "Ambre (accent mode fosc)" } },
-      ],
-      typography: [
-        { typeface: "IBM Plex Sans", usage: { es: "Interfaz y texto", en: "UI & body text", ca: "Interfície i text" } },
-        { typeface: "IBM Plex Mono", usage: { es: "Cifras y datos (expedientes, importes)", en: "Figures & data (case numbers, amounts)", ca: "Xifres i dades (expedients, imports)" } },
-      ],
-    },
-    page: {
-      heroCta: { en: "View screens", es: "Ver pantallas", ca: "Veure pantalles" },
-      workHeading: {
-        en: "Designing on top of a knowledge graph",
-        es: "Diseñar sobre un grafo de conocimiento",
-        ca: "Dissenyar sobre un graf de coneixement",
-      },
-      workCards: [
-        {
-          label: { en: "Designing on a graph, not a database", es: "Diseñar sobre un grafo, no una base de datos", ca: "Dissenyar sobre un graf, no una base de dades" },
-          desc: {
-            en: "Grant files, organisations, technologies, funding lines and regions aren't separate tables: they're nodes connected to each other. The design had to surface those connections, not just each record on its own.",
-            es: "Expedientes, organizaciones, tecnologías, líneas de financiación y regiones no son tablas aparte: son nodos conectados entre sí. El diseño tenía que dejar ver esas conexiones, no solo cada ficha por separado.",
-            ca: "Expedients, organitzacions, tecnologies, línies de finançament i regions no són taules apart: són nodes connectats entre si. El disseny havia de deixar veure aquestes connexions, no només cada fitxa per separat.",
-          },
-        },
-        {
-          label: { en: "Seven record types, one system", es: "Siete fichas, un mismo sistema", ca: "Set fitxes, un mateix sistema" },
-          desc: {
-            en: "CDTI, Framework Programme, PCTI, Organisation, Funding line, Region, Scientific term: seven different entity types that had to read as part of the same product, not as seven separate designs.",
-            es: "CDTI, Programa Marco, PCTI, Organización, Línea de apoyo, Región, Término científico: siete tipos de entidad distintos que tenían que leerse como parte del mismo producto, no como siete diseños sueltos.",
-            ca: "CDTI, Programa Marc, PCTI, Organització, Línia de suport, Regió, Terme científic: set tipus d'entitat diferents que havien de llegir-se com a part del mateix producte, no com a set dissenys solts.",
-          },
-        },
-        {
-          label: { en: "Fixing what actually broke", es: "Arreglar lo que se rompía de verdad", ca: "Arreglar el que es trencava de veritat" },
-          desc: {
-            en: "Responsive was validated by testing, not by calculating: every breakage on tablet or mobile —a header overlapping, a chart overflowing the screen— was caught on the real product and fixed one at a time.",
-            es: "El responsive se validó probando, no calculando: cada rotura en tableta o móvil —un header que se montaba, un gráfico que se salía de la pantalla— se detectó con el producto real y se corrigió una por una.",
-            ca: "El responsive es va validar provant, no calculant: cada trencament en tauleta o mòbil —una capçalera que es muntava, un gràfic que es sortia de la pantalla— es va detectar amb el producte real i es va corregir un per un.",
-          },
-        },
-        {
-          label: { en: "A thesaurus to organise the knowledge", es: "Un tesauro para organizar el conocimiento", ca: "Un tesaurus per organitzar el coneixement" },
-          desc: {
-            en: "The search engine relies on a thesaurus of scientific-technological terms (a SKOS taxonomy): a hierarchy that had to be browsable and filterable without exposing the complexity behind it.",
-            es: "El buscador se apoya en un tesauro de términos científico-tecnológicos (taxonomía SKOS): una jerarquía que había que poder navegar y filtrar sin que se notara la complejidad detrás.",
-            ca: "El cercador es recolza en un tesaurus de termes científico-tecnològics (taxonomia SKOS): una jerarquia que calia poder navegar i filtrar sense que es notés la complexitat al darrere.",
-          },
-        },
-      ],
-      resultHeading: {
-        en: "Approved by the client, still in progress",
-        es: "Aprobado por el cliente, todavía en marcha",
-        ca: "Aprovat pel client, encara en marxa",
-      },
-      learningsHeading: { en: "What I'm learning", es: "Lo que estoy aprendiendo", ca: "El que estic aprenent" },
-      learningsBadge: { en: "In progress", es: "En progreso", ca: "En curs" },
-      learningsItems: [
-        {
-          en: "Vibe coding on top of a real knowledge graph —not a sample database— taught me to think of the interface as a layer over data I don't fully control: every record has to hold up even when the data filling it changes.",
-          es: "Vibe coding sobre un grafo de conocimiento real —no una base de datos de ejemplo— me enseñó a pensar en la interfaz como una capa encima de datos que yo no controlo del todo: cada ficha tiene que sostenerse aunque el dato que la rellena cambie.",
-          ca: "El vibe coding sobre un graf de coneixement real —no una base de dades d'exemple— em va ensenyar a pensar la interfície com una capa per sobre de dades que no controlo del tot: cada fitxa ha de sostenir-se encara que el dato que l'omple canviï.",
-        },
-        {
-          en: "Seeing so many responsive fixes chained one after another confirmed it doesn't get solved in one pass: it gets uncovered breakage by breakage, testing on real devices, not calculating breakpoints on paper.",
-          es: "Ver tantos ajustes de responsive encadenados, uno detrás de otro, me confirmó que no se resuelve de una vez: se va descubriendo rotura a rotura, probando en dispositivos reales, no calculando puntos de corte sobre el papel.",
-          ca: "Veure tants ajustos de responsive encadenats, un darrere l'altre, em va confirmar que no es resol d'una vegada: es va descobrint trencament a trencament, provant en dispositius reals, no calculant punts de tall sobre el paper.",
         },
       ],
     },
