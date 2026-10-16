@@ -195,6 +195,8 @@ export default function Magazine() {
 
       <div className="revista-book-wrap" ref={bookWrapRef}>
         <div className="revista-sheen" aria-hidden="true" />
+        <div className="revista-spine" aria-hidden="true" />
+        <div className="revista-book-edge" aria-hidden="true" />
         <div
           className={`revista-corner-shadow revista-corner-shadow--left${activeCorner === "left" ? " is-active" : ""}`}
           aria-hidden="true"
