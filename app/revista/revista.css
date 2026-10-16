@@ -55,29 +55,40 @@
 }
 
 /* ── The book itself ──────────────────────────────────────────────────────
-   Sized by HEIGHT, never by viewport width — width falls out of the 2:3
-   single-page ratio (4:3 for the open two-page spread, real book physics,
-   intentionally wider than tall). A plain rotateZ tilt (no rotateX/Y, no
-   perspective) keeps the box a true rectangle, not a 3D-skewed trapezoid.
+   Sized by HEIGHT, never by viewport width — width falls out of the 3:2
+   single-page ratio (3:1 for the open two-page spread: two landscape
+   pages side by side double the width, height unchanged). Each page reads
+   as a wide magazine/photo page (3:2, the classic print ratio) rather
+   than a portrait book page or an ultra-panoramic screen strip. A plain
+   rotateZ tilt (no rotateX/Y, no perspective) keeps the box a true
+   rectangle, not a 3D-skewed trapezoid.
 
-   Spiked with Playwright (real press/move/release drags at the corners,
-   not clicks) directly against the live dev server before settling here:
-   rotateZ(-3deg) reliably broke StPageFlip's corner-drag hit-testing (0/3
-   drags completed a flip, vs 3/3 at rotateZ(0deg)); rotateZ(-1.5deg) was
-   reliable again (3/3, from multiple corners). The tilt stays constant at
-   all times, including mid-drag — no flattening needed. */
+   Re-spiked with Playwright (real press/move/release drags, multiple
+   corners, 3 fresh-page trials each — NOT a live style override, because
+   StPageFlip reads/caches its hit-test geometry once on mount and won't
+   re-measure a transform changed after the fact) after switching from the
+   old 2:3/4:3 portrait ratio to this 3:2/3:1 landscape one: the same
+   rotateZ(-1.5deg) that worked before broke two of the four corners here
+   (bottom-right and top-left: 0/3 each; top-right/bottom-left: 3/3) — a
+   wider spread means the same small angle displaces the far corners by
+   far more absolute pixels, enough to miss StPageFlip's corner hit-test
+   on the "short" diagonal. rotateZ(-0.75deg) was reliable from all four
+   corners (3/3 each, fresh reload). If a future ratio change breaks the
+   drag again, re-test the same way (fresh page load per trial) and
+   reduce the tilt further. The tilt stays constant at all times,
+   including mid-drag — no flattening needed. */
 .revista-book-wrap {
   position: relative;
   z-index: 1;
-  /* Height-driven, but also capped so the ratio-derived width (4:3 open
-     spread here, 2:3 single page on mobile below) never exceeds the
-     viewport — on a tall narrow phone, 85vh of height alone can compute a
+  /* Height-driven, but also capped so the ratio-derived width (3:1 open
+     spread here, 3:2 single page on mobile below) never exceeds the
+     viewport — on a narrow phone, 85vh of height alone can compute a
      width wider than the screen; this picks whichever bound is smaller
      while keeping the ratio exact (no squish). */
-  height: min(clamp(560px, 85vh, 920px), calc(92vw * 0.75));
-  aspect-ratio: 4 / 3;
+  height: min(clamp(560px, 85vh, 920px), calc(92vw * 0.3334));
+  aspect-ratio: 3 / 1;
   margin: 0 auto;
-  transform: rotateZ(-1.5deg);
+  transform: rotateZ(-0.75deg);
   box-shadow:
     24px 48px 90px -20px rgba(26, 23, 20, 0.28),
     8px 16px 30px -8px rgba(26, 23, 20, 0.14);
@@ -178,14 +189,32 @@
 }
 
 /* ── Mobile (≤900px, same breakpoint as the rest of the site) — single
-   page at a time, so the book container is sized as ONE 2:3 page instead
-   of a 4:3 spread. ── */
+   page at a time, so the book container is sized as ONE 3:2 page instead
+   of a 3:1 spread. ── */
 @media (max-width: 900px) {
   .revista-book-wrap {
-    height: min(clamp(480px, 82vh, 720px), calc(92vw * 1.5));
-    aspect-ratio: 2 / 3;
+    height: min(clamp(480px, 82vh, 720px), calc(92vw * 0.6667));
+    aspect-ratio: 3 / 2;
   }
-  .revista-page--text .revista-title-block { top: 30% !important; bottom: 20% !important; }
+  /* A single 3:2 page is short on a portrait phone (as little as
+     ~230–260px tall) — nowhere near enough for the title+subtitle+
+     description+link block at its desktop line-clamps (2-line title, up
+     to ~220px alone) plus the credits row and still leave the title
+     block breathing room. Two deliberate trims, not present on desktop:
+     the title drops to a single line (-webkit-line-clamp, titles here
+     are short enough that this rarely truncates, and ellipsis is a safe
+     fallback when it does), and the secondary credits row (client/year/
+     role/stack — already repeated on the full case-study page behind
+     "Ver el caso completo") is hidden rather than left to overlap. */
+  .revista-page--text .revista-title-block { top: 29% !important; bottom: 10% !important; }
+  .revista-page--text .revista-title {
+    -webkit-line-clamp: 1 !important;
+    margin-bottom: 0.3rem !important;
+  }
+  .revista-page--text .revista-subtitle { margin-bottom: 0.4rem !important; }
+  .revista-page--text .revista-description { line-height: 1.3 !important; }
+  .revista-page--text .revista-cta { margin-top: 0.4rem !important; }
+  .revista-page--text .revista-credits { display: none !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
