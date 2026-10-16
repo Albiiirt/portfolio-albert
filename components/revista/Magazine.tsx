@@ -27,6 +27,26 @@ function useMediaQuery(query: string) {
   return matches;
 }
 
+// The site has no shared theme context/hook — Navigation.tsx just flips
+// `document.documentElement.dataset.theme` directly on click, with no event
+// of its own. A MutationObserver on that one attribute is the only way for
+// this component to notice a toggle that happens while already on /revista.
+function useIsDarkTheme() {
+  const [isDark, setIsDark] = useState(false);
+  useEffect(() => {
+    const read = () => document.documentElement.dataset.theme === "dark";
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsDark(read());
+    const observer = new MutationObserver(() => setIsDark(read()));
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+    return () => observer.disconnect();
+  }, []);
+  return isDark;
+}
+
 // Minimal shape of what we actually call on the StPageFlip instance/ref —
 // react-pageflip itself only types these as `any`.
 interface PageFlipController {
@@ -39,6 +59,14 @@ interface FlipBookHandle {
 interface FlipEvent {
   data: number;
 }
+// react-pageflip types onChangeState's event as `any` too — the real values
+// are PageFlip's own FlippingState, confirmed in
+// node_modules/page-flip/src/PageFlip.ts (`updateState`) and re-exported as
+// `PageState` in node_modules/react-pageflip/build/html-flip-book/settings.d.ts.
+type FoldState = "user_fold" | "fold_corner" | "flipping" | "read";
+interface ChangeStateEvent {
+  data: FoldState;
+}
 
 export default function Magazine() {
   const { lang } = useLang();
@@ -47,6 +75,19 @@ export default function Magazine() {
   const [currentPage, setCurrentPage] = useState(0);
   const isMobile = useMediaQuery(MOBILE_QUERY);
   const reducedMotion = useMediaQuery(REDUCED_MOTION_QUERY);
+  const isDarkTheme = useIsDarkTheme();
+
+  // A black outer/inner shadow barely registers against the near-black
+  // dark-mode page background, so it needs more intensity there to read at
+  // all — while on the light (paper-white) page a lower value already looks
+  // convincingly heavy. Flat 0.55 (the library default) under-sold the fold
+  // in both themes.
+  const maxShadowOpacity = isDarkTheme ? 0.75 : 0.85;
+
+  // Whether a fold gesture (corner hover, user drag, or the settling
+  // flip animation) is currently active — drives .revista-fold-glint's
+  // visibility. See onChangeState below; "read" is the only idle state.
+  const [foldActive, setFoldActive] = useState(false);
 
   // react-pageflip only ever constructs its underlying PageFlip instance
   // once (guarded by `if (!pageFlip.current)` in its own source) — props
@@ -72,6 +113,10 @@ export default function Magazine() {
 
   const handleFlip = useCallback((e: FlipEvent) => {
     setCurrentPage(e.data);
+  }, []);
+
+  const handleChangeState = useCallback((e: ChangeStateEvent) => {
+    setFoldActive(e.data !== "read");
   }, []);
 
   const goPrev = useCallback(() => {
@@ -108,8 +153,25 @@ export default function Magazine() {
 
       <div className="revista-book-wrap">
         <div className="revista-sheen" aria-hidden="true" />
+        <div
+          className={`revista-fold-glint revista-fold-glint--left${foldActive ? " is-active" : ""}`}
+          aria-hidden="true"
+        />
+        <div
+          className={`revista-fold-glint revista-fold-glint--right${foldActive ? " is-active" : ""}`}
+          aria-hidden="true"
+        />
         {readyToMount && (
           <HTMLFlipBook
+            // react-pageflip/StPageFlip constructs its PageFlip instance once
+            // (guarded internally) and never re-reads props like
+            // maxShadowOpacity after that — exactly the same one-shot-read
+            // issue usePortrait already has above. Keying on the theme forces
+            // React to unmount/remount HTMLFlipBook when it changes, so the
+            // new maxShadowOpacity is actually picked up. startPage is read
+            // from currentPage (instead of the fixed 0 below) so that remount
+            // reopens on the same spread rather than jumping back to the start.
+            key={isDarkTheme ? "dark" : "light"}
             ref={bookRef}
             className="revista-flipbook"
             style={{}}
@@ -134,7 +196,7 @@ export default function Magazine() {
             usePortrait={isMobile}
             startZIndex={0}
             autoSize
-            maxShadowOpacity={0.55}
+            maxShadowOpacity={maxShadowOpacity}
             showCover={false}
             mobileScrollSupport
             clickEventForward
@@ -142,8 +204,9 @@ export default function Magazine() {
             swipeDistance={30}
             showPageCorners
             disableFlipByClick={false}
-            startPage={0}
+            startPage={currentPage}
             onFlip={handleFlip}
+            onChangeState={handleChangeState}
           >
             <RevistaTextPage
               project={IDENTITY_PROJECT}

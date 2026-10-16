@@ -148,6 +148,60 @@
   margin: 0 auto;
 }
 
+/* The project never imports StPageFlip's own base stylesheet (page-flip.css/
+   stPageFlip.css — deliberately not pulled straight from node_modules, a
+   fragile internal path across library updates). That sheet is what gives
+   `position: absolute` to the shadow layers StPageFlip injects itself
+   (.stf__outerShadow/.stf__innerShadow/.stf__hardShadow/.stf__hardInnerShadow)
+   and to .stf__item (the page actively being dragged) — without it they're
+   `position: static` by default and the library's own inline transform/
+   clip-path (written assuming `absolute`) places them wrong. Selectors
+   verified against node_modules/page-flip/src/Style/stPageFlip.css and
+   node_modules/page-flip/src/Render/HTMLRender.ts (createShadows()), both of
+   which are the library's own source, not a guess. */
+.revista-flipbook.stf__parent { position: relative; }
+.revista-flipbook .stf__item { position: absolute; transform-style: preserve-3d; }
+.revista-flipbook .stf__outerShadow,
+.revista-flipbook .stf__innerShadow,
+.revista-flipbook .stf__hardShadow,
+.revista-flipbook .stf__hardInnerShadow { position: absolute; left: 0; top: 0; }
+
+/* ── Fold glint (dark mode mainly) ───────────────────────────────────────
+   A black fold shadow barely shows against the near-black dark background,
+   so instead of pushing it further we add a thin rasant highlight at the
+   book's two outer edges — the only two edges StPageFlip ever folds from
+   (showPageCorners grabs a bottom corner on either side; see the existing
+   .revista-fold-corner--left/--right zones in RevistaPages.tsx). We don't
+   track the fold's real-time angle/position (StPageFlip's onChangeState only
+   reports a state string, not angle or which corner — see
+   node_modules/react-pageflip/build/html-flip-book/settings.d.ts, PageState),
+   so this is a fixed-opacity highlight toggled by foldActive in Magazine.tsx,
+   not something that tracks the drag frame by frame. Same value in both
+   themes — it's light, not shadow, so it doesn't need to vary by theme. */
+.revista-fold-glint {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 15; /* above StPageFlip's own layers (startZIndex + up to 10) */
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.revista-fold-glint.is-active { opacity: 1; }
+
+.revista-fold-glint--left {
+  left: 0;
+  width: 4.5%; /* ~8-10% of one page's width in the 2-page desktop spread */
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.18), transparent 35%);
+}
+
+.revista-fold-glint--right {
+  right: 0;
+  width: 4.5%;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.18), transparent 35%);
+}
+
 .revista-page {
   background: var(--bg);
   color: var(--text);
@@ -195,6 +249,12 @@
   .revista-book-wrap {
     height: min(clamp(480px, 82vh, 720px), calc(92vw * 0.6667));
     aspect-ratio: 3 / 2;
+  }
+  /* The wrap is ONE page here (not a 2-page spread), so 8-10% of a page's
+     width is 8-10% of the wrap directly, not the ~4.5% used on desktop. */
+  .revista-fold-glint--left,
+  .revista-fold-glint--right {
+    width: 9%;
   }
   /* A single 3:2 page is short on a portrait phone (as little as
      ~230–260px tall) — nowhere near enough for the title+subtitle+
