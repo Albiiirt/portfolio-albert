@@ -3,6 +3,13 @@ import { XuntaVideo, TOTAL_DURATION as XUNTA_DURATION } from "./xunta/XuntaVideo
 import { MadridVideo, TOTAL_DURATION as MADRID_DURATION } from "./madrid/MadridVideo";
 import { BullipediaVideo, TOTAL_DURATION as BULLIPEDIA_DURATION } from "./bullipedia/BullipediaVideo";
 import { HeroTeaserVideo, TOTAL_DURATION as HERO_TEASER_DURATION } from "./hero-teaser/HeroTeaserVideo";
+import { LogoRevealVideo } from "./logo-reveal/LogoRevealVideo";
+import {
+  BICCO_LOGO_REVEAL_PROPS,
+  BICCO_LOGO_REVEAL_DURATION,
+  GNOSS_LOGO_REVEAL_PROPS,
+  GNOSS_LOGO_REVEAL_DURATION,
+} from "./logo-reveal/presets";
 
 // Registers every Remotion composition for this repo:
 // - XuntaUnificador: Galiciana Thesaurus case study (client: Xunta de
@@ -17,6 +24,13 @@ import { HeroTeaserVideo, TOTAL_DURATION as HERO_TEASER_DURATION } from "./hero-
 //   typography), each a factual sentence over real b-roll/art with only a
 //   brief flash of the real product, embedded in components/Hero.tsx in
 //   place of <PlanetOrbit /> for motion-OK users.
+// - BiccoLogoReveal / GnossLogoReveal: the same reusable LogoRevealVideo
+//   component (group-by-group clip-path wipe, not a stroke trace — both
+//   logos are solid fills) with per-project props, rendered to
+//   public/covers/cover-bicco.mp4 / cover-gnoss.mp4 and used ONLY as the
+//   /proyectos grid card's cover video (components/proyectos's grid,
+//   NOT BiccoPage.tsx/GnossPage.tsx's Heroes, which keep their own
+//   framer-motion text animation untouched).
 export function RemotionRoot() {
   return (
     <>
@@ -51,6 +65,24 @@ export function RemotionRoot() {
         fps={30}
         width={1920}
         height={1080}
+      />
+      <Composition
+        id="BiccoLogoReveal"
+        component={LogoRevealVideo}
+        durationInFrames={BICCO_LOGO_REVEAL_DURATION}
+        fps={30}
+        width={1600}
+        height={1000}
+        defaultProps={BICCO_LOGO_REVEAL_PROPS}
+      />
+      <Composition
+        id="GnossLogoReveal"
+        component={LogoRevealVideo}
+        durationInFrames={GNOSS_LOGO_REVEAL_DURATION}
+        fps={30}
+        width={1600}
+        height={1000}
+        defaultProps={GNOSS_LOGO_REVEAL_PROPS}
       />
     </>
   );

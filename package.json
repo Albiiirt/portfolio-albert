@@ -11,7 +11,9 @@
     "remotion:render": "remotion render remotion/index.ts XuntaUnificador public/videos/xunta-unificador.mp4",
     "remotion:render:madrid": "remotion render remotion/index.ts MadridEnoturismo public/videos/madrid-enoturismo.mp4",
     "remotion:render:bullipedia": "remotion render remotion/index.ts BullipediaWalkthrough public/videos/bullipedia-walkthrough.mp4",
-    "remotion:render:hero-teaser": "remotion render remotion/index.ts HeroTeaser public/videos/hero-teaser.mp4"
+    "remotion:render:hero-teaser": "remotion render remotion/index.ts HeroTeaser public/videos/hero-teaser.mp4",
+    "remotion:render:bicco-logo": "remotion render remotion/index.ts BiccoLogoReveal public/covers/cover-bicco.mp4",
+    "remotion:render:gnoss-logo": "remotion render remotion/index.ts GnossLogoReveal public/covers/cover-gnoss.mp4"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

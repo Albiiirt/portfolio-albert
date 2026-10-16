@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
@@ -25,6 +25,11 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
   const { lang } = useLang();
   const tx = t[lang].work;
   const [hovered, setHovered] = useState(false);
+  const reducedMotion = useReducedMotion();
+  // coverVideo (one-shot logo-reveal, no loop) only plays for motion-OK
+  // users; prefers-reduced-motion falls straight to the static `cover`
+  // image, same fallback branch used when there's no video at all.
+  const showCoverVideo = Boolean(project.coverVideo) && !reducedMotion;
 
   return (
     <Link
@@ -43,7 +48,8 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
         width: "100%",
       }}
     >
-      {/* Cover: video when available, static image otherwise */}
+      {/* Cover: looping walkthrough video, one-shot logo-reveal video, or
+          static image — in that priority order. */}
       {(project.video || project.cover) && (
         <motion.div
           animate={{ scale: hovered ? 1.04 : 1 }}
@@ -56,6 +62,14 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
             >
               <source src={project.video} type="video/mp4" />
+            </video>
+          ) : showCoverVideo ? (
+            <video
+              autoPlay muted playsInline
+              poster={project.cover}
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+            >
+              <source src={project.coverVideo} type="video/mp4" />
             </video>
           ) : (
             <Image

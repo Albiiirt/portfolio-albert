@@ -233,6 +233,13 @@ export type Project = {
   // it. Only filled in for projects that actually have a `cover` image.
   coverAlt?: LocalizedText;
   video?: string;
+  // Separate from `video` (looping walkthrough clip used by the home
+  // featured section / related-projects strip): this is a single
+  // non-looping logo-reveal animation over the SAME static `cover`, shown
+  // only by the /proyectos grid card (app/proyectos/page.tsx), gated
+  // behind prefers-reduced-motion. `cover` stays set and doubles as the
+  // <video>'s poster / reduced-motion fallback.
+  coverVideo?: string;
   screens?: ProjectScreen[];
   screensFrame?: "mobile" | "desktop";
   desktopWalkthrough?: DesktopWalkthroughStep[];
@@ -464,6 +471,7 @@ export const projects: Project[] = [
     gradient: "linear-gradient(135deg, #081b3d 0%, #0d2b5e 55%, #183880 100%)",
     accentColor: "#d63900",
     cover: "/covers/cover-bicco.svg",
+    coverVideo: "/covers/cover-bicco.mp4",
     coverAlt: {
       en: "White BICCO logomark on a dark navy gradient background — cover for the Bicco project.",
       es: "Logotipo blanco de BICCO sobre un fondo degradado azul marino oscuro — portada del proyecto Bicco.",
@@ -1455,6 +1463,7 @@ export const projects: Project[] = [
       ],
     },
     cover: "/covers/cover-gnoss.svg",
+    coverVideo: "/covers/cover-gnoss.mp4",
     coverAlt: {
       en: "Cover with the GNOSS logo in white on a dark background.",
       es: "Portada con el logotipo de GNOSS en blanco sobre un fondo oscuro.",
