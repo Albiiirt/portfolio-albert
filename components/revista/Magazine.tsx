@@ -5,8 +5,7 @@ import dynamic from "next/dynamic";
 import { useLang } from "@/lib/LanguageContext";
 import { t } from "@/data/translations";
 import { projects } from "@/data/projects";
-import { IDENTITY_PROJECT } from "./helpers";
-import { RevistaClosing, RevistaImagePage, RevistaTextPage } from "./RevistaPages";
+import { RevistaImagePage, RevistaTextPage } from "./RevistaPages";
 
 // StPageFlip reads the DOM/canvas directly — never render it on the server.
 const HTMLFlipBook = dynamic(() => import("react-pageflip"), { ssr: false });
@@ -61,8 +60,9 @@ interface FlipEvent {
 }
 // react-pageflip types onChangeState's event as `any` too — the real values
 // are PageFlip's own FlippingState, confirmed in
-// node_modules/page-flip/src/PageFlip.ts (`updateState`) and re-exported as
-// `PageState` in node_modules/react-pageflip/build/html-flip-book/settings.d.ts.
+// node_modules/page-flip/src/Flip/Flip.ts. "fold_corner" is the resting
+// hover/peek state (see foldActive below); "user_fold" and "flipping" are
+// an active drag/turn.
 type FoldState = "user_fold" | "fold_corner" | "flipping" | "read";
 interface ChangeStateEvent {
   data: FoldState;
@@ -84,10 +84,56 @@ export default function Magazine() {
   // in both themes.
   const maxShadowOpacity = isDarkTheme ? 0.75 : 0.85;
 
-  // Whether a fold gesture (corner hover, user drag, or the settling
-  // flip animation) is currently active — drives .revista-fold-glint's
-  // visibility. See onChangeState below; "read" is the only idle state.
-  const [foldActive, setFoldActive] = useState(false);
+  // StPageFlip's own cast shadow (outerShadow/innerShadow, driven by
+  // maxShadowOpacity above) is computed from the same "progress" as the
+  // fold's width — fine mid-drag, but the resting corner-peek hint
+  // (showPageCorners, fold_corner state) fixes that progress to a tiny
+  // sliver (fixedCornerSize = 50px in node_modules/page-flip/src/Flip/
+  // Flip.ts, showCorner()), so the library's own shadow there is only a
+  // few px wide and effectively invisible — confirmed by reading its
+  // shadow.width formula, not guessed. .revista-corner-shadow is a second,
+  // independent shadow anchored to the corner actually being turned,
+  // visible whenever StPageFlip reports anything other than "read".
+  const bookWrapRef = useRef<HTMLDivElement | null>(null);
+  const lastClientXRef = useRef<number | null>(null);
+  const [activeCorner, setActiveCorner] = useState<"left" | "right" | null>(null);
+
+  // Lightweight, always-on position tracking (no React state, so no
+  // re-renders) — just enough to know, the instant a fold starts, which
+  // half of the book the pointer is on.
+  useEffect(() => {
+    const onMouseMove = (e: MouseEvent) => {
+      lastClientXRef.current = e.clientX;
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches[0]) lastClientXRef.current = e.touches[0].clientX;
+    };
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("touchmove", onTouchMove);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("touchmove", onTouchMove);
+    };
+  }, []);
+
+  // onChangeState's event only carries a state string, never which corner
+  // (confirmed in Flip.ts/Settings.ts — PageState has no corner field), so
+  // the corner is inferred from pointer position instead: which half of the
+  // book the cursor/touch is on when the fold starts. Good enough since a
+  // forward flip is always dragged from the right page's corner and a
+  // backward one from the left, so the pointer doesn't cross the midline
+  // mid-gesture.
+  const handleChangeState = useCallback((e: ChangeStateEvent) => {
+    if (e.data === "read") {
+      setActiveCorner(null);
+      return;
+    }
+    const wrap = bookWrapRef.current;
+    const clientX = lastClientXRef.current;
+    if (!wrap || clientX === null) return;
+    const rect = wrap.getBoundingClientRect();
+    setActiveCorner(clientX < rect.left + rect.width / 2 ? "left" : "right");
+  }, []);
 
   // react-pageflip only ever constructs its underlying PageFlip instance
   // once (guarded by `if (!pageFlip.current)` in its own source) — props
@@ -103,20 +149,14 @@ export default function Magazine() {
     setReadyToMount(true);
   }, []);
 
-  // Page 0/1 is the opening identity spread (Albert Canadas + the first
-  // project's own photo, see IDENTITY_PROJECT in helpers.ts); every real
-  // project — including that first one — still gets its own full spread
-  // right after, so the 01–07 numbering stays intact. Projects with
-  // subProjects (elBulli, Mirazur) render a single spread each, built from
-  // the parent's own fields only — their tabs live on /proyectos.
-  const pageCount = 2 + projects.length * 2 + 1; // identity spread + project spreads + colophon
+  // No cover, no closing page — just the projects, each a 2-page spread
+  // (text + image). Projects with subProjects (elBulli, Mirazur) render a
+  // single spread each, built from the parent's own fields only — their
+  // tabs live on /proyectos.
+  const pageCount = projects.length * 2;
 
   const handleFlip = useCallback((e: FlipEvent) => {
     setCurrentPage(e.data);
-  }, []);
-
-  const handleChangeState = useCallback((e: ChangeStateEvent) => {
-    setFoldActive(e.data !== "read");
   }, []);
 
   const goPrev = useCallback(() => {
@@ -139,26 +179,28 @@ export default function Magazine() {
 
   const flippingTime = reducedMotion ? 50 : 700;
 
-  const currentProjectTitle = useMemo(() => {
-    if (currentPage <= 1) return IDENTITY_PROJECT.title[lang];
-    if (currentPage === pageCount - 1) return tx.revista.closingHeading;
-    const projectIndex = Math.floor((currentPage - 2) / 2);
-    return projects[projectIndex]?.title[lang] ?? null;
-  }, [currentPage, pageCount, lang, tx]);
+  // Which project (1-based) the open spread belongs to — two StPageFlip
+  // pages per project, so this is page-pair index, not the raw page number.
+  const currentProjectIndex = Math.floor(currentPage / 2);
+
+  const currentProjectTitle = useMemo(
+    () => projects[currentProjectIndex]?.title[lang] ?? null,
+    [currentProjectIndex, lang]
+  );
 
   return (
     <div className="revista-stage" role="region" aria-label="Revista de proyectos">
       <div className="blob blob-1" aria-hidden="true" />
       <div className="blob blob-3" aria-hidden="true" />
 
-      <div className="revista-book-wrap">
+      <div className="revista-book-wrap" ref={bookWrapRef}>
         <div className="revista-sheen" aria-hidden="true" />
         <div
-          className={`revista-fold-glint revista-fold-glint--left${foldActive ? " is-active" : ""}`}
+          className={`revista-corner-shadow revista-corner-shadow--left${activeCorner === "left" ? " is-active" : ""}`}
           aria-hidden="true"
         />
         <div
-          className={`revista-fold-glint revista-fold-glint--right${foldActive ? " is-active" : ""}`}
+          className={`revista-corner-shadow revista-corner-shadow--right${activeCorner === "right" ? " is-active" : ""}`}
           aria-hidden="true"
         />
         {readyToMount && (
@@ -208,17 +250,10 @@ export default function Magazine() {
             onFlip={handleFlip}
             onChangeState={handleChangeState}
           >
-            <RevistaTextPage
-              project={IDENTITY_PROJECT}
-              lang={lang}
-              linkOverride={{ href: "/proyectos", label: tx.revista.closingLink }}
-            />
-            <RevistaImagePage project={projects[0]} lang={lang} />
             {projects.map((project) => [
               <RevistaTextPage key={`${project.id}-text`} project={project} lang={lang} />,
               <RevistaImagePage key={`${project.id}-image`} project={project} lang={lang} />,
             ])}
-            <RevistaClosing lang={lang} />
           </HTMLFlipBook>
         )}
       </div>
@@ -237,7 +272,7 @@ export default function Magazine() {
         </button>
 
         <span className="revista-counter" aria-hidden="true">
-          {String(currentPage + 1).padStart(2, "0")} / {String(pageCount).padStart(2, "0")}
+          {String(currentProjectIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
         </span>
 
         <button

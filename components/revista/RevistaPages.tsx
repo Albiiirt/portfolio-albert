@@ -8,34 +8,27 @@ import type { Project } from "@/data/projects";
 import { t } from "@/data/translations";
 import { getCoverImage, getProjectLink, getSubtitle, metaValueText, pickCredits } from "./helpers";
 
-// ── Left (text) page of a project spread — also reused, unchanged, for the
-// opening identity spread (page 0) with IDENTITY_PROJECT (see helpers.ts):
-// no new template, just empty num/category/meta so the eyebrow and credits
-// row gracefully don't render, plus an explicit link override so "Ver el
-// caso completo" doesn't point at a non-existent /proyectos/identity. ──────
+// ── Left (text) page of a project spread ─────────────────────────────────
 type TextPageProps = {
   project: Project;
   lang: Lang;
-  linkOverride?: { href: string; label: string };
 };
 
 export const RevistaTextPage = forwardRef<HTMLDivElement, TextPageProps>(function RevistaTextPage(
-  { project, lang, linkOverride },
+  { project, lang },
   ref
 ) {
   const tx = t[lang];
   const credits = pickCredits(project.meta);
   const subtitle = getSubtitle(project, lang);
-  const link = linkOverride
-    ? { ...linkOverride, external: false }
-    : getProjectLink(project, lang, { liveLink: tx.revista.liveLink, caseLink: tx.revista.caseLink });
+  const link = getProjectLink(project, lang, { liveLink: tx.revista.liveLink, caseLink: tx.revista.caseLink });
   const eyebrow = [project.num, project.category[lang]].filter(Boolean).join(" · ");
 
   return (
     <div ref={ref} className="revista-page revista-page--text">
       <div style={{ position: "absolute", inset: 0, padding: "11% 12%" }}>
-        {/* Eyebrow — omitted entirely when a page has no num/category
-            (the identity spread) rather than rendering a stray " · ". */}
+        {/* Eyebrow — omitted entirely when a project has no num/category,
+            rather than rendering a stray " · ". */}
         {eyebrow && (
           <p
             style={{
@@ -314,58 +307,6 @@ export const RevistaImagePage = forwardRef<HTMLDivElement, ImagePageProps>(funct
       )}
 
       <div className="revista-fold-corner revista-fold-corner--right" aria-hidden="true" />
-    </div>
-  );
-});
-
-// ── Closing colophon page ────────────────────────────────────────────────────
-export const RevistaClosing = forwardRef<HTMLDivElement, { lang: Lang }>(function RevistaClosing(
-  { lang },
-  ref
-) {
-  const tx = t[lang];
-  return (
-    <div ref={ref} className="revista-page">
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "1.25rem",
-          padding: "11% 12%",
-          textAlign: "center",
-        }}
-      >
-        <h2
-          style={{
-            fontFamily: "var(--font-serif-revista)",
-            fontStyle: "italic",
-            fontWeight: 400,
-            letterSpacing: 0,
-            fontSize: "clamp(1.7rem, 8cqw, 2.4rem)",
-            margin: 0,
-            color: "var(--text)",
-          }}
-        >
-          {tx.revista.closingHeading}
-        </h2>
-        <Link
-          href="/proyectos"
-          style={{
-            fontSize: "0.85rem",
-            fontWeight: 600,
-            color: "var(--text)",
-            textDecoration: "none",
-            borderBottom: "1px solid var(--border-mid)",
-            paddingBottom: "2px",
-          }}
-        >
-          {tx.revista.closingLink}
-        </Link>
-      </div>
     </div>
   );
 });

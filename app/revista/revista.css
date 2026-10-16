@@ -144,6 +144,52 @@
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 40%);
 }
 
+/* Cast shadow for the two turnable corners (showPageCorners). StPageFlip
+   draws its own cast shadow (.stf__outerShadow/.stf__innerShadow, see the
+   base-stylesheet fix below) from the same "progress" value that drives the
+   fold's width — read straight from its source
+   (node_modules/page-flip/src/Render/Render.ts, setShadowData): width scales
+   with progress, and the resting corner-peek hint (fold_corner state) pins
+   progress to a fixed ~50px sliver, so the library's own shadow there is
+   only a few px wide and effectively invisible. This is a second, simpler
+   shadow anchored directly to each corner, independent of that progress
+   value, toggled by Magazine.tsx's onChangeState (foldActive) so it covers
+   both the resting hover peek and an active drag alike. z-index 4 — the
+   same gap StPageFlip's own scheme already leaves between the covered page
+   (3) and the flipping page (5), so it reads as cast onto the page below
+   without darkening the flap sitting on top of it. */
+.revista-corner-shadow {
+  position: absolute;
+  bottom: 0;
+  z-index: 4;
+  width: 30%;
+  height: 26%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.revista-corner-shadow.is-active { opacity: 1; }
+
+/* `to top left`/`to top right` (the keyword form, not a literal 45deg) is
+   what makes this follow the box's own corner-to-corner diagonal regardless
+   of its exact aspect ratio — matching the real fold, whose hypotenuse runs
+   corner-to-corner too, not at a fixed angle. A radial-gradient was tried
+   first and rejected: its iso-opacity lines are circles centered on the
+   corner point, so it reads as a round glow/spotlight rather than a shadow
+   running along a diagonal fold edge — wrong shape for a paper fold. Tight
+   stops (dark until 15%, gone by 55%) keep it a crisp band near the edge
+   instead of a slow fade across the whole box. */
+.revista-corner-shadow--left {
+  left: 0;
+  background: linear-gradient(to top right, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.75) 22%, transparent 60%);
+}
+
+.revista-corner-shadow--right {
+  right: 0;
+  background: linear-gradient(to top left, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.75) 22%, transparent 60%);
+}
+
 .revista-flipbook {
   margin: 0 auto;
 }
@@ -166,42 +212,6 @@
 .revista-flipbook .stf__hardShadow,
 .revista-flipbook .stf__hardInnerShadow { position: absolute; left: 0; top: 0; }
 
-/* ── Fold glint (dark mode mainly) ───────────────────────────────────────
-   A black fold shadow barely shows against the near-black dark background,
-   so instead of pushing it further we add a thin rasant highlight at the
-   book's two outer edges — the only two edges StPageFlip ever folds from
-   (showPageCorners grabs a bottom corner on either side; see the existing
-   .revista-fold-corner--left/--right zones in RevistaPages.tsx). We don't
-   track the fold's real-time angle/position (StPageFlip's onChangeState only
-   reports a state string, not angle or which corner — see
-   node_modules/react-pageflip/build/html-flip-book/settings.d.ts, PageState),
-   so this is a fixed-opacity highlight toggled by foldActive in Magazine.tsx,
-   not something that tracks the drag frame by frame. Same value in both
-   themes — it's light, not shadow, so it doesn't need to vary by theme. */
-.revista-fold-glint {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 15; /* above StPageFlip's own layers (startZIndex + up to 10) */
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 150ms ease;
-}
-
-.revista-fold-glint.is-active { opacity: 1; }
-
-.revista-fold-glint--left {
-  left: 0;
-  width: 4.5%; /* ~8-10% of one page's width in the 2-page desktop spread */
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.18), transparent 35%);
-}
-
-.revista-fold-glint--right {
-  right: 0;
-  width: 4.5%;
-  background: linear-gradient(to left, rgba(255, 255, 255, 0.18), transparent 35%);
-}
-
 .revista-page {
   background: var(--bg);
   color: var(--text);
@@ -213,10 +223,6 @@
      viewport (vw) — the page is now a fixed ~320–600px panel, not a
      near-full-viewport one. */
   container-type: inline-size;
-}
-
-.revista-photo {
-  filter: grayscale(100%) contrast(1.05) brightness(1.02);
 }
 
 .revista-fold-corner {
@@ -249,12 +255,6 @@
   .revista-book-wrap {
     height: min(clamp(480px, 82vh, 720px), calc(92vw * 0.6667));
     aspect-ratio: 3 / 2;
-  }
-  /* The wrap is ONE page here (not a 2-page spread), so 8-10% of a page's
-     width is 8-10% of the wrap directly, not the ~4.5% used on desktop. */
-  .revista-fold-glint--left,
-  .revista-fold-glint--right {
-    width: 9%;
   }
   /* A single 3:2 page is short on a portrait phone (as little as
      ~230–260px tall) — nowhere near enough for the title+subtitle+
