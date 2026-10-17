@@ -276,62 +276,68 @@ export default function CastelleraPage() {
 
         {/* ── El trabajo ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
-          <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
-            <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.work}</p>
-              <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
-                {page.workHeading![lang]}
-              </h2>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
-              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.5rem" }}>
-                {project.process[lang]}
-              </p>
-              <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-                {page.workCards!.map(({ label, desc }, i) => (
-                  <div key={i} style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "1rem", alignItems: "start" }}>
-                    <div style={{ width: 6, height: 6, borderRadius: "50%", background: ACCENT, marginTop: "0.55rem", flexShrink: 0 }} />
-                    <div>
-                      <p style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text)", margin: "0 0 0.25rem" }}>{label[lang]}</p>
-                      <p style={{ fontSize: "0.9rem", lineHeight: 1.7, color: "var(--text-muted)", margin: 0 }}>{desc[lang]}</p>
+          <div className="site-content">
+            <div style={{ maxWidth: 720 }}>
+              <FadeInView>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.work}</p>
+                <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
+                  {page.workHeading![lang]}
+                </h2>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
+                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: "1.5rem" }}>
+                  {project.process[lang]}
+                </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                  {page.workCards!.map(({ label, desc }, i) => (
+                    <div key={i} style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "1rem", alignItems: "start" }}>
+                      <div style={{ width: 6, height: 6, borderRadius: "50%", background: ACCENT, marginTop: "0.55rem", flexShrink: 0 }} />
+                      <div>
+                        <p style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text)", margin: "0 0 0.25rem" }}>{label[lang]}</p>
+                        <p style={{ fontSize: "0.9rem", lineHeight: 1.7, color: "var(--text-muted)", margin: 0 }}>{desc[lang]}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            </FadeInView>
+                  ))}
+                </div>
+              </FadeInView>
+            </div>
           </div>
         </section>
 
         {/* ── El resultado ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
-          <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
-            <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
-              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                {project.result[lang]}
-              </p>
-            </FadeInView>
+          <div className="site-content">
+            <div style={{ maxWidth: 720 }}>
+              <FadeInView>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
+                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                  {project.result[lang]}
+                </p>
+              </FadeInView>
+            </div>
           </div>
         </section>
 
         {/* ── Aprendizajes ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
-          <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
-            <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>
-              <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.75rem" }}>
-                {t[lang].projectPage.learningsHeading}
-              </h2>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
-              <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-                {page.learningsItems!.map((text, i) => (
-                  <div key={i} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
-                    <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: ACCENT, paddingTop: "0.2rem" }}>{String(i + 1).padStart(2, "0")}</span>
-                    <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>{text[lang]}</p>
-                  </div>
-                ))}
-              </div>
-            </FadeInView>
+          <div className="site-content">
+            <div style={{ maxWidth: 720 }}>
+              <FadeInView>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>
+                <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.75rem" }}>
+                  {t[lang].projectPage.learningsHeading}
+                </h2>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
+                <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                  {page.learningsItems!.map((text, i) => (
+                    <div key={i} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
+                      <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: ACCENT, paddingTop: "0.2rem" }}>{String(i + 1).padStart(2, "0")}</span>
+                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>{text[lang]}</p>
+                    </div>
+                  ))}
+                </div>
+              </FadeInView>
+            </div>
           </div>
         </section>
 

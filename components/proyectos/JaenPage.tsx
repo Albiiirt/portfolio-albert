@@ -9,8 +9,7 @@ import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
-import ProjectScreensShowcase from "@/components/proyectos/ProjectScreensShowcase";
-import ProjectDeviceShowcase from "@/components/proyectos/ProjectDeviceShowcase";
+import JaenPortalSlider, { JaenToolsSlider } from "@/components/proyectos/JaenScreensSlider";
 import ProjectDesignSystemSheet from "@/components/proyectos/ProjectDesignSystemSheet";
 import ProjectComponentsSheet from "@/components/proyectos/ProjectComponentsSheet";
 import { EASE } from "@/lib/animations";
@@ -19,7 +18,17 @@ import { projects } from "@/data/projects";
 import { t } from "@/data/translations";
 import Image from "next/image";
 
-const ACCENT = "#c4813a";
+// The portal's real yellow, for fills, tints and anything sitting on a dark
+// background. Replaces the placeholder brown (Albert, 2026-10-17).
+const ACCENT = "#FDFF21";
+// Small text can't use it: #FDFF21 is 1.1:1 on the light theme's background.
+// The token resolves to a dark gold in light and to the yellow itself in dark
+// — see --jaen-accent-ink in globals.css.
+const ACCENT_TEXT = "var(--jaen-accent-ink)";
+// The modular diagram's three cards each carry their own mid-tone so the
+// labels read at 8.5px on either theme; the yellow can't, and its siblings
+// (#7a9e6a, #9a7aaa) are mid-tones for the same reason.
+const ACCENT_DIAGRAM = "#b8901f";
 const project = projects.find((p) => p.id === "turisme-jaen")!;
 const page = project.page!;
 
@@ -89,8 +98,8 @@ function RutaLayout() {
             <div style={{
               position: "absolute", left: 0,
               width: 13, height: 13, borderRadius: "50%", flexShrink: 0,
-              background: i === 0 ? ACCENT : "var(--bg-alt)",
-              border: `2px solid ${i === 0 ? ACCENT : "var(--border-mid)"}`,
+              background: i === 0 ? ACCENT_TEXT : "var(--bg-alt)",
+              border: `2px solid ${i === 0 ? ACCENT_TEXT : "var(--border-mid)"}`,
             }} />
             <div style={{ display: "flex", flexDirection: "column", gap: 4, flex: 1 }}>
               <Bar w={i === 0 ? "85%" : "70%"} h={6} opacity={i === 0 ? 0.7 : 0.4} />
@@ -170,7 +179,8 @@ function AnimatedPageTypes({ lang }: { lang: "en" | "es" | "ca" }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -4 }}
               transition={{ duration: 0.3, ease: EASE }}
-              style={{ fontSize: "0.8rem", fontWeight: 700, color: ACCENT, margin: 0 }}
+              className="jaen-accent-text"
+              style={{ fontSize: "0.8rem", fontWeight: 700, margin: 0 }}
             >
               {PAGE_TYPES[current].label[lang]}
             </motion.p>
@@ -187,7 +197,7 @@ function AnimatedPageTypes({ lang }: { lang: "en" | "es" | "ca" }) {
               className="cursor-hidden"
               style={{
                 width: i === current ? 18 : 6, height: 6, borderRadius: 3, padding: 0, border: "none",
-                background: i === current ? ACCENT : "var(--border-mid)",
+                background: i === current ? ACCENT_TEXT : "var(--border-mid)",
                 transition: "all 0.3s ease",
               }}
             />
@@ -201,7 +211,7 @@ function AnimatedPageTypes({ lang }: { lang: "en" | "es" | "ca" }) {
 // ── SVG 2: Módulo compartido ─────────────────────────────────────────────────
 function SvgModular() {
   const cards = [
-    { label: "Ruta",       color: ACCENT },
+    { label: "Ruta",       color: ACCENT_DIAGRAM },
     { label: "Municipio",  color: "#7a9e6a" },
     { label: "Evento",     color: "#9a7aaa" },
   ];
@@ -355,8 +365,6 @@ export default function JaenPage() {
           </div>
         </section>
 
-        <ProjectDeviceShowcase project={project} data={project.deviceShowcase} />
-
         {/* ── Overview ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
@@ -392,48 +400,31 @@ export default function JaenPage() {
           </div>
         </section>
 
-        <ProjectScreensShowcase project={project} />
+        <JaenPortalSlider />
 
-        {/* ── El doble reto ── */}
+        {/* ── El reto ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
             <FadeInView>
               <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.challenge}</p>
-              <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "clamp(2.5rem, 4vh, 4rem)" }}>
-                {page.challengeHeading![lang]}
-              </h2>
             </FadeInView>
-
-            <div
-              className={page.challengeCards!.length > 1 ? "proj-grid-2" : undefined}
-              style={
-                page.challengeCards!.length > 1
-                  ? { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(1.5rem, 3vw, 3rem)" }
-                  : { display: "flex", justifyContent: "flex-start" }
-              }
-            >
-              {page.challengeCards!.map((card, i) => (
-                <FadeInView key={i} delay={i * 0.1} style={page.challengeCards!.length > 1 ? undefined : { width: "100%", maxWidth: 640 }}>
-                  <div style={{
-                    padding: "clamp(1.5rem, 3vw, 2.5rem)",
-                    borderRadius: "1rem",
-                    border: i === 0 && page.challengeCards!.length > 1 ? "1px solid var(--border-mid)" : `1px solid ${ACCENT}55`,
-                    background: i === 0 && page.challengeCards!.length > 1 ? "var(--bg-alt)" : `${ACCENT}08`,
-                    height: "100%",
-                  }}>
-                    <p style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: i === 0 && page.challengeCards!.length > 1 ? "var(--text-subtle)" : ACCENT, marginBottom: "1rem" }}>
-                      {card.badge[lang]}
-                    </p>
-                    <h3 style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.4rem)", fontWeight: 700, color: "var(--text)", marginBottom: "1rem", lineHeight: 1.25 }}>
-                      {card.heading[lang]}
-                    </h3>
-                    <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
-                    <p style={{ fontSize: "0.95rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                      {card.body[lang]}
-                    </p>
-                  </div>
-                </FadeInView>
-              ))}
+            {/* Same shape as "El resultado" and as Gnoss's own challenge
+                section: heading and running text in the first column of a 2-up
+                grid, so the line length stays readable on a wide screen. The
+                bordered card went (Albert, 2026-10-17) — with a single
+                challenge it read as an orphan box at half width. */}
+            <div className="proj-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
+              <FadeInView>
+                <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
+                  {page.challengeHeading![lang]}
+                </h2>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
+                {page.challengeBody!.map((paragraph, i) => (
+                  <p key={i} style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)", marginBottom: i < page.challengeBody!.length - 1 ? "1.5rem" : 0 }}>
+                    {paragraph[lang]}
+                  </p>
+                ))}
+              </FadeInView>
             </div>
           </div>
         </section>
@@ -512,6 +503,8 @@ export default function JaenPage() {
           </div>
         </section>
 
+        <JaenToolsSlider />
+
         {/* ── Aprendizajes ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-gap-lg)", alignItems: "start" }}>
@@ -526,7 +519,7 @@ export default function JaenPage() {
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                 {page.learningsItems!.map((text, i) => (
                   <div key={i} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
-                    <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: ACCENT, paddingTop: "0.2rem" }}>{String(i + 1).padStart(2, "0")}</span>
+                    <span className="jaen-accent-text" style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", paddingTop: "0.2rem" }}>{String(i + 1).padStart(2, "0")}</span>
                     <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>{text[lang]}</p>
                   </div>
                 ))}

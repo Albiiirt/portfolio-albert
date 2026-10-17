@@ -1,13 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import NextProjectCard from "@/components/proyectos/NextProjectCard";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
+import BiccoProductSlider, { BiccoRecordsSlider } from "@/components/proyectos/BiccoScreensSlider";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import ProjectDesignSystemSheet from "@/components/proyectos/ProjectDesignSystemSheet";
@@ -21,151 +20,6 @@ const project = projects.find((p) => p.id === "bicco")!;
 const page = project.page!;
 
 const chips = ["UX Design", "AI Search", "Vibe Coding"];
-
-const SCREENS_SECTION_ID = "bicco-screens";
-
-// 6 real screens of the product (no public demo deployed, unlike Xunta's —
-// the CTA scrolls to this section instead of linking out). Same slider
-// pattern as XUNTA_SCREENS/XuntaScreensSlider — kept local to this file,
-// same precedent.
-const BICCO_SCREENS = [
-  {
-    src: "/screenshots/bicco-walkthrough/01-home-light.jpg",
-    caption: {
-      en: "Home with the search bar and facets, light mode.",
-      es: "Home con el buscador y las facetas, modo claro.",
-      ca: "Home amb el cercador i les facetes, mode clar.",
-    },
-  },
-  {
-    src: "/screenshots/bicco-walkthrough/02-home-dark.jpg",
-    caption: {
-      en: "The same home in dark mode.",
-      es: "La misma home en modo oscuro.",
-      ca: "La mateixa home en mode fosc.",
-    },
-  },
-  {
-    src: "/screenshots/bicco-walkthrough/03-buscador-facetas.jpg",
-    caption: {
-      en: "Grant file search, filtered by facets.",
-      es: "Buscador de expedientes con filtros por facetas.",
-      ca: "Cercador d'expedients amb filtres per facetes.",
-    },
-  },
-  {
-    src: "/screenshots/bicco-walkthrough/04-busqueda-avanzada.jpg",
-    caption: {
-      en: "Advanced search builder with AND/OR operators.",
-      es: "Constructor de búsqueda avanzada con operadores AND/OR.",
-      ca: "Constructor de cerca avançada amb operadors AND/OR.",
-    },
-  },
-  {
-    src: "/screenshots/bicco-walkthrough/05-explorador-tecnologias.jpg",
-    caption: {
-      en: "Technology trends explorer, with the taxonomy tree.",
-      es: "Explorador de tendencias tecnológicas, con el árbol de taxonomía.",
-      ca: "Explorador de tendències tecnològiques, amb l'arbre de taxonomia.",
-    },
-  },
-  {
-    src: "/screenshots/bicco-walkthrough/06-ficha-cdti.jpg",
-    caption: {
-      en: "Detail record of a CDTI grant file.",
-      es: "Ficha de detalle de un expediente CDTI.",
-      ca: "Fitxa de detall d'un expedient CDTI.",
-    },
-  },
-];
-
-// ── Slider for the 6 real screens — same plain crossfade + arrows + dots as
-// XuntaScreensSlider (phone-frame ProjectScreensShowcase doesn't fit these
-// 16:10 desktop captures). No autoplay. ──────────────────────────────────
-function BiccoScreensSlider() {
-  const { lang } = useLang();
-  const [active, setActive] = useState(0);
-  const count = BICCO_SCREENS.length;
-  const current = BICCO_SCREENS[active];
-
-  const goTo = (i: number) => setActive((i + count) % count);
-
-  return (
-    <section id={SCREENS_SECTION_ID} style={{ background: "#081b3d", padding: "var(--space-section-y) var(--space-section-x)" }}>
-      <div className="site-content">
-        <FadeInView>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
-            <button
-              type="button"
-              onClick={() => goTo(active - 1)}
-              aria-label={lang === "en" ? "Previous screen" : lang === "ca" ? "Pantalla anterior" : "Pantalla anterior"}
-              style={{
-                flexShrink: 0,
-                width: 40, height: 40, borderRadius: "50%", border: "none", cursor: "pointer",
-                background: "rgba(255,255,255,0.08)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center",
-              }}
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 2L4 8l6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
-            </button>
-
-            <div style={{ width: "100%", maxWidth: "70%", borderRadius: 10, overflow: "hidden", position: "relative", aspectRatio: "1600 / 1000" }}>
-              <AnimatePresence initial={false}>
-                <motion.div
-                  key={current.src}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
-                  style={{ position: "absolute", inset: 0 }}
-                >
-                  <Image
-                    src={current.src}
-                    alt={current.caption[lang]}
-                    fill
-                    sizes="(max-width: 860px) 100vw, 900px"
-                    priority={active === 0}
-                    style={{ objectFit: "cover" }}
-                  />
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => goTo(active + 1)}
-              aria-label={lang === "en" ? "Next screen" : lang === "ca" ? "Pantalla següent" : "Pantalla siguiente"}
-              style={{
-                flexShrink: 0,
-                width: 40, height: 40, borderRadius: "50%", border: "none", cursor: "pointer",
-                background: "rgba(255,255,255,0.08)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center",
-              }}
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 2l6 6-6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
-            </button>
-          </div>
-
-          <div style={{ display: "flex", justifyContent: "center", marginTop: 18 }}>
-            <div style={{ display: "flex", gap: 8 }}>
-              {BICCO_SCREENS.map((screen, i) => (
-                <button
-                  key={screen.src}
-                  type="button"
-                  onClick={() => goTo(i)}
-                  aria-label={`${i + 1}/${count}`}
-                  aria-current={i === active}
-                  style={{
-                    width: 8, height: 8, borderRadius: "50%", border: "none", cursor: "pointer", padding: 0,
-                    background: i === active ? ACCENT : "rgba(255,255,255,0.3)",
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-        </FadeInView>
-      </div>
-    </section>
-  );
-}
 
 export default function BiccoPage() {
   const { lang } = useLang();
@@ -267,10 +121,10 @@ export default function BiccoPage() {
                 {/* No public demo deployed (unlike Xunta's) — scrolls to the
                     screens section below instead of linking out. */}
                 <a
-                  href={`#${SCREENS_SECTION_ID}`}
+                  href="#bicco-screens"
                   onClick={(e) => {
                     e.preventDefault();
-                    document.getElementById(SCREENS_SECTION_ID)?.scrollIntoView({ behavior: "smooth" });
+                    document.getElementById("bicco-screens")?.scrollIntoView({ behavior: "smooth" });
                   }}
                   style={{
                     display: "inline-flex", alignItems: "center", gap: "0.5rem",
@@ -337,21 +191,23 @@ export default function BiccoPage() {
 
         {/* Visual showcase after the intro text, same placement convention
             as Xunta Galicia. */}
-        <BiccoScreensSlider />
+        <BiccoProductSlider />
 
         {/* ── El trabajo ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
-          <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
-            <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.work}</p>
-              <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
-                {page.workHeading![lang]}
-              </h2>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
-              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                {project.process[lang]}
-              </p>
-            </FadeInView>
+          <div className="site-content">
+            <div style={{ maxWidth: 720 }}>
+              <FadeInView>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.work}</p>
+                <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.5rem" }}>
+                  {page.workHeading![lang]}
+                </h2>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
+                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                  {project.process[lang]}
+                </p>
+              </FadeInView>
+            </div>
           </div>
         </section>
 
@@ -372,6 +228,8 @@ export default function BiccoPage() {
             ))}
           </div>
         </section>
+
+        <BiccoRecordsSlider />
 
         {/* ── La paleta y tipografía ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>

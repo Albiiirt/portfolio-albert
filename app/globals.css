@@ -64,6 +64,13 @@
   --cursor-ring-bg-hover:    rgba(26,23,20,0.07);
   --cursor-ring-border-hover:rgba(26,23,20,0.22);
 
+  /* Turisme Jaén's accent. The brand yellow (#FDFF21) is 1.1:1 on this
+     theme's background — unreadable as text — so small text uses this dark
+     gold instead (4.5:1 on --bg, WCAG AA). Fills and tints keep the real
+     yellow, which is how the portal itself uses it: as a surface with black
+     on top, never as a letter colour. */
+  --jaen-accent-ink: #8a6a00;
+
   /* Orbit ring */
   --orbit-ring:     rgba(26,23,20,0.45);
   --orbit-ring-dim: rgba(26,23,20,0.14);
@@ -72,6 +79,10 @@
 }
 
 [data-theme="dark"] {
+  /* On a near-black background the brand yellow is 18:1 — no substitute
+     needed, so accent text is the real colour here. */
+  --jaen-accent-ink: #FDFF21;
+
   --bg:          #0a0a0a;
   --bg-alt:      #111111;
   --text:        #f0ede8;
@@ -1001,4 +1012,85 @@ html.custom-cursor-active .cursor-hidden {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ── Project screen slider (ProjectScreenSlider: Turisme Jaén, GNOSS) ──
+   The filmstrip scrolls sideways through up to 17 thumbnails; its scrollbar
+   would cut across the dark block, so it is hidden and the strip is driven by
+   the thumbnails themselves. The browser window above it does not scroll at
+   all — it pans its own image, see the component. */
+/* Turisme Jaén's accent text. This class is also what keeps
+   --jaen-accent-ink alive: Lightning CSS drops :root custom properties that
+   nothing in the stylesheet references, and the token is otherwise only read
+   from inline styles in JaenPage, which the CSS pipeline cannot see. With the
+   property kept, those inline `var(--jaen-accent-ink)` uses resolve too. */
+.jaen-accent-text { color: var(--jaen-accent-ink); }
+
+.proj-filmstrip { scrollbar-width: none; }
+.proj-filmstrip::-webkit-scrollbar { display: none; }
+
+/* ── GNOSS infographic plates (GnossLaminasRail) ──
+   A rail the visitor drives, not a carousel and not an autoplaying marquee
+   (both were tried, 2026-10-17): the argument is that there are 56 plates all
+   following one system, which needs several on screen at once, and they have
+   to be big enough to read. Horizontal scrolling here never competes with the
+   page's own vertical scroll. */
+.laminas-rail {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+.laminas-rail::-webkit-scrollbar { display: none; }
+.laminas-arrow {
+  all: unset;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  color: #cfc9bd;
+}
+.laminas-arrow:hover { background: rgba(255,255,255,0.14); }
+.laminas-arrow:focus-visible { outline: 2px solid #4d8df5; outline-offset: 2px; }
+.gnoss-lamina { transition: transform 0.2s ease, border-color 0.2s ease; }
+.gnoss-lamina:hover { transform: translateY(-2px); border-color: rgba(10,102,242,0.65) !important; }
+.gnoss-lamina:focus-visible { outline: 2px solid #4d8df5; outline-offset: 2px; }
+
+.lamina-backdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.82);
+  backdrop-filter: blur(3px); z-index: 90;
+}
+.lamina-popup {
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: min(92vw, 1380px); max-height: 92vh; overflow: auto; z-index: 91;
+}
+.lamina-close {
+  position: fixed; top: 1.25rem; right: 1.25rem; z-index: 92;
+  display: grid; place-items: center; width: 38px; height: 38px;
+  border-radius: 50%; border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.1); color: #fff; cursor: pointer;
+}
+
+/* Lightbox paging. Sits against the viewport rather than inside the popup, so
+   the arrows do not jump when the plate inside changes between the three
+   aspect ratios. Hidden on narrow screens, where they would land on top of
+   the plate itself — there the rail behind is the way to change plate. */
+.lamina-nav {
+  position: fixed; top: 50%; transform: translateY(-50%); z-index: 92;
+  display: grid; place-items: center; width: 44px; height: 44px;
+  border-radius: 50%; border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.1); color: #fff; cursor: pointer;
+}
+.lamina-nav:hover { background: rgba(255,255,255,0.18); }
+.lamina-nav:focus-visible { outline: 2px solid #4d8df5; outline-offset: 2px; }
+.lamina-nav-prev { left: 1.25rem; }
+.lamina-nav-next { right: 1.25rem; }
+@media (max-width: 820px) {
+  .lamina-nav { display: none; }
 }

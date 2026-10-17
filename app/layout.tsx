@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Montserrat, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import Grain from "@/components/Grain";
@@ -9,6 +9,18 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+});
+
+// Not a site font: this is Turisme Jaén's own typeface, loaded so that the
+// specimen in that project's "visual system" section is actually set in the
+// face it names. Scoped to ProjectDesignSystemSheet through the `cssVar` field
+// on a typography entry — nothing else on the site refers to it.
+// No `weight` list: Montserrat is a variable font, and asking for specific
+// weights makes the loader fail with "next/font/google queries have exactly
+// one entry". Omitting it ships the whole variable range.
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
 });
 
 // Update SITE_URL when deploying to production
@@ -96,7 +108,7 @@ const schemaOrg = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" className={spaceGrotesk.variable} suppressHydrationWarning>
+    <html lang="es" className={`${spaceGrotesk.variable} ${montserrat.variable}`} suppressHydrationWarning>
       <head>
         {/* Anti-flash: set theme before first paint */}
         <InlineScript

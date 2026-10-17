@@ -34,7 +34,9 @@ export default function ProjectDesignSystemSheet({
           <div className="design-system-palette">
             {data.palette.map((swatch) => (
               <div key={swatch.hex}>
-                <div style={{ aspectRatio: "5 / 2", borderRadius: "0.5rem", background: swatch.hex }} />
+                {/* Hairline border: a white swatch vanished against the light theme's
+                    background, and a black one against the dark theme's. */}
+                <div style={{ aspectRatio: "5 / 2", borderRadius: "0.5rem", background: swatch.hex, border: "1px solid var(--border-mid)" }} />
                 <p
                   style={{
                     fontSize: "0.67rem",
@@ -57,8 +59,18 @@ export default function ProjectDesignSystemSheet({
 
       {data.typography.length > 0 && (
         <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+          {/* A lone typeface stretched to the full width and read as an empty
+              banner. Capped at the width of the palette's first two swatches:
+              its grid is 4 columns with a 1rem gap, so two columns plus the
+              gap between them is (100% - 3rem) / 2 + 1rem — the card's right
+              edge then lands exactly on the second swatch's. Below 1180px the
+              palette drops to 2 columns and the `flex-basis` takes over
+              anyway. Two typefaces or more still share the row as before. */}
           {data.typography.map((item) => (
-            <FadeInView key={item.typeface} style={{ flex: "1 1 220px" }}>
+            <FadeInView
+              key={item.typeface}
+              style={{ flex: "1 1 220px", maxWidth: data.typography.length === 1 ? "calc((100% - 3rem) / 2 + 1rem)" : undefined }}
+            >
               <div
                 style={{
                   padding: "1.5rem",
@@ -68,10 +80,18 @@ export default function ProjectDesignSystemSheet({
                   height: "100%",
                 }}
               >
+                {/* The name stays in the site's own font so the cards read as
+                    one row; the sample below is set in the real face when the
+                    site loads it, since a specimen in the wrong typeface shows
+                    nothing. */}
                 <p style={{ fontFamily: "var(--font-sans)", fontSize: "1.5rem", fontWeight: 800, color: "var(--text)", margin: "0 0 0.35rem" }}>
                   {item.typeface}
                 </p>
-                <p style={{ fontFamily: "var(--font-sans)", fontSize: "1rem", fontWeight: 500, letterSpacing: "0.02em", color: "var(--text)", margin: "0 0 0.75rem" }}>
+                <p style={{
+                  fontFamily: item.cssVar ? `var(${item.cssVar})` : "var(--font-sans)",
+                  fontSize: item.cssVar ? "1.15rem" : "1rem",
+                  fontWeight: 500, letterSpacing: "0.02em", color: "var(--text)", margin: "0 0 0.75rem",
+                }}>
                   AaBbCcGg · 0123456789 · &?!
                 </p>
                 <p style={{ fontSize: "0.88rem", color: "var(--text-muted)", margin: 0 }}>{item.usage[lang]}</p>

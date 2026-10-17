@@ -8,6 +8,8 @@ import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
+import GnossDecisionSlider, { GnossPagesSlider } from "@/components/proyectos/GnossScreensSlider";
+import GnossLaminasRail from "@/components/proyectos/GnossLaminasRail";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import { EASE } from "@/lib/animations";
@@ -176,6 +178,37 @@ export default function GnossPage() {
                   <span key={chip} className="tag">{chip}</span>
                 ))}
               </motion.div>
+              {/* Same pill, same place and same timing as MadridPage's hero
+                  CTA — the live site reads as an action, not as one more row
+                  of metadata. */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: EASE, delay: 0.48 }}
+                style={{ marginTop: "1.5rem" }}
+              >
+                <a
+                  href="https://gnoss.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex", alignItems: "center", gap: "0.5rem",
+                    padding: "0.65rem 1.25rem",
+                    borderRadius: "100px",
+                    background: ACCENT,
+                    color: "#fff",
+                    fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.04em",
+                    textDecoration: "none",
+                    transition: "opacity 0.2s",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.82")}
+                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+                >
+                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                    <path d="M2 11L11 2M11 2H5M11 2v6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  {page.heroCta![lang]}
+                </a>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -251,6 +284,8 @@ export default function GnossPage() {
           </div>
         </section>
 
+        <GnossDecisionSlider />
+
         {/* ── El sistema visual ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
           <div className="site-content">
@@ -298,37 +333,45 @@ export default function GnossPage() {
           </div>
         </section>
 
+        <GnossPagesSlider />
+
         {/* ── El resultado ── */}
         <section style={{ background: "var(--bg-alt)", padding: "var(--space-section-y) var(--space-section-x)" }}>
-          <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
-            <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
-              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
-                {project.result[lang]}
-              </p>
-            </FadeInView>
+          <div className="site-content">
+            <div style={{ maxWidth: 720 }}>
+              <FadeInView>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.result}</p>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
+                <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>
+                  {project.result[lang]}
+                </p>
+              </FadeInView>
+            </div>
           </div>
         </section>
 
+        <GnossLaminasRail />
+
         {/* ── Aprendizajes ── */}
         <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
-          <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
-            <FadeInView>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>
-              <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.75rem" }}>
-                {t[lang].projectPage.learningsHeading}
-              </h2>
-              <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
-              <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-                {page.learningsItems!.map((text, i) => (
-                  <div key={i} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
-                    <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: ACCENT, paddingTop: "0.2rem" }}>{String(i + 1).padStart(2, "0")}</span>
-                    <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>{text[lang]}</p>
-                  </div>
-                ))}
-              </div>
-            </FadeInView>
+          <div className="site-content">
+            <div style={{ maxWidth: 720 }}>
+              <FadeInView>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>
+                <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.75rem" }}>
+                  {t[lang].projectPage.learningsHeading}
+                </h2>
+                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.essentials}</p>
+                <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                  {page.learningsItems!.map((text, i) => (
+                    <div key={i} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
+                      <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: ACCENT, paddingTop: "0.2rem" }}>{String(i + 1).padStart(2, "0")}</span>
+                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>{text[lang]}</p>
+                    </div>
+                  ))}
+                </div>
+              </FadeInView>
+            </div>
           </div>
         </section>
 

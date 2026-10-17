@@ -605,21 +605,23 @@ export default function MirazurPage({ initialTab }: { initialTab?: string } = {}
         {/* ── Aprendizajes (parametrizado por la pestaña activa) ── */}
         {activeSubProject.page?.learningsItems && (
           <section style={{ background: "var(--bg)", padding: "var(--space-section-y) var(--space-section-x)" }}>
-            <div className="site-content" style={{ maxWidth: 720, margin: 0 }}>
-              <FadeInView>
-                <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>
-                <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.75rem" }}>
-                  {t[lang].projectPage.learningsHeading}
-                </h2>
-                <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-                  {activeSubProject.page.learningsItems.map((text, i) => (
-                    <div key={i} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
-                      <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: ACCENT, paddingTop: "0.2rem" }}>{String(i + 1).padStart(2, "0")}</span>
-                      <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>{text[lang]}</p>
-                    </div>
-                  ))}
-                </div>
-              </FadeInView>
+            <div className="site-content">
+              <div style={{ maxWidth: 720 }}>
+                <FadeInView>
+                  <p className="section-label" style={{ marginBottom: "1.75rem" }}>{t[lang].projectPage.sectionLabels.learnings}</p>
+                  <h2 className="display-heading" style={{ fontSize: "var(--text-heading)", marginBottom: "1.75rem" }}>
+                    {t[lang].projectPage.learningsHeading}
+                  </h2>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                    {activeSubProject.page.learningsItems.map((text, i) => (
+                      <div key={i} style={{ display: "grid", gridTemplateColumns: "2.5rem 1fr", gap: "1rem", alignItems: "start" }}>
+                        <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: ACCENT, paddingTop: "0.2rem" }}>{String(i + 1).padStart(2, "0")}</span>
+                        <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-muted)" }}>{text[lang]}</p>
+                      </div>
+                    ))}
+                  </div>
+                </FadeInView>
+              </div>
             </div>
           </section>
         )}

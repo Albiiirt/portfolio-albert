@@ -12,6 +12,7 @@ import Footer from "@/components/Footer";
 import FadeInView from "@/components/FadeInView";
 import SmoothScroll from "@/components/SmoothScroll";
 import ProjectScreensShowcase from "@/components/proyectos/ProjectScreensShowcase";
+import BullipediaSlider from "@/components/proyectos/ElBulliScreensSlider";
 import ProjectDesktopWalkthrough from "@/components/proyectos/ProjectDesktopWalkthrough";
 import ProjectWalkthroughVideo from "@/components/proyectos/ProjectWalkthroughVideo";
 import ProjectDeviceShowcase from "@/components/proyectos/ProjectDeviceShowcase";
@@ -605,7 +606,13 @@ export default function ElBulliPage({ initialTab }: { initialTab?: string } = {}
               <ProjectWalkthroughVideo project={project} videoSrc={activeSubProject.video} sectionLabel={t[lang].projectPage.sectionLabels.videoWalkthrough} />
             )}
 
-            {activeSubProject.screensFrame === "desktop" ? (
+            {/* Bullipedia's four real screens. Kept ahead of the generic
+                branches below because `desktopWalkthrough` and `screens` are
+                both empty for this project — they rendered nothing at all
+                until these captures existed (Albert, 2026-10-17). */}
+            {activeSubProject.id === "marketplace" ? (
+              <BullipediaSlider />
+            ) : activeSubProject.screensFrame === "desktop" ? (
               <ProjectDesktopWalkthrough
                 project={project}
                 steps={activeSubProject.desktopWalkthrough ?? []}

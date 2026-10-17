@@ -84,7 +84,15 @@ export type InterficiaShowcase = {
 // Palette + typeface specimen shown inside a project's own "system" section
 // (see ProjectDesignSystemSheet) — elBulli, Turisme Jaén, Gnoss AI only.
 export type DesignSystemSwatch = { hex: string; label: LocalizedText };
-export type DesignSystemTypography = { typeface: string; usage: LocalizedText };
+export type DesignSystemTypography = {
+  typeface: string;
+  usage: LocalizedText;
+  // CSS variable holding the real face, when the site loads it (see
+  // app/layout.tsx). Without it the specimen line falls back to the
+  // portfolio's own font — which is what every project did until Turisme
+  // Jaén, and is a lie on a type specimen, so fill it in where you can.
+  cssVar?: string;
+};
 export type DesignSystemSheet = {
   palette: DesignSystemSwatch[];
   typography: DesignSystemTypography[]; // [] renders no typography row — never half-broken
@@ -152,7 +160,6 @@ export type ProjectPageContent = {
   heroCta?: LocalizedText;
   challengeHeading?: LocalizedText;
   challengeBody?: LocalizedText[];
-  challengeCards?: { badge: LocalizedText; heading: LocalizedText; body: LocalizedText }[];
   solutionHeading?: LocalizedText;
   systemHeading?: LocalizedText;
   systemBody?: LocalizedText[];
@@ -909,8 +916,11 @@ export const projects: Project[] = [
       ca: "Disseny web de turisme per a Jaén — sistema UI complet dissenyat a Figma a dos, actualment en producció amb l'equip de desenvolupament intern.",
     },
     tags: ["Figma", "Web Design", "Tourism"],
-    gradient: "linear-gradient(135deg, #2d1b00 0%, #6b3a1f 60%, #c4813a 100%)",
-    accentColor: "#c4813a",
+    // Brand yellow over black, replacing the placeholder browns. This gradient
+    // only shows through behind the cover image on the work cards, so it stays
+    // dark-dominant with the yellow as the far corner.
+    gradient: "linear-gradient(135deg, #000000 0%, #1a1a1a 55%, #FDFF21 100%)",
+    accentColor: "#FDFF21",
     // Placeholder: reuses existing real screen exports (cropped visually by
     // each frame's own aspect ratio via object-fit: cover) since this
     // project already has real screenshots, unlike the others below that
@@ -1086,15 +1096,25 @@ export const projects: Project[] = [
       { labelKey: "team", value: { en: "Design + in-house development", es: "Diseño + Desarrollo interno", ca: "Disseny + desenvolupament intern" } },
     ],
     designSystem: {
+      // The real portal palette (Albert, 2026-10-17), replacing the browns that
+      // were placeholders. The yellow is measured, not guessed: the average of
+      // 1953 solid interior pixels of the "Empieza tu viaje" button in
+      // listado-facetas.webp, sampled with a 7x7 erosion so WebP chroma
+      // bleeding at the edges does not drag the hue. Worth confirming against
+      // Figma if an exact brand value exists.
       palette: [
-        { hex: "#2d1b00", label: { es: "Fondo oscuro", en: "Dark background", ca: "Fons fosc" } },
-        { hex: "#6b3a1f", label: { es: "Fondo medio", en: "Mid background", ca: "Fons mitjà" } },
-        { hex: "#c4813a", label: { es: "Acento", en: "Accent", ca: "Accent" } },
+        { hex: "#FDFF21", label: { es: "Amarillo de marca", en: "Brand yellow", ca: "Groc de marca" } },
+        { hex: "#FFFFFF", label: { es: "Blanco", en: "White", ca: "Blanc" } },
+        { hex: "#000000", label: { es: "Negro", en: "Black", ca: "Negre" } },
       ],
-      // TODO: confirmar tipografías reales con Albert — no hay sitio público
-      // ni prototipo navegable del que leer getComputedStyle, solo exports
-      // estáticos en JPG/PNG (ver ~/Desktop/exports-jaen).
-      typography: [],
+      // Confirmada por Albert, 2026-10-17.
+      typography: [
+        {
+          typeface: "Montserrat",
+          cssVar: "--font-montserrat",
+          usage: { es: "Titulares, texto e interfaz", en: "Headlines, body & interface", ca: "Titulars, text i interfície" },
+        },
+      ],
     },
     // Pending real button values (height/radius/color) and a new crop of
     // jaen-alojamiento.webp for the card specimen — Albert still has to
@@ -1103,16 +1123,16 @@ export const projects: Project[] = [
       buttons: [],
     },
     page: {
-      challengeHeading: { en: "Two challenges in one", es: "Dos retos en uno", ca: "Dos reptes en un" },
-      challengeCards: [
+      // Was "Two challenges in one" over a single card, which promised a
+      // second challenge that was never written (Albert, 2026-10-17). Now one
+      // challenge named for what it actually is, in the same
+      // challengeHeading + challengeBody shape elBulli and Gnoss already use.
+      challengeHeading: { en: "Light despite the volume", es: "Ligero pese al volumen", ca: "Lleuger malgrat el volum" },
+      challengeBody: [
         {
-          badge: { en: "The designer's challenge", es: "Reto del diseñador", ca: "El repte del dissenyador" },
-          heading: { en: "Appealing, functional and full of personality", es: "Atractivo, funcional y con personalidad", ca: "Atractiu, funcional i amb personalitat" },
-          body: {
-            en: "Make the portal feel light despite the volume, visually tell page types apart without fragmenting the system, and give it personality without falling into tourism design's most overused patterns.",
-            es: "Hacer que el portal pareciera ligero pese al volumen, distinguir visualmente los tipos de página sin fragmentar el sistema, y darle personalidad sin caer en los patrones más usados del diseño turístico.",
-            ca: "Fer que el portal semblés lleuger malgrat el volum, distingir visualment els tipus de pàgina sense fragmentar el sistema, i donar-li personalitat sense caure en els patrons més usats del disseny turístic.",
-          },
+          en: "Make the portal feel light despite the volume, visually tell page types apart without fragmenting the system, and give it personality without falling into tourism design's most overused patterns.",
+          es: "Hacer que el portal pareciera ligero pese al volumen, distinguir visualmente los tipos de página sin fragmentar el sistema, y darle personalidad sin caer en los patrones más usados del diseño turístico.",
+          ca: "Fer que el portal semblés lleuger malgrat el volum, distingir visualment els tipus de pàgina sense fragmentar el sistema, i donar-li personalitat sense caure en els patrons més usats del disseny turístic.",
         },
       ],
       structureHeading: { en: "One system, four voices", es: "Un sistema, cuatro voces", ca: "Un sistema, quatre veus" },
@@ -1480,9 +1500,11 @@ export const projects: Project[] = [
       { labelKey: "status", value: status.completed },
       { labelKey: "role", value: { en: "Web & content design · Client collaboration", es: "Diseño web y de contenido · Colaboración con cliente", ca: "Disseny web i de contingut · Col·laboració amb client" } },
       { labelKey: "stack", value: "Figma" },
-      { labelKey: "web", value: "gnoss.com", href: "https://gnoss.com/" },
     ],
     page: {
+      // The live site is the hero's call to action, not a row in the meta
+      // table (Albert, 2026-10-17) — same place Madrid puts it.
+      heroCta: { en: "Visit gnoss.com", es: "Ver gnoss.com", ca: "Veure gnoss.com" },
       challengeHeading: {
         en: "Stepping into someone else's system without breaking it",
         es: "Entrar en un sistema ajeno y no romperlo",
