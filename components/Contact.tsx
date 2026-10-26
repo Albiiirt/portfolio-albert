@@ -29,12 +29,12 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      style={{ background: "var(--bg-alt)", padding: "clamp(5rem, 10vh, 9rem) var(--space-section-x)", position: "relative" }}
+      style={{ background: "var(--bg)", padding: "clamp(5rem, 10vh, 9rem) var(--space-section-x)", position: "relative" }}
     >
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 70%, var(--border) 0%, transparent 70%)", pointerEvents: "none" }} />
 
       <div className="site-content" style={{ position: "relative", zIndex: 1 }}>
-        <div style={{ maxWidth: "820px", margin: "0 auto", textAlign: "center" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto", textAlign: "center" }}>
 
           <FadeInView>
             <p className="section-label" style={{ marginBottom: "1.75rem" }}>{tx.label}</p>
@@ -59,6 +59,7 @@ export default function Contact() {
                     display: "block",
                     fontWeight: 800,
                     color: "var(--text-muted)",
+                    whiteSpace: "pre-line",
                   }}
                 >
                   {tx.cyclingPhrases[phraseIndex]}

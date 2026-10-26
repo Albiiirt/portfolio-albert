@@ -11,15 +11,10 @@ import SmoothScroll from "@/components/SmoothScroll";
 import FadeInView from "@/components/FadeInView";
 import { useLang } from "@/lib/LanguageContext";
 import { t } from "@/data/translations";
-import { projects } from "@/data/projects";
+import { projects, getOrderedProjects } from "@/data/projects";
 import { EASE } from "@/lib/animations";
 
-const PINNED_PROJECT_IDS = ["madrid", "mirazur", "xunta-galicia"];
-const orderedProjects = [...projects].sort((a, b) => {
-  const aIndex = PINNED_PROJECT_IDS.indexOf(a.id);
-  const bIndex = PINNED_PROJECT_IDS.indexOf(b.id);
-  return (aIndex === -1 ? Infinity : aIndex) - (bIndex === -1 ? Infinity : bIndex);
-});
+const orderedProjects = getOrderedProjects();
 
 function ProjectCard({ project }: { project: (typeof projects)[0] }) {
   const { lang } = useLang();
@@ -224,9 +219,6 @@ export default function ProyectosPage() {
                     {subline[lang]}
                   </p>
                 </div>
-                <Link href="/revista" className="btn-ghost" style={{ marginTop: "1.25rem", fontSize: "0.78rem", padding: "0.65rem 1.3rem" }}>
-                  {t[lang].revista.viewAsMagazine}
-                </Link>
               </div>
             </FadeInView>
 

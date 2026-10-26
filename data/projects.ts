@@ -1721,3 +1721,16 @@ export const projects: Project[] = [
     },
   },
 ];
+
+// Order used by both the /proyectos grid and the home page's featured
+// section, so "5 mejores trabajos" on the home always matches the first 5
+// cards on /proyectos.
+export const PINNED_PROJECT_IDS = ["madrid", "mirazur", "xunta-galicia"];
+
+export function getOrderedProjects(): Project[] {
+  return [...projects].sort((a, b) => {
+    const aIndex = PINNED_PROJECT_IDS.indexOf(a.id);
+    const bIndex = PINNED_PROJECT_IDS.indexOf(b.id);
+    return (aIndex === -1 ? Infinity : aIndex) - (bIndex === -1 ? Infinity : bIndex);
+  });
+}

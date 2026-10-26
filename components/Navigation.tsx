@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useLang, type Lang } from "@/lib/LanguageContext";
+import { useLang } from "@/lib/LanguageContext";
 import { t } from "@/data/translations";
 
 function SunIcon() {
@@ -31,39 +30,13 @@ function MenuIcon({ open }: { open: boolean }) {
   );
 }
 
-function NavAnchor({ id, children }: { id: string; children: React.ReactNode }) {
-  const pathname = usePathname();
-
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (pathname === "/") {
-      e.preventDefault();
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  return (
-    <Link href={`/#${id}`} className="nav-link" style={{ padding: "0.35rem 0.75rem", textDecoration: "none" }} onClick={handleClick}>
-      {children}
-    </Link>
-  );
-}
-
 export default function Navigation() {
-  const { lang, setLang } = useLang();
+  const { lang } = useLang();
   const tx = t[lang].nav;
   const [dark, setDark] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
-  const pathname = usePathname();
 
   const closeMenu = () => setMenuOpen(false);
-
-  const scrollToSection = (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
-    closeMenu();
-    if (pathname === "/") {
-      e.preventDefault();
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   useEffect(() => {
     // One-time sync read of the theme set synchronously by the anti-flash
@@ -79,12 +52,6 @@ export default function Navigation() {
     document.documentElement.dataset.theme = next ? "dark" : "";
     try { localStorage.setItem("theme", next ? "dark" : "light"); } catch {}
   };
-
-  const langs: { code: Lang; label: string }[] = [
-    { code: "en", label: "EN" },
-    { code: "es", label: "ES" },
-    { code: "ca", label: "CA" },
-  ];
 
   return (
     <div style={{
@@ -110,9 +77,21 @@ export default function Navigation() {
         {/* Nav links + separators — hidden on mobile, replaced by hamburger below */}
         <nav className="nav-links" style={{ display: "flex", alignItems: "center", gap: 0 }}>
           <div style={{ width: 1, height: 16, background: "var(--border-mid)", flexShrink: 0 }} />
-          <NavAnchor id="work">{tx.work}</NavAnchor>
-          <NavAnchor id="about">{tx.about}</NavAnchor>
-          <NavAnchor id="contact">{tx.contact}</NavAnchor>
+          <Link href="/proyectos" className="nav-link" style={{ padding: "0.35rem 0.75rem", textDecoration: "none" }}>
+            {tx.work}
+          </Link>
+          <Link href="/#about" className="nav-link" style={{ padding: "0.35rem 0.75rem", textDecoration: "none" }}>
+            {tx.about}
+          </Link>
+          <Link href="/#timeline" className="nav-link" style={{ padding: "0.35rem 0.75rem", textDecoration: "none" }}>
+            {tx.timeline}
+          </Link>
+          <Link href="/#testimonials" className="nav-link" style={{ padding: "0.35rem 0.75rem", textDecoration: "none" }}>
+            {tx.testimonials}
+          </Link>
+          <Link href="/#contact" className="nav-link" style={{ padding: "0.35rem 0.75rem", textDecoration: "none" }}>
+            {tx.contact}
+          </Link>
           <Link href="/cv" className="nav-link" style={{ padding: "0.35rem 0.75rem", textDecoration: "none" }}>
             CV
           </Link>
@@ -133,28 +112,6 @@ export default function Navigation() {
         >
           <MenuIcon open={menuOpen} />
         </button>
-
-        {/* Language selector */}
-        <div style={{ display: "flex", alignItems: "center", padding: "0 0.3rem", gap: "0.05rem" }}>
-          {langs.map(({ code, label }, i) => (
-            <span key={code} style={{ display: "flex", alignItems: "center", gap: "0.05rem" }}>
-              <button
-                onClick={() => setLang(code)}
-                className="cursor-hidden"
-                style={{
-                  fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
-                  background: "none", border: "none", padding: "0.35rem 0.45rem",
-                  color: lang === code ? "var(--text)" : "var(--text-subtle)", transition: "color 0.2s",
-                }}
-              >
-                {label}
-              </button>
-              {i < langs.length - 1 && <span style={{ color: "var(--border-mid)", fontSize: "0.55rem" }}>/</span>}
-            </span>
-          ))}
-        </div>
-
-        <div style={{ width: 1, height: 16, background: "var(--border-mid)", flexShrink: 0 }} />
 
         {/* Theme toggle */}
         <button
@@ -188,13 +145,19 @@ export default function Navigation() {
             gap: "0.1rem",
           }}
         >
-          <Link href="/#work" className="nav-link" style={{ padding: "0.7rem 0.9rem", textDecoration: "none" }} onClick={scrollToSection("work")}>
+          <Link href="/proyectos" className="nav-link" style={{ padding: "0.7rem 0.9rem", textDecoration: "none" }} onClick={closeMenu}>
             {tx.work}
           </Link>
-          <Link href="/#about" className="nav-link" style={{ padding: "0.7rem 0.9rem", textDecoration: "none" }} onClick={scrollToSection("about")}>
+          <Link href="/#about" className="nav-link" style={{ padding: "0.7rem 0.9rem", textDecoration: "none" }} onClick={closeMenu}>
             {tx.about}
           </Link>
-          <Link href="/#contact" className="nav-link" style={{ padding: "0.7rem 0.9rem", textDecoration: "none" }} onClick={scrollToSection("contact")}>
+          <Link href="/#timeline" className="nav-link" style={{ padding: "0.7rem 0.9rem", textDecoration: "none" }} onClick={closeMenu}>
+            {tx.timeline}
+          </Link>
+          <Link href="/#testimonials" className="nav-link" style={{ padding: "0.7rem 0.9rem", textDecoration: "none" }} onClick={closeMenu}>
+            {tx.testimonials}
+          </Link>
+          <Link href="/#contact" className="nav-link" style={{ padding: "0.7rem 0.9rem", textDecoration: "none" }} onClick={closeMenu}>
             {tx.contact}
           </Link>
           <Link href="/cv" className="nav-link" style={{ padding: "0.7rem 0.9rem", textDecoration: "none" }} onClick={closeMenu}>

@@ -1,79 +1,38 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
-import { useLang, type Lang } from "@/lib/LanguageContext";
+import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
+import { useLang } from "@/lib/LanguageContext";
 import { t } from "@/data/translations";
-import { projects } from "@/data/projects";
-import { EASE } from "@/lib/animations";
-import Image from "next/image";
+import { getOrderedProjects, type Project } from "@/data/projects";
+import { ScrollDissolveReveal } from "@/components/ui/scroll-dissolve-reveal";
 
-const FEATURED_IDS = ["madrid", "mirazur", "xunta-galicia"];
-const featured = FEATURED_IDS.map((id) => projects.find((p) => p.id === id)!).filter(Boolean);
+// First 5 of the same order used on /proyectos — "5 mejores trabajos".
+const featured = getOrderedProjects().slice(0, 5);
+const SEGMENTS = featured.length - 1;
+const VH_PER_SEGMENT = 180;
 
-const cardVariants = {
-  enter: (dir: number) => ({ y: dir * 50, opacity: 0 }),
-  center: { y: 0, opacity: 1 },
-  exit: (dir: number) => ({ y: dir * -50, opacity: 0 }),
+// The dissolve shader textures these with Three.js, which can't rasterize
+// an SVG cover — same artwork as the .svg covers, just pre-rendered to PNG
+// so the WebGL texture loader can actually read it. Used only here.
+const DISSOLVE_RASTER_COVERS: Record<string, string> = {
+  "xunta-galicia": "/covers/cover-xunta-raster.png",
+  bicco: "/covers/cover-bicco-raster.png",
 };
+const dissolveCover = (p: Project) => DISSOLVE_RASTER_COVERS[p.id] ?? p.cover!;
 
-function AccordionCard({ p, lang, viewCase }: { p: typeof featured[0]; lang: Lang; viewCase: string }) {
-  return (
-    <Link href={`/proyectos/${p.id}`} className="cursor-hidden" style={{ display: "block", textDecoration: "none" }}>
-      <div style={{
-        position: "relative",
-        height: "clamp(200px, 38vw, 300px)",
-        borderRadius: "1.25rem",
-        overflow: "hidden",
-        background: p.gradient,
-        marginTop: "0.25rem",
-        marginBottom: "0.5rem",
-      }}>
-        {p.video && (
-          <video autoPlay muted loop playsInline
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}>
-            <source src={p.video} type="video/mp4" />
-          </video>
-        )}
-        {!p.video && p.cover && (
-          <Image src={p.cover} alt={p.coverAlt?.[lang] ?? ""} fill sizes="100vw"
-            style={{ objectFit: "cover", objectPosition: "center" }} />
-        )}
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.78) 50%, rgba(0,0,0,0.15) 75%, transparent 100%)" }} />
-        <div style={{ position: "absolute", top: "1rem", left: "1.25rem", display: "flex", gap: "0.4rem", alignItems: "center" }}>
-          <span style={{ fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.9)", background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", padding: "0.25rem 0.65rem", borderRadius: "100px", border: "1px solid rgba(255,255,255,0.2)" }}>
-            {(p.category as Record<string, string>)[lang]}
-          </span>
-          <span style={{ fontSize: "0.58rem", fontWeight: 600, color: "rgba(255,255,255,0.45)", letterSpacing: "0.08em" }}>
-            {p.year}
-          </span>
-        </div>
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "1.25rem 1.5rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-          <h3 style={{ fontSize: "clamp(1rem, 2.5vw, 1.4rem)", fontWeight: 700, letterSpacing: "-0.02em", color: "#fff", lineHeight: 1.15, margin: 0 }}>
-            {(p.title as Record<string, string>)[lang]}
-          </h3>
-          <p style={{ fontSize: "0.82rem", lineHeight: 1.55, color: "rgba(255,255,255,0.75)", margin: 0, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" } as React.CSSProperties}>
-            {(p.description as Record<string, string>)[lang]}
-          </p>
-          <span style={{ fontSize: "0.72rem", fontWeight: 600, color: "#fff", borderBottom: "1px solid rgba(255,255,255,0.5)", paddingBottom: "2px", alignSelf: "flex-end" }}>
-            {viewCase} →
-          </span>
-        </div>
-      </div>
-    </Link>
-  );
-}
+// All 5 covers, loaded once by the single persistent Canvas below (see
+// scroll-dissolve-reveal.tsx) instead of per-segment — that's what used to
+// cause a black flash on every transition (remounting the canvas recreated
+// the WebGL context and recompiled the shaders each time).
+const ALL_DISSOLVE_COVERS = featured.map(dissolveCover);
 
 export default function WorkSection() {
   const { lang } = useLang();
   const tx = t[lang].work;
-  const [active, setActive] = useState(0);
-  const [direction, setDirection] = useState(1);
-  const prevIdx = useRef(0);
   const sectionRef = useRef<HTMLElement>(null);
-
-  const project = featured[active];
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -81,205 +40,106 @@ export default function WorkSection() {
   });
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const idx = Math.min(Math.floor(latest * featured.length), featured.length - 1);
-    if (idx !== prevIdx.current) {
-      setDirection(idx > prevIdx.current ? 1 : -1);
-      setActive(idx);
-      prevIdx.current = idx;
-    }
+    const idx = Math.min(Math.max(Math.floor(latest * SEGMENTS), 0), SEGMENTS - 1);
+    if (idx !== activeIndex) setActiveIndex(idx);
   });
 
-  const goTo = (i: number) => {
-    setDirection(i > active ? 1 : -1);
-    setActive(i);
-    prevIdx.current = i;
-  };
+  // 0→1 progress within the current segment only — framer-motion keeps this
+  // transformer fresh every render, so it's safe to close over activeIndex.
+  const segmentProgress = useTransform(scrollYProgress, (v) => {
+    const scaled = v * SEGMENTS - activeIndex;
+    return Math.min(Math.max(scaled, 0), 1);
+  });
+  const frontTitleOpacity = useTransform(segmentProgress, (v) => 1 - v);
+
+  const front = featured[activeIndex];
+  const back = featured[activeIndex + 1];
 
   return (
     <section
       id="work"
       ref={sectionRef}
-      className="work-section"
-      style={{ height: `${featured.length * 100}svh`, background: "var(--bg)" }}
+      style={{ height: `${SEGMENTS * VH_PER_SEGMENT}svh`, background: "#000" }}
     >
-      {/* Sticky viewport */}
-      <div className="work-sticky" style={{
-        position: "sticky",
-        top: 0,
-        height: "100svh",
-        overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
-        padding: "clamp(5rem, 9vh, 7rem) var(--space-section-x) clamp(2.5rem, 5vh, 4.5rem)",
-      }}>
-        <div
-          className="site-content work-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 2fr",
-            gridTemplateRows: "minmax(0, 1fr)",
-            gap: "clamp(2rem, 4vw, 5rem)",
-            flex: 1,
-            minHeight: 0,
-          }}
-        >
+      <div style={{ position: "sticky", top: 0, height: "100svh", overflow: "hidden" }}>
 
-            {/* Left: heading + list — stretched to the full row height so the
-                card on the right (which stretches to match) starts flush
-                with the section heading, not below it. The nav keeps its
-                natural compact spacing and the "view all" link is pinned to
-                the bottom with marginTop:auto, so the leftover height
-                becomes one clean gap instead of a mismatched column. The nav
-                can shrink and scroll internally (minHeight:0 +
-                overflowY:auto) so on short viewports it never pushes the
-                button below the visible area. */}
-            <div className="work-list-col" style={{ display: "flex", flexDirection: "column", alignSelf: "stretch", minHeight: 0 }}>
+        <ScrollDissolveReveal
+          images={ALL_DISSOLVE_COVERS}
+          activeIndex={activeIndex}
+          progress={segmentProgress}
+        />
 
-              {/* Heading */}
-              <div style={{ marginBottom: "clamp(2rem, 4vh, 3.5rem)", flexShrink: 0 }}>
-                <p className="section-label" style={{ marginBottom: "0.65rem" }}>{tx.label}</p>
-                <h2 style={{ margin: 0, lineHeight: 1.05 }}>
-                  <span style={{ display: "block", fontSize: "var(--text-section)", fontWeight: 600, letterSpacing: "-0.03em", color: "var(--text)" }}>
-                    {tx.heading}
-                  </span>
-                  <span style={{ display: "block", fontSize: "var(--text-section)", fontWeight: 500, color: "var(--text-muted)" }}>
-                    {tx.headingItalic}
-                  </span>
-                </h2>
-              </div>
+        {/* Dark wash so the centered title stays legible over any cover */}
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "radial-gradient(ellipse at center, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 100%)",
+          pointerEvents: "none",
+        }} />
 
-              <nav className="work-nav" style={{ display: "flex", flexDirection: "column", minHeight: 0, overflowY: "auto" }}>
-                {featured.map((p, i) => (
-                  <div key={p.id}>
-                    <button
-                      onClick={() => goTo(i)}
-                      style={{
-                        all: "unset", cursor: "inherit",
-                        display: "flex", alignItems: "center", gap: "1rem",
-                        padding: "0.85rem 0",
-                        borderBottom: "1px solid var(--border)",
-                        width: "100%",
-                      }}
-                    >
-                      <span style={{
-                        fontSize: "0.6rem", fontWeight: 600, letterSpacing: "0.1em",
-                        color: i === active ? "var(--text)" : "var(--text-subtle)",
-                        transition: "color 0.35s", flexShrink: 0,
-                      }}>
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span style={{
-                        fontSize: "clamp(0.88rem, 1.1vw, 1rem)",
-                        fontWeight: i === active ? 700 : 400,
-                        color: i === active ? "var(--text)" : "var(--text-muted)",
-                        transition: "color 0.35s, font-weight 0.1s",
-                      }}>
-                        {p.title[lang]}
-                      </span>
-                      {i === active && (
-                        <span style={{ marginLeft: "auto", width: "5px", height: "5px", borderRadius: "50%", background: "var(--text)", flexShrink: 0 }} />
-                      )}
-                    </button>
+        {/* Centered title — crossfades between the outgoing and incoming
+            project name as the dissolve progresses, mirroring the image —
+            with the "ver todos" CTA centered right below it */}
+        <div style={{
+          position: "absolute", inset: 0,
+          display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+          gap: "1.75rem",
+          pointerEvents: "none", padding: "0 var(--space-section-x)",
+        }}>
+          {/* Fixed height (not driven by whichever title text is longest/
+              wraps differently) so re-centering the group never shifts the
+              title vertically between projects. */}
+          <div style={{ position: "relative", width: "100%", height: "clamp(6.5rem, 13vw, 10.5rem)" }}>
+            <motion.div style={{ opacity: frontTitleOpacity, textAlign: "center", position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.55)" }}>
+                {front.category[lang]} · {front.year}
+              </span>
+              <h3 style={{ margin: "0.5rem 0 0", fontSize: "clamp(2rem, 6vw, 5.5rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "#fff", lineHeight: 1.02 }}>
+                {front.title[lang]}
+              </h3>
+            </motion.div>
+            <motion.div style={{ opacity: segmentProgress, textAlign: "center", position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.55)" }}>
+                {back.category[lang]} · {back.year}
+              </span>
+              <h3 style={{ margin: "0.5rem 0 0", fontSize: "clamp(2rem, 6vw, 5.5rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "#fff", lineHeight: 1.02 }}>
+                {back.title[lang]}
+              </h3>
+            </motion.div>
+          </div>
 
-                    {/* Accordion panel — visible on tablet/mobile only via CSS */}
-                    <AnimatePresence initial={false}>
-                      {i === active && (
-                        <motion.div
-                          key={`accordion-${p.id}`}
-                          className="work-accordion"
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.38, ease: [0.25, 0.46, 0.45, 0.94] }}
-                          style={{ overflow: "hidden" }}
-                        >
-                          <AccordionCard p={p} lang={lang} viewCase={tx.viewCase} />
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ))}
-              </nav>
-
-              {/* Ver todos — pinned to the bottom of the (now stretched) column,
-                  never dependent on how much space the nav above takes up */}
-              <div style={{ marginTop: "auto", flexShrink: 0, paddingTop: "0.75rem" }}>
-                <Link href="/proyectos" className="btn-invert">
-                  {tx.viewAll} →
-                </Link>
-              </div>
-            </div>
-
-            {/* Right: card column — desktop only */}
-            <div className="work-card-wrap" style={{ position: "relative", alignSelf: "stretch", height: "100%", minHeight: 0 }}>
-              <AnimatePresence mode="wait" custom={direction}>
-                <motion.div
-                  key={active}
-                  custom={direction}
-                  variants={cardVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  transition={{ duration: 0.42, ease: EASE }}
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    borderRadius: "1.5rem",
-                    overflow: "hidden",
-                    background: project.gradient,
-                  }}
-                >
-                  <Link
-                    href={`/proyectos/${project.id}`}
-                    className="cursor-hidden"
-                    style={{ display: "block", position: "absolute", inset: 0, textDecoration: "none" }}
-                  >
-                    {project.video && (
-                      <video autoPlay muted loop playsInline
-                        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}>
-                        <source src={project.video} type="video/mp4" />
-                      </video>
-                    )}
-                    {!project.video && project.cover && (
-                      <Image src={project.cover} alt={project.coverAlt?.[lang] ?? ""} fill
-                        sizes="(max-width: 768px) 100vw, 66vw"
-                        style={{ objectFit: "cover", objectPosition: "center" }} />
-                    )}
-                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.72) 40%, rgba(0,0,0,0.18) 70%, transparent 100%)" }} />
-                    <div style={{ position: "absolute", top: "1.5rem", left: "1.75rem", display: "flex", gap: "0.5rem", alignItems: "center" }}>
-                      <span style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.9)", background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", padding: "0.3rem 0.75rem", borderRadius: "100px", border: "1px solid rgba(255,255,255,0.2)" }}>
-                        {project.category[lang]}
-                      </span>
-                      <span style={{ fontSize: "0.6rem", fontWeight: 600, color: "rgba(255,255,255,0.45)", letterSpacing: "0.08em" }}>
-                        {project.year}
-                      </span>
-                    </div>
-                    <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "1.75rem", display: "flex", flexDirection: "column", gap: "0.65rem" }}>
-                      <h3 style={{ fontSize: "clamp(1.3rem, 2.2vw, 1.8rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "#fff", lineHeight: 1.15, margin: 0 }}>
-                        {project.title[lang]}
-                      </h3>
-                      <p className="work-card-desc" style={{ fontSize: "0.95rem", lineHeight: 1.6, color: "rgba(255,255,255,0.8)", margin: 0, maxWidth: "520px" }}>
-                        {project.description[lang]}
-                      </p>
-                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "0.75rem" }}>
-                        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem" }}>
-                          {project.tags.slice(0, 3).map((tag) => (
-                            <span key={tag} style={{ fontSize: "0.65rem", fontWeight: 600, letterSpacing: "0.05em", color: "rgba(255,255,255,0.7)", background: "rgba(255,255,255,0.1)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.18)", padding: "0.22rem 0.65rem", borderRadius: "100px" }}>
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                        <span style={{ fontSize: "0.8rem", fontWeight: 600, color: "#fff", borderBottom: "1px solid rgba(255,255,255,0.5)", paddingBottom: "2px", letterSpacing: "0.01em" }}>
-                          {tx.viewCase} →
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
+          {/* `front` — the project whose title is fully visible when you
+              arrive at/dwell on this segment, not `back` (the incoming one
+              it's crossfading into), which sent clicks to the wrong
+              project for most of each segment's scroll range. */}
+          <Link href={`/proyectos/${front.id}`} className="btn-invert cursor-hidden" style={{ pointerEvents: "auto" }}>
+            {tx.viewProject} →
+          </Link>
         </div>
+
+        {/* Footer: progress dots + "ver todos", bottom-aligned with margin */}
+        <div style={{
+          position: "absolute", bottom: 0, left: 0, right: 0,
+          padding: "0 var(--space-section-x) clamp(2.5rem, 5vh, 4rem)",
+          display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem",
+        }}>
+          <div style={{ display: "flex", gap: "0.4rem" }}>
+            {featured.map((p, i) => (
+              <span key={p.id} style={{
+                width: i === activeIndex || i === activeIndex + 1 ? "18px" : "6px",
+                height: "4px", borderRadius: "2px",
+                background: i <= activeIndex ? "#fff" : "rgba(255,255,255,0.3)",
+                transition: "width 0.3s ease",
+              }} />
+            ))}
+          </div>
+          <Link href="/proyectos" className="cursor-hidden" style={{
+            fontSize: "0.85rem", fontWeight: 600, color: "#fff", textDecoration: "none",
+            borderBottom: "1px solid rgba(255,255,255,0.5)", paddingBottom: "2px",
+          }}>
+            {tx.viewAll} →
+          </Link>
+        </div>
+
       </div>
     </section>
   );

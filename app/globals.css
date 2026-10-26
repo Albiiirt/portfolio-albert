@@ -267,11 +267,14 @@ html.custom-cursor-active .cursor-hidden {
 
 /* ── Typography ── */
 .hero-heading {
-  font-size: var(--text-hero);
+  /* Sized to keep the longest hero phrase ("Hola, me llamo Albert") on a
+     single line even on narrow phones — see Hero.tsx's FlipFadeText. */
+  font-size: clamp(1.5rem, 6.8vw, 5.5rem);
   font-weight: 600;
-  line-height: 0.94;
+  line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--text);
+  white-space: nowrap;
 }
 
 .display-heading {
@@ -376,6 +379,14 @@ html.custom-cursor-active .cursor-hidden {
 @keyframes blobA { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-45px,65px) scale(1.07); } }
 @keyframes blobB { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(65px,-45px) scale(0.94); } }
 @keyframes blobC { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-30px,-60px) scale(1.1); } }
+
+/* Hero spotlight reveal — each project-layouts column scrolls through this;
+   alternating columns run it in reverse (see ProjectLayoutsGrid). Content is
+   duplicated once per column, so -50% lands on an identical frame. */
+@keyframes projectColumnScroll {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
 
 /* ── Marquee ── */
 .marquee-track {

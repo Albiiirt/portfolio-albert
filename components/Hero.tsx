@@ -5,23 +5,35 @@ import Link from "next/link";
 import { useLang } from "@/lib/LanguageContext";
 import { t } from "@/data/translations";
 import { EASE } from "@/lib/animations";
+import { FlipFadeText } from "@/components/ui/flip-fade-text";
+import { SpotlightReveal } from "@/components/ui/spotlight-reveal";
+import { ProjectLayoutsGrid } from "@/components/ui/project-layouts-grid";
 
 export default function Hero() {
   const { lang } = useLang();
   const tx = t[lang].hero;
+  // Two phases cycling in the same spot: 1) greeting (one line), 2) what
+  // Albert does (two lines — too long for one line on mobile at this size).
+  const phases = [`${tx.line1} ${tx.line2}`, `${tx.line3}\n${tx.line4}`];
 
   return (
     <section
       id="hero"
+      data-theme="dark"
       style={{
         position: "relative",
         minHeight: "80svh",
-        background: "var(--bg)",
+        background: "#000",
         overflow: "hidden",
         display: "flex",
         alignItems: "center",
       }}
     >
+      {/* Dark by default; hovering drags a soft, feathered circle of light
+          across it that reveals a drifting mosaic of real project layouts
+          underneath. */}
+      <SpotlightReveal className="h-full w-full" revealContent={<ProjectLayoutsGrid />} />
+
       <div className="hero-inner" style={{
         position: "relative",
         zIndex: 1,
@@ -32,16 +44,16 @@ export default function Hero() {
         paddingRight: "var(--space-section-x)",
       }}>
 
-        {/* Text block — capped width so it doesn't stretch edge-to-edge
-            on wide screens; aligned left, air to the right is intentional */}
-        <div style={{ maxWidth: "min(900px, 68ch)", display: "flex", flexDirection: "column", gap: "clamp(1rem, 1.8vh, 1.75rem)" }}>
+        {/* Text block — centered, capped width so it doesn't stretch
+            edge-to-edge on wide screens */}
+        <div style={{ maxWidth: "min(960px, 68ch)", margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: "clamp(1rem, 1.8vh, 1.75rem)" }}>
 
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: EASE, delay: 0 }}
-            style={{ display: "flex", alignItems: "center", gap: "0.55rem", flexWrap: "wrap" }}
+            style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.55rem", flexWrap: "wrap" }}
           >
             <svg width="9" height="11" viewBox="0 0 12 15" fill="none" aria-hidden="true">
               <path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5A1.5 1.5 0 1 1 6 3.5 1.5 1.5 0 0 1 6 6.5z" fill="var(--text-muted)" />
@@ -56,22 +68,24 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          {/* Heading */}
+          {/* Heading — two phases flip-fading in the same spot: greeting,
+              then a one-line role description. Centered, single line, and
+              slow enough (4.8s hold) to actually be readable. */}
           <motion.h1
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, ease: EASE, delay: 0.12 }}
-            style={{ margin: 0, lineHeight: 1, display: "flex", flexDirection: "column", minWidth: 0, textWrap: "balance" }}
+            style={{ margin: 0, minWidth: 0, width: "100%" }}
           >
-            <span style={{ color: "var(--text)", fontSize: "clamp(1.8rem, 4vw, 5rem)", fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.03em", minWidth: 0, maxWidth: "100%", overflowWrap: "break-word" }}>
-              {`${tx.line1} ${tx.line2}`}
-            </span>
-            <span className="hero-heading text-gradient" style={{ minWidth: 0, maxWidth: "100%", overflowWrap: "break-word" }}>
-              {tx.line3}
-            </span>
-            <span className="hero-heading" style={{ minWidth: 0, maxWidth: "100%", overflowWrap: "break-word" }}>
-              {tx.line4}
-            </span>
+            <FlipFadeText
+              words={phases}
+              interval={4800}
+              letterDuration={0.45}
+              staggerDelay={0.035}
+              exitStaggerDelay={0.02}
+              className="justify-center"
+              textClassName="hero-heading flex-nowrap justify-center"
+            />
           </motion.h1>
 
           {/* CTA */}

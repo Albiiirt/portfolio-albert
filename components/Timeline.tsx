@@ -169,8 +169,13 @@ export default function Timeline() {
           ref={scrollRef}
           style={{
             overflowX: "auto",
-            paddingLeft: "var(--space-section-x)",
-            paddingRight: "var(--space-section-x)",
+            // Full-bleed (so the row can scroll edge to edge), but the
+            // starting padding matches .site-content's centered 1440px
+            // column — plain `var(--space-section-x)` here left the first
+            // item flush with the viewport edge on screens wider than
+            // 1440px, ~800px off from the heading above it.
+            paddingLeft: "max(var(--space-section-x), calc((100vw - 1440px) / 2))",
+            paddingRight: "max(var(--space-section-x), calc((100vw - 1440px) / 2))",
             scrollbarWidth: "none",
           }}
         >
