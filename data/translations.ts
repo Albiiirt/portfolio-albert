@@ -71,7 +71,7 @@ export const t = {
       email: "acanades@gmail.com",
     },
     footer: {
-      copy: "Albert Canadas",
+      copy: "Albert Canadés",
       rights: "All rights reserved",
     },
     cv: {
@@ -297,7 +297,7 @@ export const t = {
       email: "acanades@gmail.com",
     },
     footer: {
-      copy: "Albert Canadas",
+      copy: "Albert Canadés",
       rights: "Todos los derechos reservados",
     },
     cv: {
@@ -523,7 +523,7 @@ export const t = {
       email: "acanades@gmail.com",
     },
     footer: {
-      copy: "Albert Canadas",
+      copy: "Albert Canadés",
       rights: "Tots els drets reservats",
     },
     cv: {

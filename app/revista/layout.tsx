@@ -13,8 +13,8 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Revista · Albert Canadas — Diseñador UX/UI & Web",
-  description: "Los proyectos de Albert Canadas, en formato revista: portadas a página completa y un pase de página realista.",
+  title: "Revista · Albert Canadés — Diseñador UX/UI & Web",
+  description: "Los proyectos de Albert Canadés, en formato revista: portadas a página completa y un pase de página realista.",
 };
 
 export default function RevistaLayout({ children }: { children: React.ReactNode }) {

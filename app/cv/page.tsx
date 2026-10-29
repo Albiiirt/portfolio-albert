@@ -70,7 +70,7 @@ export default function CvPage() {
 
             <a
               href="/albert-canadas-cv.pdf"
-              download="Albert-Canadas-CV.pdf"
+              download="Albert-Canadés-CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary"

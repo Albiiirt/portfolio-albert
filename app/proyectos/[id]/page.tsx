@@ -49,7 +49,7 @@ export async function generateMetadata({
   const project = projects.find((p) => p.id === id);
   if (!project) return {};
 
-  let title = `${project.title.es} · Albert Canadas`;
+  let title = `${project.title.es} · Albert Canadés`;
   let description = project.description.es;
 
   if (project.subProjects?.length) {
@@ -58,7 +58,7 @@ export async function generateMetadata({
     const activeId = resolveSubProjectId(project, raw);
     const activeSubProject = project.subProjects.find((s) => s.id === activeId);
     if (activeSubProject) {
-      title = `${project.title.es} — ${activeSubProject.tabLabel.es} · Albert Canadas`;
+      title = `${project.title.es} — ${activeSubProject.tabLabel.es} · Albert Canadés`;
       description = activeSubProject.problem.es;
     }
   }
@@ -99,7 +99,7 @@ export default async function Page({
     name: project.title.es,
     description: project.description.es,
     url: `${SITE_URL}/proyectos/${project.id}`,
-    creator: { "@type": "Person", name: "Albert Canadas", url: SITE_URL },
+    creator: { "@type": "Person", name: "Albert Canadés", url: SITE_URL },
     datePublished: project.year,
     keywords: project.tags.join(", "),
     about: project.problem.es,
