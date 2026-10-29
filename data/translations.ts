@@ -35,7 +35,7 @@ export const t = {
     about: {
       label: "about me",
       heading: "Designer,\ncurious by nature.",
-      bio: "Based in Barcelona, currently at Dosgrapas — working with brands in tourism, culture and tech. I think in product before pixels: what a page needs to do, who edits it, how it grows — not just how it looks. I use AI every day, not only to prototype faster but to implement myself: from Figma to production with Next.js, Framer and CMS like Strapi or Notion. No Figma-delivery-only.",
+      bio: "Based in Barcelona, open to new opportunities — I've worked with brands in tourism, culture and tech. I think in product before pixels: what a page needs to do, who edits it, how it grows — not just how it looks. I use AI every day, not only to prototype faster but to implement myself: from Figma to production with Next.js, Framer and CMS like Strapi or Notion. No Figma-delivery-only.",
       location: "Barcelona",
       availability: "Open to opportunities",
       toolsLabel: "Tools & Technologies",
@@ -98,7 +98,7 @@ export const t = {
       experience: [
         {
           company: "Dosgrapas",
-          period: "Oct. 2025 – Present",
+          period: "Oct. 2025 – Oct. 2026",
           role: "Web Designer / Frontend",
           bullets: [
             "Product and interface decisions — functionality, content structure and visual design — for clients in tourism, culture and tech",
@@ -261,7 +261,7 @@ export const t = {
     about: {
       label: "sobre mí",
       heading: "Diseñador,\ncurioso por naturaleza.",
-      bio: "Basado en Barcelona, actualmente en Dosgrapas — trabajando con marcas de turismo, cultura y tecnología. Pienso en producto antes que en píxeles: qué tiene que hacer una página, quién la va a editar, cómo va a crecer — no solo qué aspecto tiene. Uso la IA cada día, no solo para prototipar más rápido sino para implementar yo mismo: de Figma a producción con Next.js, Framer y CMS como Strapi o Notion. Nada de entregar solo Figmas.",
+      bio: "Basado en Barcelona, abierto a nuevas oportunidades — he trabajado con marcas de turismo, cultura y tecnología. Pienso en producto antes que en píxeles: qué tiene que hacer una página, quién la va a editar, cómo va a crecer — no solo qué aspecto tiene. Uso la IA cada día, no solo para prototipar más rápido sino para implementar yo mismo: de Figma a producción con Next.js, Framer y CMS como Strapi o Notion. Nada de entregar solo Figmas.",
       location: "Barcelona",
       availability: "Abierto a oportunidades",
       toolsLabel: "Herramientas y tecnologías",
@@ -324,7 +324,7 @@ export const t = {
       experience: [
         {
           company: "Dosgrapas",
-          period: "Oct. 2025 – Actualidad",
+          period: "Oct. 2025 – Oct. 2026",
           role: "Diseñador Web / Frontend",
           bullets: [
             "Decisiones de producto e interfaz — funcionalidad, estructura de contenido y diseño visual — para clientes de turismo, cultura y tecnología",
@@ -487,7 +487,7 @@ export const t = {
     about: {
       label: "sobre mi",
       heading: "Dissenyador,\ncuriós per naturalesa.",
-      bio: "A Barcelona, ara a Dosgrapas — treballant amb marques de turisme, cultura i tecnologia. Penso en producte abans que en píxels: què ha de fer una pàgina, qui l'editarà, com creixerà — no només quin aspecte té. Faig servir la IA cada dia, no només per prototipar més ràpid sinó per implementar jo mateix: de Figma a producció amb Next.js, Framer i CMS com Strapi o Notion. Res d'entregar només Figmas.",
+      bio: "A Barcelona, obert a noves oportunitats — he treballat amb marques de turisme, cultura i tecnologia. Penso en producte abans que en píxels: què ha de fer una pàgina, qui l'editarà, com creixerà — no només quin aspecte té. Faig servir la IA cada dia, no només per prototipar més ràpid sinó per implementar jo mateix: de Figma a producció amb Next.js, Framer i CMS com Strapi o Notion. Res d'entregar només Figmas.",
       location: "Barcelona",
       availability: "Obert a oportunitats",
       toolsLabel: "Eines i tecnologies",
@@ -550,7 +550,7 @@ export const t = {
       experience: [
         {
           company: "Dosgrapas",
-          period: "Oct. 2025 – Actualitat",
+          period: "Oct. 2025 – Oct. 2026",
           role: "Dissenyador Web / Frontend",
           bullets: [
             "Decisions de producte i interfície — funcionalitat, estructura de contingut i disseny visual — per a clients de turisme, cultura i tecnologia",
