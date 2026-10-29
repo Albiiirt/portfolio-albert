@@ -122,9 +122,9 @@ const coverFragmentShader = `
 
     float noiseScale = 6.0;
     vec2 pixelatedUv = floor(vUv * uResolution / noiseScale) * noiseScale / uResolution;
-    float blockNoise = fbm(pixelatedUv * 100.0) * 0.15;
+    float blockNoise = fbm(pixelatedUv * 100.0) * 0.08;
 
-    float angularNoise = fbm(vec2(angle * 5.0, 0.0)) * 0.15;
+    float angularNoise = fbm(vec2(angle * 5.0, 0.0)) * 0.08;
 
     float totalNoise = blockNoise + angularNoise;
     float noisyDist = dist + totalNoise;
@@ -147,8 +147,8 @@ const coverFragmentShader = `
     vec3 baseColor = mix(texColor.rgb, vec3(0.0), uGrayscale);
     vec3 finalColor = baseColor;
 
-    float edgeGlowIntensity = uEdgeIntensity * 2.0;
-    float edgeGlow = edge * edgeGlowIntensity * (1.0 + uGrayscale * 3.0);
+    float edgeGlowIntensity = uEdgeIntensity * 1.0;
+    float edgeGlow = edge * edgeGlowIntensity * (1.0 + uGrayscale * 1.5);
     finalColor += edgeColor * edgeGlow * uEdgeBrightness;
 
     float edgeZoneWidth = 0.15 * (1.0 - uDissolve) + 0.02;
@@ -157,7 +157,7 @@ const coverFragmentShader = `
     float sparkle = hash(floor(vUv * uResolution / 4.0)) * edgeZone;
 
     float edgeBrightness = (1.0 - uDissolve) * uEdgeBrightness * (1.0 + uGrayscale * 2.0);
-    finalColor += vec3(sparkle * 3.0 * edgeBrightness);
+    finalColor += vec3(sparkle * 1.2 * edgeBrightness);
 
     float alpha = dissolveMask * texColor.a;
 
@@ -238,7 +238,7 @@ const coverFragmentShaderReverse = `
     vec3 darkBase = vec3(0.0);
     vec3 baseColor = mix(texColor.rgb, darkBase, uDarkness);
 
-    float edgeGlow = edge * uEdgeIntensity * 2.0;
+    float edgeGlow = edge * uEdgeIntensity * 1.0;
     baseColor += edgeColor * edgeGlow;
 
     vec3 finalColor = clamp(baseColor, 0.0, 1.0);
@@ -334,7 +334,7 @@ const Scene = ({ images, activeIndex, progress }: SceneProps) => {
       material1Ref.current.uniforms.uDissolve.value = prog;
       const grayscaleProgress = Math.min(1.0, prog / 0.4);
       material1Ref.current.uniforms.uGrayscale.value = grayscaleProgress;
-      material1Ref.current.uniforms.uEdgeIntensity.value = prog * 0.5;
+      material1Ref.current.uniforms.uEdgeIntensity.value = prog * 0.3;
       material1Ref.current.uniforms.uEdgeBrightness.value = 1.0 - prog;
     }
 
@@ -342,7 +342,7 @@ const Scene = ({ images, activeIndex, progress }: SceneProps) => {
       material2Ref.current.uniforms.uTime.value = timeInSeconds;
       material2Ref.current.uniforms.uResolution.value.set(size.width, size.height);
       const acceleratedProgress = Math.min(1.0, prog * 1.1);
-      material2Ref.current.uniforms.uEdgeIntensity.value = 0.6 * (1.0 - acceleratedProgress);
+      material2Ref.current.uniforms.uEdgeIntensity.value = 0.35 * (1.0 - acceleratedProgress);
       material2Ref.current.uniforms.uDarkness.value = 1.0 - acceleratedProgress;
       material2Ref.current.uniforms.uGrayscale.value = 1.0 - acceleratedProgress;
     }

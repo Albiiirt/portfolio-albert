@@ -50,7 +50,11 @@ export default function WorkSection() {
     const scaled = v * SEGMENTS - activeIndex;
     return Math.min(Math.max(scaled, 0), 1);
   });
-  const frontTitleOpacity = useTransform(segmentProgress, (v) => 1 - v);
+  // Staggered, not a straight crossfade: each title fades out/in over the
+  // first/last 35% of the segment, leaving a silent gap in the noisiest
+  // middle stretch of the dissolve instead of showing both names at once.
+  const frontTitleOpacity = useTransform(segmentProgress, (v) => Math.max(0, 1 - v / 0.35));
+  const backTitleOpacity = useTransform(segmentProgress, (v) => Math.max(0, (v - 0.65) / 0.35));
 
   const front = featured[activeIndex];
   const back = featured[activeIndex + 1];
@@ -97,7 +101,7 @@ export default function WorkSection() {
                 {front.title[lang]}
               </h3>
             </motion.div>
-            <motion.div style={{ opacity: segmentProgress, textAlign: "center", position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            <motion.div style={{ opacity: backTitleOpacity, textAlign: "center", position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
               <span style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.55)" }}>
                 {back.category[lang]} · {back.year}
               </span>
